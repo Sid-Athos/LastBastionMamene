@@ -7,6 +7,7 @@ namespace LastBastion
     public class Villager : Unit
     {
         uint _harvestCooldown = 3;
+        bool _isHarvesting;
 
 
         public Villager(bool flying, float posX, float posY,
@@ -16,8 +17,14 @@ namespace LastBastion
             job, lifePoints, dmg, armor, isMoving,
             attackCooldown, speed)
         {
+            _isHarvesting = false;
         }
 
         public uint HarvestCd => _harvestCooldown;
+        
+        public Harvest()
+        {
+            isHarvesting = ! isHarvesting;
+        }
     }
 }
