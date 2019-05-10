@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    class Unit
+    public class Unit
     {
         //Map _context;
         float _posX;

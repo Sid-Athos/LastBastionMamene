@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion.Model
 {
-    public class Market : Buildings
+    public class Market : Building
     {
         uint _foodProduction;
         uint _rank = 1;

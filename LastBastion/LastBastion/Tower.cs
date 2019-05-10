@@ -4,15 +4,15 @@ using System.Text;
 
 namespace LastBastion.Model
 {
-    public class Towers : Buildings
+    public class Tower : Building
     {
         
-        Villagers [] _slots;
+        Villager [] _slots;
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
 
-        public Towers(float posX,
+        public Tower(float posX,
         float posY,
         uint lifePoints,
         uint dmg,
@@ -27,7 +27,7 @@ namespace LastBastion.Model
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;
-            _slots = new Villagers[2];
+            _slots = new Villager[2];
         }
 
         public uint Rank => _rank;
@@ -36,7 +36,7 @@ namespace LastBastion.Model
 
         public uint Dmg => _dmg;
 
-        public void Attack(Units unit)
+        public void Attack(Unit unit)
         {
             if (_dmg > unit.Life)
             {
@@ -58,7 +58,7 @@ namespace LastBastion.Model
             if (_rank < 3)
             {
                 _rank++;
-                Villagers[] newSlots = new Villagers[_slots.Length * 2];
+                Villager[] newSlots = new Villager[_slots.Length * 2];
                 for (int i = 0; i < _slots.Length; i++)
                 {
                     newSlots[i] = _slots[i];
@@ -71,7 +71,7 @@ namespace LastBastion.Model
             }
         }
 
-        public void AddArcher(Villagers u)
+        public void AddArcher(Villager u)
         {
             if(!u.IsInTower)
             {

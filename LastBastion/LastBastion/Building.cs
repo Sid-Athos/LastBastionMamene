@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion.Model
 {
-    public class Buildings
+    public class Building
     {
         float _posX;
         float _posY;
@@ -14,7 +14,7 @@ namespace LastBastion.Model
         uint _armor;
         uint _rank;
 
-        public Buildings(float posX, float posY, uint lifePoints, uint armor, uint rank)
+        public Building(float posX, float posY, uint lifePoints, uint armor, uint rank)
         {
             _posX = posX;
             _posY = posY;

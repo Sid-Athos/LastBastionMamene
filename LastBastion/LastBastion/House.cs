@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion.Model
 {
-    public class House : Buildings
+    public class House : Building
     {
         uint _population;
         uint _rank = 1;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion.Model
 {
-    public class Mine : Buildings
+    public class Mine : Building
     {
         uint _stoneProduction;
         uint _rank = 1;

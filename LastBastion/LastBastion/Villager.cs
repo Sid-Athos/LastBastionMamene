@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    class Villager : Unit
+    public class Villager : Unit
     {
         uint _harvestCooldown = 3;
 
