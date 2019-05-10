@@ -9,7 +9,6 @@ namespace LastBastion
         //Map _context;
         float _posX;
         float _posY;
-        public bool _flying;
         readonly string _job;
         uint _lifePoints;
         uint _maxLifePoints;
@@ -19,8 +18,6 @@ namespace LastBastion
         uint _aaCooldown;
         float _speed;
         bool _inTower = false;
-        static List<Villager> _villagePeople = new List<Villager>();
-        static List<Barbar> _barbarians = new List<Barbar>();
         bool _burned = false;
         bool _paralyzed = false;
 
@@ -53,7 +50,6 @@ namespace LastBastion
             unit._lifePoints = Math.Max(unit._lifePoints - (_dmg - unit._armor), 0);
         }
 
-        public int BarbCount => _barbarians.Count;
 
         public uint Dmg => _dmg;
 
@@ -90,17 +86,11 @@ namespace LastBastion
             _inTower = !_inTower;
         }
 
-        public void AddVillager(Villager v)
+        public void Move()
         {
-            _villagePeople.Add(v);
+            _isMoving = !_isMoving;
         }
 
-        public void RemoveVillager(Villager n)
-        {
-            _villagePeople.Remove(n);
-
-        }
-        public int VillCount => _villagePeople.Count;
 
 
         private bool disposedValue = false; // Pour détecter les appels redondants

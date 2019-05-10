@@ -5,11 +5,12 @@ using SFML.System;
 
 namespace LastBastion
 {
-    class Village
+    public class Village
     {
         Map _map;
         List<Hut> _nearby;
         int _area;
+        Dictionary<int, Hut> _buildings;
 
         public Village(Map map)
         {
@@ -19,6 +20,7 @@ namespace LastBastion
             SetCastle();
             SetNearby();
         }
+
         public void SetCastle()
         {
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].SetBuilding("Castle");
@@ -63,6 +65,7 @@ namespace LastBastion
                     if (item.Value == _nearby[_random])
                     {
                         item.Value.SetBuilding(name);
+                        /* switch pour savoir quel constructeur il faut appeler en fonction du name */
                     }
                 }
                 _nearby.Remove(_nearby[_random]);

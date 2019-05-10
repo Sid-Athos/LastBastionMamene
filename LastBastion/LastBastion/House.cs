@@ -6,7 +6,7 @@ namespace LastBastion
 {
     public class House : Building
     {
-        uint _population;
+        uint _population = 5;
         uint _rank = 1;
 
         public House(float posX,float posY,uint lifePoints, uint maxLifePoints,uint armor, uint rank, uint population)
