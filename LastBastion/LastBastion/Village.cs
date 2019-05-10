@@ -5,7 +5,7 @@ using SFML.System;
 
 namespace LastBastion
 {
-    class Village
+    public class Village
     {
         Map _map;
         List<Hut> _nearby;

@@ -5,7 +5,7 @@ using SFML.System;
 
 namespace LastBastion
 {
-    class Hut
+    public class Hut
     {
         Vector2f _pos;
         Vector2i _posG;
