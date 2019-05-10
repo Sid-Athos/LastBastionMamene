@@ -43,7 +43,7 @@ namespace LastBastion
         public void Attack(Unit unit)
         {
 
-            if (_dmg > (unit._lifePoints + unit._armor)
+            if (_dmg > (unit._lifePoints + unit._armor))
             {
                 unit._lifePoints = 0;
                 unit.Die();
