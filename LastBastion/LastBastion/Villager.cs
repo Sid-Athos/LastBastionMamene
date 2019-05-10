@@ -22,9 +22,9 @@ namespace LastBastion
 
         public uint HarvestCd => _harvestCooldown;
         
-        public Harvest()
+        public void Harvest()
         {
-            isHarvesting = ! isHarvesting;
+            _isHarvesting = ! _isHarvesting;
         }
     }
 }

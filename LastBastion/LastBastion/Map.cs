@@ -11,6 +11,8 @@ namespace LastBastion
         Game _game;
         MapUI _UI;
         Village _village;
+        List<Villager> _villagePeople;
+        List<Barbar> _barbarians;
 
         public Map(Game game)
         {
@@ -18,11 +20,40 @@ namespace LastBastion
             _UI = new MapUI(_game.Sprites, _game.GetWindow.Render);
             CreateMap();
             _village = new Village(this);
+            _villagePeople = new List<Villager>();
+            _barbarians = new List<Barbar>();
+        }
+
+        public int VillCount => _villagePeople.Count;
+
+        public int BarbCount => _barbarians.Count;
+
+        public void AddVillager(Villager v)
+        {
+            _villagePeople.Add(v);
+        }
+
+        public void RemoveVillager(Villager n)
+        {
+            _villagePeople.Remove(n);
+
+        }
+
+        public void AddBarbar(Barbar v)
+        {
+            _barbarians.Add(v);
+        }
+
+        public void RemoveBarbar(Barbar n)
+        {
+            _barbarians.Remove(n);
+
         }
 
         public Village GetVillage => _village;
         public Game GetGame => _game;
         public MapUI GetMapUI => _UI;
+
 
         public void PrintMap()
         {
