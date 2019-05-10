@@ -19,9 +19,9 @@ namespace LastBastion
         }
 
 
-        /**public void Move(double x, double Y)
+        public void Move(double x, double Y)
         {
             _isMoving = !isMoving;
-        }*/
+        }
     }
 }
