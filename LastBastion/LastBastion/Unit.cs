@@ -21,14 +21,13 @@ namespace LastBastion
         bool _inTower = false;
         static List<Villager> _villagePeople = new List<Villager>();
         static List<Barbar> _barbarians = new List<Barbar>();
-        public bool _burned = false;
-        public bool _paralyzed = false;
+        bool _burned = false;
+        bool _paralyzed = false;
 
-        public Unit(bool flying, float posX, float posY,
+        public Unit(float posX, float posY,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed)
         {
-            _flying = flying;
             _posX = posX;
             _posY = posY;
             _job = job;
@@ -44,7 +43,7 @@ namespace LastBastion
         public void Attack(Unit unit)
         {
 
-            if (_dmg > unit._lifePoints)
+            if (_dmg > (unit._lifePoints + unit._armor)
             {
                 unit._lifePoints = 0;
                 unit.Die();
