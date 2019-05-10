@@ -4,11 +4,11 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Forge : Building
+    public class Wall : Building
     {
         uint _rank = 1;
 
-        public Forge(float posX, float posY, uint lifePoints, uint armor, uint rank)
+        public Wall(float posX, float posY, uint lifePoints, uint armor,uint rank)
             : base(posX, posY, lifePoints, armor, rank)
         {
 
@@ -25,16 +25,5 @@ namespace LastBastion
                 IncreaseArmor();
             }
         }
-
-        public void IncUnitArmor()
-        {
-            
-        }
-
-        public void IncUnitDmg()
-        {
-
-        }
-
     }
 }
