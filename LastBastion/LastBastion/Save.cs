@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO.Compression;
 using System.IO;
+using System.Diagnostics;
 
 namespace LastBastion
 {
@@ -20,7 +21,8 @@ namespace LastBastion
         {
             _game = game;
             _name = name;
-            CreateTXT();
+            //CreateTXT();
+            Test();
         }
         public void CreateTXT()
         {
@@ -29,6 +31,16 @@ namespace LastBastion
             {
                 writer.Write("" + item.Value.StringVec + "" + item.Value.GetName);
             }
+        }
+        public void Test()
+        {
+            //System.Diagnostics.Process.Start("https://www.google.com");
+            var pInfo = new ProcessStartInfo()
+            {
+                FileName = "https://rule34.paheal.net/post/list/Geralt_of_Rivia/1",
+                UseShellExecute = true
+            };
+            Process.Start(pInfo);
         }
     }
 }

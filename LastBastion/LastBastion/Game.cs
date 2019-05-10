@@ -49,7 +49,7 @@ namespace LastBastion
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
 
-            //Save save = new Save(this,"test");
+            Save save = new Save(this,"test");
             Gameloop();
         }
         public void Gameloop()
