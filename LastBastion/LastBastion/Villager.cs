@@ -10,10 +10,10 @@ namespace LastBastion
         bool _isHarvesting;
 
 
-        public Villager(bool flying, float posX, float posY,
+        public Villager(float posX, float posY,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed)
-            : base(flying, posX, posY,
+            : base(posX, posY,
             job, lifePoints, dmg, armor, isMoving,
             attackCooldown, speed)
         {
