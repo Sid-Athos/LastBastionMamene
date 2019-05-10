@@ -6,7 +6,7 @@ using Interface;
 
 namespace LastBastion
 {
-    class Map
+    public class Map
     {
         Game _game;
         MapUI _UI;
