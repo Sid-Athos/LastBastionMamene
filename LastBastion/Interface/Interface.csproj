@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SFML.Audio" Version="2.5.0" />
+    <PackageReference Include="WinInsider.SFML.Graphics" Version="2.5.0" />
+  </ItemGroup>
+
+</Project>
