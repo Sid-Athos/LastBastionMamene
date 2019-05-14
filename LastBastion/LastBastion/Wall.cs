@@ -7,8 +7,8 @@ namespace LastBastion
     public class Wall : Building
     {
         uint _rank = 1;
-
-        public Wall(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor,uint rank)
+        
+        public Wall(float posX, float posY, uint lifePoints, uint armor,uint rank)
             : base(posX, posY, lifePoints, armor, rank)
         {
 

@@ -54,11 +54,11 @@ namespace LastBastion
             switch (_buildingName)
             {
                 case "House":
-                    House _house = new House(GetVec2F.X,GetVec2F.Y,100,100,10,1,5);
+                    House _house = new House(GetVec2F.X,GetVec2F.Y,100,10,1,5);
 
                     break;
                 case "Sawmill":
-                    Sawmill _sawmill = new Sawmill(GetVec2F.X,GetVec2F.Y,100,100,10,1,2);
+                    Sawmill _sawmill = new Sawmill(GetVec2F.X,GetVec2F.Y,100,10,1,2);
                     break;
                 case "Mine":
                     Mine _mine = new Mine(GetVec2F.X, GetVec2F.Y, 100, 10, 1, 2);
