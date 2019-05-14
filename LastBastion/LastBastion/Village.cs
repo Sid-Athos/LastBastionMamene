@@ -10,7 +10,6 @@ namespace LastBastion
         Map _map;
         List<Hut> _nearby;
         int _area;
-        Dictionary<int, Hut> _buildings;
 
         public Village(Map map)
         {
