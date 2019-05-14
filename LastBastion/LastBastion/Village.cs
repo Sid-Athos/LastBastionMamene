@@ -60,14 +60,16 @@ namespace LastBastion
             if (_nearby.Count > 0)
             {
                 int _random = _map.GetGame.RandomNumber(0, _nearby.Count - 1);
+                /*
                 foreach (var item in _map.GetGame.GetGrid)
                 {
                     if (item.Value == _nearby[_random])
                     {
                         item.Value.SetBuilding(name);
-                        /* switch pour savoir quel constructeur il faut appeler en fonction du name */
                     }
                 }
+                */
+                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetBuilding(name);
                 _nearby.Remove(_nearby[_random]);
                 _nearby = RebuildeMegaGreatConstructor();
             }

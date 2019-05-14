@@ -43,24 +43,28 @@ namespace LastBastion
                     case Keyboard.Key.Z:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y - 1)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveUp(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y - 1)].GetVec2F);
                         }
                         break;
                     case Keyboard.Key.S:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y + 1)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveDown(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y + 1)].GetVec2F);
                         }
                         break;
                     case Keyboard.Key.Q:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X - 1, _game.GetWindow.GetView.Y)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveLeft(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X - 1, _game.GetWindow.GetView.Y)].GetVec2F);
                         }
                         break;
                     case Keyboard.Key.D:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X + 1, _game.GetWindow.GetView.Y)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveRight(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X + 1, _game.GetWindow.GetView.Y)].GetVec2F);
                         }
                         break;

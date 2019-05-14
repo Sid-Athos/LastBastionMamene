@@ -34,36 +34,43 @@ namespace LastBastion
             {
                 _spriteBar.Clear();
             }
-            if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Castle")
+            else
             {
-                _spriteBar.Clear();
-            }
-            if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Empty")
-            {
-                _spriteBar.Add(_sprites.GetSprite("House"));
-                _spriteBar.Add(_sprites.GetSprite("Tower"));
-            }
-            if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Stone")
-            {
-                _spriteBar.Add(_sprites.GetSprite("House"));
-                _spriteBar.Add(_sprites.GetSprite("Tower"));
-                _spriteBar.Add(_sprites.GetSprite("Mine"));
-            }
-            if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Bush")
-            {
-                _spriteBar.Add(_sprites.GetSprite("House"));
-                _spriteBar.Add(_sprites.GetSprite("Tower"));
-                _spriteBar.Add(_sprites.GetSprite("Farm"));
-            }
-            if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Wood")
-            {
-                _spriteBar.Add(_sprites.GetSprite("House"));
-                _spriteBar.Add(_sprites.GetSprite("Tower"));
-                _spriteBar.Add(_sprites.GetSprite("Sawmill"));
+                if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Castle")
+                {
+                    _spriteBar.Clear();
+                }
+                else
+                {
+                    if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Empty")
+                    {
+                        _spriteBar.Add(_sprites.GetSprite("House"));
+                        _spriteBar.Add(_sprites.GetSprite("Tower"));
+                    }
+                    if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Stone")
+                    {
+                        _spriteBar.Add(_sprites.GetSprite("House"));
+                        _spriteBar.Add(_sprites.GetSprite("Tower"));
+                        _spriteBar.Add(_sprites.GetSprite("Mine"));
+                    }
+                    if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Bush")
+                    {
+                        _spriteBar.Add(_sprites.GetSprite("House"));
+                        _spriteBar.Add(_sprites.GetSprite("Tower"));
+                        _spriteBar.Add(_sprites.GetSprite("Farm"));
+                    }
+                    if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Wood")
+                    {
+                        _spriteBar.Add(_sprites.GetSprite("House"));
+                        _spriteBar.Add(_sprites.GetSprite("Tower"));
+                        _spriteBar.Add(_sprites.GetSprite("Sawmill"));
+                    }
+                }
             }
         }
         public bool IsOpen => _up;
         public void OpenClose() { _up = !_up; }
+        public void ToZero () { _currentPos = 0; }
         public void DrawMenu()
         {
             int right;
