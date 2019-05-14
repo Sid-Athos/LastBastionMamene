@@ -8,8 +8,8 @@ namespace LastBastion
     {
         uint _rank = 1;
 
-        public Barrack(float posX, float posY, uint lifePoints, uint armor, uint rank)
-            : base(posX, posY, lifePoints, armor, rank)
+        public Barrack(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
+            : base(posX, posY, lifePoints, maxLifePoints, armor, rank)
         {
 
         }

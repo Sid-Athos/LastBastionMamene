@@ -150,7 +150,7 @@ namespace LastBastion
                 int h = -1 * (y / 2);
                 for (float j = 0f; j < 50 * 15; j += 15)
                 {
-                    Hut NewH = new Hut(new Vector2f(i, j), "[ " + l + " ; " + h + " ]", new Vector2i(l, h));
+                    Hut NewH = new Hut(this, new Vector2f(i, j), "[ " + l + " ; " + h + " ]", new Vector2i(l, h));
                     _grid.Add(new Vector2i(l, h), NewH);
                     h++;
                 }
