@@ -43,6 +43,12 @@ namespace Interface
             texture = new Texture("../../../../images/Cloud.png");
             _sprites.Add("Cloud", new Sprite(texture));
 
+            texture = new Texture("../../../../images/Mine.png");
+            _sprites.Add("Mine", new Sprite(texture));
+
+            texture = new Texture("../../../../images/Farm.png");
+            _sprites.Add("Farm", new Sprite(texture));
+
             texture = new Texture("../../../../images/HideFont.png");
             _sprites.Add("HideFont", new Sprite(texture));
 

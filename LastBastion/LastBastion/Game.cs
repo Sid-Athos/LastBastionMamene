@@ -91,6 +91,7 @@ namespace LastBastion
             //UI
             if (_menu.IsOpen)
             {
+                _menu.UpdateList();
                 _menu.DrawMenu();
             }
         }
