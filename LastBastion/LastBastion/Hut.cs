@@ -55,7 +55,6 @@ namespace LastBastion
             {
                 case "House":
                     House _house = new House(GetVec2F.X,GetVec2F.Y,100,10,1,5);
-
                     break;
                 case "Sawmill":
                     Sawmill _sawmill = new Sawmill(GetVec2F.X,GetVec2F.Y,100,10,1,2);
@@ -79,7 +78,7 @@ namespace LastBastion
                     Barrack _barrack = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 15, 1);
                     break;
                 default:
-                    Console.WriteLine("Default case");
+                    //Console.WriteLine("Default case");
                     break;
             }
         }
