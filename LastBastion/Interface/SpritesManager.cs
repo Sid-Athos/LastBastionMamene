@@ -8,10 +8,14 @@ namespace Interface
     public class SpritesManager
     {
         Dictionary<string, Sprite> _sprites;
+        Text _text;
 
         public SpritesManager()
         {
             _sprites = new Dictionary<string, Sprite>();
+            Font _font = new Font("../../../../images/RINGM___.TTF");
+            _text = new Text();
+            _text.Font = _font; 
         }
 
         public void Initialized()
@@ -20,6 +24,15 @@ namespace Interface
 
             texture = new Texture("../../../../images/CursorFont.png");
             _sprites.Add("CursorFont", new Sprite(texture));
+
+            texture = new Texture("../../../../images/IconFont.png");
+            _sprites.Add("IconFont", new Sprite(texture));
+
+            texture = new Texture("../../../../images/IconBoard.png");
+            _sprites.Add("IconBoard", new Sprite(texture));
+
+            texture = new Texture("../../../../images/HousIcon.jpg");
+            _sprites.Add("HouseIcon", new Sprite(texture));
 
             texture = new Texture("../../../../images/CursorBoard.png");
             _sprites.Add("CursorBoard", new Sprite(texture));
@@ -57,13 +70,23 @@ namespace Interface
             texture = new Texture("../../../../images/House.png");
             _sprites.Add("House", new Sprite(texture));
 
+            texture = new Texture("../../../../images/Tower.png");
+            _sprites.Add("Tower", new Sprite(texture));
+
             texture = new Texture("../../../../images/castle.png");
             _sprites.Add("Castle", new Sprite(texture));
 
             texture = new Texture("../../../../images/sawmill.png");
             _sprites.Add("Sawmill", new Sprite(texture));
         }
-
+        public void Update()
+        {
+            foreach (var item in _sprites)
+            {
+                item.Value.Scale = new SFML.System.Vector2f(1f, 1f);
+            }
+        }
         public Sprite GetSprite(string name) => _sprites[name];
+        public Text GetText => _text;
     }
 }

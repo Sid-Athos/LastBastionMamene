@@ -18,6 +18,13 @@ namespace LastBastion
         }
         public void IsKeyPressed(object sender, KeyEventArgs e)
         {
+            if (_game.GetMenuBuilder.IsOpen)
+            {
+                if (e.Code == Keyboard.Key.Enter)
+                {
+                    _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                }
+            }
             switch (e.Code)
             {
                 case Keyboard.Key.Space:
@@ -28,6 +35,7 @@ namespace LastBastion
                     _game.Close();
                     break;
             }
+
             if (!_game.IsStop)
             {
                 switch (e.Code)
@@ -68,8 +76,16 @@ namespace LastBastion
                             _game.GetWindow.GetView.Render.Size = new Vector2f(_game.GetWindow.GetView.Render.Size.X + 15, _game.GetWindow.GetView.Render.Size.Y + 15);
                         }
                         break;
+                    case Keyboard.Key.Left:
+                        _game.GetMenuBuilder.UWantToMoveToTheLeftInTheMenu();
+                        break;
+                    case Keyboard.Key.Right:
+                        _game.GetMenuBuilder.UWantToMoveToTheRightInTheMenu();
+                        break;
+                    case Keyboard.Key.Tab:
+                        _game.GetMenuBuilder.OpenClose();
+                        break;
                     case Keyboard.Key.B:
-                        Console.WriteLine("test");
                         break;
                     case Keyboard.Key.C:
                         break;
@@ -175,11 +191,7 @@ namespace LastBastion
                         break;
                     case Keyboard.Key.Space:
                         break;
-                    case Keyboard.Key.Enter:
-                        break;
                     case Keyboard.Key.Backspace:
-                        break;
-                    case Keyboard.Key.Tab:
                         break;
                     case Keyboard.Key.End:
                         break;
@@ -196,10 +208,6 @@ namespace LastBastion
                     case Keyboard.Key.Multiply:
                         break;
                     case Keyboard.Key.Divide:
-                        break;
-                    case Keyboard.Key.Left:
-                        break;
-                    case Keyboard.Key.Right:
                         break;
                     case Keyboard.Key.Numpad0:
                         break;
