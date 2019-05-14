@@ -88,7 +88,7 @@ namespace LastBastion
                     Barrack _barrack = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 150, 15, 1);
                     break;
                 default:
-                    Console.WriteLine("Default case");
+                    //Console.WriteLine("Default case");
                     break;
             }
         }
