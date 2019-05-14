@@ -36,7 +36,7 @@ namespace LastBastion
 
         public void IncPop()
         {
-            _population += 10;
+            _population += 2;
         }
 
     }
