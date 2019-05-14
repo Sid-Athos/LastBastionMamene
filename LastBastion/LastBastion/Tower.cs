@@ -15,7 +15,6 @@ namespace LastBastion
         public Tower(float posX,
         float posY,
         uint lifePoints,
-        uint maxLifePoints,
         uint dmg,
         uint armor,
         uint aaCooldown,
@@ -23,7 +22,6 @@ namespace LastBastion
             :base( posX,
          posY,
          lifePoints,
-         maxLifePoints,
          armor,
          rank)
         {

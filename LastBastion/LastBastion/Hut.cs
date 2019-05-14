@@ -54,29 +54,29 @@ namespace LastBastion
             switch (_buildingName)
             {
                 case "House":
-                    House _house = new House(GetVec2F.X,GetVec2F.Y,100,100,10,1,5);
+                    House _house = new House(GetVec2F.X,GetVec2F.Y,100,10,1,5);
 
                     break;
                 case "Sawmill":
-                    Sawmill _sawmill = new Sawmill(GetVec2F.X,GetVec2F.Y,100,100,10,1,2);
+                    Sawmill _sawmill = new Sawmill(GetVec2F.X,GetVec2F.Y,100,10,1,2);
                     break;
                 case "Mine":
-                    Mine _mine = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    Mine _mine = new Mine(GetVec2F.X, GetVec2F.Y, 100, 10, 1, 2);
                     break;
                 case "Forge":
-                    Forge _forge = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    Forge _forge = new Forge(GetVec2F.X, GetVec2F.Y, 100, 10, 1);
                     break;
                 case "Market":
-                    Market _market = new Market(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    Market _market = new Market(GetVec2F.X, GetVec2F.Y, 100, 10, 1, 2);
                     break;
                 case "Tower":
-                    Tower _tower = new Tower(GetVec2F.X,GetVec2F.Y,200,200,10,20,1,1);
+                    Tower _tower = new Tower(GetVec2F.X,GetVec2F.Y,200,10,20,1,1);
                     break;
                 case "Wall":
-                    Wall _wall = new Wall(GetVec2F.X, GetVec2F.Y, 300, 300, 30, 1);
+                    Wall _wall = new Wall(GetVec2F.X, GetVec2F.Y, 300, 30, 1);
                     break;
                 case "Barrack":
-                    Barrack _barrack = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 150, 15, 1);
+                    Barrack _barrack = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 15, 1);
                     break;
                 default:
                     Console.WriteLine("Default case");

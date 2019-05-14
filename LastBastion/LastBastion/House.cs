@@ -9,7 +9,7 @@ namespace LastBastion
         uint _population = 5;
         uint _rank = 1;
 
-        public House(float posX,float posY,uint lifePoints, uint maxLifePoints,uint armor, uint rank, uint population)
+        public House(float posX,float posY,uint lifePoints,uint armor, uint rank, uint population)
             :base(posX,posY,lifePoints,armor,rank)
         {
             _population = population;
