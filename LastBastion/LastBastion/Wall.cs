@@ -9,7 +9,7 @@ namespace LastBastion
         uint _rank = 1;
 
         public Wall(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor,uint rank)
-            : base(posX, posY, lifePoints, maxLifePoints, armor, rank)
+            : base(posX, posY, lifePoints, armor, rank)
         {
 
         }

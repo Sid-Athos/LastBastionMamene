@@ -29,7 +29,7 @@ namespace LastBastion
             _posY = posY;
             _job = job;
             _lifePoints = lifePoints;
-            _maxLifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
             _dmg = dmg;
             _armor = armor;
             _isMoving = isMoving;

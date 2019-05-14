@@ -23,7 +23,6 @@ namespace LastBastion
             :base( posX,
          posY,
          lifePoints,
-         maxLifePoints,
          armor,
          rank)
         {
