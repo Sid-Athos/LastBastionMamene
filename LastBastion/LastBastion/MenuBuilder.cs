@@ -148,27 +148,30 @@ namespace LastBastion
         }
         public String SelectTarget()
         {
-            if (_spriteBar[_currentPos] == _sprites.GetSprite("House"))
+            if (_spriteBar.Count > 0)
             {
-                return "House";
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("House"))
+                {
+                    return "House";
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Farm"))
+                {
+                    return "Farm";
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Mine"))
+                {
+                    return "Mine";
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Tower"))
+                {
+                    return "Tower";
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Sawmill"))
+                {
+                    return "Sawmill";
+                }
             }
-            if (_spriteBar[_currentPos] == _sprites.GetSprite("Farm"))
-            {
-                return "Farm";
-            }
-            if (_spriteBar[_currentPos] == _sprites.GetSprite("Mine"))
-            {
-                return "Mine";
-            }
-            if (_spriteBar[_currentPos] == _sprites.GetSprite("Tower"))
-            {
-                return "Tower";
-            }
-            if (_spriteBar[_currentPos] == _sprites.GetSprite("Sawmill"))
-            {
-                return "Sawmill";
-            }
-            return "Empty";
+            return "bad";
         }
     }
 }

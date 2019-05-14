@@ -22,7 +22,10 @@ namespace LastBastion
             {
                 if (e.Code == Keyboard.Key.Enter)
                 {
-                    _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                    if (_game.GetMenuBuilder.SelectTarget() != "bad")
+                    {
+                        _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                    }
                 }
             }
             switch (e.Code)

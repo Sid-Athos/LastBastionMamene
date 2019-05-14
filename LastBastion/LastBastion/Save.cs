@@ -22,7 +22,7 @@ namespace LastBastion
             _game = game;
             _name = name;
             //CreateTXT();
-            Test();
+            //Test();
         }
         public void CreateTXT()
         {
@@ -40,9 +40,11 @@ namespace LastBastion
             {
                 if (item.Value.GetName == "House" || item.Value.GetName == "Tower" || item.Value.GetName == "Mine" || item.Value.GetName == "Sawmill" || item.Value.GetName == "Farm")
                 {
-                    writer.WriteLine("" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "%%");
+                    writer.WriteLine("" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "%%");
                 }
             }
+            writer = new StreamWriter(@"C: \Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Setup");
+            writer.WriteLine();
         }
         public void Test()
         {
