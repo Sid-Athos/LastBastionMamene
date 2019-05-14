@@ -14,7 +14,7 @@ namespace LastBastion
         uint _armor;
         uint _rank;
 
-        public Building(float posX, float posY, uint lifePoints, uint armor, uint rank)
+        public Building(float posX, float posY, uint lifePoints,uint maxLifePoints, uint armor, uint rank)
         {
             _posX = posX;
             _posY = posY;

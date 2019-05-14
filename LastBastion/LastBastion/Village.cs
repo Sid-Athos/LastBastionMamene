@@ -10,7 +10,6 @@ namespace LastBastion
         Map _map;
         List<Hut> _nearby;
         int _area;
-        Dictionary<int, Hut> _buildings;
 
         public Village(Map map)
         {
@@ -65,7 +64,6 @@ namespace LastBastion
                     if (item.Value == _nearby[_random])
                     {
                         item.Value.SetBuilding(name);
-                        /* switch pour savoir quel constructeur il faut appeler en fonction du name */
                     }
                 }
                 _nearby.Remove(_nearby[_random]);

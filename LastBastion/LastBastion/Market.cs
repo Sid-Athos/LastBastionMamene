@@ -9,8 +9,8 @@ namespace LastBastion
         uint _foodProduction;
         uint _rank = 1;
 
-        public Market(float posX, float posY, uint lifePoints, uint armor, uint rank, uint foodProduction)
-            : base(posX, posY, lifePoints, armor, rank)
+        public Market(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, uint foodProduction)
+            : base(posX, posY, lifePoints, maxLifePoints, armor, rank)
         {
             _foodProduction = foodProduction;
         }
