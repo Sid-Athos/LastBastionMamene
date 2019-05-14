@@ -4,7 +4,6 @@ using System.Text;
 
 namespace LastBastion
 {
-
     public class Wall : Building
     {
         uint _rank = 1;

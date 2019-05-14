@@ -16,6 +16,7 @@ namespace LastBastion
         SpritesManager _sprites;
         Input _input;
         Map _map;
+        MenuBuilder _menu;
         //Mouse
         Vector2f _cursorPosition;
         // Timer And Stop
@@ -44,12 +45,13 @@ namespace LastBastion
             _pause = true;
             
             _map = new Map(this);
+            _menu = new MenuBuilder(this, _sprites);
 
             _window.Render.SetMouseCursorVisible(false);
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
 
-            Save save = new Save(this,"test");
+            //Save save = new Save(this,"test");
             Gameloop();
         }
         public void Gameloop()
@@ -63,6 +65,7 @@ namespace LastBastion
                 {
                     TimerUpdate();
                 }
+                _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));
                 //Update
                 _window.Render.SetView(_window.GetView.Render);
@@ -83,6 +86,12 @@ namespace LastBastion
             if (!_pause)
             {
                 _map.SamourailDeCoke();
+                // Draw menu
+            }
+            //UI
+            if (_menu.IsOpen)
+            {
+                _menu.DrawMenu();
             }
         }
 
@@ -93,6 +102,8 @@ namespace LastBastion
         public Random GetRDM => _random;
         public Vector2f CursorPosition => _cursorPosition;
         public SpritesManager Sprites => _sprites;
+        public MenuBuilder GetMenuBuilder => _menu;
+        public Map Map => _map; 
 
         //Timer And Stop
         public int GetTimer => _countTimer;

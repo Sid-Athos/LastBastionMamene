@@ -93,6 +93,11 @@ namespace LastBastion
             {
                 if (item.Value.IsBusy())
                 {
+                    if (item.Value.GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("Tower").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Tower"));
+                    }
                     if (item.Value.GetName == "House")
                     {
                         _map.GetGame.Sprites.GetSprite("House").Position = item.Value.GetVec2F;
