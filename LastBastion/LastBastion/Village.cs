@@ -93,6 +93,11 @@ namespace LastBastion
             {
                 if (item.Value.IsBusy())
                 {
+                    if (item.Value.GetName == "Mine")
+                    {
+                        _map.GetGame.Sprites.GetSprite("Mine").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Mine"));
+                    }
                     if (item.Value.GetName == "Tower")
                     {
                         _map.GetGame.Sprites.GetSprite("Tower").Position = item.Value.GetVec2F;
@@ -102,6 +107,11 @@ namespace LastBastion
                     {
                         _map.GetGame.Sprites.GetSprite("House").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("House"));
+                    }
+                    if (item.Value.GetName == "Farm")
+                    {
+                        _map.GetGame.Sprites.GetSprite("Farm").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Farm"));
                     }
                     if (item.Value.GetName == "Sawmill")
                     {

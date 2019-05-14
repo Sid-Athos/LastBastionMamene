@@ -33,6 +33,8 @@ namespace LastBastion
             _spriteBar.Add(_sprites.GetSprite("House"));
             _spriteBar.Add(_sprites.GetSprite("Sawmill"));
             _spriteBar.Add(_sprites.GetSprite("Tower"));
+            _spriteBar.Add(_sprites.GetSprite("Farm"));
+            _spriteBar.Add(_sprites.GetSprite("Mine"));
         }
         public bool IsOpen => _up;
         public void OpenClose() { _up = !_up; }
@@ -114,6 +116,14 @@ namespace LastBastion
             if (_spriteBar[_currentPos] == _sprites.GetSprite("House"))
             {
                 return "House";
+            }
+            if (_spriteBar[_currentPos] == _sprites.GetSprite("Farm"))
+            {
+                return "Farm";
+            }
+            if (_spriteBar[_currentPos] == _sprites.GetSprite("Mine"))
+            {
+                return "Mine";
             }
             if (_spriteBar[_currentPos] == _sprites.GetSprite("Tower"))
             {
