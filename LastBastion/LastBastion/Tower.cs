@@ -15,6 +15,7 @@ namespace LastBastion
         public Tower(float posX,
         float posY,
         uint lifePoints,
+        uint maxLifePoints,
         uint dmg,
         uint armor,
         uint aaCooldown,
@@ -22,6 +23,7 @@ namespace LastBastion
             :base( posX,
          posY,
          lifePoints,
+         maxLifePoints,
          armor,
          rank)
         {
@@ -29,8 +31,6 @@ namespace LastBastion
             _aaCooldown = aaCooldown;
             _slots = new Villager[2];
         }
-
-        public uint Rank => _rank;
 
         public int AvailableSlots => _slots.Length;
 

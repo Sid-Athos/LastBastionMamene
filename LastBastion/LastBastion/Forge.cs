@@ -8,13 +8,11 @@ namespace LastBastion
     {
         uint _rank = 1;
 
-        public Forge(float posX, float posY, uint lifePoints, uint armor, uint rank)
-            : base(posX, posY, lifePoints, armor, rank)
+        public Forge(float posX, float posY, uint lifePoints,uint maxLifePoints, uint armor, uint rank)
+            : base(posX, posY, lifePoints, maxLifePoints, armor, rank)
         {
 
         }
-
-        public uint Rank => _rank;
 
         public void Upgrade()
         {
