@@ -32,17 +32,52 @@ namespace LastBastion
             {
                 if(item.Value.GetName == "Farm")
                 {
-                    _foodStock += (15 * item.Value.Building.Rank);
+                    _foodStock += (10 * item.Value.Building.Rank);
                 }
                 if (item.Value.GetName == "Sawmill")
                 {
-                    _woodStock += (15 * item.Value.Building.Rank);
+                    _woodStock += (10 * item.Value.Building.Rank);
                 }
                 if (item.Value.GetName == "Mine")
                 {
-                    _stoneStock += (15 * item.Value.Building.Rank);
+                    _stoneStock += (10 * item.Value.Building.Rank);
                 }
             }
+        }
+
+        public bool IsEnoughRessource(string building)
+        {
+            if(building == "House" && _woodStock >= 30 && _stoneStock >= 10)
+            {
+                _woodStock -= 30;
+                _stoneStock -= 10;
+                return true;
+            }
+            if (building == "Mine" && _woodStock >= 40 && _stoneStock >= 20)
+            {
+                _woodStock -= 40;
+                _stoneStock -= 20;
+                return true;
+            }
+            if (building == "Farm" && _woodStock >= 40 && _stoneStock >= 10)
+            {
+                _woodStock -= 40;
+                _stoneStock -= 10;
+                return true;
+            }
+            if (building == "Sawmill" && _woodStock >= 50 && _stoneStock >= 10)
+            {
+                _woodStock -= 50;
+                _stoneStock -= 10;
+                return true;
+            }
+            if (building == "Tower" && _woodStock >= 10 && _stoneStock >= 60)
+            {
+                _woodStock -= 10;
+                _stoneStock -= 60;
+                return true;
+            }
+            return false;
         }
 
         public void SetCastle()

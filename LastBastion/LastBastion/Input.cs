@@ -26,7 +26,10 @@ namespace LastBastion
                 {
                     if (_game.GetMenuBuilder.SelectTarget() != "bad")
                     {
-                        _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                        if (_game.Map.GetVillage.IsEnoughRessource(_game.GetMenuBuilder.SelectTarget()))
+                        {
+                            _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                        }
                     }
                 }
             }

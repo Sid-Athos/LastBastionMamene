@@ -25,6 +25,7 @@ namespace LastBastion
         bool MinutePass = true;
         bool _pause;
         int _cycle;
+        int _lastProd;
         //Random
         Random _random = new Random();
 
@@ -41,6 +42,7 @@ namespace LastBastion
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
 
             _countTimer = 300;
+            _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
             
@@ -69,6 +71,14 @@ namespace LastBastion
                 //Update
                 _window.Render.SetView(_window.GetView.Render);
                 DrawUpdate();
+                if (_countTimer != _lastProd && _countTimer%3 == 0)
+                {
+                    _map.GetVillage.RessourceProd();
+                    _lastProd = _countTimer;
+                    Console.WriteLine(_map.GetVillage.StoneStock);
+                    Console.WriteLine(_map.GetVillage.FoodStock);
+                    Console.WriteLine(_map.GetVillage.WoodStock);
+                }
                 //End Update
 
                 _window.Render.Display();

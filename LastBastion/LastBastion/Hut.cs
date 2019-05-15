@@ -29,6 +29,7 @@ namespace LastBastion
         public Vector2f GetVec2F { get { return _pos; } }
         public String GetName { get { return _buildingName; } }
         public String StringVec => _name;
+
         public bool IsBusy()
         {
             if (_buildingName != "Empty")
@@ -48,7 +49,6 @@ namespace LastBastion
             get { return building; }
             set { building = value; }
         }
-
         
         public void SetBuilding(string a)
         {
@@ -67,7 +67,7 @@ namespace LastBastion
                 case "Forge":
                     building = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
                     break;
-                case "Market":
+                case "Farm":
                     building = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
                     break;
                 case "Tower":
