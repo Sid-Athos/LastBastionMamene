@@ -23,6 +23,7 @@ namespace LastBastion
             _buildingName = "Empty";
             _name = name;
             _isReveal = false;
+            building = null;
         }
         public Vector2i GetVec2I { get { return _posG; } }
         public Vector2f GetVec2F { get { return _pos; } }
@@ -63,29 +64,28 @@ namespace LastBastion
             switch (_buildingName)
             {
                 case "House":
-                    House _house = new House(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 5);
-
+                    building = new House(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 5);
                     break;
                 case "Sawmill":
-                    Sawmill _sawmill = new Sawmill(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
                     break;
                 case "Mine":
-                    Mine _mine = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    building = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
                     break;
                 case "Forge":
-                    Forge _forge = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    building = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
                     break;
                 case "Market":
-                    Farm _market = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    building = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
                     break;
                 case "Tower":
-                    Tower _tower = new Tower(GetVec2F.X, GetVec2F.Y, 200, 200, 10, 20, 1, 1);
+                    building = new Tower(GetVec2F.X, GetVec2F.Y, 200, 200, 10, 20, 1, 1);
                     break;
                 case "Wall":
-                    Wall _wall = new Wall(GetVec2F.X, GetVec2F.Y, 300, 300, 30, 1);
+                    building = new Wall(GetVec2F.X, GetVec2F.Y, 300, 300, 30, 1);
                     break;
                 case "Barrack":
-                    Barrack _barrack = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 150, 15, 1);
+                    building = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 150, 15, 1);
                     break;
                 default:
                     //Console.WriteLine("Default case");

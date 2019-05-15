@@ -25,25 +25,28 @@ namespace LastBastion
         }
         public void CreateTXT()
         {
-            StreamWriter writer = new StreamWriter(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Ressources");
+            StreamWriter writer = new StreamWriter(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\" + _name);
+            writer.WriteLine("<Ressources>");
             foreach (var item in _game.GetGrid)
             {
                 //writer.Write("" + item.Value.StringVec + "" + item.Value.GetName);
                 if (item.Value.GetName == "Stone" || item.Value.GetName == "Bush" || item.Value.GetName == "Wood")
                 {
-                    writer.WriteLine("" + item.Value.GetVec2I + "$$" + item.Value.GetName + "%%");
+                    writer.WriteLine("%%" + item.Value.GetVec2I + "$$" + item.Value.GetName + "%%");
                 }
             }
-            writer = new StreamWriter(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Building");
+            writer.WriteLine("<Building>");
             foreach (var item in _game.GetGrid)
             {
-                if (item.Value.GetName == "House" || item.Value.GetName == "Tower" || item.Value.GetName == "Mine" || item.Value.GetName == "Sawmill" || item.Value.GetName == "Farm")
+                if (item.Value.Building != null)
                 {
-                    writer.WriteLine("" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "%%");
+                    writer.WriteLine("**" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "%%");
                 }
             }
-            writer = new StreamWriter(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Setup");
-            writer.WriteLine("" + _game.GetTimer + "$$" + _game.Cycle + "%%");
+            writer.WriteLine("<Setup>");
+            writer.WriteLine("%%" + _game.GetTimer + "$$" + _game.Cycle + "%%");
+            writer.Close();
+            Console.Write("Done");
         }
         public void Test()
         {
