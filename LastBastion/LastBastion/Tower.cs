@@ -11,6 +11,7 @@ namespace LastBastion
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
+        
 
         public Tower(float posX,
         float posY,
@@ -75,8 +76,16 @@ namespace LastBastion
         {
             if(!u.IsInTower)
             {
+                if(ShowArchers() == _slots.Length)
+                {
+                    throw new InvalidOperationException("La tour est déjà remplie...");
+                }
                 _slots.SetValue(u,ShowArchers());
-                u.JoinTower(); 
+                u.JoinTower();
+                u.SetTower(this);
+            } else
+            {
+                throw new InvalidOperationException("This villager is already into a tower!");
             }
         }
 

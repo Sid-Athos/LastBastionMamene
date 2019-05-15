@@ -27,6 +27,11 @@ namespace LastBastion
         //Random
         Random _random = new Random();
 
+        public Game()
+        {
+
+        }
+
         public void Run()
         {
             _input = new Input(this);

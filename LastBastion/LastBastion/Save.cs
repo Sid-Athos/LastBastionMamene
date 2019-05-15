@@ -22,9 +22,10 @@ namespace LastBastion
             _game = game;
             _name = name;
             //CreateTXT();
-            Test();
+            //Test();
         }
-        public void CreateTXT()
+      /** 
+       * public void CreateTXT()
         {
             StreamWriter writer = new StreamWriter(@"C:\Users\Rosiek\Desktop\LastBastion\Save\" + _name);
             foreach (var item in _game.GetGrid)
@@ -41,6 +42,6 @@ namespace LastBastion
                 UseShellExecute = true
             };
             Process.Start(pInfo);
-        }
+        }*/
     }
 }

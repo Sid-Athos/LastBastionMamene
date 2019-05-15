@@ -24,6 +24,10 @@ namespace LastBastion
             _barbarians = new List<Barbar>();
         }
 
+        public List<Villager> VillList => _villagePeople;
+
+        public List<Barbar> BarList => _barbarians;
+
         public int VillCount => _villagePeople.Count;
 
         public int BarbCount => _barbarians.Count;
@@ -51,7 +55,9 @@ namespace LastBastion
         }
 
         public Village GetVillage => _village;
+
         public Game GetGame => _game;
+
         public MapUI GetMapUI => _UI;
 
 

@@ -6,7 +6,7 @@ namespace LastBastion
 {
     public class Unit
     {
-        //Map _context;
+        Map _context;
         float _posX;
         float _posY;
         readonly string _job;
@@ -23,7 +23,7 @@ namespace LastBastion
 
         public Unit(float posX, float posY,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed)
+            uint attackCooldown, float speed, Map context)
         {
             _posX = posX;
             _posY = posY;
@@ -35,6 +35,7 @@ namespace LastBastion
             _isMoving = isMoving;
             _aaCooldown = attackCooldown;
             _speed = speed;
+            _context = context;
         }
 
         public void Attack(Unit unit)
@@ -46,7 +47,6 @@ namespace LastBastion
                 unit.Die();
                 return;
             }
-
             unit._lifePoints = Math.Max(unit._lifePoints - (_dmg - unit._armor), 0);
         }
 
@@ -81,6 +81,8 @@ namespace LastBastion
             //Remove();
         }
 
+        public Map Context => _context;
+
         public void JoinTower()
         {
             _inTower = !_inTower;
@@ -90,8 +92,6 @@ namespace LastBastion
         {
             _isMoving = !_isMoving;
         }
-
-
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
@@ -124,6 +124,30 @@ namespace LastBastion
             Dispose(true);
             // TODO: supprimer les marques de commentaire pour la ligne suivante si le finaliseur est remplacé ci-dessus.
             // GC.SuppressFinalize(this);
+        }
+
+        public Villager FindClosestEnemy(Map map)
+        {
+            List<Villager> units = map.VillList;
+            if(units.Count == 0)
+            {
+                throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
+            }
+            var magnitude = _posX + _posY;
+            float min = Math.Abs((units[0]._posX + units[0]._posY) - magnitude);
+            var unitToReturn = units[0];
+            
+            foreach(Villager n in units)
+            {
+                var newMin = Math.Abs((n._posX + n._posY) - magnitude);
+                if (newMin < min)
+                {
+                    min = newMin;
+                    unitToReturn = n;
+                }
+            }
+
+            return unitToReturn;
         }
     }
 }
