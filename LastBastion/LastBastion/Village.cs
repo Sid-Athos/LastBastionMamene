@@ -10,14 +10,39 @@ namespace LastBastion
         Map _map;
         List<Hut> _nearby;
         int _area;
+        uint _foodStock;
+        uint _stoneStock;
+        uint _woodStock;
 
         public Village(Map map)
         {
             _map = map;
             _nearby = new List<Hut>();
             _area = 3;
+            _woodStock = 0;
+            _foodStock = 0;
+            _stoneStock = 0;
             SetCastle();
             SetNearby();
+        }
+
+        public void RessourceProd()
+        {
+            foreach(var item in _map.GetGame.GetGrid )
+            {
+                if(item.Value.GetName == "Farm")
+                {
+                    _foodStock += (15 * item.Value.Building.Rank);
+                }
+                if (item.Value.GetName == "Sawmill")
+                {
+                    _woodStock += (15 * item.Value.Building.Rank);
+                }
+                if (item.Value.GetName == "Mine")
+                {
+                    _stoneStock += (15 * item.Value.Building.Rank);
+                }
+            }
         }
 
         public void SetCastle()
@@ -41,6 +66,7 @@ namespace LastBastion
             _map.GetGame.GetGrid[new Vector2i(1, -1)].SetBuilding("Castle");
             _map.GetGame.GetGrid[new Vector2i(1, -1)].IsReveal = true;
         }
+
         public void SetNearby()
         {
             for (int i = -1 * _area + 1; i < _area; i++)
@@ -54,6 +80,7 @@ namespace LastBastion
                 }
             }
         }
+
         public void CreateBuilding(string name)
         {
             if (_nearby.Count > 0)
@@ -79,6 +106,7 @@ namespace LastBastion
             }
             Console.WriteLine(_nearby.Count);
         }
+
         public List<Hut> RebuildeMegaGreatConstructor()
         {
             List<Hut> newList = new List<Hut>();
@@ -88,6 +116,7 @@ namespace LastBastion
             }
             return newList;
         }
+
         public void DrawBuilding()
         {
             foreach (var item in _map.GetGame.GetGrid)
@@ -153,11 +182,16 @@ namespace LastBastion
                 }
             }
         }
+
         public void DrawCastle()
         {
             _map.GetGame.Sprites.GetSprite("Castle").Position = _map.GetGame.GetGrid[new Vector2i(-1, -1)].GetVec2F;
             _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Castle"));
         }
+
+        public uint FoodStock => _foodStock;
+        public uint WoodStock => _woodStock;
+        public uint StoneStock => _stoneStock;
         public int Area => _area;
         public Map GetMap => _map;
     }

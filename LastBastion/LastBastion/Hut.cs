@@ -48,16 +48,8 @@ namespace LastBastion
             get { return building; }
             set { building = value; }
         }
-        /*
-        public List<Hut> IsHarvestable()
-        {
-            List<Hut> ressourceList = new List<Hut>();
-            foreach(var item in )
-            {
 
-            }
-        }
-        */
+        
         public void SetBuilding(string a)
         {
             _buildingName = a;
@@ -67,16 +59,16 @@ namespace LastBastion
                     building = new House(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 5);
                     break;
                 case "Sawmill":
-                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
                     break;
                 case "Mine":
-                    building = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    building = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
                     break;
                 case "Forge":
                     building = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
                     break;
                 case "Market":
-                    building = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 2);
+                    building = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
                     break;
                 case "Tower":
                     building = new Tower(GetVec2F.X, GetVec2F.Y, 200, 200, 10, 20, 1, 1);
