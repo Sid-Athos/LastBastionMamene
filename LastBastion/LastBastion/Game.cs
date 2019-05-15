@@ -51,7 +51,6 @@ namespace LastBastion
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
 
-            Save save = new Save(this,"test");
             Gameloop();
         }
         public void Gameloop()
@@ -104,7 +103,8 @@ namespace LastBastion
         public Vector2f CursorPosition => _cursorPosition;
         public SpritesManager Sprites => _sprites;
         public MenuBuilder GetMenuBuilder => _menu;
-        public Map Map => _map; 
+        public Map Map => _map;
+        public int Cycle => _cycle;
 
         //Timer And Stop
         public int GetTimer => _countTimer;

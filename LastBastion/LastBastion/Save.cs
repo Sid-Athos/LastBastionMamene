@@ -21,12 +21,11 @@ namespace LastBastion
         {
             _game = game;
             _name = name;
-            //CreateTXT();
             //Test();
         }
         public void CreateTXT()
         {
-            StreamWriter writer = new StreamWriter(@"C: \Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Ressources");
+            StreamWriter writer = new StreamWriter(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Ressources");
             foreach (var item in _game.GetGrid)
             {
                 //writer.Write("" + item.Value.StringVec + "" + item.Value.GetName);
@@ -35,7 +34,7 @@ namespace LastBastion
                     writer.WriteLine("" + item.Value.GetVec2I + "$$" + item.Value.GetName + "%%");
                 }
             }
-            writer = new StreamWriter(@"C: \Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Building");
+            writer = new StreamWriter(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Building");
             foreach (var item in _game.GetGrid)
             {
                 if (item.Value.GetName == "House" || item.Value.GetName == "Tower" || item.Value.GetName == "Mine" || item.Value.GetName == "Sawmill" || item.Value.GetName == "Farm")
@@ -43,8 +42,8 @@ namespace LastBastion
                     writer.WriteLine("" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "%%");
                 }
             }
-            writer = new StreamWriter(@"C: \Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Setup");
-            writer.WriteLine();
+            writer = new StreamWriter(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\Setup");
+            writer.WriteLine("" + _game.GetTimer + "$$" + _game.Cycle + "%%");
         }
         public void Test()
         {

@@ -11,10 +11,12 @@ namespace LastBastion
     class Input
     {
         Game _game;
+        Save _save;
 
         public Input(Game game)
         {
             _game = game;
+            _save = new Save(_game, "test");
         }
         public void IsKeyPressed(object sender, KeyEventArgs e)
         {
@@ -92,6 +94,9 @@ namespace LastBastion
                     case Keyboard.Key.Tab:
                         _game.GetMenuBuilder.OpenClose();
                         break;
+                    case Keyboard.Key.P:
+                        _save.CreateTXT();
+                        break;
                     case Keyboard.Key.B:
                         break;
                     case Keyboard.Key.C:
@@ -117,8 +122,6 @@ namespace LastBastion
                     case Keyboard.Key.N:
                         break;
                     case Keyboard.Key.O:
-                        break;
-                    case Keyboard.Key.P:
                         break;
                     case Keyboard.Key.R:
                         break;
