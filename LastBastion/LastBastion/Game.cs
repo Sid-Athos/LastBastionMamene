@@ -89,6 +89,7 @@ namespace LastBastion
             _map.PrintMap();
             _map.GetVillage.DrawCastle();
             _map.GetVillage.DrawBuilding();
+            _map.GetVillage.WallRenderer();
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();

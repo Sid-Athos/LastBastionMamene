@@ -47,7 +47,13 @@ namespace LastBastion
 
         public bool IsEnoughRessource(string building)
         {
-            if(building == "House" && _woodStock >= 30 && _stoneStock >= 10)
+            if (building == "Wall" && _woodStock >= 10 && _stoneStock >= 20)
+            {
+                _woodStock -= 30;
+                _stoneStock -= 10;
+                return true;
+            }
+            if (building == "House" && _woodStock >= 30 && _stoneStock >= 10)
             {
                 _woodStock -= 30;
                 _stoneStock -= 10;
@@ -158,6 +164,11 @@ namespace LastBastion
             {
                 if (item.Value.IsBusy())
                 {
+                    if (item.Value.GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("Wall").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Wall"));
+                    }
                     if (item.Value.GetName == "Mine")
                     {
                         _map.GetGame.Sprites.GetSprite("Mine").Position = item.Value.GetVec2F;
@@ -217,7 +228,35 @@ namespace LastBastion
                 }
             }
         }
-
+        public void WallRenderer()
+        {
+            foreach (var item in _map.GetGame.GetGrid)
+            {
+                if (item.Value.GetName == "Wall")
+                {
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X-1,item.Key.Y)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallLeft").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallLeft"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X+1, item.Key.Y)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallRight").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallRight"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y+1)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallDown").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallDown"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y-1)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallUp").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallUp"));
+                    }
+                }
+            }
+        }
         public void DrawCastle()
         {
             _map.GetGame.Sprites.GetSprite("Castle").Position = _map.GetGame.GetGrid[new Vector2i(-1, -1)].GetVec2F;

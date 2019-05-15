@@ -46,23 +46,27 @@ namespace LastBastion
                     {
                         _spriteBar.Add(_sprites.GetSprite("House"));
                         _spriteBar.Add(_sprites.GetSprite("Tower"));
+                        _spriteBar.Add(_sprites.GetSprite("Wall"));
                     }
                     if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Stone")
                     {
                         _spriteBar.Add(_sprites.GetSprite("House"));
                         _spriteBar.Add(_sprites.GetSprite("Tower"));
+                        _spriteBar.Add(_sprites.GetSprite("Wall"));
                         _spriteBar.Add(_sprites.GetSprite("Mine"));
                     }
                     if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Bush")
                     {
                         _spriteBar.Add(_sprites.GetSprite("House"));
                         _spriteBar.Add(_sprites.GetSprite("Tower"));
+                        _spriteBar.Add(_sprites.GetSprite("Wall"));
                         _spriteBar.Add(_sprites.GetSprite("Farm"));
                     }
                     if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Wood")
                     {
                         _spriteBar.Add(_sprites.GetSprite("House"));
                         _spriteBar.Add(_sprites.GetSprite("Tower"));
+                        _spriteBar.Add(_sprites.GetSprite("Wall"));
                         _spriteBar.Add(_sprites.GetSprite("Sawmill"));
                     }
                 }
@@ -169,6 +173,10 @@ namespace LastBastion
                 if (_spriteBar[_currentPos] == _sprites.GetSprite("Sawmill"))
                 {
                     return "Sawmill";
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Wall"))
+                {
+                    return "Wall";
                 }
             }
             return "bad";
