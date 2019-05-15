@@ -136,12 +136,14 @@ namespace Tests
             Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1);
             Assert.That(sido.ShowArchers(), Is.EqualTo(0));
 
+
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(10.9f, 11.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v1 = new Villager(0.9f, 5.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
             var job2 = Guid.NewGuid().ToString();
-            Villager v2 = new Villager(10.5f, 11.2f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v2 = new Villager(19.5f, 8.2f, job2, 150, 10, 3, false, 2, 1.5f, var);
             var job3 = Guid.NewGuid().ToString();
             Villager v3 = new Villager(10.5f, 11.2f, job3, 150, 10, 3, false, 2, 1.5f, var);
+            Assert.Throws<IndexOutOfRangeException>(() => v1.FindClosestEnemy(var));
 
             var.AddVillager(v1);
             var.AddVillager(v2);
@@ -159,8 +161,10 @@ namespace Tests
 
             Assert.That(sido.ShowArchers(), Is.EqualTo(2));
             Assert.That(v1.ShowTower, Is.EqualTo(sido));
+
             Villager check = v1.FindClosestEnemy(var);
             Assert.That(check, Is.EqualTo(v1));
+
         }
     }
 }

@@ -133,6 +133,7 @@ namespace LastBastion
             {
                 throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
             }
+
             var magnitude = _posX + _posY;
             float min = Math.Abs((units[0]._posX + units[0]._posY) - magnitude);
             var unitToReturn = units[0];

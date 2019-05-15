@@ -8,6 +8,7 @@ namespace LastBastion
     {
         float _posX;
         float _posY;
+        
 
         public Vectors(float x, float y)
         {
