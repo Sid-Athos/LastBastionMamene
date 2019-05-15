@@ -19,9 +19,9 @@ namespace LastBastion
             _map = map;
             _nearby = new List<Hut>();
             _area = 3;
-            _woodStock = 0;
-            _foodStock = 0;
-            _stoneStock = 0;
+            _woodStock = 150;
+            _foodStock = 150;
+            _stoneStock = 150;
             SetCastle();
             SetNearby();
         }
@@ -32,15 +32,15 @@ namespace LastBastion
             {
                 if(item.Value.GetName == "Farm")
                 {
-                    _foodStock += (10 * item.Value.Building.Rank);
+                    _foodStock += (5 * item.Value.Building.Rank);
                 }
                 if (item.Value.GetName == "Sawmill")
                 {
-                    _woodStock += (10 * item.Value.Building.Rank);
+                    _woodStock += (5 * item.Value.Building.Rank);
                 }
                 if (item.Value.GetName == "Mine")
                 {
-                    _stoneStock += (10 * item.Value.Building.Rank);
+                    _stoneStock += (5 * item.Value.Building.Rank);
                 }
             }
         }
