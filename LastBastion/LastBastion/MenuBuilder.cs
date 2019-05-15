@@ -73,7 +73,7 @@ namespace LastBastion
             }
         }
         public bool IsOpen => _up;
-        public void OpenClose() { _up = !_up; }
+        public void OpenClose() { _up = !_up; _currentPos = 0; }
         public void ToZero () { _currentPos = 0; }
         public void DrawMenu()
         {

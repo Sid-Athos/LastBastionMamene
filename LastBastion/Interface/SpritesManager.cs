@@ -25,6 +25,18 @@ namespace Interface
             texture = new Texture("../../../../images/CursorFont.png");
             _sprites.Add("CursorFont", new Sprite(texture));
 
+            texture = new Texture("../../../../images/TowerUp.png");
+            _sprites.Add("TowerUp", new Sprite(texture));
+
+            texture = new Texture("../../../../images/TowerBot.png");
+            _sprites.Add("TowerBot", new Sprite(texture));
+
+            texture = new Texture("../../../../images/TowerLeft.png");
+            _sprites.Add("TowerLeft", new Sprite(texture));
+
+            texture = new Texture("../../../../images/TowerRIght.png");
+            _sprites.Add("TowerRight", new Sprite(texture));
+
             texture = new Texture("../../../../images/IconFont.png");
             _sprites.Add("IconFont", new Sprite(texture));
 
