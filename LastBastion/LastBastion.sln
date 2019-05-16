@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LastBastion", "LastBastion\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interface", "Interface\Interface.csproj", "{90B83CAE-63B5-448D-BF2E-9F334F8B01D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LastBastion.Tests", "LastBastion.Tests\LastBastion.Tests.csproj", "{C55B44F8-7DD1-4901-BEA7-AE5F595138FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LastBastion.Tests", "LastBastion.Tests\LastBastion.Tests.csproj", "{C55B44F8-7DD1-4901-BEA7-AE5F595138FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Tests", "Tests.Tests\Tests.Tests.csproj", "{FE0FB3D0-D3A8-492F-9F3C-FE04D7E2C20B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{C55B44F8-7DD1-4901-BEA7-AE5F595138FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C55B44F8-7DD1-4901-BEA7-AE5F595138FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C55B44F8-7DD1-4901-BEA7-AE5F595138FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0FB3D0-D3A8-492F-9F3C-FE04D7E2C20B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0FB3D0-D3A8-492F-9F3C-FE04D7E2C20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0FB3D0-D3A8-492F-9F3C-FE04D7E2C20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0FB3D0-D3A8-492F-9F3C-FE04D7E2C20B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

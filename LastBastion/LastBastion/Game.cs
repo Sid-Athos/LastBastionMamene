@@ -16,6 +16,7 @@ namespace LastBastion
         SpritesManager _sprites;
         Input _input;
         Map _map;
+        MenuBuilder _menu;
         //Mouse
         Vector2f _cursorPosition;
         // Timer And Stop
@@ -24,6 +25,7 @@ namespace LastBastion
         bool MinutePass = true;
         bool _pause;
         int _cycle;
+        int _lastProd;
         //Random
         Random _random = new Random();
 
@@ -44,17 +46,21 @@ namespace LastBastion
 
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
 
-            _countTimer = 300;
+            _countTimer = 239;
+            _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
             
             _map = new Map(this);
+            _menu = new MenuBuilder(this, _sprites);
+
+            _sprites.musicStart();
+            _sprites.musicPlay("Zebby");
 
             _window.Render.SetMouseCursorVisible(false);
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
 
-            Save save = new Save(this,"test");
             Gameloop();
         }
         public void Gameloop()
@@ -68,10 +74,36 @@ namespace LastBastion
                 {
                     TimerUpdate();
                 }
+                if (_countTimer == 240 )
+                {
+                    _sprites.musicStop("zebby");
+                }
+                if (_countTimer == 241)
+                {
+                    _sprites.musicPlay("battle");
+                }
+                if (_countTimer == 300)
+                {
+                    _sprites.musicStop("battle");
+                }
+                if (_countTimer == 301)
+                {
+                    _sprites.musicPlay("zebby");
+                }
+                _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));
                 //Update
                 _window.Render.SetView(_window.GetView.Render);
                 DrawUpdate();
+                if (_countTimer != _lastProd && _countTimer%3 == 0)
+                {
+                    _map.GetVillage.RessourceProd();
+                    _lastProd = _countTimer;
+                    Console.WriteLine("Stock de Pierre : " + _map.GetVillage.StoneStock);
+                    Console.WriteLine("Stock de Nourriture : " + _map.GetVillage.FoodStock);
+                    Console.WriteLine("Stock de Bois : " + _map.GetVillage.WoodStock);
+                    Console.WriteLine("-----------------------------");
+                }
                 //End Update
 
                 _window.Render.Display();
@@ -82,12 +114,20 @@ namespace LastBastion
             _map.PrintMap();
             _map.GetVillage.DrawCastle();
             _map.GetVillage.DrawBuilding();
+            _map.GetVillage.WallRenderer();
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();
             if (!_pause)
             {
                 _map.SamourailDeCoke();
+                // Draw menu
+            }
+            //UI
+            if (_menu.IsOpen)
+            {
+                _menu.UpdateList();
+                _menu.DrawMenu();
             }
         }
 
@@ -98,6 +138,9 @@ namespace LastBastion
         public Random GetRDM => _random;
         public Vector2f CursorPosition => _cursorPosition;
         public SpritesManager Sprites => _sprites;
+        public MenuBuilder GetMenuBuilder => _menu;
+        public Map Map => _map;
+        public int Cycle => _cycle;
 
         //Timer And Stop
         public int GetTimer => _countTimer;
@@ -143,12 +186,31 @@ namespace LastBastion
                 int h = -1 * (y / 2);
                 for (float j = 0f; j < 50 * 15; j += 15)
                 {
-                    Hut NewH = new Hut(new Vector2f(i, j), "[ " + l + " ; " + h + " ]", new Vector2i(l, h));
+                    Hut NewH = new Hut(this,new Vector2f(i, j), "[ " + l + " ; " + h + " ]", new Vector2i(l, h));
                     _grid.Add(new Vector2i(l, h), NewH);
                     h++;
                 }
                 l++;
             }
+        }
+
+        public List<Vector2f> InTheMistOfPandaria(int n)
+        {
+            List<Vector2f> list = new List<Vector2f>();
+            List<Vector2f> returnList = new List<Vector2f>();
+            foreach (var item in _grid)
+            {
+                if (!item.Value.IsReveal)
+                {
+                    list.Add(item.Value.GetVec2F);
+                }
+            }
+            for (int i = 0; i < n; i++)
+            {
+                int rdm = RandomNumber(0, list.Count);
+                returnList.Add(list[rdm]);
+            }
+            return returnList;
         }
     }
 }

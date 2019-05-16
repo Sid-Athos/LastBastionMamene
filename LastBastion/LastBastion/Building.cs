@@ -14,15 +14,14 @@ namespace LastBastion
         uint _armor;
         uint _rank;
 
-        public Building(float posX, float posY, uint lifePoints, uint armor, uint rank)
+        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
         {
             _posX = posX;
             _posY = posY;
             _lifePoints = lifePoints;
-            _maxLifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
             _armor = armor;
             _rank = rank;
-            _count++;
         }
 
         public uint Armor => _armor;
@@ -50,6 +49,12 @@ namespace LastBastion
                 return true;
             }
             return false;
+        }
+
+        public uint Rank
+        {
+            get { return _rank; }
+            set { _rank = value; }
         }
 
         public float Xpos

@@ -11,13 +11,28 @@ namespace LastBastion
     class Input
     {
         Game _game;
+        Save _save;
 
         public Input(Game game)
         {
             _game = game;
+            _save = new Save(_game, "test");
         }
         public void IsKeyPressed(object sender, KeyEventArgs e)
         {
+            if (_game.GetMenuBuilder.IsOpen)
+            {
+                if (e.Code == Keyboard.Key.Enter)
+                {
+                    if (_game.GetMenuBuilder.SelectTarget() != "bad")
+                    {
+                        if (_game.Map.GetVillage.IsEnoughRessource(_game.GetMenuBuilder.SelectTarget()))
+                        {
+                            _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                        }
+                    }
+                }
+            }
             switch (e.Code)
             {
                 case Keyboard.Key.Space:
@@ -28,6 +43,7 @@ namespace LastBastion
                     _game.Close();
                     break;
             }
+
             if (!_game.IsStop)
             {
                 switch (e.Code)
@@ -35,24 +51,28 @@ namespace LastBastion
                     case Keyboard.Key.Z:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y - 1)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveUp(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y - 1)].GetVec2F);
                         }
                         break;
                     case Keyboard.Key.S:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y + 1)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveDown(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y + 1)].GetVec2F);
                         }
                         break;
                     case Keyboard.Key.Q:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X - 1, _game.GetWindow.GetView.Y)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveLeft(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X - 1, _game.GetWindow.GetView.Y)].GetVec2F);
                         }
                         break;
                     case Keyboard.Key.D:
                         if (_game.GetGrid.ContainsKey(new Vector2i(_game.GetWindow.GetView.X + 1, _game.GetWindow.GetView.Y)))
                         {
+                            _game.GetMenuBuilder.ToZero();
                             _game.GetWindow.GetView.MoveRight(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X + 1, _game.GetWindow.GetView.Y)].GetVec2F);
                         }
                         break;
@@ -68,8 +88,19 @@ namespace LastBastion
                             _game.GetWindow.GetView.Render.Size = new Vector2f(_game.GetWindow.GetView.Render.Size.X + 15, _game.GetWindow.GetView.Render.Size.Y + 15);
                         }
                         break;
+                    case Keyboard.Key.Left:
+                        _game.GetMenuBuilder.UWantToMoveToTheLeftInTheMenu();
+                        break;
+                    case Keyboard.Key.Right:
+                        _game.GetMenuBuilder.UWantToMoveToTheRightInTheMenu();
+                        break;
+                    case Keyboard.Key.Tab:
+                        _game.GetMenuBuilder.OpenClose();
+                        break;
+                    case Keyboard.Key.P:
+                        _save.CreateTXT();
+                        break;
                     case Keyboard.Key.B:
-                        Console.WriteLine("test");
                         break;
                     case Keyboard.Key.C:
                         break;
@@ -94,8 +125,6 @@ namespace LastBastion
                     case Keyboard.Key.N:
                         break;
                     case Keyboard.Key.O:
-                        break;
-                    case Keyboard.Key.P:
                         break;
                     case Keyboard.Key.R:
                         break;
@@ -175,11 +204,7 @@ namespace LastBastion
                         break;
                     case Keyboard.Key.Space:
                         break;
-                    case Keyboard.Key.Enter:
-                        break;
                     case Keyboard.Key.Backspace:
-                        break;
-                    case Keyboard.Key.Tab:
                         break;
                     case Keyboard.Key.End:
                         break;
@@ -196,10 +221,6 @@ namespace LastBastion
                     case Keyboard.Key.Multiply:
                         break;
                     case Keyboard.Key.Divide:
-                        break;
-                    case Keyboard.Key.Left:
-                        break;
-                    case Keyboard.Key.Right:
                         break;
                     case Keyboard.Key.Numpad0:
                         break;

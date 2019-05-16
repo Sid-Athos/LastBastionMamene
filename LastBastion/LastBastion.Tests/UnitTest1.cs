@@ -133,9 +133,9 @@ namespace Tests
             Assert.That(sid, Is.Not.Null);
 
             Map var = new Map(sid);
+
             Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1);
             Assert.That(sido.ShowArchers(), Is.EqualTo(0));
-
 
             var job1 = Guid.NewGuid().ToString();
             Villager v1 = new Villager(0.9f, 5.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
@@ -149,7 +149,6 @@ namespace Tests
             var.AddVillager(v2);
             var.AddVillager(v3);
 
-
             Assert.That(v3.Job, Is.EqualTo(job3));
             Assert.That(v1.IsInTower, Is.EqualTo(false));
             Assert.That(v1.ShowTower, Is.Null);
@@ -162,9 +161,21 @@ namespace Tests
             Assert.That(sido.ShowArchers(), Is.EqualTo(2));
             Assert.That(v1.ShowTower, Is.EqualTo(sido));
 
-            Villager check = v1.FindClosestEnemy(var);
-            Assert.That(check, Is.EqualTo(v1));
+            Vectors check = v1.FindClosestEnemy(var);
+            Assert.That(check, Is.EqualTo(v1.Position));
 
+        }
+
+
+        [Test]
+        public void T7_Moves_With_Timestamp()
+        {
+            Game sid = new Game();
+            sid.Run();
+            Assert.That(sid, Is.Not.Null);
+
+            Map var = new Map(sid);
+            Assert.That(sid,Is.Not.Null);
         }
     }
 }

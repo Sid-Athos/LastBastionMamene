@@ -10,24 +10,29 @@ namespace LastBastion
         Vector2f _pos;
         Vector2i _posG;
         string _name;
-        string _building;
+        string _buildingName;
         bool _isReveal;
+        Building building;
+        Game _game;
 
-        public Hut(Vector2f pos, string name, Vector2i posG)
+        public Hut(Game game, Vector2f pos, string name, Vector2i posG)
         {
+            _game = game;
             _posG = posG;
             _pos = pos;
-            _building = "Empty";
+            _buildingName = "Empty";
             _name = name;
             _isReveal = false;
+            building = null;
         }
         public Vector2i GetVec2I { get { return _posG; } }
         public Vector2f GetVec2F { get { return _pos; } }
-        public String GetName { get { return _building; } }
+        public String GetName { get { return _buildingName; } }
         public String StringVec => _name;
+
         public bool IsBusy()
         {
-            if (_building != "Empty")
+            if (_buildingName != "Empty")
             {
                 return true;
             }
@@ -38,6 +43,46 @@ namespace LastBastion
             get { return _isReveal; }
             set { _isReveal = value; }
         }
-        public void SetBuilding(string a) { _building = a; }
+
+        public Building Building
+        {
+            get { return building; }
+            set { building = value; }
+        }
+        
+        public void SetBuilding(string a)
+        {
+            _buildingName = a;
+            switch (_buildingName)
+            {
+                case "House":
+                    building = new House(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 5);
+                    break;
+                case "Sawmill":
+                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    break;
+                case "Mine":
+                    building = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    break;
+                case "Forge":
+                    building = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    break;
+                case "Farm":
+                    building = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    break;
+                case "Tower":
+                    building = new Tower(GetVec2F.X, GetVec2F.Y, 200, 200, 10, 20, 1, 1);
+                    break;
+                case "Wall":
+                    building = new Wall(GetVec2F.X, GetVec2F.Y, 300, 300, 30, 1);
+                    break;
+                case "Barrack":
+                    building = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 150, 15, 1);
+                    break;
+                default:
+                    //Console.WriteLine("Default case");
+                    break;
+            }
+        }
     }
 }
