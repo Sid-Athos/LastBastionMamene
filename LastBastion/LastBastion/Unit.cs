@@ -7,6 +7,7 @@ namespace LastBastion
     public class Unit
     {
         Map _context;
+        Vectors _position;
         float _posX;
         float _posY;
         readonly string _job;
@@ -36,7 +37,10 @@ namespace LastBastion
             _aaCooldown = attackCooldown;
             _speed = speed;
             _context = context;
+            _position = new Vectors(posX, posY);
         }
+
+        public Vectors Position => _position;
 
         public void Attack(Unit unit)
         {
