@@ -42,10 +42,10 @@ namespace LastBastion
             return (float)Math.Sqrt((Math.Pow(_posX,2) + (Math.Pow(_posY, 2))));
         }
 
-        public Vectors Substract(Vectors origin, Vectors arrival)
+        public Vectors Substract(Vectors origin, Vectors arrival,float range)
         {
-            float x= Math.Abs(origin._posX - arrival._posX);
-            float y = Math.Abs(origin._posY - arrival. _posY);
+            float x= Math.Abs((origin._posX) - Math.Abs(arrival._posX - range));
+            float y = Math.Abs((origin._posY) - Math.Abs(arrival._posY - range));
             return new Vectors(x, y);
         }
 
@@ -64,9 +64,9 @@ namespace LastBastion
             return new Vectors(x, y);
         }
 
-       public Vectors Movement(Vectors origin, Vectors arrival, uint timestamp,float speed)
+       public Vectors Movement(Vectors origin, Vectors arrival, uint timestamp,float speed,float range)
         {
-            Vectors moveVec = Substract(origin, arrival);
+            Vectors moveVec = Substract(origin, arrival,range);
             Vectors normalizedVec =  Normalize(moveVec);
             Console.WriteLine("[{0},{1}]",normalizedVec.X, normalizedVec.Y);
             return normalizedVec;

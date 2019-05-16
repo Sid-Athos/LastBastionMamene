@@ -21,6 +21,7 @@ namespace LastBastion
         bool _inTower = false;
         bool _burned = false;
         bool _paralyzed = false;
+        float _range = 0.2f;
 
         public Unit(float posX, float posY,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
@@ -54,6 +55,7 @@ namespace LastBastion
             unit._lifePoints = Math.Max(unit._lifePoints - (_dmg - unit._armor), 0);
         }
 
+        public float Range => _range;
 
         public uint Dmg => _dmg;
 
