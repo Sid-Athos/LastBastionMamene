@@ -53,6 +53,11 @@ namespace LastBastion
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
 
+            foreach (var item in InTheMistOfPandaria(10))
+            {
+                Console.WriteLine("" + item.X + " ; " + item.Y);
+            }
+
             Gameloop();
         }
         public void Gameloop()
@@ -168,6 +173,25 @@ namespace LastBastion
                 }
                 l++;
             }
+        }
+
+        public List<Vector2f> InTheMistOfPandaria(int n)
+        {
+            List<Vector2f> list = new List<Vector2f>();
+            List<Vector2f> returnList = new List<Vector2f>();
+            foreach (var item in _grid)
+            {
+                if (!item.Value.IsReveal)
+                {
+                    list.Add(item.Value.GetVec2F);
+                }
+            }
+            for (int i = 0; i < n; i++)
+            {
+                int rdm = RandomNumber(0, list.Count);
+                returnList.Add(list[rdm]);
+            }
+            return returnList;
         }
     }
 }
