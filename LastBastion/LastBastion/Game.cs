@@ -49,14 +49,11 @@ namespace LastBastion
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
 
+            _sprites.musicPlay("zebby");
+
             _window.Render.SetMouseCursorVisible(false);
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
-
-            foreach (var item in InTheMistOfPandaria(10))
-            {
-                Console.WriteLine("" + item.X + " ; " + item.Y);
-            }
 
             Gameloop();
         }

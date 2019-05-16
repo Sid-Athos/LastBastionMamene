@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SFML.Graphics;
+using SFML.Audio;
 
 namespace Interface
 {
@@ -9,13 +10,21 @@ namespace Interface
     {
         Dictionary<string, Sprite> _sprites;
         Text _text;
+        List<Music> _music;
 
         public SpritesManager()
         {
             _sprites = new Dictionary<string, Sprite>();
             Font _font = new Font("../../../../images/RINGM___.TTF");
             _text = new Text();
-            _text.Font = _font; 
+            _text.Font = _font;
+            _music = new List<Music>();
+            Music music = new Music("../../../../images/rosiek.wav");
+            music.Loop = true;
+            _music.Add(music);
+            music = new Music("../../../../images/rosiek.wav");
+            music.Loop = true;
+            _music.Add(music);
         }
 
         public void Initialized()
@@ -121,5 +130,28 @@ namespace Interface
         }
         public Sprite GetSprite(string name) => _sprites[name];
         public Text GetText => _text;
+
+        public void musicPlay(string name)
+        {
+            if (name == "zebby")
+            {
+                _music[0].Play();
+            }
+            if (name == "battle")
+            {
+                _music[1].Play();
+            }
+        }
+        public void _musicStop(string name)
+        {
+            if (name == "zebby")
+            {
+                _music[0].Stop();
+            }
+            if (name == "battle")
+            {
+                _music[1].Stop();
+            }
+        }
     }
 }
