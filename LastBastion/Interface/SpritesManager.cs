@@ -22,7 +22,7 @@ namespace Interface
             Music music = new Music("../../../../images/rosiek.wav");
             music.Loop = true;
             _music.Add(music);
-            music = new Music("../../../../images/rosiek.wav");
+            music = new Music("../../../../images/war.wav");
             music.Loop = true;
             _music.Add(music);
         }
@@ -100,7 +100,7 @@ namespace Interface
             texture = new Texture("../../../../images/Tower.png");
             _sprites.Add("Tower", new Sprite(texture));
 
-            texture = new Texture("../../../../images/castle.png");
+            texture = new Texture("../../../../images/castle01.png");
             _sprites.Add("Castle", new Sprite(texture));
 
             texture = new Texture("../../../../images/Wall01.png");
@@ -135,22 +135,29 @@ namespace Interface
         {
             if (name == "zebby")
             {
-                _music[0].Play();
+                _music[0].Volume = 100f;
             }
             if (name == "battle")
             {
-                _music[1].Play();
+                _music[1].Volume = 100f;
             }
         }
-        public void _musicStop(string name)
+        public void musicStop(string name)
         {
             if (name == "zebby")
             {
-                _music[0].Stop();
+                _music[0].Volume = 0f;
             }
             if (name == "battle")
             {
-                _music[1].Stop();
+                _music[1].Volume = 0f;
+            }
+        }
+        public void musicStart()
+        {
+            foreach (var item in _music)
+            {
+                item.Play();
             }
         }
     }
