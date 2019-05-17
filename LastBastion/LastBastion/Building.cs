@@ -6,22 +6,22 @@ namespace LastBastion
 {
     public class Building
     {
-        float _posX;
-        float _posY;
+        Map _context;
+        Vectors _position;
         uint _lifePoints;
         uint _maxLifePoints;
         static uint _count;
         uint _armor;
         uint _rank;
 
-        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
+        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context)
         {
-            _posX = posX;
-            _posY = posY;
+            _position = new Vectors(posX, posY);
             _lifePoints = lifePoints;
             _maxLifePoints = _lifePoints;
             _armor = armor;
             _rank = rank;
+            _context = context;
         }
 
         public uint Armor => _armor;
@@ -57,16 +57,10 @@ namespace LastBastion
             set { _rank = value; }
         }
 
-        public float Xpos
+        public Vectors Position
         {
-            get { return _posX; }
-            set { _posX = value; }
-        }
-
-        public float Ypos
-        {
-            get { return _posY; }
-            set { _posY = value; }
+            get { return _position; }
+            set { _position = value; }
         }
 
     }

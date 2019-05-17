@@ -8,8 +8,6 @@ namespace LastBastion
     {
         Map _context;
         Vectors _position;
-        float _posX;
-        float _posY;
         readonly string _job;
         uint _lifePoints;
         uint _maxLifePoints;
@@ -27,8 +25,6 @@ namespace LastBastion
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed, Map context)
         {
-            _posX = posX;
-            _posY = posY;
             _job = job;
             _lifePoints = lifePoints;
             _maxLifePoints = _lifePoints;
@@ -41,7 +37,11 @@ namespace LastBastion
             _position = new Vectors(posX, posY);
         }
 
-        public Vectors Position => _position;
+        public Vectors Position
+        {
+            get { return _position; }
+            set { _position = value;  }
+        }
 
         public void Attack(Unit unit)
         {
@@ -132,7 +132,7 @@ namespace LastBastion
             // GC.SuppressFinalize(this);
         }
 
-        public Villager FindClosestEnemy(Map map)
+        public Vectors FindClosestEnemy(Map map)
         {
             List<Villager> units = map.VillList;
             if(units.Count == 0)
@@ -140,17 +140,17 @@ namespace LastBastion
                 throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
             }
 
-            var magnitude = _posX + _posY;
-            float min = Math.Abs((units[0]._posX + units[0]._posY) - magnitude);
-            var unitToReturn = units[0];
+            var magnitude = Position.X + Position.Y;
+            float min = Math.Abs((units[0].Position.X + units[0].Position.Y) - magnitude);
+            Vectors unitToReturn = units[0].Position;
             
             foreach(Villager n in units)
             {
-                var newMin = Math.Abs((n._posX + n._posY) - magnitude);
+                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
                 if (newMin < min)
                 {
                     min = newMin;
-                    unitToReturn = n;
+                    unitToReturn = n.Position;
                 }
             }
 
