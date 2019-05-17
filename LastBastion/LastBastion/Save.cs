@@ -22,6 +22,7 @@ namespace LastBastion
             _game = game;
             _name = name;
             //Test();
+            AddRessToGrid("%%[Vector2i] X(17) Y(-1)$$Stone%%");
         }
         public void CreateTXT()
         {
@@ -32,7 +33,7 @@ namespace LastBastion
                 //writer.Write("" + item.Value.StringVec + "" + item.Value.GetName);
                 if (item.Value.GetName == "Stone" || item.Value.GetName == "Bush" || item.Value.GetName == "Wood")
                 {
-                    writer.WriteLine("%%" + item.Value.GetVec2I + "$$" + item.Value.GetName + "%%");
+                    writer.WriteLine("$$" + item.Value.GetVec2I.X + "$$" + item.Value.GetVec2I.Y + "$$" + item.Value.GetName + "%%");
                 }
             }
             writer.WriteLine("<Building>");
@@ -40,11 +41,11 @@ namespace LastBastion
             {
                 if (item.Value.Building != null)
                 {
-                    writer.WriteLine("**" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "%%");
+                    writer.WriteLine("$$" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "%%");
                 }
             }
             writer.WriteLine("<Setup>");
-            writer.WriteLine("%%" + _game.GetTimer + "$$" + _game.Cycle + "%%");
+            writer.WriteLine("$$" + _game.GetTimer + "$$" + _game.Cycle + "$$" + _game.Map.GetVillage.FoodStock + "$$" + _game.Map.GetVillage.StoneStock + "$$" + _game.Map.GetVillage.WoodStock + "%%");
             writer.Close();
             Console.Write("Done");
         }
@@ -58,5 +59,141 @@ namespace LastBastion
             };
             Process.Start(pInfo);
         }
+        
+        public void LeauAdd()
+        {
+            String[] lines = File.ReadAllLines(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\" + _name);
+            string part = "";
+            foreach (var item in lines)
+            {
+                if (item  == "<Ressources>")
+                {
+                    part = "<Ressources>";
+                }
+                if (part == "<Ressources>")
+                {
+                    AddRessToGrid(item);
+                }
+            }
+        }
+        public void AddRessToGrid(string line)
+        {
+            int len = line.Length;
+            string t1 = "";
+            string t2 = "";
+            string x = "";
+            string y = "";
+            for (int i = 0; i < len; i++)
+            {
+                //%%[Vector2i] X(17) Y(-1)$$Stone%%
+                if (t1 == "%%[Vector2i] X(" )
+                {
+                    if (line[i] == '-' || 
+                        line[i] == '0' || 
+                        line[i] == '1' || 
+                        line[i] == '2' || 
+                        line[i] == '3' || 
+                        line[i] == '4' || 
+                        line[i] == '5' || 
+                        line[i] == '6' || 
+                        line[i] == '7' ||
+                        line[i] == '8' || 
+                        line[i] == '9' )
+                    {
+                        x += line[i];
+                    }
+                    else
+                    {
+                        t1 += line[i];
+                    }
+                }
+                else
+                {
+                    if (!t1.Contains("%%[Vector2i] X()"))
+                    {
+                        t1 += line[i];
+                    }
+                }
+                if (t1.Contains("%%[Vector2i] X()") && t2 != ") Y(")
+                {
+                    t2 += line[i];
+                }
+                //Console.WriteLine(t2);
+                if (t2 == ") Y(")
+                {
+                    //Console.WriteLine("zfzfzg");
+                    if (line[i] == '-' ||
+                        line[i] == '0' ||
+                        line[i] == '1' ||
+                        line[i] == '2' ||
+                        line[i] == '3' ||
+                        line[i] == '4' ||
+                        line[i] == '5' ||
+                        line[i] == '6' ||
+                        line[i] == '7' ||
+                        line[i] == '8' ||
+                        line[i] == '9')
+                    {
+                        y += line[i];
+                        //Console.WriteLine(line[i]);
+                    }
+                }
+            }
+            int X = StringToInt(x);
+            int Y = StringToInt(y);
+            Console.WriteLine(y);
+            Console.WriteLine(Y);
+        }
+        public int StringToInt(string intagueur)
+        {
+            int len = intagueur.Length;
+            int x = 0;
+            int s = 1;
+            for (int i = 0; i < len; i++)
+            {
+                if (intagueur[0] == '-')
+                {
+                    s = -1;
+                }
+                if (x == 0)
+                {
+                    x += CharToInt(intagueur[i]);
+                }
+                else
+                {
+                    x = x * 10 + CharToInt(intagueur[i]);
+                }
+            }
+            return s * x;
+        }
+        public int CharToInt(char n)
+        {
+            switch ((int)n)
+            {
+                case 48:
+                    return 0;
+                case 49:
+                    return 1;
+                case 50:
+                    return 2;
+                case 51:
+                    return 3;
+                case 52:
+                    return 4;
+                case 53:
+                    return 5;
+                case 54:
+                    return 6;
+                case 55:
+                    return 7;
+                case 56:
+                    return 8;
+                case 57:
+                    return 9;
+                default:
+                    return 0;
+            }
+        }
+        
     }
 }
