@@ -6,11 +6,6 @@ namespace Tests
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void T1_Game_and_Map_Are_created_and_not_null()
         {
@@ -134,7 +129,8 @@ namespace Tests
 
             Map var = new Map(sid);
 
-            Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1);
+            Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1,1,var);
+            var.AddBuilding(sido);
             Assert.That(sido.ShowArchers(), Is.EqualTo(0));
 
             var job1 = Guid.NewGuid().ToString();
@@ -163,7 +159,6 @@ namespace Tests
 
             Vectors check = v1.FindClosestEnemy(var);
             Assert.That(check, Is.EqualTo(v1.Position));
-
         }
 
 

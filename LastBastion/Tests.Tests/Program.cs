@@ -17,14 +17,13 @@ namespace Tests.Tests
             Villager v1 = new Villager(0.9f, 5.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
             var job2 = Guid.NewGuid().ToString();
             Villager v2 = new Villager(19.5f, 8.2f, job2, 150, 10, 3, false, 2, 1.5f, var);
-            var position = v1.Position;
-            Console.WriteLine("Coordonnées du vecteur : [{0},{1}]", position.X, position.Y);
-            Console.WriteLine("Norme du vecteur : [{0}]", position.Magnitude());
-            var initPos = position;
-            Vectors arrivalPos = v2.Position;
-            Vectors destination = initPos.Movement(initPos, arrivalPos, 5, 0.2f,v1.Range);
-            Vectors finalPlace = destination.AddVecs(position, destination);
-            Console.WriteLine("Coordonnées du vecteur : [{0},{1}]", finalPlace.X, finalPlace.Y);
+            Tower sido = new Tower(0.5f, 0.5f, 250, 250, 30, 5, 5, 1, var);
+            var list = var.BuildList;
+
+            foreach(var n in list)
+            {
+                Console.WriteLine("Type of building is : {0} !", n.GetType());
+            }
             Console.ReadKey();
         }
     }

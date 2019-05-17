@@ -22,6 +22,7 @@ namespace LastBastion
             _armor = armor;
             _rank = rank;
             _context = context;
+            _context.AddBuilding(this);
         }
 
         public uint Armor => _armor;

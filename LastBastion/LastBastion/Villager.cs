@@ -49,7 +49,7 @@ namespace LastBastion
 
             foreach (Building n in buildList)
             {
-                if(n.TypeOf != Tower)
+                if(n.GetType() != typeof(Tower))
                 {
                     var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
                     if (newMin < min)
