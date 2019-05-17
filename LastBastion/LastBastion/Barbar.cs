@@ -7,6 +7,7 @@ namespace LastBastion
     public class Barbar : Unit
     {
         static uint _count;
+        Unit _target;
 
         public Barbar(float posX, float posY,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
@@ -16,6 +17,18 @@ namespace LastBastion
             attackCooldown, speed, context)
         {
             _count++;
-        }       
+        }  
+        
+        /**public Building AquireTarget()
+        {
+            Map context = base.Context;
+            List<Building> buildings = Context.BuildList;
+
+            foreach(var n in buildings)
+            {
+
+            }
+            return;
+        }*/
     }
 }

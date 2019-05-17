@@ -64,5 +64,7 @@ namespace LastBastion
             set { _position = value; }
         }
 
+        public Map Context => _context;
+
     }
 }

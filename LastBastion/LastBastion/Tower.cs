@@ -11,7 +11,7 @@ namespace LastBastion
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
-        
+        Unit _target;
 
         public Tower(float posX,
         float posY,
@@ -104,6 +104,33 @@ namespace LastBastion
             }
 
             return compteur;
+        }
+
+        public void AcquireTarget()
+        {
+            Map context = base.Context;
+            List<Barbar> barbList = context.BarList;
+
+            if (context.BarbCount == 0)
+            {
+                throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
+            }
+
+            var magnitude = Position.X + Position.Y;
+            float min = Math.Abs((barbList[0].Position.X + barbList[0].Position.Y) - magnitude);
+            Unit unitToReturn = barbList[0];
+
+            foreach (var n in barbList)
+            {
+                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
+                if (newMin < min)
+                {
+                    min = newMin;
+                    unitToReturn = n;
+                }
+
+               _target =  unitToReturn;
+            }
         }
     }
 }
