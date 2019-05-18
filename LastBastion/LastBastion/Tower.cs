@@ -34,6 +34,7 @@ namespace LastBastion
             _dmg = dmg;
             _aaCooldown = aaCooldown;
             _slots = new Villager[2];
+            context.AddBuilding(this);
         }
 
 

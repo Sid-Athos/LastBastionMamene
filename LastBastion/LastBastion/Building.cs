@@ -23,9 +23,13 @@ namespace LastBastion
             _rank = rank;
             _context = context;
             _context.AddBuilding(this);
+            _count++;
         }
 
         public uint Armor => _armor;
+
+
+        public uint Count => _count;
 
         public void IncreaseArmor()
         {

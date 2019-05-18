@@ -11,14 +11,15 @@ namespace LastBastion
         Unit _tar;
         Tower _context;
             
-        public Villager(float posX, float posY,
+        public Villager(float posX, float posY,float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed, Map context)
-            : base(posX, posY,
+            : base(posX, posY,range,
             job, lifePoints, dmg, armor, isMoving,
             attackCooldown, speed, context)
         {
             _isHarvesting = false;
+            context.AddVillager(this);
         }
 
         public void SetTarget(Unit u )
@@ -28,7 +29,7 @@ namespace LastBastion
 
         public void SetTower(Tower t)
         {
-            _context = u;
+            _context = t;
         }
 
         public Tower ShowTower => _context;

@@ -14,9 +14,9 @@ namespace Tests.Tests
             Map var = new Map(sid);
 
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(0.9f, 5.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v1 = new Villager(0.9f, 5.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
             var job2 = Guid.NewGuid().ToString();
-            Barbar v2 = new Barbar(0.5f, 0.5f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            Barbar v2 = new Barbar(0.5f, 0.5f, 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             Tower sido = new Tower(0.5f, 0.5f, 250, 250, 30, 5, 5, 1, var);
             Barrack b = new Barrack(0.9f, 1.5f, 150, 150, 1, 1, var);
             Mine m = new Mine(1.9f, 1.5f, 150, 150, 1, 1, var);

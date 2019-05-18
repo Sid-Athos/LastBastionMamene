@@ -19,9 +19,10 @@ namespace LastBastion
         bool _inTower = false;
         bool _burned = false;
         bool _paralyzed = false;
-        float _range = 0.2f;
+        float _range;
+        Unit _target;
 
-        public Unit(float posX, float posY,
+        public Unit(float posX, float posY,float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed, Map context)
         {
@@ -34,6 +35,7 @@ namespace LastBastion
             _aaCooldown = attackCooldown;
             _speed = speed;
             _context = context;
+            _range = range;
             _position = new Vectors(posX, posY);
         }
 
@@ -134,7 +136,7 @@ namespace LastBastion
 
         public Vectors FindClosestEnemy(Map map)
         {
-            List<Villager> units = map.VillList;
+            List<Building> units = map.BuildList;
             if(units.Count == 0)
             {
                 throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
@@ -144,7 +146,7 @@ namespace LastBastion
             float min = Math.Abs((units[0].Position.X + units[0].Position.Y) - magnitude);
             Vectors unitToReturn = units[0].Position;
             
-            foreach(Villager n in units)
+            foreach(Building n in units)
             {
                 var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
                 if (newMin < min)
@@ -155,6 +157,43 @@ namespace LastBastion
             }
 
             return unitToReturn;
+        }
+
+        public void AcquireTarget()
+        {
+            Map context = _context;
+            List<Barbar> barbList = context.BarList;
+
+            if (context.BarbCount == 0)
+            {
+                throw new InvalidOperationException("Aucune unité n'est disponible!");
+            }
+
+            var magnitude = Position.X + Position.Y;
+            float min = Math.Abs((barbList[0].Position.X + barbList[0].Position.Y) - magnitude);
+            Unit unitToReturn = barbList[0];
+
+
+            foreach (var n in barbList)
+            {
+                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
+                if (newMin < min && newMin <= n.Range)
+                {
+                    min = newMin;
+                    unitToReturn = n;
+                }
+
+            }
+            if (min >= _range)
+            {
+                return;
+            }
+            _target = unitToReturn;
+        }
+
+        public void SetTarget(Unit u)
+        {
+            _target = u;
         }
     }
 }

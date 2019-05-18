@@ -26,9 +26,9 @@ namespace Tests
             Assert.That(var, Is.Not.Null);
 
             var job = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(10.9f, 11.2f, job, 150, 4, 3, false, 2, 1.5f, var);
+            Villager v1 = new Villager(10.9f, 11.2f, 0.1f,job, 150, 4, 3, false, 2, 1.5f, var);
             job = Guid.NewGuid().ToString();
-            Villager v2 = new Villager(10.5f, 11.2f, job, 150, 4, 3, false, 2, 1.5f, var);
+            Villager v2 = new Villager(10.5f, 11.2f,0.1f,job, 150, 4, 3, false, 2, 1.5f, var);
             v1.Move();
             Assert.That(v1, Is.Not.Null);
             Assert.That(v2, Is.Not.Null);
@@ -44,13 +44,13 @@ namespace Tests
             Assert.That(var, Is.Not.Null);
 
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(10.9f, 11.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v1 = new Villager(10.9f, 11.2f, 0.1f,job1, 150, 10, 3, false, 2, 1.5f, var);
             var job2 = Guid.NewGuid().ToString();
-            Villager v2 = new Villager(10.5f, 11.2f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v2 = new Villager(10.5f, 11.2f,0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             var job3 = Guid.NewGuid().ToString();
-            Villager v3 = new Villager(10.9f, 11.2f, job3, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v3 = new Villager(10.9f, 11.2f, 0.1f, job3, 150, 10, 3, false, 2, 1.5f, var);
             var job4 = Guid.NewGuid().ToString();
-            Villager v4 = new Villager(10.9f, 11.2f, job4, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v4 = new Villager(10.9f, 11.2f, 0.1f, job4, 150, 10, 3, false, 2, 1.5f, var);
 
 
             var.AddVillager(v1);
@@ -70,13 +70,13 @@ namespace Tests
             Assert.That(var, Is.Not.Null);
 
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(10.9f, 11.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v1 = new Villager(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
             var job2 = Guid.NewGuid().ToString();
-            Villager v2 = new Villager(10.5f, 11.2f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v2 = new Villager(10.5f, 11.2f, 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             var job3 = Guid.NewGuid().ToString();
-            Villager v3 = new Villager(10.9f, 11.2f, job3, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v3 = new Villager(10.9f, 11.2f, 0.1f, job3, 150, 10, 3, false, 2, 1.5f, var);
             var job4 = Guid.NewGuid().ToString();
-            Villager v4 = new Villager(10.9f, 11.2f, job4, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v4 = new Villager(10.9f, 11.2f, 0.1f, job4, 150, 10, 3, false, 2, 1.5f, var);
 
 
             var.AddVillager(v1);
@@ -103,13 +103,13 @@ namespace Tests
             Map var = new Map(sid);
             Assert.That(var, Is.Not.Null);
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(10.9f, 11.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v1 = new Villager(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
             var job2 = Guid.NewGuid().ToString();
-            Villager v2 = new Villager(10.5f, 11.2f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v2 = new Villager(10.5f, 11.2f, 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             var job3 = Guid.NewGuid().ToString();
-            Villager v3 = new Villager(10.9f, 11.2f, job3, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v3 = new Villager(10.9f, 11.2f, 0.1f, job3, 150, 10, 3, false, 2, 1.5f, var);
             var job4 = Guid.NewGuid().ToString();
-            Villager v4 = new Villager(10.9f, 11.2f, job4, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v4 = new Villager(10.9f, 11.2f, 0.1f, job4, 150, 10, 3, false, 2, 1.5f, var);
 
             for (int i = 0; i < 6; i++)
             {
@@ -134,11 +134,11 @@ namespace Tests
             Assert.That(sido.ShowArchers(), Is.EqualTo(0));
 
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(0.9f, 5.2f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v1 = new Villager(0.9f, 5.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
             var job2 = Guid.NewGuid().ToString();
-            Villager v2 = new Villager(19.5f, 8.2f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v2 = new Villager(19.5f, 8.2f, 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             var job3 = Guid.NewGuid().ToString();
-            Villager v3 = new Villager(10.5f, 11.2f, job3, 150, 10, 3, false, 2, 1.5f, var);
+            Villager v3 = new Villager(10.5f, 11.2f, 0.1f, job3, 150, 10, 3, false, 2, 1.5f, var);
             Assert.Throws<IndexOutOfRangeException>(() => v1.FindClosestEnemy(var));
 
             var.AddVillager(v1);
@@ -185,7 +185,7 @@ namespace Tests
             Tower sido = new Tower(0.5f, 0.5f, 250, 250, 10, 3, 2,1, var);
             Assert.Throws<InvalidOperationException>(() => sido.AcquireTarget());
 
-            Barbar fefe = new Barbar(0.8f, 0.9f,"Barbar", 150, 5, 0, false, 2, 0.2f, var);
+            Barbar fefe = new Barbar(0.8f, 0.9f, 0.2f, "Barbar", 150, 5, 0, false, 2, 0.2f, var);
             Assert.That(var.BarbCount, Is.EqualTo(1));
             sido.AcquireTarget();
 
