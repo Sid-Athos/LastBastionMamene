@@ -8,6 +8,7 @@ namespace LastBastion
     {
         uint _harvestCooldown = 3;
         bool _isHarvesting;
+        Unit _tar;
         Tower _context;
             
         public Villager(float posX, float posY,
@@ -20,7 +21,12 @@ namespace LastBastion
             _isHarvesting = false;
         }
 
-        public void SetTower(Tower u)
+        public void SetTarget(Unit u )
+        {
+            _tar = u;
+        }
+
+        public void SetTower(Tower t)
         {
             _context = u;
         }
