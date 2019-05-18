@@ -196,5 +196,12 @@ namespace LastBastion
         {
             _target = u;
         }
+
+        public void Paralize()
+        {
+            _paralyzed = !_paralyzed;
+        }
+
+        public bool IsParalysed => _paralyzed;
     }
 }

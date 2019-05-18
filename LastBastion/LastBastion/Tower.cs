@@ -35,6 +35,11 @@ namespace LastBastion
             _aaCooldown = aaCooldown;
             _slots = new Villager[2];
             context.AddBuilding(this);
+            for(int i = 0;i<2;i++)
+            {
+                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f, context);
+                sut.SetTower(this);
+            }
         }
 
         public void SetAllTowerUnitsTarget()
@@ -94,7 +99,7 @@ namespace LastBastion
             }
         }
 
-        public void AddArcher(Villager u)
+        public void AddArcher(Archer u)
         {
             if(!u.IsInTower)
             {

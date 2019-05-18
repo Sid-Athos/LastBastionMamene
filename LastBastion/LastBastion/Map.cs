@@ -14,6 +14,7 @@ namespace LastBastion
         List<Villager> _villagePeople;
         List<Barbar> _barbarians;
         List<Building> _buildings;
+        List<Archer> _archers;
 
         public Map(Game game)
         {
@@ -44,6 +45,11 @@ namespace LastBastion
         {
             _villagePeople.Add(v);
         }
+        public void RemoveVillager(Villager n)
+        {
+            _villagePeople.Remove(n);
+
+        }
 
         public void AddBuilding(Building T)
         {
@@ -55,11 +61,16 @@ namespace LastBastion
             _buildings.Remove(T);
         }
 
-        public void RemoveVillager(Villager n)
+        public void AddArcher(Archer T)
         {
-            _villagePeople.Remove(n);
-
+            _archers.Add(T);
         }
+
+        public void rmvArcher(Archer T)
+        {
+            _archers.Remove(T);
+        }
+
 
         public void AddBarbar(Barbar v)
         {
