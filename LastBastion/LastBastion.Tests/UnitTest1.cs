@@ -52,11 +52,6 @@ namespace Tests
             var job4 = Guid.NewGuid().ToString();
             Villager v4 = new Villager(10.9f, 11.2f, 0.1f, job4, 150, 10, 3, false, 2, 1.5f, var);
 
-
-            var.AddVillager(v1);
-            var.AddVillager(v2);
-            var.AddVillager(v3);
-            var.AddVillager(v4);
             Assert.That(var.VillCount, Is.EqualTo(4));
         }
 
@@ -78,11 +73,6 @@ namespace Tests
             var job4 = Guid.NewGuid().ToString();
             Villager v4 = new Villager(10.9f, 11.2f, 0.1f, job4, 150, 10, 3, false, 2, 1.5f, var);
 
-
-            var.AddVillager(v1);
-            var.AddVillager(v2);
-            var.AddVillager(v3);
-            var.AddVillager(v4);
 
             Assert.That(var.VillCount, Is.EqualTo(4));
 
@@ -129,9 +119,6 @@ namespace Tests
 
             Map var = new Map(sid);
 
-            Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1,1,var);
-            var.AddBuilding(sido);
-            Assert.That(sido.ShowArchers(), Is.EqualTo(0));
 
             var job1 = Guid.NewGuid().ToString();
             Villager v1 = new Villager(0.9f, 5.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
@@ -140,10 +127,8 @@ namespace Tests
             var job3 = Guid.NewGuid().ToString();
             Villager v3 = new Villager(10.5f, 11.2f, 0.1f, job3, 150, 10, 3, false, 2, 1.5f, var);
             Assert.Throws<IndexOutOfRangeException>(() => v1.FindClosestEnemy(var));
-
-            var.AddVillager(v1);
-            var.AddVillager(v2);
-            var.AddVillager(v3);
+            Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1,1,var);
+            Assert.That(sido.ShowArchers(), Is.EqualTo(0));
 
             Assert.That(v3.Job, Is.EqualTo(job3));
             Assert.That(v1.IsInTower, Is.EqualTo(false));
@@ -158,7 +143,7 @@ namespace Tests
             Assert.That(v1.ShowTower, Is.EqualTo(sido));
 
             Vectors check = v1.FindClosestEnemy(var);
-            Assert.That(check, Is.EqualTo(v1.Position));
+            Assert.That(check, Is.EqualTo(sido.Position));
         }
 
 

@@ -137,6 +137,7 @@ namespace LastBastion
         public Vectors FindClosestEnemy(Map map)
         {
             List<Building> units = map.BuildList;
+
             if(units.Count == 0)
             {
                 throw new IndexOutOfRangeException("Aucune unité n'est disponible!");

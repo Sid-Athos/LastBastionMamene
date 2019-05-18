@@ -22,10 +22,7 @@ namespace LastBastion
             context.AddVillager(this);
         }
 
-        public void SetTarget(Unit u )
-        {
-            _tar = u;
-        }
+        
 
         public void SetTower(Tower t)
         {
