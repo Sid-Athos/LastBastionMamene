@@ -8,6 +8,10 @@ namespace Tests.Tests
     {
         static void Main(string[] args)
         {
+            float foa = 0.5f + 0.5f;
+
+            Console.WriteLine("{0}", foa);
+            Console.ReadKey();
             Game sid = new Game();
             sid.Run();
 
@@ -22,7 +26,6 @@ namespace Tests.Tests
             Mine m = new Mine(1.9f, 1.5f, 150, 150, 1, 1, var);
             Sawmill s = new Sawmill(1.9f, 1.5f, 150, 150, 1, 1, var);
             Forge f = new Forge(1.9f, 1.5f, 150, 150, 1, 1, var);
-            var.AddBarbar(v2);
 
             var list = var.BuildList;
 
@@ -30,13 +33,15 @@ namespace Tests.Tests
             sido.AcquireTarget();
 
             Unit tar = sido.Target;
-            Console.WriteLine("Unité la plus proche : {0}" ,tar.GetType());
+            //Console.WriteLine("Unité la plus proche : {0}" ,tar.GetType());
 
             foreach(var n in list)
             {
                 Console.WriteLine("Position of building is : [{0},{1}] !", n.Position.X,n.Position.Y);
                 Console.WriteLine("Type of building is : {0} !", n.GetType());
             }
+
+            Console.WriteLine("{0}", foa);
             Console.ReadKey();
         }
     }

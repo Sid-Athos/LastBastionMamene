@@ -170,11 +170,11 @@ namespace Tests
             Tower sido = new Tower(0.5f, 0.5f, 250, 250, 10, 3, 2,1, var);
             Assert.Throws<InvalidOperationException>(() => sido.AcquireTarget());
 
-            Barbar fefe = new Barbar(0.8f, 0.9f, 0.2f, "Barbar", 150, 5, 0, false, 2, 0.2f, var);
+            Barbar fefe = new Barbar(0.5f, 0.7f, 0.2f, "Barbar", 150, 5, 0, false, 2, 0.2f, var);
             Assert.That(var.BarbCount, Is.EqualTo(1));
             sido.AcquireTarget();
 
-            Assert.That(sido.Target, Is.Null);
+            Assert.That(sido.Target, Is.EqualTo(fefe));
 
             Assert.That(sid, Is.Not.Null);
         }

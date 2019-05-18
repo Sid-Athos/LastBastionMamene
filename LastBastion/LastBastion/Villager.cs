@@ -8,7 +8,6 @@ namespace LastBastion
     {
         uint _harvestCooldown = 3;
         bool _isHarvesting;
-        Unit _tar;
         Tower _context;
             
         public Villager(float posX, float posY,float range,

@@ -11,7 +11,7 @@ namespace LastBastion
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
-        float _range = 0.0f;
+        float _range = 0.23f;
         Unit _target;
 
         public Tower(float posX,
@@ -39,9 +39,12 @@ namespace LastBastion
 
         public void SetAllTowerUnitsTarget()
         {
-            for (int i = 0; i < _slots.Length; i++)
+            if (_slots[0] != null)
             {
-                _slots[i].SetTarget(Target);
+                for (int i = 0; i < _slots.Length; i++)
+                {
+                    _slots[i].SetTarget(Target);
+                }
             }
         }
 
@@ -146,6 +149,7 @@ namespace LastBastion
                     min = newMin;
                     unitToReturn = n;
                 }
+                Console.WriteLine("min {0} range {1} unit{2}", min, _range,n);
 
             }
             if (min >= _range)
