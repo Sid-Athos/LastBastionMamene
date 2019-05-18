@@ -119,31 +119,19 @@ namespace Tests
 
             Map var = new Map(sid);
 
-
-            var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(0.9f, 5.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
-            var job2 = Guid.NewGuid().ToString();
-            Villager v2 = new Villager(19.5f, 8.2f, 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
-            var job3 = Guid.NewGuid().ToString();
-            Villager v3 = new Villager(10.5f, 11.2f, 0.1f, job3, 150, 10, 3, false, 2, 1.5f, var);
-            Assert.Throws<IndexOutOfRangeException>(() => v1.FindClosestEnemy(var));
             Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1,1,var);
-            Assert.That(sido.ShowArchers(), Is.EqualTo(0));
-
-            Assert.That(v3.Job, Is.EqualTo(job3));
-            Assert.That(v1.IsInTower, Is.EqualTo(false));
-            Assert.That(v1.ShowTower, Is.Null);
+            Assert.That(sido.ShowArchers(), Is.EqualTo(2));
             //sido.AddArcher(v1);
             //Assert.Throws<InvalidOperationException>(() => sido.AddArcher(v1));
-            Assert.That(v1.IsInTower, Is.EqualTo(true));
             //sido.AddArcher(v2);
             //Assert.Throws<InvalidOperationException>(() => sido.AddArcher(v3));
 
             Assert.That(sido.ShowArchers(), Is.EqualTo(2));
-            Assert.That(v1.ShowTower, Is.EqualTo(sido));
+            sido.Upgrade();
+            Assert.That(sido.ShowArchers(), Is.EqualTo(4));
+            Archer test = new Archer(0.5f, 10.4f, 2.0f, "Archer", 50, 5, 2, false, 3, 0.2f, false, var);
+            Assert.Throws<InvalidOperationException>(() => sido.AddArcher(test));
 
-            Vectors check = v1.FindClosestEnemy(var);
-            Assert.That(check, Is.EqualTo(sido.Position));
         }
 
 
@@ -159,24 +147,30 @@ namespace Tests
         }
 
         [Test]
-        public void T8_Tower_Acquire_Targets()
+        public void T8_Tower_Acquire_Targets_Within_Constraints()
         {
             Game sid = new Game();
             sid.Run();
-            Assert.That(sid, Is.Not.Null);
 
             Map var = new Map(sid);
 
-            Tower sido = new Tower(0.5f, 0.5f, 250, 250, 10, 3, 2,1, var);
+            var job1 = Guid.NewGuid().ToString();
+            Villager v1 = new Villager(0.9f, 5.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            Tower sido = new Tower(0.5f, 0.5f, 250, 250, 30, 5, 5, 1, var);
+            
             Assert.Throws<InvalidOperationException>(() => sido.AcquireTarget());
+            
+            var job2 = Guid.NewGuid().ToString();
 
-            Barbar fefe = new Barbar(0.5f, 0.7f, 0.2f, "Barbar", 150, 5, 0, false, 2, 0.2f, var);
-            Assert.That(var.BarbCount, Is.EqualTo(1));
+            for (float i = 0.2f; i < 1.5f; i += 0.1f)
+            {
+                Barbar v2 = new Barbar((0.7f + i), (0.7f + i), 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            }
             sido.AcquireTarget();
-
-            Assert.That(sido.Target, Is.EqualTo(fefe));
-
-            Assert.That(sid, Is.Not.Null);
+            Assert.That(sido.Target, Is.Null);
+            Barbar v3 = new Barbar(0.7f, (0.7f), 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
+            sido.AcquireTarget();
+            Assert.That(sido.Target, Is.EqualTo(v3));
         }
     }
 }

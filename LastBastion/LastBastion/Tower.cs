@@ -7,7 +7,7 @@ namespace LastBastion
     public class Tower : Building
     {
         
-        Villager [] _slots;
+        Archer [] _slots;
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
@@ -33,11 +33,12 @@ namespace LastBastion
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;
-            _slots = new Villager[2];
+            _slots = new Archer[2];
             context.AddBuilding(this);
             for(int i = 0;i<2;i++)
             {
                 Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f, context);
+                AddArcher(sut);
                 sut.SetTower(this);
             }
         }
@@ -58,6 +59,9 @@ namespace LastBastion
         public float Range => _range;
 
         public int AvailableSlots => _slots.Length;
+
+        public Archer[] Slots => _slots;
+
 
         public uint Dmg => _dmg;
 
@@ -86,16 +90,24 @@ namespace LastBastion
             if (_rank < 3)
             {
                 _rank++;
-                Villager[] newSlots = new Villager[_slots.Length * 2];
+
+                int compteur = 0;
+                Archer[] newSlots = new Archer[_slots.Length * 2];
                 for (int i = 0; i < _slots.Length; i++)
                 {
                     newSlots[i] = _slots[i];
+                    compteur++;
                 }
-
                 IncreaseArmor();
                 IncDamage();
                 IncHealth();
                 _slots = newSlots;
+                for (int i = compteur; i < newSlots.Length;i++)
+                {
+                    Archer sut = new Archer(this.Position.X, this.Position.Y, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f, Context);
+                    AddArcher(sut);
+                    sut.SetTower(this);
+                }
             }
         }
 
@@ -145,12 +157,12 @@ namespace LastBastion
 
             foreach (var n in barbList)
             {
-                if (this.Position.IsInRange(Position,n.Position,Range))
+                if (Position.IsInRange(Position,n.Position,Range))
                 {
                     unitToReturn = n;
                     _target = unitToReturn;
                     SetAllTowerUnitsTarget();
-                    return;
+                    break;
                 }
             }
         }
