@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Catapult : Tower
+    /**public class Catapult : Tower
     {
-    }
+    }*/
 }

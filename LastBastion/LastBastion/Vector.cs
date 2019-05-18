@@ -49,6 +49,18 @@ namespace LastBastion
             return new Vectors(x, y);
         }
 
+        public float SubstractX(Vectors origin, Vectors arrival)
+        {
+            float x = Math.Abs((origin._posX) - Math.Abs(arrival._posX));
+            return x;
+        }
+
+        public float SubstractY(Vectors origin, Vectors arrival)
+        {
+            float y = Math.Abs((origin._posY) - Math.Abs(arrival._posY));
+            return y;
+        }
+
         public Vectors AddVecs(Vectors origin, Vectors arrival)
         {
             float x = origin._posX + arrival._posX;
@@ -70,6 +82,12 @@ namespace LastBastion
             Vectors normalizedVec =  Normalize(moveVec);
             Console.WriteLine("[{0},{1}]",normalizedVec.X, normalizedVec.Y);
             return normalizedVec;
+        }
+
+        public bool IsInRange(Vectors origin, Vectors arrival, float range)
+        {
+            float result = (float)Math.Sqrt(Math.Pow(origin.X - arrival.X, 2)+ Math.Pow(arrival.X - arrival.Y, 2));
+            return result <= range ? true : false;
         }
     }
 }

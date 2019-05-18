@@ -11,7 +11,7 @@ namespace LastBastion
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
-        float _range = 0.23f;
+        float _range = 0.3f;
         Unit _target;
 
         public Tower(float posX,
@@ -141,29 +141,18 @@ namespace LastBastion
                 throw new InvalidOperationException("Aucune unité n'est disponible!");
             }
 
-            var magnitude = Position.X + Position.Y;
-            float min = Math.Abs((barbList[0].Position.X + barbList[0].Position.Y) - magnitude);
-            Unit unitToReturn = barbList[0];
+            Barbar unitToReturn;
 
-            
             foreach (var n in barbList)
             {
-                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
-                if (newMin < min && newMin <= n.Range)
+                if (this.Position.IsInRange(Position,n.Position,Range))
                 {
-                    min = newMin;
                     unitToReturn = n;
+                    _target = unitToReturn;
+                    SetAllTowerUnitsTarget();
+                    return;
                 }
-                Console.WriteLine("min {0} range {1} unit{2}", min, _range,n);
-
             }
-            if (min >= _range)
-            {
-                return;
-            }
-            _target = unitToReturn;
-
-            SetAllTowerUnitsTarget();
         }
     }
 }

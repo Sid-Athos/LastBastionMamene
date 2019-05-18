@@ -25,6 +25,9 @@ namespace LastBastion
             _villagePeople = new List<Villager>();
             _barbarians = new List<Barbar>();
             _buildings = new List<Building>();
+            _buildings = new List<Building>();
+            _archers = new List<Archer>();
+
         }
 
         public List<Villager> VillList => _villagePeople;
