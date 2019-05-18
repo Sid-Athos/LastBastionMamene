@@ -37,6 +37,13 @@ namespace LastBastion
             context.AddBuilding(this);
         }
 
+        public void SetAllTowerUnitsTarget()
+        {
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                _slots[i].SetTarget(Target);
+            }
+        }
 
         public Unit Target => _target;
 
@@ -54,10 +61,7 @@ namespace LastBastion
                 unit.Die();
                 _target = null;
                 AcquireTarget();
-                for (int i = 0; i < _slots.Length; i++)
-                {
-                    _slots[i].SetTarget(Target);
-                }
+                SetAllTowerUnitsTarget();
                 return;
             }
             unit.Attacked(Math.Max(unit.Life - (_dmg - unit.Armor), 0));
@@ -150,10 +154,7 @@ namespace LastBastion
             }
             _target = unitToReturn;
 
-            for(int i = 0;i < _slots.Length;i++)
-            {
-                _slots[i].SetTarget(unitToReturn);
-            }
+            SetAllTowerUnitsTarget();
         }
     }
 }
