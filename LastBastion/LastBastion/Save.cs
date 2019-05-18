@@ -17,7 +17,7 @@ namespace LastBastion
         Game _game;
         string _name;
 
-        public Save(Game game,string name)
+        public Save(Game game, string name)
         {
             _game = game;
             _name = name;

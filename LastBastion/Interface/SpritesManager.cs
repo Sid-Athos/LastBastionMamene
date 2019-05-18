@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SFML.Graphics;
+using SFML.Audio;
 
 namespace Interface
 {
@@ -9,13 +10,21 @@ namespace Interface
     {
         Dictionary<string, Sprite> _sprites;
         Text _text;
+        List<Music> _music;
 
         public SpritesManager()
         {
             _sprites = new Dictionary<string, Sprite>();
             Font _font = new Font("../../../../images/RINGM___.TTF");
             _text = new Text();
-            _text.Font = _font; 
+            _text.Font = _font;
+            _music = new List<Music>();
+            Music music = new Music("../../../../images/rosiek.wav");
+            music.Loop = true;
+            _music.Add(music);
+            music = new Music("../../../../images/war.wav");
+            music.Loop = true;
+            _music.Add(music);
         }
 
         public void Initialized()
@@ -91,7 +100,7 @@ namespace Interface
             texture = new Texture("../../../../images/Tower.png");
             _sprites.Add("Tower", new Sprite(texture));
 
-            texture = new Texture("../../../../images/castle.png");
+            texture = new Texture("../../../../images/castle01.png");
             _sprites.Add("Castle", new Sprite(texture));
 
             texture = new Texture("../../../../images/Wall01.png");
@@ -124,5 +133,35 @@ namespace Interface
         }
         public Sprite GetSprite(string name) => _sprites[name];
         public Text GetText => _text;
+
+        public void musicPlay(string name)
+        {
+            if (name == "zebby")
+            {
+                _music[0].Volume = 100f;
+            }
+            if (name == "battle")
+            {
+                _music[1].Volume = 100f;
+            }
+        }
+        public void musicStop(string name)
+        {
+            if (name == "zebby")
+            {
+                _music[0].Volume = 0f;
+            }
+            if (name == "battle")
+            {
+                _music[1].Volume = 0f;
+            }
+        }
+        public void musicStart()
+        {
+            foreach (var item in _music)
+            {
+                item.Play();
+            }
+        }
     }
 }

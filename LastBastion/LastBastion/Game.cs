@@ -29,6 +29,11 @@ namespace LastBastion
         //Random
         Random _random = new Random();
 
+        public Game()
+        {
+
+        }
+
         public void Run()
         {
             _input = new Input(this);
@@ -41,7 +46,7 @@ namespace LastBastion
 
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
 
-            _countTimer = 300;
+            _countTimer = 239;
             _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
@@ -49,14 +54,12 @@ namespace LastBastion
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
 
+            _sprites.musicStart();
+            _sprites.musicPlay("Zebby");
+
             _window.Render.SetMouseCursorVisible(false);
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
-
-            foreach (var item in InTheMistOfPandaria(10))
-            {
-                Console.WriteLine("" + item.X + " ; " + item.Y);
-            }
 
             Gameloop();
         }
@@ -70,6 +73,22 @@ namespace LastBastion
                 if (_pause)
                 {
                     TimerUpdate();
+                }
+                if (_countTimer == 240 )
+                {
+                    _sprites.musicStop("zebby");
+                }
+                if (_countTimer == 241)
+                {
+                    _sprites.musicPlay("battle");
+                }
+                if (_countTimer == 300)
+                {
+                    _sprites.musicStop("battle");
+                }
+                if (_countTimer == 301)
+                {
+                    _sprites.musicPlay("zebby");
                 }
                 _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));

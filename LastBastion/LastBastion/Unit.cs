@@ -6,9 +6,8 @@ namespace LastBastion
 {
     public class Unit
     {
-        //Map _context;
-        float _posX;
-        float _posY;
+        Map _context;
+        Vectors _position;
         readonly string _job;
         uint _lifePoints;
         uint _maxLifePoints;
@@ -20,13 +19,13 @@ namespace LastBastion
         bool _inTower = false;
         bool _burned = false;
         bool _paralyzed = false;
+        float _range;
+        Unit _target;
 
-        public Unit(float posX, float posY,
+        public Unit(float posX, float posY,float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed)
+            uint attackCooldown, float speed, Map context)
         {
-            _posX = posX;
-            _posY = posY;
             _job = job;
             _lifePoints = lifePoints;
             _maxLifePoints = _lifePoints;
@@ -35,6 +34,15 @@ namespace LastBastion
             _isMoving = isMoving;
             _aaCooldown = attackCooldown;
             _speed = speed;
+            _context = context;
+            _range = range;
+            _position = new Vectors(posX, posY);
+        }
+
+        public Vectors Position
+        {
+            get { return _position; }
+            set { _position = value;  }
         }
 
         public void Attack(Unit unit)
@@ -46,10 +54,10 @@ namespace LastBastion
                 unit.Die();
                 return;
             }
-
             unit._lifePoints = Math.Max(unit._lifePoints - (_dmg - unit._armor), 0);
         }
 
+        public float Range => _range;
 
         public uint Dmg => _dmg;
 
@@ -81,6 +89,8 @@ namespace LastBastion
             //Remove();
         }
 
+        public Map Context => _context;
+
         public void JoinTower()
         {
             _inTower = !_inTower;
@@ -90,8 +100,6 @@ namespace LastBastion
         {
             _isMoving = !_isMoving;
         }
-
-
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
@@ -125,5 +133,75 @@ namespace LastBastion
             // TODO: supprimer les marques de commentaire pour la ligne suivante si le finaliseur est remplacé ci-dessus.
             // GC.SuppressFinalize(this);
         }
+
+        public Vectors FindClosestEnemy(Map map)
+        {
+            List<Building> units = map.BuildList;
+
+            if(units.Count == 0)
+            {
+                throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
+            }
+
+            var magnitude = Position.X + Position.Y;
+            float min = Math.Abs((units[0].Position.X + units[0].Position.Y) - magnitude);
+            Vectors unitToReturn = units[0].Position;
+            
+            foreach(Building n in units)
+            {
+                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
+                if (newMin < min)
+                {
+                    min = newMin;
+                    unitToReturn = n.Position;
+                }
+            }
+
+            return unitToReturn;
+        }
+
+        public void AcquireTarget()
+        {
+            Map context = _context;
+            List<Barbar> barbList = context.BarList;
+
+            if (context.BarbCount == 0)
+            {
+                throw new InvalidOperationException("Aucune unité n'est disponible!");
+            }
+
+            var magnitude = Position.X + Position.Y;
+            float min = Math.Abs((barbList[0].Position.X + barbList[0].Position.Y) - magnitude);
+            Unit unitToReturn = barbList[0];
+
+
+            foreach (var n in barbList)
+            {
+                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
+                if (newMin < min && newMin <= n.Range)
+                {
+                    min = newMin;
+                    unitToReturn = n;
+                }
+
+            }
+            if (min >= _range)
+            {
+                return;
+            }
+            _target = unitToReturn;
+        }
+
+        public void SetTarget(Unit u)
+        {
+            _target = u;
+        }
+
+        public void Paralize()
+        {
+            _paralyzed = !_paralyzed;
+        }
+
+        public bool IsParalysed => _paralyzed;
     }
 }

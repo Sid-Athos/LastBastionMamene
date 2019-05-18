@@ -13,6 +13,8 @@ namespace LastBastion
         Village _village;
         List<Villager> _villagePeople;
         List<Barbar> _barbarians;
+        List<Building> _buildings;
+        List<Archer> _archers;
 
         public Map(Game game)
         {
@@ -22,22 +24,56 @@ namespace LastBastion
             _village = new Village(this);
             _villagePeople = new List<Villager>();
             _barbarians = new List<Barbar>();
+            _buildings = new List<Building>();
+            _buildings = new List<Building>();
+            _archers = new List<Archer>();
+
         }
+
+        public List<Villager> VillList => _villagePeople;
+
+        public List<Barbar> BarList => _barbarians;
+
+        public List<Building> BuildList => _buildings;
+
 
         public int VillCount => _villagePeople.Count;
 
         public int BarbCount => _barbarians.Count;
 
+        public int BuildCount => _buildings.Count;
+
+
         public void AddVillager(Villager v)
         {
             _villagePeople.Add(v);
         }
-
         public void RemoveVillager(Villager n)
         {
             _villagePeople.Remove(n);
 
         }
+
+        public void AddBuilding(Building T)
+        {
+            _buildings.Add(T);
+        }
+
+        public void RemoveBuilding(Building T)
+        {
+            _buildings.Remove(T);
+        }
+
+        public void AddArcher(Archer T)
+        {
+            _archers.Add(T);
+        }
+
+        public void rmvArcher(Archer T)
+        {
+            _archers.Remove(T);
+        }
+
 
         public void AddBarbar(Barbar v)
         {
@@ -51,7 +87,9 @@ namespace LastBastion
         }
 
         public Village GetVillage => _village;
+
         public Game GetGame => _game;
+
         public MapUI GetMapUI => _UI;
 
 

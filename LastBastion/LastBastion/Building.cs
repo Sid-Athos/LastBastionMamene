@@ -6,24 +6,29 @@ namespace LastBastion
 {
     public class Building
     {
-        float _posX;
-        float _posY;
+        Map _context;
+        Vectors _position;
         uint _lifePoints;
         uint _maxLifePoints;
         uint _armor;
         uint _rank;
 
-        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
+        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context)
         {
-            _posX = posX;
-            _posY = posY;
+            _position = new Vectors(posX, posY);
             _lifePoints = lifePoints;
             _maxLifePoints = _lifePoints;
             _armor = armor;
             _rank = rank;
+            _context = context;
+            _context.AddBuilding(this);
+            _count++;
         }
 
         public uint Armor => _armor;
+
+
+        public uint Count => _count;
 
         public void IncreaseArmor()
         {
@@ -56,17 +61,13 @@ namespace LastBastion
             set { _rank = value; }
         }
 
-        public float Xpos
+        public Vectors Position
         {
-            get { return _posX; }
-            set { _posX = value; }
+            get { return _position; }
+            set { _position = value; }
         }
 
-        public float Ypos
-        {
-            get { return _posY; }
-            set { _posY = value; }
-        }
+        public Map Context => _context;
 
     }
 }

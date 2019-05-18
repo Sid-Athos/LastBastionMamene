@@ -56,28 +56,28 @@ namespace LastBastion
             switch (_buildingName)
             {
                 case "House":
-                    building = new House(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 5);
+                    building = new House(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, 5,_game.Map);
                     break;
                 case "Sawmill":
-                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, _game.Map);
                     break;
                 case "Mine":
-                    building = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    building = new Mine(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, _game.Map);
                     break;
                 case "Forge":
-                    building = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    building = new Forge(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, _game.Map);
                     break;
                 case "Farm":
-                    building = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1);
+                    building = new Farm(GetVec2F.X, GetVec2F.Y, 100, 100, 10, 1, _game.Map);
                     break;
                 case "Tower":
-                    building = new Tower(GetVec2F.X, GetVec2F.Y, 200, 200, 10, 20, 1, 1);
+                    building = new Tower(GetVec2F.X, GetVec2F.Y, 200, 200, 10, 20, 1, 1, _game.Map);
                     break;
                 case "Wall":
-                    building = new Wall(GetVec2F.X, GetVec2F.Y, 300, 300, 30, 1);
+                    building = new Wall(GetVec2F.X, GetVec2F.Y, 300, 300, 30, 1, _game.Map);
                     break;
                 case "Barrack":
-                    building = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 150, 15, 1);
+                    building = new Barrack(GetVec2F.X, GetVec2F.Y, 150, 150, 15, 1, _game.Map);
                     break;
                 default:
                     //Console.WriteLine("Default case");
