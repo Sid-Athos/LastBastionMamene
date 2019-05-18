@@ -111,6 +111,9 @@ namespace Interface
 
             texture = new Texture("../../../../images/sawmill.png");
             _sprites.Add("Sawmill", new Sprite(texture));
+
+            texture = new Texture("../../../../images/resourceBar.png");
+            _sprites.Add("ResourceBar", new Sprite(texture));
         }
         public void Update()
         {

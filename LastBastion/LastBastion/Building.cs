@@ -10,7 +10,6 @@ namespace LastBastion
         float _posY;
         uint _lifePoints;
         uint _maxLifePoints;
-        static uint _count;
         uint _armor;
         uint _rank;
 
