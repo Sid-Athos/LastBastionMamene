@@ -11,6 +11,7 @@ namespace LastBastion
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
+        float _range = 0.0f;
         Unit _target;
 
         public Tower(float posX,
@@ -35,6 +36,11 @@ namespace LastBastion
             _slots = new Villager[2];
         }
 
+
+        public Unit Target => _target;
+
+        public float Range => _range;
+
         public int AvailableSlots => _slots.Length;
 
         public uint Dmg => _dmg;
@@ -45,6 +51,8 @@ namespace LastBastion
             {
                 unit.Attacked(0);
                 unit.Die();
+                _target = null;
+                AcquireTarget();
                 return;
             }
             unit.Attacked(Math.Max(unit.Life - (_dmg - unit.Armor), 0));
@@ -113,24 +121,29 @@ namespace LastBastion
 
             if (context.BarbCount == 0)
             {
-                throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
+                throw new InvalidOperationException("Aucune unité n'est disponible!");
             }
 
             var magnitude = Position.X + Position.Y;
             float min = Math.Abs((barbList[0].Position.X + barbList[0].Position.Y) - magnitude);
             Unit unitToReturn = barbList[0];
 
+            
             foreach (var n in barbList)
             {
                 var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
-                if (newMin < min)
+                if (newMin < min && newMin <= n.Range)
                 {
                     min = newMin;
                     unitToReturn = n;
                 }
 
-               _target =  unitToReturn;
             }
+            if (min >= _range)
+            {
+                return;
+            }
+            _target = unitToReturn;
         }
     }
 }

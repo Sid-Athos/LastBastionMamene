@@ -17,8 +17,10 @@ namespace LastBastion
             attackCooldown, speed, context)
         {
             _count++;
-        }  
-        
+            context.AddBarbar(this);
+
+        }
+
         /**public Building AquireTarget()
         {
             Map context = base.Context;

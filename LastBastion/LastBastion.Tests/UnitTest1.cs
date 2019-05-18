@@ -172,5 +172,26 @@ namespace Tests
             Map var = new Map(sid);
             Assert.That(sid,Is.Not.Null);
         }
+
+        [Test]
+        public void T8_Tower_Acquire_Targets()
+        {
+            Game sid = new Game();
+            sid.Run();
+            Assert.That(sid, Is.Not.Null);
+
+            Map var = new Map(sid);
+
+            Tower sido = new Tower(0.5f, 0.5f, 250, 250, 10, 3, 2,1, var);
+            Assert.Throws<InvalidOperationException>(() => sido.AcquireTarget());
+
+            Barbar fefe = new Barbar(0.8f, 0.9f,"Barbar", 150, 5, 0, false, 2, 0.2f, var);
+            Assert.That(var.BarbCount, Is.EqualTo(1));
+            sido.AcquireTarget();
+
+            Assert.That(sido.Target, Is.Null);
+
+            Assert.That(sid, Is.Not.Null);
+        }
     }
 }
