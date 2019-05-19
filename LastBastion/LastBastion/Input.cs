@@ -119,6 +119,7 @@ namespace LastBastion
                     case Keyboard.Key.K:
                         break;
                     case Keyboard.Key.L:
+                        _save.LeauAdd();
                         break;
                     case Keyboard.Key.M:
                         break;

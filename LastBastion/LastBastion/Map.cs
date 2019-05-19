@@ -97,15 +97,15 @@ namespace LastBastion
                             RDM = _game.RandomNumber(0, 100);
                             if (RDM <= 33)
                             {
-                                item.Value.SetBuilding("Wood");
+                                item.Value.SetName = "Wood";
                             }
                             if (RDM >= 66)
                             {
-                                item.Value.SetBuilding("Stone");
+                                item.Value.SetName = "Stone";
                             }
                             if (RDM < 66 && RDM > 33)
                             {
-                                item.Value.SetBuilding("Bush");
+                                item.Value.SetName = "Bush";
                             }
                         }
                     }
@@ -116,7 +116,7 @@ namespace LastBastion
                             RDM = _game.RandomNumber(0, 100);
                             if (RDM <= spawnC + spawnC / 2)
                             {
-                                item.Value.SetBuilding(choice);
+                                item.Value.SetName = choice;
                             }
                         }
                     }
