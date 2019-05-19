@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.IO.Compression;
 using System.IO;
 using System.Diagnostics;
+using SFML.System;
 
 namespace LastBastion
 {
@@ -22,7 +23,7 @@ namespace LastBastion
             _game = game;
             _name = name;
             //Test();
-            AddRessToGrid("%%[Vector2i] X(17) Y(-1)$$Stone%%");
+            //AddRessToGrid("%%[Vector2i] X(17) Y(-1)$$Stone%%");
         }
         public void CreateTXT()
         {
@@ -74,6 +75,14 @@ namespace LastBastion
                 {
                     AddRessToGrid(item);
                 }
+                if (item == "<Building>")
+                {
+                    part = "<Building>";
+                }
+                if (part == "<Building>")
+                {
+                    //AddBuildToGrid(item);
+                }
             }
         }
         public void AddRessToGrid(string line)
@@ -118,10 +127,8 @@ namespace LastBastion
                 {
                     t2 += line[i];
                 }
-                //Console.WriteLine(t2);
                 if (t2 == ") Y(")
                 {
-                    //Console.WriteLine("zfzfzg");
                     if (line[i] == '-' ||
                         line[i] == '0' ||
                         line[i] == '1' ||
@@ -135,14 +142,26 @@ namespace LastBastion
                         line[i] == '9')
                     {
                         y += line[i];
-                        //Console.WriteLine(line[i]);
                     }
                 }
             }
             int X = StringToInt(x);
             int Y = StringToInt(y);
-            Console.WriteLine(y);
-            Console.WriteLine(Y);
+            if (_game.GetGrid.ContainsKey(new Vector2i(X,Y)))
+            {
+                if (line.Contains("Stone"))
+                {
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Stone";
+                }
+                if (line.Contains("Bush"))
+                {
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Bush";
+                }
+                if (line.Contains("Wood"))
+                {
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Wood";
+                }
+            }
         }
         public int StringToInt(string intagueur)
         {

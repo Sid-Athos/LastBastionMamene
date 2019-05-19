@@ -124,6 +124,7 @@ namespace LastBastion
                 _menu.UpdateList();
                 _menu.DrawMenu();
             }
+            _menu.UpdateTopBar();
         }
 
         public int RandomNumber(int min, int max) => _random.Next(min, max);
