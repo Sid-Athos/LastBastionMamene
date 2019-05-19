@@ -12,6 +12,7 @@ namespace LastBastion
         uint _maxLifePoints;
         uint _armor;
         uint _rank;
+        uint _count;
 
         public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context)
         {
