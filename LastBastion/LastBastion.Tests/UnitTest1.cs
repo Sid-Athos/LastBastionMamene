@@ -130,11 +130,12 @@ namespace Tests
             Map var = new Map(sid);
 
             Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1,1,var);
+            Archer v1 = new Archer(10.9f, 11.2f, 0.1f, "Archer", 150, 10, 3, false, 2, 0.002f, var);
+            Archer v2 = new Archer(10.9f, 11.2f, 0.1f, "Archer", 150, 10, 3, false, 2, 0.002f, var);
+
             Assert.That(sido.ShowArchers(), Is.EqualTo(2));
-            //sido.AddArcher(v1);
-            //Assert.Throws<InvalidOperationException>(() => sido.AddArcher(v1));
-            //sido.AddArcher(v2);
-            //Assert.Throws<InvalidOperationException>(() => sido.AddArcher(v3));
+            Assert.Throws<InvalidOperationException>(() => sido.AddArcher(v1));
+            Assert.Throws<InvalidOperationException>(() => sido.AddArcher(v2));
 
             Assert.That(sido.ShowArchers(), Is.EqualTo(2));
             sido.Upgrade();
@@ -161,9 +162,7 @@ namespace Tests
 
             while(!v1.Position.IsInRange(v1.Position,v3.Position,v1.Range))
             {
-                Assert.That(v1.Position.IsInRange(v1.Position, v3.Position, v1.Range), Is.False);
-
-                v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
+                    v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
                     bool check = v1.Position.IsInRange(v1.Position, v3.Position, v1.Range);
             }
 
@@ -197,10 +196,8 @@ namespace Tests
             sido.AcquireTarget();
 
             Assert.That(sido.Target, Is.Null);
-
             Barbar v3 = new Barbar(0.7f, (0.7f), 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             sido.AcquireTarget();
-
             Assert.That(sido.Target, Is.EqualTo(v3));
         }
     }

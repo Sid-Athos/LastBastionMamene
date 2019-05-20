@@ -18,8 +18,7 @@ namespace Interface
         public ViewUI(WindowUI window,Vector2f initPos)
         {
             _window = window;
-            _view = new View(new Vector2f(100, 100), new Vector2f(200, 200));
-
+            _view = new View(new Vector2f(500, 500), new Vector2f(500, 500));
             _view.Center = initPos;
             _x = 0;
             _y = 0;
