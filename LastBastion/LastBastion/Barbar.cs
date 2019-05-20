@@ -19,6 +19,7 @@ namespace LastBastion
             context.AddBarbar(this);
         }
 
+
         /**public Building AquireTarget()
         {
             Map context = base.Context;

@@ -27,28 +27,6 @@ namespace LastBastion
             set { _posY = value; }
         }
 
-
-        public Vectors CalcNorm(float x, float y)
-        {
-            float posX = Math.Abs(x - _posX);
-            float posY = Math.Abs(y - _posY);
-
-            return new Vectors(posX, posY);
-        }
-
-        public float Magnitude()
-        {
-
-            return (float)Math.Sqrt((Math.Pow(_posX,2) + (Math.Pow(_posY, 2))));
-        }
-
-        public Vectors Substract(Vectors origin, Vectors arrival,float range)
-        {
-            float x= Math.Abs((origin._posX) - Math.Abs(arrival._posX - range));
-            float y = Math.Abs((origin._posY) - Math.Abs(arrival._posY - range));
-            return new Vectors(x, y);
-        }
-
         public float SubstractX(Vectors origin, Vectors arrival)
         {
             float x = Math.Abs((origin._posX) - Math.Abs(arrival._posX));
@@ -61,17 +39,32 @@ namespace LastBastion
             return y;
         }
 
-        public Vectors AddVecs(Vectors origin, Vectors arrival)
+        public float Magnitude()
         {
-            float x = origin._posX + arrival._posX;
-            float y = origin._posY + arrival._posY;
+
+            return (float)Math.Sqrt((Math.Pow(X,2) + (Math.Pow(Y, 2))));
+        }
+
+        public Vectors Substract(Vectors origin, Vectors arrival,float range)
+        {
+            float x= Math.Abs((arrival._posX) - Math.Abs(origin._posX));
+            float y = Math.Abs((arrival._posY) - Math.Abs(origin._posY ));
             return new Vectors(x, y);
         }
 
-        public Vectors Normalize(Vectors v)
+
+        public Vectors AddVecs(Vectors origin, Vectors arrival)
         {
-            float x = v._posX / v.Magnitude();
-            float y = v._posY / v.Magnitude();
+            float x = (float)origin._posX + (arrival._posX*0.2f);
+            float y = (float)origin._posY + (arrival._posY*0.2f);
+            return new Vectors(x, y);
+        }
+
+        public Vectors Normalize(Vectors v,float speed)
+        {
+            float x = v._posX / v.Magnitude() * speed;
+
+            float y = v._posY / v.Magnitude() * speed;
 
             return new Vectors(x, y);
         }
@@ -79,9 +72,9 @@ namespace LastBastion
        public Vectors Movement(Vectors origin, Vectors arrival, uint timestamp,float speed,float range)
         {
             Vectors moveVec = Substract(origin, arrival,range);
-            Vectors normalizedVec =  Normalize(moveVec);
-            Console.WriteLine("[{0},{1}]",normalizedVec.X, normalizedVec.Y);
-            return normalizedVec;
+            Vectors normalizedVec =  Normalize(moveVec,speed);
+            Console.WriteLine("Point de départ : [{0},{1}], Destination : [{2},{3}], Nouvel emplacement : [{4},{5}]", origin.X, origin.Y,arrival.X, arrival.Y,moveVec.X, moveVec.Y);
+            return AddVecs(origin,moveVec);
         }
 
         public bool IsInRange(Vectors origin, Vectors arrival, float range)

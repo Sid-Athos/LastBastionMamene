@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SFML.System;
 
 namespace LastBastion
 {
@@ -77,6 +78,9 @@ namespace LastBastion
             {
                 Die();
             }
+            Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
+
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
         }
 
         public void Attacked(uint newLife)
