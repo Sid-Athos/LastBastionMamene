@@ -101,6 +101,7 @@ namespace LastBastion
                         _save.CreateTXT();
                         break;
                     case Keyboard.Key.B:
+                        Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, 0.2f, "Barbare", 150, 3, 2, false, 3, 0.2f, _game.Map);
                         break;
                     case Keyboard.Key.C:
                         break;

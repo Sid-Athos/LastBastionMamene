@@ -115,6 +115,13 @@ namespace LastBastion
             _map.GetVillage.DrawCastle();
             _map.GetVillage.DrawBuilding();
             _map.GetVillage.WallRenderer();
+            if (_map.BarbCount > 0)
+            {
+                foreach(var n in _map.BarList)
+                {
+                    n.Update();
+                }
+            }
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();
