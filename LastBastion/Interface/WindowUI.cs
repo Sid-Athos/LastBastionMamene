@@ -18,6 +18,7 @@ namespace Interface
         {
             _sprites = sprites;
             _window = new RenderWindow(new VideoMode(1500, 1500), "Last Bastion", Styles.Default);
+            _window.SetFramerateLimit(200);
             _view = new ViewUI(this,initPos);
         }
 
