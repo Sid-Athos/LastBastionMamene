@@ -24,9 +24,18 @@ namespace LastBastion
         Unit _target;
         Building _enemyTar;
 
-        public Unit(float posX, float posY,float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed, Map context)
+        public Unit(
+            float posX, 
+            float posY
+            ,float range,
+            string job, 
+            uint lifePoints, 
+            uint dmg,
+            uint armor,
+            bool isMoving,
+            uint attackCooldown, 
+            float speed,
+            Map context)
         {
             _job = job;
             _lifePoints = lifePoints;
@@ -40,17 +49,13 @@ namespace LastBastion
             _range = range;
             _position = new Vectors(posX, posY);
         }
-
+        
         public Vectors Position
         {
             get { return _position; }
             set { _position = value;  }
         }
-
-        public Building EnemyTarget => _enemyTar;
-
-        public float Speed => _speed;
-
+        
         public void Attack(Unit unit)
         {
 
@@ -75,25 +80,11 @@ namespace LastBastion
             unit.Life = Math.Max(unit.Life - (_dmg - unit.Armor), 0);
         }
 
-        public float Range => _range;
-
-        public uint Dmg => _dmg;
-
-        public uint Armor => _armor;
-
         public uint Life
         {
             get { return _lifePoints; }
             set { _lifePoints = value; }
         }
-
-        public bool IsMoving => _isMoving;
-
-        public bool IsInTower => _inTower;
-
-        public string Job => _job;
-
-        
 
         public void Attacked(uint newLife)
         {
@@ -102,10 +93,8 @@ namespace LastBastion
 
         public void Die()
         {
-            //Remove();
-        }
 
-        public Map Context => _context;
+        }
 
         public void JoinTower()
         {
@@ -116,6 +105,71 @@ namespace LastBastion
         {
             _isMoving = !_isMoving;
         }
+        
+        public Vectors FindClosestEnemy(Map map)
+        {
+            List<Building> units = map.BuildList;
+
+            if(units.Count == 0)
+            {
+                throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
+            }
+
+            var magnitude = Position.X + Position.Y;
+            float min = Math.Abs((units[0].Position.X + units[0].Position.Y) - magnitude);
+            Vectors unitToReturn = units[0].Position;
+            
+            foreach(Building n in units)
+            {
+                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
+                if (newMin < min)
+                {
+                    min = newMin;
+                    unitToReturn = n.Position;
+                }
+            }
+            return unitToReturn;
+        }
+        
+        public void SetTarget(Unit u)
+        {
+            _target = u;
+        }
+
+        public void SetTarget(Building b)
+        {
+            _enemyTar = b;
+        }
+
+        public void Paralize()
+        {
+            _paralyzed = !_paralyzed;
+        }
+
+        public void Moving()
+        {
+            _isMoving = !_isMoving;
+        }
+
+        public Building EnemyTarget => _enemyTar;
+
+        public Map Context => _context;
+
+        public float Speed => _speed;
+
+        public bool IsParalysed => _paralyzed;
+
+        public bool IsMoving => _isMoving;
+
+        public bool IsInTower => _inTower;
+
+        public string Job => _job;
+
+        public float Range => _range;
+
+        public uint Dmg => _dmg;
+
+        public uint Armor => _armor;
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
@@ -149,50 +203,5 @@ namespace LastBastion
             // TODO: supprimer les marques de commentaire pour la ligne suivante si le finaliseur est remplacé ci-dessus.
             // GC.SuppressFinalize(this);
         }
-
-        public Vectors FindClosestEnemy(Map map)
-        {
-            List<Building> units = map.BuildList;
-
-            if(units.Count == 0)
-            {
-                throw new IndexOutOfRangeException("Aucune unité n'est disponible!");
-            }
-
-            var magnitude = Position.X + Position.Y;
-            float min = Math.Abs((units[0].Position.X + units[0].Position.Y) - magnitude);
-            Vectors unitToReturn = units[0].Position;
-            
-            foreach(Building n in units)
-            {
-                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
-                if (newMin < min)
-                {
-                    min = newMin;
-                    unitToReturn = n.Position;
-                }
-            }
-
-            return unitToReturn;
-        }
-
-        
-
-        public void SetTarget(Unit u)
-        {
-            _target = u;
-        }
-
-        public void SetTarget(Building b)
-        {
-            _enemyTar = b;
-        }
-
-        public void Paralize()
-        {
-            _paralyzed = !_paralyzed;
-        }
-
-        public bool IsParalysed => _paralyzed;
     }
 }
