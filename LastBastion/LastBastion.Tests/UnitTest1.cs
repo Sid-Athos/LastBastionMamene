@@ -156,26 +156,18 @@ namespace Tests
             Assert.That(sid,Is.Not.Null);
 
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(0.9f, 5.2f, 0.1f, job1, 150, 10, 3, false, 2, 0.2f, var);
-            Tower v3 = new Tower(9.9f, 17.2f, 150, 150, 10, 3, 2, 0, var);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-            v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
+            Villager v1 = new Villager(0.9f, 5.2f, 0.2f, job1, 150, 10, 3, false, 2, 0.2f, var);
+            Tower v3 = new Tower(13.7f, 24.8f, 150, 150, 10, 3, 2, 0, var);
 
-            Tower sido = new Tower(0.5f, 0.5f, 250, 250, 30, 5, 5, 1, var);
+            while(!v1.Position.IsInRange(v1.Position,v3.Position,v1.Range))
+            {
+                Assert.That(v1.Position.IsInRange(v1.Position, v3.Position, v1.Range), Is.False);
 
+                v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
+                    bool check = v1.Position.IsInRange(v1.Position, v3.Position, v1.Range);
+            }
 
+            Assert.That(v1.Position.IsInRange(v1.Position, v3.Position, v1.Range));
         }
 
         [Test]

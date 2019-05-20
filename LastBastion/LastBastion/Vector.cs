@@ -73,14 +73,18 @@ namespace LastBastion
         {
             Vectors moveVec = Substract(origin, arrival,range);
             Vectors normalizedVec =  Normalize(moveVec,speed);
-            Console.WriteLine("Point de départ : [{0},{1}], Destination : [{2},{3}], Nouvel emplacement : [{4},{5}]", origin.X, origin.Y,arrival.X, arrival.Y,moveVec.X, moveVec.Y);
             return AddVecs(origin,moveVec);
         }
 
         public bool IsInRange(Vectors origin, Vectors arrival, float range)
         {
-            float result = (float)Math.Sqrt(Math.Pow(origin.X - arrival.X, 2)+ Math.Pow(arrival.X - arrival.Y, 2));
-            return result <= range ? true : false;
+            float result = (float)(Math.Pow(arrival.X - origin.X, 2)+ Math.Pow(arrival.Y - origin.Y, 2));
+            return result <= (float)Math.Pow(range,2);
+        }
+
+        public float Distance(Vectors origin, Vectors arrival)
+        {
+            return (float)(Math.Pow(arrival.X - origin.X, 2) + Math.Pow(arrival.Y - origin.Y, 2));
         }
     }
 }
