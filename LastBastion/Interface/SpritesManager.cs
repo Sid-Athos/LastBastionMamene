@@ -70,6 +70,9 @@ namespace Interface
             texture = new Texture("../../../../images/Farm.png");
             _sprites.Add("Farm", new Sprite(texture));
 
+            texture = new Texture("../../../../images/TopBar.png");
+            _sprites.Add("TopBar", new Sprite(texture));
+
             texture = new Texture("../../../../images/HideFont.png");
             _sprites.Add("HideFont", new Sprite(texture));
 
@@ -132,7 +135,11 @@ namespace Interface
             }
         }
         public Sprite GetSprite(string name) => _sprites[name];
-        public Text GetText => _text;
+        public Text Text
+        {
+            get { return _text; }
+            set { _text = value; }
+        }
 
         public void musicPlay(string name)
         {

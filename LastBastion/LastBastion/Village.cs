@@ -49,8 +49,8 @@ namespace LastBastion
         {
             if (building == "Wall" && _woodStock >= 10 && _stoneStock >= 20)
             {
-                _woodStock -= 30;
-                _stoneStock -= 10;
+                _woodStock -= 10;
+                _stoneStock -= 20;
                 return true;
             }
             if (building == "House" && _woodStock >= 30 && _stoneStock >= 10)
