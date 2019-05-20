@@ -43,9 +43,23 @@ namespace LastBastion
 
         }
 
-        public uint MaxLife => _maxLifePoints;
 
-        public uint Life => _lifePoints;
+        public void Die()
+        {
+            return;
+        }
+
+        public uint MaxLife
+        {
+            get { return _lifePoints; }
+            set { _lifePoints = value; }
+        }
+
+        public uint Life
+        {
+            get { return _lifePoints; }
+            set { _lifePoints = value; }
+        }
 
         public bool IsDestroy()
         {

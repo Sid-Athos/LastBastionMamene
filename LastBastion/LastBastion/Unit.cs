@@ -22,6 +22,7 @@ namespace LastBastion
         bool _paralyzed = false;
         float _range;
         Unit _target;
+        Building _enemyTar;
 
         public Unit(float posX, float posY,float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
@@ -46,16 +47,32 @@ namespace LastBastion
             set { _position = value;  }
         }
 
+        public Building EnemyTarget => _enemyTar;
+
+        public float Speed => _speed;
+
         public void Attack(Unit unit)
         {
 
             if (_dmg > (unit._lifePoints + unit._armor))
             {
-                unit._lifePoints = 0;
+                unit.Life = 0;
                 unit.Die();
                 return;
             }
-            unit._lifePoints = Math.Max(unit._lifePoints - (_dmg - unit._armor), 0);
+            unit.Life = Math.Max(unit.Life - (_dmg - unit._armor), 0);
+        }
+
+        public void Attack(Building unit)
+        {
+
+            if (_dmg > (unit.Life + unit.Armor))
+            {
+                unit.Life = 0;
+                unit.Die();
+                return;
+            }
+            unit.Life = Math.Max(unit.Life - (_dmg - unit.Armor), 0);
         }
 
         public float Range => _range;
@@ -64,7 +81,11 @@ namespace LastBastion
 
         public uint Armor => _armor;
 
-        public uint Life => _lifePoints;
+        public uint Life
+        {
+            get { return _lifePoints; }
+            set { _lifePoints = value; }
+        }
 
         public bool IsMoving => _isMoving;
 
@@ -72,16 +93,7 @@ namespace LastBastion
 
         public string Job => _job;
 
-        public void Update()
-        {
-            if (_lifePoints == 0)
-            {
-                Die();
-            }
-            Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
-
-            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
-        }
+        
 
         public void Attacked(uint newLife)
         {
@@ -164,41 +176,16 @@ namespace LastBastion
             return unitToReturn;
         }
 
-        public void AcquireTarget()
-        {
-            Map context = _context;
-            List<Barbar> barbList = context.BarList;
-
-            if (context.BarbCount == 0)
-            {
-                throw new InvalidOperationException("Aucune unité n'est disponible!");
-            }
-
-            var magnitude = Position.X + Position.Y;
-            float min = Math.Abs((barbList[0].Position.X + barbList[0].Position.Y) - magnitude);
-            Unit unitToReturn = barbList[0];
-
-
-            foreach (var n in barbList)
-            {
-                var newMin = Math.Abs((n.Position.X + n.Position.Y) - magnitude);
-                if (newMin < min && newMin <= n.Range)
-                {
-                    min = newMin;
-                    unitToReturn = n;
-                }
-
-            }
-            if (min >= _range)
-            {
-                return;
-            }
-            _target = unitToReturn;
-        }
+        
 
         public void SetTarget(Unit u)
         {
             _target = u;
+        }
+
+        public void SetTarget(Building b)
+        {
+            _enemyTar = b;
         }
 
         public void Paralize()

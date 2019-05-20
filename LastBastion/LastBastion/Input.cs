@@ -46,6 +46,7 @@ namespace LastBastion
 
             if (!_game.IsStop)
             {
+                Console.WriteLine("[{0},{1}]", _game.GetWindow.GetView.X, _game.GetWindow.GetView.Y);
                 switch (e.Code)
                 {
                     case Keyboard.Key.Z:
@@ -101,7 +102,7 @@ namespace LastBastion
                         _save.CreateTXT();
                         break;
                     case Keyboard.Key.B:
-                        Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, 0.2f, "Barbare", 150, 3, 2, false, 3, 0.2f, _game.Map);
+                        Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, 1.0f, "Barbare", 150, 3, 2, false, 3, 0.05f, _game.Map);
                         break;
                     case Keyboard.Key.C:
                         break;
