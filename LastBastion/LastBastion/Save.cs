@@ -42,7 +42,7 @@ namespace LastBastion
             {
                 if (item.Value.Building != null)
                 {
-                    writer.WriteLine("$$" + item.Value.GetName + "$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "%%");
+                    writer.WriteLine("$$" + item.Value.GetVec2I + "$$" + item.Value.Building.Life + "$$" + item.Value.Building.MaxLife + "$$" + item.Value.Building.Armor + "$$" + item.Value.Building.Rank + "$$" + item.Value.GetName + "%%");
                 }
             }
             writer.WriteLine("<Setup>");
@@ -102,7 +102,7 @@ namespace LastBastion
         }
         public void AddBuildToGrid(string line)
         {
-            //$$Mine$$[Vector2i] X(-8) Y(3)$$100$$100$$10$$1%%
+            //$$House$$[Vector2i] X(-2) Y(2)$$100$$100$$10$$1%%
             int len = line.Length;
             string t1 = "";
             string x = "";
@@ -113,7 +113,8 @@ namespace LastBastion
             string rank = "";
             for (int i = 0; i < len; i++)
             {
-                if (t1 == "$$Mine$$[Vector2i] X(")
+                Console.WriteLine(t1);
+                if (t1 == "$$[Vector2i] X(")
                 {
                     if (line[i] == '-' ||
                         line[i] == '0' ||
@@ -129,8 +130,12 @@ namespace LastBastion
                     {
                         x += line[i];
                     }
+                    else
+                    {
+                        t1 += line[i];
+                    }
                 }
-                else if (t1 == "$$Mine$$[Vector2i] X() Y(")
+                else if (t1 == "$$[Vector2i] X() Y(")
                 {
                     if (line[i] == '-' ||
                         line[i] == '0' ||
@@ -146,8 +151,12 @@ namespace LastBastion
                     {
                         y += line[i];
                     }
+                    else
+                    {
+                        t1 += line[i];
+                    }
                 }
-                else if (t1 == "$$Mine$$[Vector2i] X() Y()$$")
+                else if (t1 == "$$[Vector2i] X() Y()$$")
                 {
                     if (line[i] == '-' ||
                         line[i] == '0' ||
@@ -163,9 +172,13 @@ namespace LastBastion
                     {
                         life += line[i];
                     }
+                    else
+                    {
+                        t1 += line[i];
+                    }
 
                 }
-                else if (t1 == "$$Mine$$[Vector2i] X() Y()$$$$")
+                else if (t1 == "$$[Vector2i] X() Y()$$$$")
                 {
                     if (line[i] == '-' ||
                         line[i] == '0' ||
@@ -181,8 +194,12 @@ namespace LastBastion
                     {
                         maxLife += line[i];
                     }
+                    else
+                    {
+                        t1 += line[i];
+                    }
                 }
-                else if (t1 == "$$Mine$$[Vector2i] X() Y()$$$$$$")
+                else if (t1 == "$$[Vector2i] X() Y()$$$$$$")
                 {
                     if (line[i] == '-' ||
                         line[i] == '0' ||
@@ -198,8 +215,12 @@ namespace LastBastion
                     {
                         armor += line[i];
                     }
+                    else
+                    {
+                        t1 += line[i];
+                    }
                 }
-                else if (t1 == "$$Mine$$[Vector2i] X() Y()$$$$$$$$")
+                else if (t1 == "$$[Vector2i] X() Y()$$$$$$$$")
                 {
                     if (line[i] == '-' ||
                         line[i] == '0' ||
@@ -215,6 +236,10 @@ namespace LastBastion
                     {
                         rank += line[i];
                     }
+                    else
+                    {
+                        t1 += line[i];
+                    }
                 }
                 else
                 {
@@ -229,6 +254,7 @@ namespace LastBastion
             uint Armor = StringToUInt(armor);
             uint Rank = StringToUInt(rank);
             */
+            Console.WriteLine(new Vector2i(X, Y));
             if (_game.GetGrid.ContainsKey(new Vector2i(X, Y)))
             {
                 if (line.Contains("Mine"))
@@ -322,9 +348,7 @@ namespace LastBastion
             }
             int X = StringToInt(x);
             int Y = StringToInt(y);
-
-            Console.WriteLine(x);
-            Console.WriteLine(X);
+            
             if (_game.GetGrid.ContainsKey(new Vector2i(X,Y)))
             {
                 if (line.Contains("Stone"))
