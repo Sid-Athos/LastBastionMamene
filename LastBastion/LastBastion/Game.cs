@@ -70,6 +70,8 @@ namespace LastBastion
                 _window.Render.DispatchEvents();
                 _window.Render.Clear();
 
+                //Console.WriteLine(_grid[new Vector2i(GetWindow.GetView.X, GetWindow.GetView.Y)].GetName);
+
                 if (_pause)
                 {
                     TimerUpdate();
@@ -99,10 +101,12 @@ namespace LastBastion
                 {
                     _map.GetVillage.RessourceProd();
                     _lastProd = _countTimer;
+                    /*
                     Console.WriteLine("Stock de Pierre : " + _map.GetVillage.StoneStock);
                     Console.WriteLine("Stock de Nourriture : " + _map.GetVillage.FoodStock);
                     Console.WriteLine("Stock de Bois : " + _map.GetVillage.WoodStock);
                     Console.WriteLine("-----------------------------");
+                    */
                 }
                 //End Update
 
@@ -129,6 +133,7 @@ namespace LastBastion
                 _menu.UpdateList();
                 _menu.DrawMenu();
             }
+            _menu.UpdateTopBar();
         }
 
         public int RandomNumber(int min, int max) => _random.Next(min, max);

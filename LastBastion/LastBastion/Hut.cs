@@ -28,6 +28,7 @@ namespace LastBastion
         public Vector2i GetVec2I { get { return _posG; } }
         public Vector2f GetVec2F { get { return _pos; } }
         public String GetName { get { return _buildingName; } }
+        public String SetName { set { _buildingName = value; } }
         public String StringVec => _name;
 
         public bool IsBusy()
