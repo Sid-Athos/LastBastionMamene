@@ -18,7 +18,7 @@ namespace LastBastion
         Game _game;
         string _name;
 
-        public Save(Game game, string name)
+        public Save(Game game,string name)
         {
             _game = game;
             _name = name;
@@ -113,7 +113,6 @@ namespace LastBastion
             string rank = "";
             for (int i = 0; i < len; i++)
             {
-                Console.WriteLine(t1);
                 if (t1 == "$$[Vector2i] X(")
                 {
                     if (line[i] == '-' ||
