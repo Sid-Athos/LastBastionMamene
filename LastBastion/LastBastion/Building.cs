@@ -38,10 +38,15 @@ namespace LastBastion
             _count++;
         }
 
-        public uint Armor => _armor;
-
-
-        public uint Count => _count;
+        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
+        {
+            _position = new Vectors(posX, posY);
+            _lifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
+            _armor = armor;
+            _rank = rank;
+            _count++;
+        }
 
         public void IncreaseArmor()
         {
@@ -52,9 +57,12 @@ namespace LastBastion
         {
             _maxLifePoints  *= 2;
             _lifePoints *= 2;
-
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> f74832f9d16f4d3691ce22e5a5f010ffe7cd6ecb
         public void Die()
         {
             return;
@@ -123,6 +131,9 @@ namespace LastBastion
         }
 
         public Map Context => _context;
-
+        
+        public uint Armor => _armor;
+        
+        public uint Count => _count;
     }
 }

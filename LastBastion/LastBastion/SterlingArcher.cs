@@ -22,7 +22,7 @@ namespace LastBastion
             _inTower = true;
         }
 
-        public Archer(float posX, float posY, float range,
+        internal Archer(float posX, float posY, float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed,bool inTower, Map context)
             : base(posX, posY, range,
@@ -34,10 +34,30 @@ namespace LastBastion
             _inTower = inTower;
         }
 
-        public void SetTower(Tower t)
+        internal Archer(float posX, float posY, float range,
+            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
+            uint attackCooldown, float speed, bool inTower)
+            : base(posX, posY, range,
+            job, lifePoints, dmg, armor, isMoving,
+            attackCooldown, speed)
+        {
+            _count++;
+            _inTower = inTower;
+        }
+
+        internal void SetTower(Tower t)
         {
             _context = t;
         }
 
+        internal void Attack()
+        {
+            new Projectiles(Position, Target, this);
+        }
+
+        internal void Update()
+        {
+        }
     }
+
 }

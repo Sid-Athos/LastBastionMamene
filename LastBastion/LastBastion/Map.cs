@@ -15,6 +15,7 @@ namespace LastBastion
         List<Barbar> _barbarians;
         List<Building> _buildings;
         List<Archer> _archers;
+        List<Projectiles> _projectiles;
 
         public Map(Game game)
         {
@@ -27,7 +28,19 @@ namespace LastBastion
             _buildings = new List<Building>();
             _buildings = new List<Building>();
             _archers = new List<Archer>();
+            _projectiles = new List<Projectiles>;
+        }
 
+        public Map()
+        {
+            CreateMap();
+            _village = new Village(this);
+            _villagePeople = new List<Villager>();
+            _barbarians = new List<Barbar>();
+            _buildings = new List<Building>();
+            _buildings = new List<Building>();
+            _archers = new List<Archer>();
+            _projectiles = new List<Projectiles>;
         }
 
         public List<Villager> VillList => _villagePeople;
@@ -52,6 +65,15 @@ namespace LastBastion
         {
             _villagePeople.Remove(n);
 
+        }
+
+        public void AddProjectile(Projectiles v)
+        {
+            _projectiles.Add(v);
+        }
+        public void RemoveProjectile(Projectiles n)
+        {
+            _projectiles.Remove(n);
         }
 
         public void AddBuilding(Building T)
@@ -216,7 +238,7 @@ namespace LastBastion
                 }
             }
         }
-        public void SamourailDeCoke()
+        public void SamouraïDeCoke()
         {
             foreach (var item in _game.GetGrid)
             {

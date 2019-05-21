@@ -131,7 +131,7 @@ namespace LastBastion
             _window.PrintCursor();
            if (!_pause)
             {
-                _map.SamourailDeCoke();
+                _map.SamouraïDeCoke();
                 // Draw menu
             }
             //UI
