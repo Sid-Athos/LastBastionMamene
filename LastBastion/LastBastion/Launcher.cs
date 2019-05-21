@@ -43,11 +43,12 @@ namespace LastBastion
             k = 0;
             h = 0;
             //
+            _window.KeyPressed += IsKeyPressed;
             Menu();
         }
         public void IsKeyPressed(object sender, KeyEventArgs e)
         {
-            if (e.Code == Keyboard.Key.Z)
+            if (e.Code == Keyboard.Key.Z || e.Code == Keyboard.Key.Up)
             {
                 if (murgle == "Menu")
                 {
@@ -64,41 +65,7 @@ namespace LastBastion
                     }
                 }
             }
-            if (e.Code == Keyboard.Key.Up)
-            {
-                if (murgle == "Menu")
-                {
-                    if (k != 0)
-                    {
-                        k--;
-                    }
-                }
-                if (murgle == "Select")
-                {
-                    if (h != 0)
-                    {
-                        h--;
-                    }
-                }
-            }
-            if (e.Code == Keyboard.Key.S)
-            {
-                if (murgle == "Menu")
-                {
-                    if (k != 2)
-                    {
-                        k++;
-                    }
-                }
-                if (murgle == "Select")
-                {
-                    if (h != len)
-                    {
-                        h++;
-                    }
-                }
-            }
-            if (e.Code == Keyboard.Key.Down)
+            if (e.Code == Keyboard.Key.S || e.Code == Keyboard.Key.Down)
             {
                 if (murgle == "Menu")
                 {
@@ -183,7 +150,6 @@ namespace LastBastion
             quit.CharacterSize = 70;
             //
             isOpen = true;
-            _window.KeyPressed += IsKeyPressed;
             //
             while (isOpen)
             {
@@ -267,7 +233,6 @@ namespace LastBastion
             s5.CharacterSize = 60;
             //
             GameSelectOpen = true;
-            _window.DispatchEvents();
             //
             while (GameSelectOpen)
             {
