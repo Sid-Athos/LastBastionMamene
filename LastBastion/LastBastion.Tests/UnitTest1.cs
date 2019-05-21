@@ -157,13 +157,13 @@ namespace Tests
             Assert.That(sid,Is.Not.Null);
 
             var job1 = Guid.NewGuid().ToString();
-            Villager v1 = new Villager(0.9f, 5.2f, 0.2f, job1, 150, 10, 3, false, 2, 0.2f, var);
+            Barbar v1 = new Barbar(0.9f, 5.2f, 0.2f, job1, 150, 10, 3, false, 2, 0.2f, var);
             Tower v3 = new Tower(13.7f, 24.8f, 150, 150, 10, 3, 2, 0, var);
 
-            while(!v1.Position.IsInRange(v1.Position,v3.Position,v1.Range))
+            while(!v1.Position.IsInRange(v1.Position,v3.Position,1.5f))
             {
                     v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-                    bool check = v1.Position.IsInRange(v1.Position, v3.Position, v1.Range);
+                    bool check = v1.Position.IsInRange(v1.Position, v3.Position, 1.5f);
             }
 
             Assert.That(v1.Position.IsInRange(v1.Position, v3.Position, v1.Range));

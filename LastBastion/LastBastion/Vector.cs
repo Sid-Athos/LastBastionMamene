@@ -70,7 +70,6 @@ namespace LastBastion
             return new Vectors(x, y);
         }
 
-
         Vectors AddVecs(Vectors origin, Vectors arrival,float speed)
         {
             float x = (float)origin.X + ((arrival.X-1.5f)*speed);
