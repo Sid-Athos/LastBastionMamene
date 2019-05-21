@@ -135,6 +135,16 @@ namespace Interface
 
             texture = new Texture("../../../../images/BotBar.png");
             _sprites.Add("BotBar", new Sprite(texture));
+
+            texture = new Texture("../../../../images/Health.png");
+            _sprites.Add("HealthIcon", new Sprite(texture));
+
+            texture = new Texture("../../../../images/Armor.png");
+            _sprites.Add("ArmorIcon", new Sprite(texture));
+
+            texture = new Texture("../../../../images/Attack.png");
+            _sprites.Add("AttackIcon", new Sprite(texture));
+
         }
         public void Update()
         {
