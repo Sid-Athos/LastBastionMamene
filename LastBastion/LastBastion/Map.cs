@@ -216,7 +216,7 @@ namespace LastBastion
                 }
             }
         }
-        public void SamourailDeCoke()
+        public void SamouraïDeCoke()
         {
             foreach (var item in _game.GetGrid)
             {

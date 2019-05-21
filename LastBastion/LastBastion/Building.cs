@@ -25,12 +25,7 @@ namespace LastBastion
             _context.AddBuilding(this);
             _count++;
         }
-
-        public uint Armor => _armor;
-
-
-        public uint Count => _count;
-
+        
         public void IncreaseArmor()
         {
             _armor++;
@@ -40,10 +35,8 @@ namespace LastBastion
         {
             _maxLifePoints  *= 2;
             _lifePoints *= 2;
-
         }
-
-
+        
         public void Die()
         {
             return;
@@ -83,6 +76,9 @@ namespace LastBastion
         }
 
         public Map Context => _context;
-
+        
+        public uint Armor => _armor;
+        
+        public uint Count => _count;
     }
 }
