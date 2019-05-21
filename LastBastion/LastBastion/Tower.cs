@@ -43,6 +43,32 @@ namespace LastBastion
             }
         }
 
+        public Tower(float posX,
+        float posY,
+        uint lifePoints,
+        uint maxLifePoints,
+        uint dmg,
+        uint armor,
+        uint aaCooldown,
+        uint rank)
+            : base(posX,
+         posY,
+         lifePoints,
+         maxLifePoints,
+         armor,
+         rank)
+        {
+            _dmg = dmg;
+            _aaCooldown = aaCooldown;
+            _slots = new Archer[2];
+            for (int i = 0; i < 2; i++)
+            {
+                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f,false);
+                AddArcher(sut);
+                sut.SetTower(this);
+            }
+        }
+
         public void SetAllTowerUnitsTarget()
         {
             if (_slots[0] != null)
