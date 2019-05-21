@@ -16,6 +16,7 @@ namespace LastBastion
         int k;
         bool isOpen;
         bool GameSelectOpen;
+        string murgle;
 
         public Launcher()
         {
@@ -69,27 +70,36 @@ namespace LastBastion
             }
             if (e.Code == Keyboard.Key.Enter)
             {
-                if (k == 0)
+                if (murgle == "Menu")
                 {
-                    isOpen = false;
-                    _window.Close();
-                    Game _game = new Game();
-                    _game.Run();
+                    if (k == 0)
+                    {
+                        isOpen = false;
+                        _window.Close();
+                        Game _game = new Game();
+                        _game.Run();
+                    }
+                    if (k == 1)
+                    {
+                        isOpen = false;
+                        GameSelect();
+                    }
+                    if (k == 2)
+                    {
+                        isOpen = false;
+                        _window.Close();
+                    }
                 }
-                if (k == 1)
+                if (murgle == "Select")
                 {
-                    isOpen = false;
-                    GameSelect();
-                }
-                if (k == 2)
-                {
-                    isOpen = false;
-                    _window.Close();
+                    GameSelectOpen = false;
+                    Menu();
                 }
             }
         }
         public void Menu()
         {
+            murgle = "Menu";
             Sprite E0 = new Sprite(new Texture("../../../../images/E0L.png"));
             Sprite E1 = new Sprite(new Texture("../../../../images/TitleLauncher.png"));
             //
@@ -122,6 +132,7 @@ namespace LastBastion
             quit.Color = new Color(0, 0, 0);
             quit.CharacterSize = 70;
             //
+            isOpen = true;
             _window.KeyPressed += IsKeyPressed;
             //
             while (isOpen)
@@ -162,6 +173,7 @@ namespace LastBastion
         }
         public void GameSelect()
         {
+            murgle = "Select";
             Sprite E0 = new Sprite(new Texture("../../../../images/E0L.png"));
             E0.Position = new Vector2f(E0.Position.X + 590, E0.Position.Y + 30);
             int n = 0;
@@ -176,37 +188,39 @@ namespace LastBastion
             back.CharacterSize = 50;
             Text s1 = new Text();
             s1.Font = _font;
-            s1.DisplayedString = "s1";
-            s1.Position = new Vector2f(900, 200);
+            s1.DisplayedString = "erriozijgzej";
+            s1.Position = new Vector2f(730, 200);
             s1.Color = new Color(0, 0, 0);
-            s1.CharacterSize = 50;
+            s1.CharacterSize = 60;
             Text s2 = new Text();
             s2.Font = _font;
-            s2.DisplayedString = "s2";
-            s2.Position = new Vector2f(900, 400);
+            s2.DisplayedString = "aopfjpajfopa";
+            s2.Position = new Vector2f(730, 300);
             s2.Color = new Color(0, 0, 0);
-            s2.CharacterSize = 50;
+            s2.CharacterSize = 60;
             Text s3 = new Text();
             s3.Font = _font;
-            s3.DisplayedString = "s3";
-            s3.Position = new Vector2f(900, 600);
+            s3.DisplayedString = "apozfkpoazkfopa";
+            s3.Position = new Vector2f(730, 400);
             s3.Color = new Color(0, 0, 0);
-            s3.CharacterSize = 50;
+            s3.CharacterSize = 60;
             Text s4 = new Text();
             s4.Font = _font;
-            s4.DisplayedString = "s4";
-            s4.Position = new Vector2f(900, 800);
+            s4.DisplayedString = "aofkopaofpka";
+            s4.Position = new Vector2f(730, 500);
             s4.Color = new Color(0, 0, 0);
-            s4.CharacterSize = 50;
+            s4.CharacterSize = 60;
             Text s5 = new Text();
             s5.Font = _font;
-            s5.DisplayedString = "s5";
-            s5.Position = new Vector2f(900, 900);
+            s5.DisplayedString = "apofkanif";
+            s5.Position = new Vector2f(730, 600);
             s5.Color = new Color(0, 0, 0);
-            s5.CharacterSize = 50;
+            s5.CharacterSize = 60;
             //
-            String[] list = SaveList(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\");
-            int len = list.Length;
+            List<string> list = SaveList(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\");
+            Console.WriteLine(list);
+            int len = list.Count;
+            Console.WriteLine(len);
             //
             GameSelectOpen = true;
             _window.DispatchEvents();
@@ -217,38 +231,70 @@ namespace LastBastion
                 _window.Clear();
                 //
                 _window.Draw(_sprite);
+                _window.Draw(E0);
                 if (len > 0)
                 {
                     if (n + 1 <= len)
                     {
+                        s1.DisplayedString = list[n];
                         _window.Draw(s1);
                     }
                     if (n + 2 <= len)
                     {
-                        _window.Draw(s1);
+                        s2.DisplayedString = list[n + 1];
+                        _window.Draw(s2);
                     }
                     if (n + 3 <= len)
                     {
-                        _window.Draw(s1);
+                        s3.DisplayedString = list[n + 2];
+                        _window.Draw(s3);
                     }
                     if (n + 4 <= len)
                     {
-                        _window.Draw(s1);
+                        s4.DisplayedString = list[n + 3];
+                        _window.Draw(s4);
                     }
                     if (n + 5 <= len)
                     {
-                        _window.Draw(s1);
+                        s5.DisplayedString = list[n + 4];
+                        _window.Draw(s5);
                     }
                 }
-                _window.Draw(E0);
                 _window.Draw(back);
                 //
                 _window.Display();
             }
         }
-        public String[] SaveList(string path)
+        public List<string> SaveList(string path)
         {
-            String[] list = Directory.GetFiles(path);
+            String[] directory = Directory.GetFiles(path);
+            List<string> list = new List<string>();
+            string t1 = "";
+            string name = "";
+            foreach (var item in directory)
+            {
+                int len = item.Length;
+                name = "";
+                t1 = "";
+                for (int i = 0; i < len; i++)
+                {
+                    if (t1 == path)
+                    {
+                        name += item[i];
+                    }
+                    else
+                    {
+                        t1 += item[i];
+                    }
+                }
+                if (name != "")
+                {
+                    if (!list.Contains(name))
+                    {
+                        list.Add(name);
+                    }
+                }
+            }
             return list;
         }
     }
