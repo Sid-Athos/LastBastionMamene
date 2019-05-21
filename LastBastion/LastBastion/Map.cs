@@ -26,7 +26,6 @@ namespace LastBastion
             _villagePeople = new List<Villager>();
             _barbarians = new List<Barbar>();
             _buildings = new List<Building>();
-            _buildings = new List<Building>();
             _archers = new List<Archer>();
             _projectiles = new List<Projectiles>();
         }
@@ -36,7 +35,6 @@ namespace LastBastion
             //_village = new Village(this);
             _villagePeople = new List<Villager>();
             _barbarians = new List<Barbar>();
-            _buildings = new List<Building>();
             _buildings = new List<Building>();
             _archers = new List<Archer>();
             _projectiles = new List<Projectiles>();
@@ -55,10 +53,11 @@ namespace LastBastion
 
         public int BuildCount => _buildings.Count;
 
+        public void Shuffle() => _barbarians = _barbarians.Shuffle.Barbars(_barbarians);
 
         public void AddVillager(Villager v)
         {
-            _villagePeople.Add(v);
+            VillList.Add(v);
         }
         public void RemoveVillager(Villager n)
         {

@@ -74,6 +74,11 @@ namespace LastBastion
             _position = new Vectors(posX, posY);
         }
 
+        public Unit(uint life)
+        {
+            _lifePoints = life;
+        }
+
         public Vectors Position
         {
             get { return _position; }

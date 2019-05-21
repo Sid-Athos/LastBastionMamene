@@ -206,6 +206,8 @@ namespace LastBastion
 
             Barbar unitToReturn;
 
+            barbList = Shuffle.Barbars(barbList);
+
             foreach (var n in barbList)
             {
                 if(!s.Contains(n))

@@ -31,6 +31,12 @@ namespace LastBastion
             _count++;
         }
 
+        public Barbar(uint life)
+            : base(life)
+        {
+            _count++;
+        }
+
         public void Update()
         {
             if (Life == 0)
