@@ -112,7 +112,7 @@ namespace LastBastion
         }
 
 
-        public void Upgrade()
+        public new void Upgrade()
         {
             if (_rank < 3)
             {
@@ -181,6 +181,7 @@ namespace LastBastion
             }
 
             Barbar unitToReturn;
+            barbList = Shuffle.Barbars(barbList);
 
             foreach (var n in barbList)
             {

@@ -45,15 +45,12 @@ namespace LastBastion
         public List<Barbar> BarList => _barbarians;
 
         public List<Building> BuildList => _buildings;
-
-
+        
         public int VillCount => _villagePeople.Count;
 
         public int BarbCount => _barbarians.Count;
 
         public int BuildCount => _buildings.Count;
-
-        public void Shuffle() => _barbarians = _barbarians.Shuffle.Barbars(_barbarians);
 
         public void AddVillager(Villager v)
         {

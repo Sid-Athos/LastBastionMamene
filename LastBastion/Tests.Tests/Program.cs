@@ -10,22 +10,36 @@ namespace Tests.Tests
         static void Main(string[] args)
         {
 
-            List<Unit> list = new List<Unit>();
+            List<Barbar> list = new List<Barbar>();
 
             for(uint i = 0; i < 50; i++)
             {
+                Barbar b;
+                if(i < 20)
+                {
+                    b = new Barbar(0);
 
-                Barbar b = new Barbar(i);
+                } else
+                {
+                     b = new Barbar(i);
+
+                }
                 list.Add(b);
             }
 
-            list = Shuffle.List(list);
+            list = Shuffle.Barbars(list);
 
             for (int i = 0; i < list.Count; i++)
             {
                 Console.WriteLine(list[i].Life);
 
             }
+            Console.WriteLine("Compteur " + list.Count);
+
+            Predicate<Barbar> dead = Preds.IsDead;
+            list.RemoveAll(dead);
+            Console.WriteLine("Compteur " + list.Count);
+
             Console.ReadKey();
         }
     }
