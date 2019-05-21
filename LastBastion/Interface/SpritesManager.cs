@@ -124,6 +124,24 @@ namespace Interface
             texture = new Texture("../../../../images/sawmill.png");
             _sprites.Add("Sawmill", new Sprite(texture));
 
+            texture = new Texture("../../../../images/sawmillUp.png");
+            _sprites.Add("SawmillUp", new Sprite(texture));
+
+            texture = new Texture("../../../../images/MineUp.png");
+            _sprites.Add("MineUp", new Sprite(texture));
+
+            texture = new Texture("../../../../images/FarmUp.png");
+            _sprites.Add("FarmUp", new Sprite(texture));
+
+            texture = new Texture("../../../../images/TowerLUP.png");
+            _sprites.Add("TowerLUP", new Sprite(texture));
+
+            texture = new Texture("../../../../images/Wall01Up.png");
+            _sprites.Add("WallLUP", new Sprite(texture));
+
+            texture = new Texture("../../../../images/HouseUp.png");
+            _sprites.Add("HouseUp", new Sprite(texture));
+
             texture = new Texture("../../../../images/resourceBar.png");
             _sprites.Add("ResourceBar", new Sprite(texture));
 

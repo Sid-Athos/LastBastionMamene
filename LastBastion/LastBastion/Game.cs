@@ -129,7 +129,7 @@ namespace LastBastion
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();
-            if (!_pause)
+           if (!_pause)
             {
                 _map.SamourailDeCoke();
                 // Draw menu

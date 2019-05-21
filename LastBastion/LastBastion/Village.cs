@@ -9,19 +9,23 @@ namespace LastBastion
     {
         Map _map;
         List<Hut> _nearby;
+        string _buildingName;
         int _area;
         uint _foodStock;
         uint _stoneStock;
         uint _woodStock;
+        uint _villagerStock;
 
         public Village(Map map)
         {
             _map = map;
             _nearby = new List<Hut>();
+            _buildingName = "Empty";
             _area = 3;
             _woodStock = 150;
             _foodStock = 150;
             _stoneStock = 150;
+            _villagerStock = 5;
             SetCastle();
             SetNearby();
         }
@@ -33,14 +37,42 @@ namespace LastBastion
                 if(item.Value.GetName == "Farm")
                 {
                     _foodStock += (5 * item.Value.Building.Rank);
+                    if (_foodStock > 9999)
+                    {
+                        _foodStock = 9999;
+                    }
                 }
                 if (item.Value.GetName == "Sawmill")
                 {
                     _woodStock += (5 * item.Value.Building.Rank);
+                    if (_woodStock > 9999)
+                    {
+                        _woodStock = 9999;
+                    }
                 }
                 if (item.Value.GetName == "Mine")
                 {
                     _stoneStock += (5 * item.Value.Building.Rank);
+                    if(_stoneStock > 9999)
+                    {
+                        _stoneStock = 9999;
+                    }
+                }
+                if (item.Value.GetName == "House")
+                {
+                    _villagerStock += (5 * item.Value.Building.Rank);
+                    if(item.Value.Building.Rank <= 2)
+                    {
+                        _foodStock -= 1;
+                    }
+                    else
+                    {
+                        _foodStock -= 2;
+                    }
+                    if (_foodStock > 9999)
+                    {
+                        _foodStock = 9999;
+                    }
                 }
             }
         }
@@ -124,10 +156,47 @@ namespace LastBastion
 
         public void CreateBuilding(string name)
         {
-            if (_nearby.Count > 0)
+            if (_map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost <= _woodStock &&
+                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost <= _stoneStock &&
+                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost <= _foodStock &&
+                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost <= _villagerStock)
+            {
+                _woodStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost;
+                _stoneStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost;
+                _foodStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost;
+                _villagerStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost;
+                _buildingName = name;
+                switch (_buildingName)
+                {
+                    case "House":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
+                    break;
+                    case "Sawmill":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Sawmill(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    break;
+                    case "Mine":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Mine(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    break;
+                    case "Farm":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Farm(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    break;
+                    case "Tower":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y,300,300,0,30,0,1, _map);
+                    break;
+                    case "Wall":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Wall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    break;
+                }
+            }
+            /*if (_nearby.Count > 0)
             {
                 int _random = _map.GetGame.RandomNumber(0, _nearby.Count - 1);
-                /*
                 foreach (var item in _map.GetGame.GetGrid)
                 {
                     if (item.Value == _nearby[_random])
@@ -135,8 +204,6 @@ namespace LastBastion
                         item.Value.SetBuilding(name);
                     }
                 }
-                */
-                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetBuilding(name);
                 _nearby.Remove(_nearby[_random]);
                 _nearby = RebuildeMegaGreatConstructor();
             }
@@ -145,7 +212,7 @@ namespace LastBastion
                 _area++;
                 SetNearby();
             }
-            Console.WriteLine(_nearby.Count);
+            Console.WriteLine(_nearby.Count);*/
         }
 
         public List<Hut> RebuildeMegaGreatConstructor()

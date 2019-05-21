@@ -6,24 +6,33 @@ namespace LastBastion
 {
     public class House : Building
     {
-        uint _population = 5;
+        uint _villager = 5;
+        uint _rent = 1;
         uint _rank = 1;
 
-        public House(float posX,float posY,uint lifePoints,uint maxLifePoints, uint armor, uint rank, uint population, Map context)
-            :base(posX,posY,lifePoints,maxLifePoints, armor,rank,context)
+        public House(float posX, float posY, uint villager, uint rent, Map context)
+            : base(posX, posY, 100, 100, 5, 1, 30, 50, 10, 0, context)
         {
-            _population = population;
+            _villager = villager;
+            _rent = rent;
         }
 
-        public uint Population
+        public uint Rent
         {
-            get { return _population; }
-            set { _population = value; }
+            get { return _rent; }
+            set { _rent = value; }
+        }
+
+        public uint Villager
+        {
+            get { return _villager; }
+            set { _villager = value; }
         }
 
         public void Upgrade()
         {
-            if(_rank < 3)
+            Console.WriteLine("test");
+            if (_rank < 3)
             {
                 _rank++;
                 IncPop();
@@ -34,7 +43,7 @@ namespace LastBastion
 
         public void IncPop()
         {
-            _population += 2;
+            _villager += 2;
         }
 
     }

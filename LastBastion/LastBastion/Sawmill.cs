@@ -8,8 +8,8 @@ namespace LastBastion
     {
         uint _rank = 1;
 
-        public Sawmill (float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context)
-            : base(posX, posY, lifePoints, maxLifePoints, armor, rank, context)
+        public Sawmill(float posX, float posY, Map context)
+            : base(posX, posY, 100, 100, 5, 1, 50, 0, 10, 2, context)
         {
         }
 

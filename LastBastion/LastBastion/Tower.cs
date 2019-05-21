@@ -23,12 +23,13 @@ namespace LastBastion
         uint aaCooldown,
         uint rank,
         Map context)
-            :base( posX,
+            : base(posX,
          posY,
          lifePoints,
          maxLifePoints,
          armor,
          rank,
+         10, 0, 60, 2,
          context)
         {
             _dmg = dmg;

@@ -28,7 +28,14 @@ namespace LastBastion
                     {
                         if (_game.Map.GetVillage.IsEnoughRessource(_game.GetMenuBuilder.SelectTarget()))
                         {
-                            _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                            if(_game.GetMenuBuilder.SelectTarget() == "HouseUp")
+                            {
+                                _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Upgrade();
+                            }
+                            else
+                            {
+                                _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                            }
                         }
                     }
                 }
@@ -46,7 +53,7 @@ namespace LastBastion
 
             if (!_game.IsStop)
             {
-                Console.WriteLine("[{0},{1}]", _game.GetWindow.GetView.X, _game.GetWindow.GetView.Y);
+                //Console.WriteLine("[{0},{1}]", _game.GetWindow.GetView.X, _game.GetWindow.GetView.Y);
                 switch (e.Code)
                 {
                     case Keyboard.Key.Z:
