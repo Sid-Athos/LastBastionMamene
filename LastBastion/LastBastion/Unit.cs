@@ -58,7 +58,6 @@ namespace LastBastion
         
         public void Attack(Unit unit)
         {
-
             if (_dmg > (unit._lifePoints + unit._armor))
             {
                 unit.Life = 0;
@@ -154,6 +153,8 @@ namespace LastBastion
         public Building EnemyTarget => _enemyTar;
 
         public Map Context => _context;
+
+        public Unit Target => _target;
 
         public float Speed => _speed;
 

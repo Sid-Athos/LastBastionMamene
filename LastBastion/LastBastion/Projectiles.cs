@@ -16,15 +16,29 @@ namespace LastBastion
             _position = o;
             _target = d;
             _context = context;
+            context.Context.AddProjectile(this);
         }
 
-        public void Attack()
-        {
-            Target.Attacked(Target.Life - (Context.Dmg + Target.Armor));
-        }
 
         Unit Context => _context;
         Unit Target => _target;
+        Vectors Position => _position;
+        Vectors Destination => Target.Position;
+        float Speed => _speed;
 
+        public void Update()
+        {
+            if (Target.Life > 0)
+            {
+                if(!Position.IsInRange(Position, Destination, 0.5f))
+                {
+                    Position.Movement(Position, Destination, 1, Speed, 0.5f);
+                } else
+                {
+                    Target.Attacked(Context.Dmg);
+                }
+            }
+            return;
+        }
     }
 }

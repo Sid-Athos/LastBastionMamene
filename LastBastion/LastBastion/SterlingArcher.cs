@@ -39,5 +39,10 @@ namespace LastBastion
             _context = t;
         }
 
+        public void Attack()
+        {
+            new Projectiles(Position, Target, this);
+        }
     }
+
 }

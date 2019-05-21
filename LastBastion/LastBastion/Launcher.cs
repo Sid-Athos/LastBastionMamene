@@ -38,7 +38,7 @@ namespace LastBastion
             */
             //
             //
-            list = SaveList(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\");
+            list = SaveList(@"../../../..\Save\");
             len = list.Count;
             k = 0;
             h = 0;
