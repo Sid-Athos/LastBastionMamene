@@ -44,6 +44,32 @@ namespace LastBastion
             }
         }
 
+        public Tower(float posX,
+        float posY,
+        uint lifePoints,
+        uint maxLifePoints,
+        uint dmg,
+        uint armor,
+        uint aaCooldown,
+        uint rank)
+            : base(posX,
+         posY,
+         lifePoints,
+         maxLifePoints,
+         armor,
+         rank)
+        {
+            _dmg = dmg;
+            _aaCooldown = aaCooldown;
+            _slots = new Archer[2];
+            for (int i = 0; i < 2; i++)
+            {
+                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f,false);
+                AddArcher(sut);
+                sut.SetTower(this);
+            }
+        }
+
         public void SetAllTowerUnitsTarget()
         {
             if (_slots[0] != null)
@@ -166,6 +192,38 @@ namespace LastBastion
                     break;
                 }
             }
+        }
+
+        internal void SwitchTarget(List<Unit> s)
+        {
+            Map context = base.Context;
+            List<Barbar> barbList = context.BarList;
+
+            if (context.BarbCount == 0)
+            {
+                throw new InvalidOperationException("Aucune unité n'est disponible!");
+            }
+
+            Barbar unitToReturn;
+
+            foreach (var n in barbList)
+            {
+                if(!s.Contains(n))
+                {
+                    if (Position.IsInRange(Position, n.Position, Range))
+                    {
+                        unitToReturn = n;
+                        _target = unitToReturn;
+                        SetAllTowerUnitsTarget();
+                        break;
+                    }
+                }
+            }
+        }
+
+        internal void Update()
+        {
+
         }
     }
 }

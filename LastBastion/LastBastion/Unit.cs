@@ -182,7 +182,7 @@ namespace LastBastion
 
         public float Speed => _speed;
 
-        bool IsParalysed => _paralyzed;
+        internal bool IsParalysed => _paralyzed;
 
         bool IsMoving => _isMoving;
 

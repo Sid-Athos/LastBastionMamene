@@ -19,12 +19,7 @@ namespace Tests
         [Test]
         public void T2_Create_Map_Create_Villagers()
         {
-            Game sid = new Game();
-            sid.Run();
-
-            Assert.That(sid, Is.Not.Null);
-
-            Map var = new Map(sid);
+            Map var = new Map();
 
             Assert.That(var, Is.Not.Null);
             Assert.That(var.VillCount, Is.EqualTo(0));
@@ -41,12 +36,7 @@ namespace Tests
         [Test]
         public void T3_Units_Are_Created_And_Can_Join_Units_List()
         {
-            Game sid = new Game();
-            sid.Run();
-
-            Assert.That(sid, Is.Not.Null);
-
-            Map var = new Map(sid);
+            Map var = new Map();
             Assert.That(var, Is.Not.Null);
 
             for(int i = 0; i < 4;i++)
@@ -64,10 +54,7 @@ namespace Tests
         [Test]
         public void T4_Units_Are_In_List_And_Attack_Correctly()
         {
-            Game sid = new Game();
-            sid.Run();
-            Assert.That(sid, Is.Not.Null);
-            Map var = new Map(sid);
+            Map var = new Map();
             Assert.That(var, Is.Not.Null);
 
 
@@ -97,10 +84,7 @@ namespace Tests
         [Test]
         public void T5_Units_Can_Attack()
         {
-            Game sid = new Game();
-            sid.Run();
-            Assert.That(sid, Is.Not.Null);
-            Map var = new Map(sid);
+            Map var = new Map();
             Assert.That(var, Is.Not.Null);
             var job1 = Guid.NewGuid().ToString();
             Villager v1 = new Villager(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
@@ -122,12 +106,7 @@ namespace Tests
         [Test]
         public void T6_Archers_are_created_join_towers_within_limits_Plus_Tower_Upgrade()
         {
-
-            Game sid = new Game();
-            sid.Run();
-            Assert.That(sid, Is.Not.Null);
-
-            Map var = new Map(sid);
+            Map var = new Map();
 
             Tower sido = new Tower(0.5f,10.5f,500,15,5,5,1,1,var);
             Archer v1 = new Archer(10.9f, 11.2f, 0.1f, "Archer", 150, 10, 3, false, 2, 0.002f, var);
@@ -149,18 +128,13 @@ namespace Tests
         [Test]
         public void T7_Units_Move_Toward_Towers()
         {
-            Game sid = new Game();
-            sid.Run();
-            Assert.That(sid, Is.Not.Null);
-
-            Map var = new Map(sid);
-            Assert.That(sid,Is.Not.Null);
+            Map var = new Map();
 
             var job1 = Guid.NewGuid().ToString();
             Barbar v1 = new Barbar(0.9f, 5.2f, 0.2f, job1, 150, 10, 3, false, 2, 0.2f, var);
             Tower v3 = new Tower(13.7f, 24.8f, 150, 150, 10, 3, 2, 0, var);
 
-            while(!v1.Position.IsInRange(v1.Position,v3.Position,1.5f))
+            while(!v1.Position.IsInRange(v1.Position,v3.Position,2.0f))
             {
                     v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
                     bool check = v1.Position.IsInRange(v1.Position, v3.Position, 1.5f);
@@ -172,11 +146,7 @@ namespace Tests
         [Test]
         public void T8_Tower_Acquire_Targets_Within_Constraints()
         {
-            Game sid = new Game();
-            sid.Run();
-
-            Map var = new Map(sid);
-
+            Map var = new Map();
             var job1 = Guid.NewGuid().ToString();
             Villager v1 = new Villager(0.9f, 5.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
             Tower sido = new Tower(0.5f, 0.5f, 250, 250, 30, 5, 5, 1, var);
