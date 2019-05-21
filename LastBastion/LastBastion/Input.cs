@@ -113,6 +113,8 @@ namespace LastBastion
                     case Keyboard.Key.G:
                         break;
                     case Keyboard.Key.H:
+                        Console.WriteLine(_game.GetWindow.GetView.Render.Size.X);
+                        Console.WriteLine(_game.GetWindow.GetView.Render.Size.Y);
                         break;
                     case Keyboard.Key.I:
                         break;
