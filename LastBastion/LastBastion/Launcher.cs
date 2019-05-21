@@ -14,6 +14,9 @@ namespace LastBastion
         Sprite _sprite;
         RenderWindow _window;
         int k;
+        int h;
+        int len;
+        List<string> list;
         bool isOpen;
         bool GameSelectOpen;
         string murgle;
@@ -34,7 +37,11 @@ namespace LastBastion
             music.Play();
             */
             //
+            //
+            list = SaveList(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\");
+            len = list.Count;
             k = 0;
+            h = 0;
             //
             Menu();
         }
@@ -42,30 +49,70 @@ namespace LastBastion
         {
             if (e.Code == Keyboard.Key.Z)
             {
-                if (k != 0)
+                if (murgle == "Menu")
                 {
-                    k--;
+                    if (k != 0)
+                    {
+                        k--;
+                    }
+                }
+                if (murgle == "Select")
+                {
+                    if (h != 0)
+                    {
+                        h--;
+                    }
                 }
             }
             if (e.Code == Keyboard.Key.Up)
             {
-                if (k != 0)
+                if (murgle == "Menu")
                 {
-                    k--;
+                    if (k != 0)
+                    {
+                        k--;
+                    }
+                }
+                if (murgle == "Select")
+                {
+                    if (h != 0)
+                    {
+                        h--;
+                    }
                 }
             }
             if (e.Code == Keyboard.Key.S)
             {
-                if (k != 2)
+                if (murgle == "Menu")
                 {
-                    k++;
+                    if (k != 2)
+                    {
+                        k++;
+                    }
+                }
+                if (murgle == "Select")
+                {
+                    if (h != len)
+                    {
+                        h++;
+                    }
                 }
             }
             if (e.Code == Keyboard.Key.Down)
             {
-                if (k != 2)
+                if (murgle == "Menu")
                 {
-                    k++;
+                    if (k != 2)
+                    {
+                        k++;
+                    }
+                }
+                if (murgle == "Select")
+                {
+                    if (h != len)
+                    {
+                        h++;
+                    }
                 }
             }
             if (e.Code == Keyboard.Key.Enter)
@@ -92,8 +139,11 @@ namespace LastBastion
                 }
                 if (murgle == "Select")
                 {
-                    GameSelectOpen = false;
-                    Menu();
+                    if (h == len)
+                    {
+                        GameSelectOpen = false;
+                        Menu();
+                    }
                 }
             }
         }
@@ -177,7 +227,6 @@ namespace LastBastion
             Sprite E0 = new Sprite(new Texture("../../../../images/E0L.png"));
             E0.Position = new Vector2f(E0.Position.X + 590, E0.Position.Y + 30);
             int n = 0;
-            int h = 0;
             //
             Font _font = new Font("../../../../images/RINGM___.TTF");
             Text back = new Text();
@@ -217,11 +266,6 @@ namespace LastBastion
             s5.Color = new Color(0, 0, 0);
             s5.CharacterSize = 60;
             //
-            List<string> list = SaveList(@"C:\Users\Rosiek\Documents\C_Sharp\LastBastionMamene\LastBastion\Save\");
-            Console.WriteLine(list);
-            int len = list.Count;
-            Console.WriteLine(len);
-            //
             GameSelectOpen = true;
             _window.DispatchEvents();
             //
@@ -232,6 +276,40 @@ namespace LastBastion
                 //
                 _window.Draw(_sprite);
                 _window.Draw(E0);
+                if (h == n)
+                {
+                    s1.Color = new Color(222, 41, 2);
+                    s2.Color = new Color(0, 0, 0);
+                    back.Color = new Color(0, 0, 0);
+                }
+                if (h == n + 1)
+                {
+                    s1.Color = new Color(0, 0, 0);
+                    s2.Color = new Color(222, 41, 2);
+                    s3.Color = new Color(0, 0, 0);
+                    back.Color = new Color(0, 0, 0);
+                }
+                if (h == n + 2)
+                {
+                    s2.Color = new Color(0, 0, 0);
+                    s3.Color = new Color(222, 41, 2);
+                    s4.Color = new Color(0, 0, 0);
+                    back.Color = new Color(0, 0, 0);
+                }
+                if (h == n + 3)
+                {
+                    s3.Color = new Color(0, 0, 0);
+                    s4.Color = new Color(222, 41, 2);
+                    s5.Color = new Color(0, 0, 0);
+                    back.Color = new Color(0, 0, 0);
+                }
+                if (h == n + 4)
+                {
+                    s1.Color = new Color(0, 0, 0);
+                    s4.Color = new Color(0, 0, 0);
+                    s5.Color = new Color(222, 41, 2);
+                    back.Color = new Color(0, 0, 0);
+                }
                 if (len > 0)
                 {
                     if (n + 1 <= len)
@@ -259,6 +337,23 @@ namespace LastBastion
                         s5.DisplayedString = list[n + 4];
                         _window.Draw(s5);
                     }
+                }
+                if (h == len)
+                {
+                    s1.Color = new Color(0, 0, 0);
+                    s2.Color = new Color(0, 0, 0);
+                    s3.Color = new Color(0, 0, 0);
+                    s4.Color = new Color(0, 0, 0);
+                    s5.Color = new Color(0, 0, 0);
+                    back.Color = new Color(222, 41, 2);
+                }
+                if (h == n + 5)
+                {
+                    n = n + 5;
+                }
+                if (h == n - 1)
+                {
+                    n = n - 5;
                 }
                 _window.Draw(back);
                 //
