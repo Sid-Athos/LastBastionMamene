@@ -4,13 +4,13 @@ using System.Text;
 
 namespace LastBastion
 {
-    internal class Archer : Unit
+    public class Archer : Unit
     {
         static uint _count;
         Tower _context;
         bool _inTower;
 
-        internal Archer(float posX, float posY, float range,
+        public Archer(float posX, float posY, float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed, Map context)
             : base(posX, posY, range,
@@ -31,6 +31,17 @@ namespace LastBastion
         {
             _count++;
             context.AddArcher(this);
+            _inTower = inTower;
+        }
+
+        internal Archer(float posX, float posY, float range,
+            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
+            uint attackCooldown, float speed, bool inTower)
+            : base(posX, posY, range,
+            job, lifePoints, dmg, armor, isMoving,
+            attackCooldown, speed)
+        {
+            _count++;
             _inTower = inTower;
         }
 

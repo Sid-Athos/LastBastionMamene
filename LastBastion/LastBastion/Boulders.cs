@@ -45,7 +45,7 @@ namespace LastBastion
                 {
                     if(Destination.IsInRange(Destination,n.Position,2.0f))
                     {
-                        Target.Attacked(Context.Dmg);
+                        Target.Attacked(0);
                     }
                 }
             }

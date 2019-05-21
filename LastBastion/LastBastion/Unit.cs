@@ -49,14 +49,38 @@ namespace LastBastion
             _range = range;
             _position = new Vectors(posX, posY);
         }
-        
-        internal Vectors Position
+
+        public Unit(
+            float posX,
+            float posY
+            , float range,
+            string job,
+            uint lifePoints,
+            uint dmg,
+            uint armor,
+            bool isMoving,
+            uint attackCooldown,
+            float speed)
+        {
+            _job = job;
+            _lifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
+            _dmg = dmg;
+            _armor = armor;
+            _isMoving = isMoving;
+            _aaCooldown = attackCooldown;
+            _speed = speed;
+            _range = range;
+            _position = new Vectors(posX, posY);
+        }
+
+        public Vectors Position
         {
             get { return _position; }
             set { _position = value;  }
         }
         
-        internal void Attack(Unit unit)
+        public void Attack(Unit unit)
         {
             if (_dmg > (unit._lifePoints + unit._armor))
             {
@@ -67,7 +91,7 @@ namespace LastBastion
             unit.Life = Math.Max(unit.Life - (_dmg - unit._armor), 0);
         }
 
-        internal void Attack(Building unit)
+        public void Attack(Building unit)
         {
 
             if (_dmg > (unit.Life + unit.Armor))
@@ -79,7 +103,7 @@ namespace LastBastion
             unit.Life = Math.Max(unit.Life - (_dmg - unit.Armor), 0);
         }
 
-        internal uint Life
+        public uint Life
         {
             get { return _lifePoints; }
             set { _lifePoints = value; }
@@ -90,12 +114,12 @@ namespace LastBastion
             _lifePoints = newLife;
         }
 
-         void Die()
+         internal void Die()
         {
 
         }
 
-        void JoinTower()
+        internal void JoinTower()
         {
             _inTower = !_inTower;
         }
@@ -130,12 +154,12 @@ namespace LastBastion
             return unitToReturn;
         }
         
-        void SetTarget(Unit u)
+        internal void SetTarget(Unit u)
         {
             _target = u;
         }
 
-        void SetTarget(Building b)
+        internal void SetTarget(Building b)
         {
             _enemyTar = b;
         }
@@ -162,15 +186,15 @@ namespace LastBastion
 
         bool IsMoving => _isMoving;
 
-        bool IsInTower => _inTower;
+        internal bool IsInTower => _inTower;
 
         string Job => _job;
 
-        float Range => _range;
+        public float Range => _range;
 
         internal uint Dmg => _dmg;
 
-        uint Armor => _armor;
+        internal uint Armor => _armor;
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 

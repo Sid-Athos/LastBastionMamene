@@ -20,7 +20,17 @@ namespace LastBastion
             _count++;
             context.AddBarbar(this);
         }
-        
+
+        public Barbar(float posX, float posY, float range,
+            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
+            uint attackCooldown, float speed)
+            : base(posX, posY, range,
+            job, lifePoints, dmg, armor, isMoving,
+            attackCooldown, speed)
+        {
+            _count++;
+        }
+
         public void Update()
         {
             if (Life == 0)

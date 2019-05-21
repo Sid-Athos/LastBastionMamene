@@ -31,6 +31,18 @@ namespace LastBastion
             _projectiles = new List<Projectiles>;
         }
 
+        public Map()
+        {
+            CreateMap();
+            _village = new Village(this);
+            _villagePeople = new List<Villager>();
+            _barbarians = new List<Barbar>();
+            _buildings = new List<Building>();
+            _buildings = new List<Building>();
+            _archers = new List<Archer>();
+            _projectiles = new List<Projectiles>;
+        }
+
         public List<Villager> VillList => _villagePeople;
 
         public List<Barbar> BarList => _barbarians;

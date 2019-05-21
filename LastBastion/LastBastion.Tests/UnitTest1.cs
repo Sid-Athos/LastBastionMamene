@@ -140,7 +140,7 @@ namespace Tests
             Assert.That(sido.ShowArchers(), Is.EqualTo(2));
             sido.Upgrade();
             Assert.That(sido.ShowArchers(), Is.EqualTo(4));
-            Archer test = new Archer(0.5f, 10.4f, 2.0f, "Archer", 50, 5, 2, false, 3, 0.2f, false, var);
+            Archer test = new Archer(0.5f, 10.4f, 2.0f, "Archer", 50, 5, 2, false, 3, 0.2f,var);
             Assert.Throws<InvalidOperationException>(() => sido.AddArcher(test));
 
         }
