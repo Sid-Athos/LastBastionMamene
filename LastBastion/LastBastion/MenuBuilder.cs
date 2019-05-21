@@ -141,19 +141,107 @@ namespace LastBastion
                 //Price
                 _game.Sprites.Text.DisplayedString = _game.Map.GetVillage.StoneStock.ToString();
                 _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 151);
-                _game.Sprites.Text.Scale = new Vector2f(0.8f, 0.8f);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                 _game.GetWindow.Render.Draw(_game.Sprites.Text);
                 _game.Sprites.Text.DisplayedString = _game.Map.GetVillage.StoneStock.ToString();
                 _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 169);
-                _game.Sprites.Text.Scale = new Vector2f(0.8f, 0.8f);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                 _game.GetWindow.Render.Draw(_game.Sprites.Text);
                 _game.Sprites.Text.DisplayedString = _game.Map.GetVillage.StoneStock.ToString();
                 _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 187);
-                _game.Sprites.Text.Scale = new Vector2f(0.8f, 0.8f);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                 _game.GetWindow.Render.Draw(_game.Sprites.Text);
                 _game.Sprites.Text.DisplayedString = _game.Map.GetVillage.StoneStock.ToString();
                 _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 205);
-                _game.Sprites.Text.Scale = new Vector2f(0.8f, 0.8f);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                //Description
+                _game.Sprites.Text.DisplayedString = "Description";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 135);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("House"))
+                {
+                    _game.Sprites.Text.DisplayedString = "Increase maximum kingdom";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 165);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " population by 5 points per rank.";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 175);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Farm"))
+                {
+                    _game.Sprites.Text.DisplayedString = "Increase maximum kingdom";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 165);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " production of food ";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 175);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " by 5 points per rank.";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 185);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Mine"))
+                {
+                    _game.Sprites.Text.DisplayedString = "Increase maximum kingdom";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 165);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " production of stone ";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 175);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " by 5 points per rank.";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 185);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Tower"))
+                {
+                    _game.Sprites.Text.DisplayedString = "Main defence to protect";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 165);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " the kingdom from Dracula.";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 175);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Sawmill"))
+                {
+                    _game.Sprites.Text.DisplayedString = "Increase maximum kingdom";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 165);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " production of wood ";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 175);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " by 5 points per rank.";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 185);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("Wall"))
+                {
+                    _game.Sprites.Text.DisplayedString = "Protect the kingdom from";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 165);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                    _game.Sprites.Text.DisplayedString = " darkness invaders.";
+                    _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 175);
+                    _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                    _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                }
+                //Stats
+                _game.Sprites.Text.DisplayedString = "Stats";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 88, _game.GetWindow.GetView.Render.Center.Y + 135);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                 _game.GetWindow.Render.Draw(_game.Sprites.Text);
             }
         }
