@@ -7,12 +7,14 @@ namespace LastBastion
     internal class Boulders : Projectiles
     {
         Vectors _destination;
+        Unit _focus;
         float _distance;
 
         internal Boulders(Vectors o, Unit d, Unit context, Vectors destination,float distance)
             :base(o, d, context)
         {
             _distance = distance;
+            _focus = d;
             _destination = new Vectors(d.Position.X,d.Position.Y);
         }
 

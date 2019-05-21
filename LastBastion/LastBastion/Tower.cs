@@ -192,5 +192,37 @@ namespace LastBastion
                 }
             }
         }
+
+        internal void SwitchTarget(List<Unit> s)
+        {
+            Map context = base.Context;
+            List<Barbar> barbList = context.BarList;
+
+            if (context.BarbCount == 0)
+            {
+                throw new InvalidOperationException("Aucune unité n'est disponible!");
+            }
+
+            Barbar unitToReturn;
+
+            foreach (var n in barbList)
+            {
+                if(!s.Contains(n))
+                {
+                    if (Position.IsInRange(Position, n.Position, Range))
+                    {
+                        unitToReturn = n;
+                        _target = unitToReturn;
+                        SetAllTowerUnitsTarget();
+                        break;
+                    }
+                }
+            }
+        }
+
+        internal void Update()
+        {
+
+        }
     }
 }

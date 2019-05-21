@@ -6,6 +6,8 @@ namespace LastBastion
 {
     public class Thunder:Tower
     {
+        List<Unit> _paralysedList;
+
         public Thunder(float posX,
         float posY,
         uint lifePoints,
@@ -25,15 +27,28 @@ namespace LastBastion
          rank,
          context)
         {
-
+            _paralysedList = new List<Unit>();
         }
 
-        public void Paralyze()
+        List<Unit> ParList => _paralysedList;
+
+        internal void Paralyze()
         {
             if (!Target.IsParalysed)
+            {
                 Target.Paralize();
+                ParList.Add(Target);
+                base.SwitchTarget(ParList);
+            }
             else
+            {
                 throw new InvalidCastException("La cible est déjà paralysée !");
+            }
+        }
+
+        internal new void  Update()
+        {
+
         }
     }
 }
