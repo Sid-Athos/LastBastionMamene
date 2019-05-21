@@ -4,29 +4,28 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Projectiles
+    internal class Projectiles
     {
         Vectors _position;
         Unit _context;
         Unit _target;
         readonly float _speed = 0.001f;
 
-        public Projectiles(Vectors o,Unit d,Unit context)
+        internal Projectiles(Vectors o,Unit d,Unit context)
         {
             _position = o;
             _target = d;
             _context = context;
             context.Context.AddProjectile(this);
         }
-
-
-        Unit Context => _context;
-        Unit Target => _target;
-        Vectors Position => _position;
+        
+        internal Unit Context => _context;
+        internal Unit Target => _target;
+        internal Vectors Position => _position;
         Vectors Destination => Target.Position;
-        float Speed => _speed;
+        internal float Speed => _speed;
 
-        public void Update()
+        internal void Update()
         {
             if (Target.Life > 0)
             {
@@ -38,7 +37,6 @@ namespace LastBastion
                     Target.Attacked(Context.Dmg);
                 }
             }
-            return;
         }
     }
 }

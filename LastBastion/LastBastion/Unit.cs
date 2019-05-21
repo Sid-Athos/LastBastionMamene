@@ -50,13 +50,13 @@ namespace LastBastion
             _position = new Vectors(posX, posY);
         }
         
-        public Vectors Position
+        internal Vectors Position
         {
             get { return _position; }
             set { _position = value;  }
         }
         
-        public void Attack(Unit unit)
+        internal void Attack(Unit unit)
         {
             if (_dmg > (unit._lifePoints + unit._armor))
             {
@@ -67,7 +67,7 @@ namespace LastBastion
             unit.Life = Math.Max(unit.Life - (_dmg - unit._armor), 0);
         }
 
-        public void Attack(Building unit)
+        internal void Attack(Building unit)
         {
 
             if (_dmg > (unit.Life + unit.Armor))
@@ -79,33 +79,33 @@ namespace LastBastion
             unit.Life = Math.Max(unit.Life - (_dmg - unit.Armor), 0);
         }
 
-        public uint Life
+        internal uint Life
         {
             get { return _lifePoints; }
             set { _lifePoints = value; }
         }
 
-        public void Attacked(uint newLife)
+        internal void Attacked(uint newLife)
         {
             _lifePoints = newLife;
         }
 
-        public void Die()
+         void Die()
         {
 
         }
 
-        public void JoinTower()
+        void JoinTower()
         {
             _inTower = !_inTower;
         }
 
-        public void Move()
+        void Move()
         {
             _isMoving = !_isMoving;
         }
         
-        public Vectors FindClosestEnemy(Map map)
+        Vectors FindClosestEnemy(Map map)
         {
             List<Building> units = map.BuildList;
 
@@ -130,12 +130,12 @@ namespace LastBastion
             return unitToReturn;
         }
         
-        public void SetTarget(Unit u)
+        void SetTarget(Unit u)
         {
             _target = u;
         }
 
-        public void SetTarget(Building b)
+        void SetTarget(Building b)
         {
             _enemyTar = b;
         }
@@ -152,25 +152,25 @@ namespace LastBastion
 
         public Building EnemyTarget => _enemyTar;
 
-        public Map Context => _context;
+        internal Map Context => _context;
 
-        public Unit Target => _target;
+        internal Unit Target => _target;
 
         public float Speed => _speed;
 
-        public bool IsParalysed => _paralyzed;
+        bool IsParalysed => _paralyzed;
 
-        public bool IsMoving => _isMoving;
+        bool IsMoving => _isMoving;
 
-        public bool IsInTower => _inTower;
+        bool IsInTower => _inTower;
 
-        public string Job => _job;
+        string Job => _job;
 
-        public float Range => _range;
+        float Range => _range;
 
-        public uint Dmg => _dmg;
+        internal uint Dmg => _dmg;
 
-        public uint Armor => _armor;
+        uint Armor => _armor;
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
