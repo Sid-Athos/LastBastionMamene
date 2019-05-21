@@ -9,8 +9,11 @@ namespace LastBastion
     {
         static void Main(string[] args)
         {
+            /*
             Game _game = new Game();
             _game.Run();
+            */
+            Launcher launcher = new Launcher();
         }
     }
 }
