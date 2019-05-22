@@ -1,27 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LastBastion
+﻿namespace LastBastion
 {
     internal class Projectiles
     {
         Vectors _position;
-        Unit _context;
+        Archer _context;
         Unit _target;
         readonly float _speed = 0.001f;
 
-        internal Projectiles(Vectors o,Unit d,Unit context)
+        internal Projectiles(Vectors o,Unit d,Archer context)
         {
             _position = o;
             _target = d;
             _context = context;
-            context.Context.AddProjectile(this);
+            Context.Context.AddProjectile(this);
         }
-        
+
+        internal Projectiles(Vectors o, Unit d)
+        {
+            _position = o;
+            _target = d;
+            Context.Context.AddProjectile(this);
+        }
+
         internal Unit Context => _context;
         internal Unit Target => _target;
-        internal Vectors Position => _position;
+
+        internal Vectors Position
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
+
         Vectors Destination => Target.Position;
         internal float Speed => _speed;
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Interface;
 using LastBastion;
 
 namespace Tests.Tests
@@ -34,7 +33,8 @@ namespace Tests.Tests
                 Console.WriteLine(list[i].Life);
 
             }
-            Console.WriteLine("Compteur " + list.Count);
+                var l = list[0].GetType().ToString();
+            Console.WriteLine("Type " + l);
 
             Predicate<Barbar> dead = Preds.IsDead;
             list.RemoveAll(dead);

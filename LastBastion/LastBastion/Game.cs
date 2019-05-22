@@ -37,7 +37,6 @@ namespace LastBastion
         public void Run()
         {
             _input = new Input(this);
-
             _sprites = new SpritesManager();
             _sprites.Initialized();
 
@@ -63,6 +62,7 @@ namespace LastBastion
 
             Gameloop();
         }
+
         public void Gameloop()
         {
             while (_window.Render.IsOpen)

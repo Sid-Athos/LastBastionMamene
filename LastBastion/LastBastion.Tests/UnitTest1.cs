@@ -7,13 +7,14 @@ namespace Tests
     public class Tests
     {
         [Test]
-        public void T1_Game_and_Map_Are_created_and_not_null()
+        public void T1_Game_Map_And_Castle_Are_created_and_not_null()
         {
             Game sid = new Game();
             sid.Run();
             Assert.That(sid, Is.Not.Null);
-            Map var = new Map(sid);
+            Map var = sid.Map;
             Assert.That(var, Is.Not.Null);
+            Assert.That(var.GetCastle, Is.Not.Null);
         }
 
         [Test]
@@ -134,13 +135,12 @@ namespace Tests
             Barbar v1 = new Barbar(0.9f, 5.2f, 0.2f, job1, 150, 10, 3, false, 2, 0.2f, var);
             Tower v3 = new Tower(13.7f, 24.8f, 150, 150, 10, 3, 2, 0, var);
 
-            while(!v1.Position.IsInRange(v1.Position,v3.Position,2.0f))
-            {
-                    v1.Position = v1.Position.Movement(v1.Position, v3.Position, 0, 1.0f, 2.0f);
-                    bool check = v1.Position.IsInRange(v1.Position, v3.Position, 1.5f);
-            }
+            Assert.That(!v1.Position.IsInRange(v1.Position, v3.Position, v1.Range));
 
-            Assert.That(v1.Position.IsInRange(v1.Position, v3.Position, v1.Range));
+            Tower v2 = new Tower(0.87f, 5.6f, 150, 150, 10, 3, 2, 0, var);
+
+            Assert.That(v2.Position.IsInRange(v2.Position, v1.Position, v2.Range));
+            Assert.That(var.BuildCount,Is.EqualTo(2));
         }
 
         [Test]
@@ -153,21 +153,22 @@ namespace Tests
 
             Assert.That(v1, Is.Not.Null);
             Assert.That(sido, Is.Not.Null);
-
             Assert.Throws<InvalidOperationException>(() => sido.AcquireTarget());
             
             var job2 = Guid.NewGuid().ToString();
 
             for (float i = 0.2f; i < 1.5f; i += 0.1f)
             {
-                Barbar v2 = new Barbar((0.7f + i), (0.7f + i), 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
+                Barbar v2 = new Barbar((2.7f + i), (2.7f + i), 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             }
 
             sido.AcquireTarget();
 
             Assert.That(sido.Target, Is.Null);
+
             Barbar v3 = new Barbar(0.7f, (0.7f), 0.1f, job2, 150, 10, 3, false, 2, 1.5f, var);
             sido.AcquireTarget();
+
             Assert.That(sido.Target, Is.EqualTo(v3));
         }
     }

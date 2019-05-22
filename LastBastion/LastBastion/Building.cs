@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LastBastion
 {
@@ -34,7 +32,6 @@ namespace LastBastion
             _foodCost = foodCost;
             _villagerCost = villagerCost;
             _context = context;
-            _context.AddBuilding(this);
             _count++;
         }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LastBastion
+﻿namespace LastBastion
 {
     public class Barrack : Building
     {
@@ -45,10 +41,5 @@ namespace LastBastion
                 IncreaseArmor();
             }
         }
-
-        public void UpgradeUnit()
-        {
-        }
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LastBastion
 {
@@ -11,8 +10,9 @@ namespace LastBastion
         uint _rank = 1;
         uint _dmg;
         uint _aaCooldown;
-        float _range = 0.3f;
+        float _range = 2.0f;
         Unit _target;
+        List<Projectiles> _proj;
 
         public Tower(float posX,
         float posY,
@@ -81,7 +81,11 @@ namespace LastBastion
             }
         }
 
-        public Unit Target => _target;
+        public Unit Target
+        {
+            get { return _target; }
+            set { _target = value; }
+        }
 
         public float Range => _range;
 
@@ -89,21 +93,44 @@ namespace LastBastion
 
         public Archer[] Slots => _slots;
 
+        internal List<Projectiles> ProList => _proj;
 
         public uint Dmg => _dmg;
 
+        internal void AddProjectile(Projectiles p)
+        {
+            _proj.Add(p);
+        }
+
         public void Attack(Unit unit)
         {
-            if (_dmg > unit.Life)
+            for(int i = 0; i < _slots.Length;i++)
             {
-                unit.Attacked(0);
-                unit.Die();
-                _target = null;
-                AcquireTarget();
-                SetAllTowerUnitsTarget();
-                return;
+                _slots[i].Attack();
             }
-            unit.Attacked(Math.Max(unit.Life - (_dmg - unit.Armor), 0));
+
+            Projectiles p = new Projectiles(Position, unit);
+
+            foreach(var n in ProList)
+            {
+                if(p.Position.IsInRange(p.Position,p.Target.Position,0.3f))
+                {
+                    p.Target.Attacked(0);
+                    if (_dmg > unit.Life)
+                    {
+                        p.Target.Attacked(0);
+                        p.Target.Die();
+                        AcquireTarget();
+                        SetAllTowerUnitsTarget();
+                        return;
+                    }
+                    p.Target.Attacked(Math.Max(p.Target.Life- (_dmg - p.Target.Armor), 0));
+                }
+                else
+                {
+                    p.Position = p.Position.Movement(p.Position, p.Target.Position, 1, 0.002f, 0.5f);
+                }
+            }
         }
 
         public void IncDamage()
@@ -226,7 +253,17 @@ namespace LastBastion
 
         internal void Update()
         {
+            Target = (Target.Life == 0) ? null : Target;
 
+            if(Target == null)
+            {
+                AcquireTarget();
+            }
+
+            if(Target.Position.IsInRange(Target.Position,Position,Range))
+            {
+                Attack(Target);
+            }
         }
     }
 }

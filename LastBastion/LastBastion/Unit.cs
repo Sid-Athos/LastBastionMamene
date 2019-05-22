@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using SFML.System;
 
 namespace LastBastion
 {
@@ -121,7 +119,7 @@ namespace LastBastion
 
          internal void Die()
         {
-
+           
         }
 
         internal void JoinTower()
