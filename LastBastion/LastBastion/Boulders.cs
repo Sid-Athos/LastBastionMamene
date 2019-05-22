@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LastBastion
+﻿namespace LastBastion
 {
     internal class Boulders : Projectiles
     {
@@ -10,7 +6,7 @@ namespace LastBastion
         Unit _focus;
         float _distance;
 
-        internal Boulders(Vectors o, Unit d, Unit context, Vectors destination,float distance)
+        internal Boulders(Vectors o, Unit d, Archer context, Vectors destination,float distance)
             :base(o, d, context)
         {
             _distance = distance;

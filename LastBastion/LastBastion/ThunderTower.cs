@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LastBastion
 {
@@ -8,7 +7,8 @@ namespace LastBastion
     {
         List<Unit> _paralysedList;
 
-        public Thunder(float posX,
+        public Thunder(
+        float posX,
         float posY,
         uint lifePoints,
         uint maxLifePoints,
@@ -17,7 +17,8 @@ namespace LastBastion
         uint aaCooldown,
         uint rank,
         Map context)
-            : base(posX,
+            : base(
+         posX,
          posY,
          lifePoints,
          maxLifePoints,
@@ -32,6 +33,8 @@ namespace LastBastion
 
         List<Unit> ParList => _paralysedList;
 
+        uint ParCount => (uint)_paralysedList.Count;
+        
         internal void Paralyze()
         {
             if (!Target.IsParalysed)
@@ -48,7 +51,11 @@ namespace LastBastion
 
         internal new void  Update()
         {
-
+            if(ParCount > 0)
+            {
+                Predicate<Unit> deads = Preds.IsDead;
+                ParList.RemoveAll(deads);
+            }
         }
     }
 }

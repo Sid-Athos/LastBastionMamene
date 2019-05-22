@@ -8,6 +8,7 @@ namespace LastBastion
     public class Village
     {
         Map _map;
+        Building _castle;
         List<Hut> _nearby;
         string _buildingName;
         int _area;
@@ -138,6 +139,7 @@ namespace LastBastion
             _map.GetGame.GetGrid[new Vector2i(1, 1)].IsReveal = true;
             _map.GetGame.GetGrid[new Vector2i(1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, -1)].IsReveal = true;
+            GetMap.Castle(new Castle(0f, 0f, 750, 750, 3, 1, GetMap)) ;
         }
 
         public void SetNearby()
@@ -156,7 +158,7 @@ namespace LastBastion
 
         public void CreateBuilding(string name)
         {
-            if (_map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost <= _woodStock &&
+          /**  if (_map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost <= _woodStock &&
                 _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost <= _stoneStock &&
                 _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost <= _foodStock &&
                 _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost <= _villagerStock)
@@ -193,8 +195,8 @@ namespace LastBastion
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Wall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
                     break;
                 }
-            }
-            /*if (_nearby.Count > 0)
+            }*/
+            if (_nearby.Count > 0)
             {
                 int _random = _map.GetGame.RandomNumber(0, _nearby.Count - 1);
                 foreach (var item in _map.GetGame.GetGrid)
@@ -212,7 +214,7 @@ namespace LastBastion
                 _area++;
                 SetNearby();
             }
-            Console.WriteLine(_nearby.Count);*/
+            Console.WriteLine(_nearby.Count);
         }
 
         public List<Hut> RebuildeMegaGreatConstructor()

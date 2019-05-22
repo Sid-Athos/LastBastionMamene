@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using SFML.System;
 
 namespace LastBastion
@@ -31,11 +30,23 @@ namespace LastBastion
             _count++;
         }
 
-        public void Update()
+        public Barbar(uint life)
+            : base(life)
+        {
+            _count++;
+        }
+
+        internal new void Die()
+        {
+            Context.RemoveBarbar(this);
+        }
+
+        internal void Update()
         {
             if (Life == 0)
             {
                 Die();
+                return;
             }
 
             if (BarbTarget != null && Position.IsInRange(Position, BarbTarget.Position, Range))
@@ -53,9 +64,9 @@ namespace LastBastion
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
         }
 
-        public Building BarbTarget => _target;
+        internal Building BarbTarget => _target;
 
-        public void AcquireTarget()
+        void AcquireTarget()
         {
             Map context = Context;
             List<Building> buildList = context.BuildList;

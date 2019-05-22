@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using SFML.System;
 using Interface;
 
@@ -10,12 +8,14 @@ namespace LastBastion
     {
         Game _game;
         MapUI _UI;
+        Castle _castle;
         Village _village;
         List<Villager> _villagePeople;
         List<Barbar> _barbarians;
         List<Building> _buildings;
         List<Archer> _archers;
         List<Projectiles> _projectiles;
+        Dictionary<Building, Unit> _buildingHasTarget;
 
         public Map(Game game)
         {
@@ -26,8 +26,8 @@ namespace LastBastion
             _villagePeople = new List<Villager>();
             _barbarians = new List<Barbar>();
             _buildings = new List<Building>();
-            _buildings = new List<Building>();
             _archers = new List<Archer>();
+            _projectiles = new List<Projectiles>();
             _projectiles = new List<Projectiles>();
         }
 
@@ -36,7 +36,6 @@ namespace LastBastion
             //_village = new Village(this);
             _villagePeople = new List<Villager>();
             _barbarians = new List<Barbar>();
-            _buildings = new List<Building>();
             _buildings = new List<Building>();
             _archers = new List<Archer>();
             _projectiles = new List<Projectiles>();
@@ -47,18 +46,16 @@ namespace LastBastion
         public List<Barbar> BarList => _barbarians;
 
         public List<Building> BuildList => _buildings;
-
-
+        
         public int VillCount => _villagePeople.Count;
 
         public int BarbCount => _barbarians.Count;
 
         public int BuildCount => _buildings.Count;
 
-
         public void AddVillager(Villager v)
         {
-            _villagePeople.Add(v);
+            VillList.Add(v);
         }
         public void RemoveVillager(Villager n)
         {
@@ -77,7 +74,12 @@ namespace LastBastion
 
         public void AddBuilding(Building T)
         {
-            _buildings.Add(T);
+            BuildList.Add(T);
+        }
+
+        public void Castle(Castle c)
+        {
+            _castle = c;
         }
 
         public void RemoveBuilding(Building T)
@@ -110,6 +112,9 @@ namespace LastBastion
         public Village GetVillage => _village;
 
         public Game GetGame => _game;
+
+        public Castle GetCastle => _castle;
+
 
         public MapUI GetMapUI => _UI;
 

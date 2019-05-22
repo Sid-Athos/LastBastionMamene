@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using SFML.System;
 
 namespace LastBastion
 {
@@ -74,6 +72,11 @@ namespace LastBastion
             _position = new Vectors(posX, posY);
         }
 
+        public Unit(uint life)
+        {
+            _lifePoints = life;
+        }
+
         public Vectors Position
         {
             get { return _position; }
@@ -116,7 +119,7 @@ namespace LastBastion
 
          internal void Die()
         {
-
+           
         }
 
         internal void JoinTower()
