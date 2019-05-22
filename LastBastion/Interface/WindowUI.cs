@@ -17,7 +17,7 @@ namespace Interface
         public WindowUI(SpritesManager sprites,Vector2f initPos)
         {
             _sprites = sprites;
-            _window = new RenderWindow(new VideoMode(1500, 1500), "Last Bastion", Styles.Default);
+            _window = new RenderWindow(new VideoMode(1600, 900), "Last Bastion", Styles.Default);
             _window.SetFramerateLimit(200);
             _view = new ViewUI(this,initPos);
         }

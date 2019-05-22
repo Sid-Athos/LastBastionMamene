@@ -203,7 +203,13 @@ namespace LastBastion
                 {
                     if (item.Value == _nearby[_random])
                     {
+
                         //item.Value.SetBuilding(name);
+
+                        /*
+                        item.Value.SetBuilding(name);
+                        */
+
                     }
                 }
                 _nearby.Remove(_nearby[_random]);

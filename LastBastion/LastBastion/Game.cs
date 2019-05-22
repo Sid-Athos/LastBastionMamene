@@ -140,6 +140,10 @@ namespace LastBastion
                 _menu.UpdateList();
                 _menu.DrawMenu();
             }
+            else
+            {
+                _menu.MenuDesc();
+            }
             _menu.UpdateTopBar();
         }
 
