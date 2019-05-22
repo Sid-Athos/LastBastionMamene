@@ -563,19 +563,218 @@ namespace LastBastion
             }
             if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Farm")
             {
+                //Icon Building
+                _game.Sprites.GetSprite("Farm").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Scale = new Vector2f(4f, 4f);
+                _game.Sprites.GetSprite("Farm").Scale = new Vector2f(4f, 4f);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Farm"));
+                _game.GetWindow.Render.Draw(_sprites.GetSprite("IconBoard"));
+                //Description
+                _game.Sprites.Text.DisplayedString = "Increase maximum kingdom";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = " production of food ";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 175);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "by 5 points rank.";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 185);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                //Icon
+                _game.Sprites.GetSprite("HealthIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("HealthIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 158);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("HealthIcon"));
+                _game.Sprites.GetSprite("ArmorIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("ArmorIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 176);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("ArmorIcon"));
+                _game.Sprites.GetSprite("Bush").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("Bush").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 194);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Bush"));
+                //Stats Text
+                _game.Sprites.Text.DisplayedString = "100";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 151);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "10";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 169);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "+5";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 187);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
             }
             if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Mine")
             {
-                //Here
-            }
-            if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Tower")
-            {
+                //Icon Building
+                _game.Sprites.GetSprite("Mine").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Scale = new Vector2f(4f, 4f);
+                _game.Sprites.GetSprite("Mine").Scale = new Vector2f(4f, 4f);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Mine"));
+                _game.GetWindow.Render.Draw(_sprites.GetSprite("IconBoard"));
+                //Description
+                _game.Sprites.Text.DisplayedString = "Increase maximum kingdom";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = " production of stone ";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 175);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "by 5 points rank.";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 185);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                //Icon
+                _game.Sprites.GetSprite("HealthIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("HealthIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 158);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("HealthIcon"));
+                _game.Sprites.GetSprite("ArmorIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("ArmorIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 176);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("ArmorIcon"));
+                _game.Sprites.GetSprite("Stone").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("Stone").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 194);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Stone"));
+                //Stats Text
+                _game.Sprites.Text.DisplayedString = "100";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 151);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "10";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 169);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "+5";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 187);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
             }
             if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Sawmill")
             {
+                //Icon Building
+                _game.Sprites.GetSprite("Sawmill").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Scale = new Vector2f(4f, 4f);
+                _game.Sprites.GetSprite("Sawmill").Scale = new Vector2f(4f, 4f);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Sawmill"));
+                _game.GetWindow.Render.Draw(_sprites.GetSprite("IconBoard"));
+                //Description
+                _game.Sprites.Text.DisplayedString = "Increase maximum kingdom";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = " production of wood ";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 175);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "by 5 points rank.";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 185);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                //Icon
+                _game.Sprites.GetSprite("HealthIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("HealthIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 158);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("HealthIcon"));
+                _game.Sprites.GetSprite("ArmorIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("ArmorIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 176);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("ArmorIcon"));
+                _game.Sprites.GetSprite("Wood").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("Wood").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 194);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Wood"));
+                //Stats Text
+                _game.Sprites.Text.DisplayedString = "100";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 151);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "10";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 169);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "+5";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 187);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+            }
+            if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Tower")
+            {
+                //Icon Building
+                _game.Sprites.GetSprite("Tower").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Scale = new Vector2f(4f, 4f);
+                _game.Sprites.GetSprite("Tower").Scale = new Vector2f(4f, 4f);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Tower"));
+                _game.GetWindow.Render.Draw(_sprites.GetSprite("IconBoard"));
+                //Description
+                _game.Sprites.Text.DisplayedString = "Main defence to protect";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = " the kingdom from Dracula. ";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 175);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                //Icon
+                _game.Sprites.GetSprite("HealthIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("HealthIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 158);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("HealthIcon"));
+                _game.Sprites.GetSprite("ArmorIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("ArmorIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 176);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("ArmorIcon"));
+                _game.Sprites.GetSprite("AttackIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("AttackIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 194);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("AttackIcon"));
+                //Stats Text
+                _game.Sprites.Text.DisplayedString = "200";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 151);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "20";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 169);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "10";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 187);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
             }
             if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Wall")
             {
+                //Icon Building
+                _game.Sprites.GetSprite("Wall").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 105, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _sprites.GetSprite("IconBoard").Scale = new Vector2f(4f, 4f);
+                _game.Sprites.GetSprite("Wall").Scale = new Vector2f(4f, 4f);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("Wall"));
+                _game.GetWindow.Render.Draw(_sprites.GetSprite("IconBoard"));
+                //Description
+                _game.Sprites.Text.DisplayedString = "Protect the kingdom from";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 165);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = " darkness invaders. ";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 24, _game.GetWindow.GetView.Render.Center.Y + 175);
+                _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                //Icon
+                _game.Sprites.GetSprite("HealthIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("HealthIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 158);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("HealthIcon"));
+                _game.Sprites.GetSprite("ArmorIcon").Scale = new Vector2f(1.4f, 1.4f);
+                _game.Sprites.GetSprite("ArmorIcon").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 190, _game.GetWindow.GetView.Render.Center.Y + 176);
+                _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("ArmorIcon"));
+                //Stats Text
+                _game.Sprites.Text.DisplayedString = "300";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 151);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
+                _game.Sprites.Text.DisplayedString = "30";
+                _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 214, _game.GetWindow.GetView.Render.Center.Y + 169);
+                _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
+                _game.GetWindow.Render.Draw(_game.Sprites.Text);
             }
         }
         public void UWantToMoveToTheRightInTheMenu()
