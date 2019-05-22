@@ -13,6 +13,7 @@ namespace LastBastion
         //Attribut
         WindowUI _window;
         Dictionary<Vector2i, Hut> _grid;
+        Dictionary<string, Building> _sampleBuilding;
         SpritesManager _sprites;
         Input _input;
         Map _map;
@@ -52,6 +53,7 @@ namespace LastBastion
             
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
+            _sampleBuilding = InitializeBuildingSample();
 
             _sprites.musicStart();
             _sprites.musicPlay("Zebby");
@@ -227,6 +229,27 @@ namespace LastBastion
                 returnList.Add(list[rdm]);
             }
             return returnList;
+        }
+        public Dictionary<string, Building> InitializeBuildingSample()
+        {
+            Dictionary<string, Building> returnValue = new Dictionary<string, Building>();
+            //House Lv1
+            House house = new House(0f, 0f, 5, 1, _map);
+            returnValue.Add("House", house);
+            //House Lv2
+            House house1 = new House(0f, 0f, 5, 1, _map);
+            house1.Upgrade();
+            returnValue.Add("House2", house1);
+            //House Lv3
+            House house2 = new House(0f, 0f, 5, 1, _map);
+            house2.Upgrade();
+            house2.Upgrade();
+            returnValue.Add("House3", house2);
+            foreach (var item in returnValue)
+            {
+                Console.WriteLine(item.Value.Rank);
+            }
+            return returnValue;
         }
     }
 }

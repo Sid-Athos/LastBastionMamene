@@ -9,7 +9,7 @@ namespace LastBastion
         uint _lifePoints;
         uint _maxLifePoints;
         uint _armor;
-        uint _rank = 1;
+        uint _rank;
         uint _count;
         uint _woodCost;
         uint _stoneCost;
@@ -108,7 +108,7 @@ namespace LastBastion
 
         public void Upgrade()
         {
-            Console.WriteLine("test");
+            Console.WriteLine("tefzfzefzfst");
         }
 
         public uint Rank
