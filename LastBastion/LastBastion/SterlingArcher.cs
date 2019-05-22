@@ -10,7 +10,7 @@ namespace LastBastion
         Tower _context;
         bool _inTower;
 
-        public Archer(float posX, float posY, float range,
+        internal Archer(float posX, float posY, float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed, Map context)
             : base(posX, posY, range,
