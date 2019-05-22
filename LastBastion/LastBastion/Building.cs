@@ -58,11 +58,7 @@ namespace LastBastion
             _maxLifePoints  *= 2;
             _lifePoints *= 2;
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> f74832f9d16f4d3691ce22e5a5f010ffe7cd6ecb
         public void Die()
         {
             return;

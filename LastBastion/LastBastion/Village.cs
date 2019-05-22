@@ -77,7 +77,7 @@ namespace LastBastion
             }
         }
 
-        public bool IsEnoughRessource(string building)
+        /*public bool IsEnoughRessource(string building)
         {
             if (building == "Wall" && _woodStock >= 10 && _stoneStock >= 20)
             {
@@ -116,27 +116,27 @@ namespace LastBastion
                 return true;
             }
             return false;
-        }
+        }*/
 
         public void SetCastle()
         {
-            _map.GetGame.GetGrid[new Vector2i(-1, 0)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(-1, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(-1, 1)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(-1, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, 1)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(-1, -1)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(-1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, -1)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(0, 0)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(0, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, 0)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(0, 1)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(0, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, 1)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(0, -1)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(0, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, -1)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(1, 0)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(1, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, 0)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(1, 1)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(1, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, 1)].IsReveal = true;
-            _map.GetGame.GetGrid[new Vector2i(1, -1)].SetBuilding("Castle");
+            _map.GetGame.GetGrid[new Vector2i(1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, -1)].IsReveal = true;
         }
 
@@ -183,7 +183,7 @@ namespace LastBastion
                     case "Farm":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Farm(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
-                    break;
+                    break; 
                     case "Tower":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y,300,300,0,30,0,1, _map);

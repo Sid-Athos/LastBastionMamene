@@ -258,32 +258,32 @@ namespace LastBastion
             {
                 if (line.Contains("Mine"))
                 {
-                    _game.GetGrid[new Vector2i(X, Y)].SetBuilding("Mine");
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Mine";
                     //_game.GetGrid[new Vector2i(X, Y)].Building = new Mine(X, Y, Life, MaxLife, Armor, Rank);
                 }
                 if (line.Contains("Farm"))
                 {
-                    _game.GetGrid[new Vector2i(X, Y)].SetBuilding("Farm");
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Farm";
                     //_game.GetGrid[new Vector2i(X, Y)].Building = new Farm(X, Y, Life, MaxLife, Armor, Rank);
                 }
                 if (line.Contains("Sawmill"))
                 {
-                    _game.GetGrid[new Vector2i(X, Y)].SetBuilding("Sawmill");
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Sawmill";
                     //_game.GetGrid[new Vector2i(X, Y)].Building = new Sawmill(X, Y, Life, MaxLife, Armor, Rank);
                 }
                 if (line.Contains("House"))
                 {
-                    _game.GetGrid[new Vector2i(X, Y)].SetBuilding("House");
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "House";
                     //_game.GetGrid[new Vector2i(X, Y)].Building = new House(X, Y, Life, MaxLife, Armor, Rank, 5);
                 }
                 if (line.Contains("Tower"))
                 {
-                    _game.GetGrid[new Vector2i(X, Y)].SetBuilding("Tower");
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Tower";
                     //_game.GetGrid[new Vector2i(X, Y)].Building = new Tower(X,Y,Life,MaxLife,10,Armor,1,Rank);
                 }
                 if (line.Contains("Wall"))
                 {
-                    _game.GetGrid[new Vector2i(X, Y)].SetBuilding("Wall");
+                    _game.GetGrid[new Vector2i(X, Y)].SetName = "Wall";
                     //_game.GetGrid[new Vector2i(X, Y)].Building = new Wall(X, Y, Life, MaxLife, Armor, Rank);
                 }
             }

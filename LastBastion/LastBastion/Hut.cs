@@ -51,7 +51,7 @@ namespace LastBastion
             set { building = value; }
         }
         
-        public void SetBuilding(string a)
+        /*public void SetBuilding(string a)
         {
             _buildingName = a;
             switch (_buildingName)
@@ -78,6 +78,6 @@ namespace LastBastion
                     //Console.WriteLine("Default case");
                     break;
             }
-        }
+        }*/
     }
 }
