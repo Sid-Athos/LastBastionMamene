@@ -31,6 +31,16 @@ namespace LastBastion
             SetNearby();
         }
 
+
+        // For development purpose only
+        public void IncreaseRessources()
+        {
+            _woodStock += 5000;
+            _foodStock += 5000;
+            _stoneStock += 5000;
+            _villagerStock += 5000;
+        }
+
         public void RessourceProd()
         {
             foreach(var item in _map.GetGame.GetGrid )
@@ -78,46 +88,77 @@ namespace LastBastion
             }
         }
 
-        /*public bool IsEnoughRessource(string building)
+        bool IsTowerBuyable => Wood >= 10 && Stones >= 60;
+      
+
+        bool IsWallBuyable => Wood >= 10 && Stones >= 20;
+        
+
+        void BuyWall()
         {
-            if (building == "Wall" && _woodStock >= 10 && _stoneStock >= 20)
-            {
-                _woodStock -= 10;
-                _stoneStock -= 20;
-                return true;
-            }
-            if (building == "House" && _woodStock >= 30 && _stoneStock >= 10)
-            {
-                _woodStock -= 30;
-                _stoneStock -= 10;
-                return true;
-            }
-            if (building == "Mine" && _woodStock >= 40 && _stoneStock >= 20)
-            {
-                _woodStock -= 40;
-                _stoneStock -= 20;
-                return true;
-            }
-            if (building == "Farm" && _woodStock >= 40 && _stoneStock >= 10)
-            {
-                _woodStock -= 40;
-                _stoneStock -= 10;
-                return true;
-            }
-            if (building == "Sawmill" && _woodStock >= 50 && _stoneStock >= 10)
-            {
-                _woodStock -= 50;
-                _stoneStock -= 10;
-                return true;
-            }
-            if (building == "Tower" && _woodStock >= 10 && _stoneStock >= 60)
-            {
-                _woodStock -= 10;
-                _stoneStock -= 60;
-                return true;
-            }
-            return false;
-        }*/
+            Wood -= 10;
+            Stones -= 20;
+        }
+
+
+        bool IsHouseBuyable => Wood >= 30 && Stones >= 10;
+
+        void BuyHouse()
+        {
+            Wood -= 30;
+            Stones -= 10;
+        }
+
+        bool IsMineBuyable => Wood >= 40 && Stones >= 20;
+        
+
+        void BuyMine()
+        {
+            Wood -= 40;
+            Stones -= 20;
+        }
+        
+        bool IsFarmBuyable =>Wood >= 40 && Stones >= 10;
+        
+
+       void BuyFarm()
+        {
+            Wood -= 40;
+            Stones -= 10;
+        }
+
+        bool IsSawMillBuyable => Wood >= 50 && Stones >= 10;
+        
+
+        void BuySawMill()
+        {
+            Wood -= 50;
+            Stones -= 10;
+        }
+
+        uint Wood
+        {
+            get { return _woodStock; }
+            set { _woodStock = value; }
+        }
+
+        uint Stones
+        {
+            get { return _stoneStock; }
+            set { _stoneStock = value; }
+        }
+
+        uint Food
+        {
+            get { return _foodStock; }
+            set { _foodStock = value; }
+        }
+
+        void BuyTower()
+        {
+            Wood -= 10;
+            Stones -= 60;
+        }
 
         public void SetCastle()
         {
@@ -158,44 +199,59 @@ namespace LastBastion
 
         public void CreateBuilding(string name)
         {
-          /**  if (_map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost <= _woodStock &&
-                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost <= _stoneStock &&
-                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost <= _foodStock &&
-                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost <= _villagerStock)
-            {
-                _woodStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost;
-                _stoneStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost;
-                _foodStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost;
-                _villagerStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost;
                 _buildingName = name;
                 switch (_buildingName)
                 {
                     case "House":
-                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
-                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
+                        if(IsHouseBuyable)
+                        {
+                            BuyHouse();
+                            _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                            _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
+                        }
                     break;
                     case "Sawmill":
+                    if(IsSawMillBuyable)
+                    {
+                        BuySawMill();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Sawmill(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    }
                     break;
                     case "Mine":
+                    if(IsMineBuyable)
+                    {
+                        BuyMine();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Mine(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    }
                     break;
                     case "Farm":
+                    if(IsFarmBuyable)
+                    {
+                        BuyFarm();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Farm(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    }
                     break; 
                     case "Tower":
+                    if(IsTowerBuyable)
+                    {
+                        BuyTower();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y,300,300,0,30,0,1, _map);
+                    }
                     break;
                     case "Wall":
+                    if(IsWallBuyable)
+                    {
+                        BuyWall();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Wall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    }
                     break;
-                }
-            }*/
+                
+            }
             if (_nearby.Count > 0)
             {
                 int _random = _map.GetGame.RandomNumber(0, _nearby.Count - 1);

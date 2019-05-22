@@ -31,6 +31,8 @@ namespace LastBastion
             _projectiles = new List<Projectiles>();
         }
 
+        public Village Vill => _village;
+
         public Map()
         {
             //_village = new Village(this);

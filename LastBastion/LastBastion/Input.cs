@@ -121,6 +121,7 @@ namespace LastBastion
                         Console.WriteLine(_game.GetWindow.GetView.Render.Size.Y);
                         break;
                     case Keyboard.Key.I:
+                        _game.Map.Vill.IncreaseRessources();
                         break;
                     case Keyboard.Key.J:
                         break;

@@ -32,7 +32,7 @@
 
         }
 
-        public void Upgrade()
+        public new void Upgrade()
         {
             if(_rank < 3)
             {
