@@ -10,10 +10,8 @@ namespace LastBastion
         MapUI _UI;
         Castle _castle;
         Village _village;
-        List<Villager> _villagePeople;
         List<Unit> _barbarians;
         List<Building> _buildings;
-        List<Archer> _archers;
         List<Projectiles> _projectiles;
         Dictionary<Building, Unit> _buildingHasTarget;
         Waves _waves;
@@ -41,7 +39,6 @@ namespace LastBastion
         public Map()
         {
             //_village = new Village(this);
-            _villagePeople = new List<Villager>();
             _barbarians = new List<Unit>();
             _buildings = new List<Building>();
             _archers = new List<Archer>();
@@ -49,28 +46,15 @@ namespace LastBastion
             _waves = new Waves(this);
 
         }
-
-        public List<Villager> VillList => _villagePeople;
+        
 
         public List<Unit> BarList => _barbarians;
 
         public List<Building> BuildList => _buildings;
-        
-        public int VillCount => _villagePeople.Count;
 
         public int BarbCount => _barbarians.Count;
 
         public int BuildCount => _buildings.Count;
-
-        public void AddVillager(Villager v)
-        {
-            VillList.Add(v);
-        }
-        public void RemoveVillager(Villager n)
-        {
-            _villagePeople.Remove(n);
-
-        }
 
         internal void AddProjectile(Projectiles v)
         {

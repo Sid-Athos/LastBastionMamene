@@ -17,7 +17,7 @@ namespace LastBastion
             _round = 1;
         }
 
-        public Map WavesContext => _context;
+        internal Map WavesContext => _context;
 
         public uint Round
         {
@@ -25,13 +25,13 @@ namespace LastBastion
             set { _round = value; }
         }
 
-        public uint TimeStamp
+        internal uint TimeStamp
         {
             get { return _timeStamp; }
             set { _timeStamp = value; }
         }
 
-        public uint GobAmount
+        internal uint GobAmount
         {
             get { return _gobAmount; }
             set { _gobAmount = value; }
@@ -82,8 +82,7 @@ namespace LastBastion
 
                 Round++;
         }
-
-
+        
         public void Update()
         {
                 SpawnWave();

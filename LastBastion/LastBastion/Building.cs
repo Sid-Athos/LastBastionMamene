@@ -15,6 +15,7 @@ namespace LastBastion
         uint _stoneCost;
         uint _foodCost;
         uint _villagerCost;
+        bool _burned;
 
         public Building(float posX, float posY, 
             uint lifePoints, uint maxLifePoints, 
@@ -33,6 +34,7 @@ namespace LastBastion
             _villagerCost = villagerCost;
             _context = context;
             _count++;
+            IsBurned = false;
         }
 
         public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
@@ -43,6 +45,17 @@ namespace LastBastion
             _armor = armor;
             _rank = rank;
             _count++;
+        }
+
+        public bool IsBurned
+        {
+            get { return _burned; }
+            set { _burned = value; }
+        }
+
+        public void Burn()
+        {
+            IsBurned = !IsBurned; ;
         }
 
         public void IncreaseArmor()
