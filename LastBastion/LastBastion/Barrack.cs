@@ -27,7 +27,7 @@
                   foodCost,
                   stoneCost,
                   villagerCost, 
-                  context)
+                  context,"Barrack","test")
         {
 
         }

@@ -18,7 +18,7 @@ namespace LastBastion
             attackCooldown, speed, context)
         {
             _count++;
-            context.AddArcher(this);
+            //context.AddArcher(this);
             _inTower = true;
         }
 
@@ -30,7 +30,7 @@ namespace LastBastion
             attackCooldown, speed, context)
         {
             _count++;
-            context.AddArcher(this);
+            //context.AddArcher(this);
             _inTower = inTower;
         }
 

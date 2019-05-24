@@ -9,7 +9,7 @@ namespace LastBastion
         uint _rank = 1;
 
         public Farm(float posX, float posY, Map context)
-            : base(posX, posY, 100, 100, 5, 1, 40, 0, 20, 2, context)
+            : base(posX, posY, 100, 100, 5, 1, 40, 0, 20, 2, context,"Farm","test")
         {
         }
 

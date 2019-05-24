@@ -245,11 +245,50 @@ namespace LastBastion
             house2.Upgrade();
             house2.Upgrade();
             returnValue.Add("House3", house2);
-            foreach (var item in returnValue)
-            {
-                Console.WriteLine(item.Value.Rank);
-            }
+            //Sawmill Lv1
+            Sawmill sawmill = new Sawmill(0f,0f,_map);
+            returnValue.Add("Sawmill", sawmill);
+            //Sawmill Lv2
+            Sawmill sawmill1 = new Sawmill(0f, 0f, _map);
+            sawmill1.Upgrade();
+            returnValue.Add("Sawmill2", sawmill1);
+            //Sawmill Lv3
+            Sawmill sawmill2 = new Sawmill(0f, 0f, _map);
+            sawmill2.Upgrade();
+            sawmill2.Upgrade();
+            returnValue.Add("Sawmill3", sawmill2);
+            //Farm Lv1
+            Farm farm = new Farm(0f, 0f, _map);
+            returnValue.Add("Farm", farm);
+            //Farm Lv2
+            Farm farm1 = new Farm(0f, 0f, _map);
+            farm1.Upgrade();
+            returnValue.Add("Farm2", farm1);
+            //Farm Lv3
+            Farm farm2 = new Farm(0f, 0f, _map);
+            farm2.Upgrade();
+            farm2.Upgrade();
+            returnValue.Add("Farm3", farm2);
+            //Mine Lv1
+            Mine mine = new Mine(0f, 0f, _map);
+            returnValue.Add("Mine", mine);
+            //Mine Lv2
+            Mine mine1 = new Mine(0f, 0f, _map);
+            mine1.Upgrade();
+            returnValue.Add("Mine2", mine1);
+            //Mine Lv3
+            Mine mine2 = new Mine(0f, 0f, _map);
+            mine2.Upgrade();
+            mine2.Upgrade();
+            returnValue.Add("Mine3", mine2);
+            //Wall Lv1
+            Wall wall = new Wall(0f,0f,_map);
+            returnValue.Add("Wall",wall);
+            //Tower Lv1
+            Tower tower = new Tower(0f,0f,200,200,10,20,1,1,_map);
+            returnValue.Add("Tower",tower);
             return returnValue;
         }
+        public Dictionary<string, Building> SamplerBuilding => _sampleBuilding;
     }
 }
