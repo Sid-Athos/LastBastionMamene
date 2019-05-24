@@ -13,15 +13,5 @@ namespace LastBastion
         {
 
         }
-
-        public void Upgrade()
-        {
-            if(_rank < 3)
-            {
-                _rank++;
-                IncHealth();
-                IncreaseArmor();
-            }
-        }
     }
 }
