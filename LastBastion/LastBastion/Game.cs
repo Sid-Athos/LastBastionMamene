@@ -28,7 +28,6 @@ namespace LastBastion
         int _lastProd;
         //Random
         Random _random = new Random();
-        Waves _waves;
 
         public Game()
         {
