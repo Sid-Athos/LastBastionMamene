@@ -6,10 +6,9 @@
         Unit _focus;
         float _distance;
 
-        internal Boulders(Vectors o, Unit d, Archer context, Vectors destination,float distance)
-            :base(o, d, context)
+        internal Boulders(Vectors o, Unit d,Tower c)
+            :base(o, d,c)
         {
-            _distance = distance;
             _focus = d;
             _destination = new Vectors(d.Position.X,d.Position.Y);
         }

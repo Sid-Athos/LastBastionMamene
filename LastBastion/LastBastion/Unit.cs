@@ -102,7 +102,7 @@ namespace LastBastion
 
         internal void Attacked(uint newLife)
         {
-            _lifePoints = newLife;
+            Life = newLife;
         }
 
          internal void Die()

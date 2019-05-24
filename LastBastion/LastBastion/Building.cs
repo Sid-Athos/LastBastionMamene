@@ -86,13 +86,13 @@ namespace LastBastion
         public uint Life
         {
             get { return _lifePoints; }
-            set { _lifePoints = value;
-                Console.WriteLine("yes");
-            }
+            set { _lifePoints = value; }
         }
 
         public bool IsDestroy()
         {
+            // un uint en dessous de 0 c'est plusieurs milliards
+            // return Life == 0;
             if (_lifePoints <= 0)
             {
                 return true;
@@ -124,5 +124,11 @@ namespace LastBastion
         public uint Armor => _armor;
         
         public uint Count => _count;
+
+        internal virtual void Update()
+        {
+
+        }
+
     }
 }

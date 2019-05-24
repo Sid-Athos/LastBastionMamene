@@ -36,7 +36,8 @@ namespace LastBastion
 
         public bool IsInRange(Vectors origin, Vectors arrival, float range)
         {
-            float result = (float)(Math.Pow(arrival.X - origin.X, 2)+ Math.Pow(arrival.Y - origin.Y, 2));
+            float result = (float)Math.Sqrt(Math.Pow(arrival.X - origin.X, 2)+ Math.Pow(arrival.Y - origin.Y, 2));
+
             return result <= (float)Math.Pow(range,2);
         }
 

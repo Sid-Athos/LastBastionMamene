@@ -344,7 +344,7 @@ namespace LastBastion
                         BuyTower();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = name;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = 
-                            new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 350, 350, 5, 2, 0, 0f, 0, GetMap, name, "Une habitation");
+                            new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 350, 350, 5, 2, 0, 5.0f, 4, GetMap, name, "Une habitation");
                     }
                     break;
                     case "Wall":
@@ -397,11 +397,6 @@ namespace LastBastion
                     {
                         _map.GetGame.Sprites.GetSprite("Mine").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Mine"));
-                    }
-                    if (item.Value.GetName == "Tower")
-                    {
-                        _map.GetGame.Sprites.GetSprite("Tower").Position = item.Value.GetVec2F;
-                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Tower"));
                     }
                     if (item.Value.GetName == "House")
                     {

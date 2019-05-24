@@ -45,7 +45,7 @@ namespace LastBastion
             _inTower = inTower;
         }
 
-        public Tower TowCont => _context;
+        internal Tower TowCont => _context;
 
         internal void SetTower(Tower t)
         {
@@ -54,12 +54,17 @@ namespace LastBastion
 
         internal void Attack()
         {
-            Projectiles p = new Projectiles(Position, Target, this);
+            Projectiles p = new Projectiles(Position, Target,TowCont);
+            Console.WriteLine("Seterling"+ p);
             Context.AddProjectile(p);
         }
 
-        internal void Update()
+        internal override void Update()
         {
+            if(!_inTower)
+            {
+
+            }
         }
     }
 

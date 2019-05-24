@@ -63,39 +63,41 @@ namespace LastBastion
                 Die();
                 return;
             }
-
-            if (BarbTarget == null && Context.BuildCount >= 1)
-            {
-                AcquireTarget();
-            }
-
-            if (BarbTarget != null && Position.IsInRange(Position, BarbTarget.Position, Range))
-            {
-                if(_timeStamp == 0)
-                {
-                    Attack(BarbTarget);
-                    TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                    return;
-                }
-                uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-
-                if (newTs == _timeStamp + AaCd)
-                {
-                    Attack(BarbTarget);
-                    TimeSt = newTs;
-                }
-                return;
-            }
-
-
-           if (BarbTarget != null && !Position.IsInRange(Position,BarbTarget.Position,Range))
-            {
-                Position = Position.Movement(Position, BarbTarget.Position, 1, Speed, Range);
-                Console.WriteLine("life" + BarbTarget.Life);
-            }
-
             Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
+            if (!IsParalysed)
+            {
+                if (BarbTarget == null && Context.BuildCount >= 1)
+                {
+                    AcquireTarget();
+                    bool tr = base.Position.IsInRange(Position, BarbTarget.Position, Range);
+                }
+
+                if (BarbTarget != null && Position.IsInRange(Position, BarbTarget.Position, Range))
+                {
+                    if(_timeStamp == 0)
+                    {
+                        Attack(BarbTarget);
+                        TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                        return;
+                    }
+                    uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+                    if (newTs == _timeStamp + AaCd)
+                    {
+                        Attack(BarbTarget);
+                        TimeSt = newTs;
+                    }
+                    return;
+                }
+
+
+               if (BarbTarget != null && !Position.IsInRange(Position,BarbTarget.Position,Range))
+                {
+                    Position = Position.Movement(Position, BarbTarget.Position, 1, Speed, Range);
+                }
+            }
+            
         }
 
         internal Building BarbTarget => _target;

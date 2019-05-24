@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.System;
+using System;
 using System.Collections.Generic;
 
 namespace LastBastion
@@ -10,7 +11,7 @@ namespace LastBastion
         uint _rank;
         uint _dmg;
         uint _aaCooldown;
-        float _range = 2.0f;
+        float _range = 4.0f;
         Unit _target;
         List<Projectiles> _proj;
         uint _timeStamp;
@@ -44,10 +45,11 @@ namespace LastBastion
             context.AddBuilding(this);
             for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 2, 1, false, 2, 0.2f, context);
+                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 2, 1, false, 2, 2.3f, context);
                 _slots[i] = sut;
                 sut.SetTower(this);
             }
+            _proj = new List<Projectiles>();
         }
 
         public Tower(float posX,
@@ -69,9 +71,12 @@ namespace LastBastion
             _slots = new Archer[2];
             for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 80, 3, 1, false, 2, 0.002f, true);
+                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 80, Dmg, 1, false, 2, 0.002f, true);
+                _slots[i] = sut;
                 sut.SetTower(this);
             }
+            _proj = new List<Projectiles>();
+
         }
 
         internal uint AaCd => _aaCooldown;
@@ -87,13 +92,7 @@ namespace LastBastion
             }
         }
 
-        public void SetAllProjUnitsTarget()
-        {
-            for (int i = 0; i < _slots.Length; i++)
-            {
-                _proj[i].Target = Target;
-            }
-        }
+        internal List<Projectiles> ProjList => _proj;
 
         public Unit Target
         {
@@ -107,8 +106,6 @@ namespace LastBastion
 
         public Archer[] Slots => _slots;
 
-        internal List<Projectiles> ProList => _proj;
-
         public uint Dmg => _dmg;
 
         internal void AddProjectile(Projectiles p)
@@ -121,29 +118,24 @@ namespace LastBastion
             if(unit.Life == 0)
             {
                 SwitchTarget(base.Context.BarList);
-                return;
             }
             if(Target != null)
             {
                 uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                if (_timeStamp == 0)
+                if (_timeStamp == 0 && Attacked == false)
                 {
                     for (int i = 0; i < _slots.Length; i++)
                     {
                         _slots[i].Attack();
                     }
-                    Projectiles p = new Projectiles(Position, unit);
+                    Projectiles p = new Projectiles(Position, unit,this);
                     _proj.Add(p);
                     TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                    return;
+                    Attacked = true;
                 }
-                else if (newTs < _timeStamp + AaCd)
+                else if (newTs < (_timeStamp + AaCd) && newTs > _timeStamp)
                 {
-                    foreach (var n in ProList)
-                    {
-
-                        n.Update();
-                    }
+                    Attacked = false;
                 }
                 else if(newTs == _timeStamp + AaCd)
                 {
@@ -151,11 +143,41 @@ namespace LastBastion
                     {
                         _slots[i].Attack();
                     }
-                    Projectiles p = new Projectiles(Position, unit);
+                    Projectiles p = new Projectiles(Position, unit,this);
+                    Console.WriteLine("Proj 153 " + ProjList.Count);
                     _proj.Add(p);
+                    TimeSt = newTs;
+                    Attacked = true;
+                }
+                else
+                {
+                    Attacked = !Attacked;
                 }
             }
-        }   
+            if(ProjList.Count > 0)
+            {
+                try
+                {
+                    foreach (var n in ProjList)
+                    {
+
+                        n.Update();
+                    }
+
+                }
+                catch(InvalidOperationException)
+                {
+
+                }
+
+            }
+        }
+
+        internal bool Attacked
+        {
+            get { return _attacked; }
+            set { _attacked = value; }
+        }
 
         internal uint TimeSt
         {
@@ -242,13 +264,13 @@ namespace LastBastion
 
             foreach (var n in barbList)
             {
+
                 if (Position.IsInRange(Position,n.Position,Range))
                 {
                     unitToReturn = n;
                     _target = unitToReturn;
                     SetAllTowerUnitsTarget();
-                    SetAllProjUnitsTarget();
-                    break;
+                    return;
                 }
             }
         }
@@ -270,30 +292,40 @@ namespace LastBastion
             foreach (var n in barbList)
             {
                 if(!s.Contains(n))
-                {
                     if (Position.IsInRange(Position, n.Position, Range))
                     {
                         unitToReturn = n;
-                        _target = unitToReturn;
+                        Target = unitToReturn;
                         SetAllTowerUnitsTarget();
-                        break;
+                        //SetAllProjUnitsTarget();
+                        return;
                     }
-                }
             }
         }
 
-        internal void Update()
+        internal override void Update()
         {
-            Target = (Target.Life == 0) ? null : Target;
+            Console.WriteLine(Target);
+            Context.GetGame.Sprites.GetSprite("Tower").Position = new Vector2f(Position.X, Position.Y);
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Tower"));
+            if(base.Life == 0)
+            {
+                Context.RemoveBuilding(this);
+                return;
+            }
 
             if(Target == null)
             {
-                AcquireTarget();
+                if(Context.BarbCount > 0)
+                    AcquireTarget();
+                return;
             }
 
             if(Target.Position.IsInRange(Target.Position,Position,Range))
             {
                 Attack(Target);
+
+                Target = (Target.Life == 0) ? null : Target;
             }
         }
     }

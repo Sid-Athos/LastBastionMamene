@@ -1,28 +1,29 @@
-﻿namespace LastBastion
+﻿using System;
+
+namespace LastBastion
 {
     internal class Projectiles
     {
         Vectors _position;
         Archer _context;
+        Tower _tow;
         Unit _target;
+        uint _dmg;
         readonly float _speed = 0.001f;
 
-        internal Projectiles(Vectors o,Unit d,Archer context)
+       
+
+        internal Projectiles(Vectors o, Unit d, Tower c)
         {
             _position = o;
             _target = d;
-            _context = context;
-            Context.Context.AddProjectile(this);
+            _tow = c;
+            _dmg = c.Dmg;
         }
 
-        internal Projectiles(Vectors o, Unit d)
-        {
-            _position = o;
-            _target = d;
-            Context.Context.AddProjectile(this);
-        }
+        internal Archer Context => _context;
 
-        internal Unit Context => _context;
+        internal uint Dmg => _dmg;
 
         internal Vectors Position
         {
@@ -41,15 +42,18 @@
 
         internal void Update()
         {
-            if(!Position.IsInRange(Position, Destination, 0f))
+            
+            if(!Position.IsInRange(Position, Destination, 2.45f))
             {
-                Position.Movement(Position, Destination, 1, Speed, 0.5f);
+                //Console.WriteLine("Position : [{0},{1}], Cible : [{2},{3}]",Position.X,Position.Y,Target.Position.X,Target.Position.Y);
+                Position = Position.Movement(Position, Destination, 1, Speed, 0.5f);
             } else
             {
-                if (Target.Life > 0)
-                {
-                Target.Attacked(Target.Life - (Context.Dmg - Target.Armor));
-                 }
+                        //Console.WriteLine(Target);
+
+                        //Console.WriteLine(Target.Life);
+                        Target.Life = Target.Life - (Dmg - Target.Armor);
+                                        
             }
         }
     }
