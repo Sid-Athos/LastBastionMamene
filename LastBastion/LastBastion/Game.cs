@@ -29,10 +29,11 @@ namespace LastBastion
         int _lastProd;
         //Random
         Random _random = new Random();
+        Waves _waves;
 
         public Game()
         {
-
+            _waves = new Waves(this);
         }
 
         public void Run()
