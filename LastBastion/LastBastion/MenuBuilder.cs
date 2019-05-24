@@ -169,6 +169,7 @@ namespace LastBastion
                     _game.Sprites.Text.Scale = new Vector2f(0.8f, 0.8f);
                     _game.GetWindow.Render.Draw(_game.Sprites.Text);
                     //Price
+                    Console.WriteLine(SelectTarget());
                     _game.Sprites.Text.DisplayedString = _game.SamplerBuilding[SelectTarget()].VillagerCost.ToString();
                     _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 151);
                     _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
@@ -543,27 +544,27 @@ namespace LastBastion
                 {
                     return "Wall";
                 }
-                if (_spriteBar[_currentPos] == _sprites.GetSprite("HouseUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X,_game.GetWindow.GetView.Y)].Building.Rank == 2)
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("HouseUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X,_game.GetWindow.GetView.Y)].Building.Rank == 1)
                 {
                     return "House Lv2";
                 }
-                if (_spriteBar[_currentPos] == _sprites.GetSprite("HouseUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 3)
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("HouseUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 2)
                 {
                     return "House Lv3";
                 }
-                if (_spriteBar[_currentPos] == _sprites.GetSprite("FarmUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 2)
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("FarmUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 1)
                 {
                     return "Farm Lv2";
                 }
-                if (_spriteBar[_currentPos] == _sprites.GetSprite("FarmUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 3)
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("FarmUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 2)
                 {
                     return "Farm Lv3";
                 }
-                if (_spriteBar[_currentPos] == _sprites.GetSprite("MineUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 2)
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("MineUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 1)
                 {
                     return "Mine Lv2";
                 }
-                if (_spriteBar[_currentPos] == _sprites.GetSprite("MineUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 3)
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("MineUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank == 2)
                 {
                     return "Mine Lv3";
                 }
