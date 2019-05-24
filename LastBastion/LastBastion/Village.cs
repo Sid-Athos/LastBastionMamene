@@ -61,7 +61,6 @@ namespace LastBastion
                 }
                 if (item.Value.GetName == "House")
                 {
-                    _villagerStock += (5 * item.Value.Building.Rank);
                     if(item.Value.Building.Rank <= 2)
                     {
                         _foodStock -= 1;
@@ -175,6 +174,7 @@ namespace LastBastion
                     case "House":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
+                        _map.GetVillage._villagerStock += 5;
                     break;
                     case "Sawmill":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
@@ -195,6 +195,17 @@ namespace LastBastion
                     case "Wall":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Wall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                    break;
+                    case "House LV2":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
+                        _map.GetVillage._villagerStock += 5;
+                    break;
+                    case "House LV3":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
+                        _map.GetVillage._villagerStock += 5;
+                    break;
+                    default:
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
                     break;
                 }
             }
@@ -406,6 +417,7 @@ namespace LastBastion
         public uint FoodStock => _foodStock;
         public uint WoodStock => _woodStock;
         public uint StoneStock => _stoneStock;
+        public uint VillagerStock => _villagerStock;
         public int Area => _area;
         public Map GetMap => _map;
     }

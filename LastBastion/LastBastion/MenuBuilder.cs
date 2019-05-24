@@ -434,6 +434,10 @@ namespace LastBastion
             _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - _game.GetWindow.GetView.Render.Size.X / 2 + 6.8f * t, _game.GetWindow.GetView.Render.Center.Y - _game.GetWindow.GetView.Render.Size.Y / 2);
             _game.Sprites.Text.Scale = new Vector2f(1f, 1f);
             _game.GetWindow.Render.Draw(_game.Sprites.Text);
+            _game.Sprites.Text.DisplayedString = _game.Map.GetVillage.VillagerStock.ToString();
+            _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - _game.GetWindow.GetView.Render.Size.X / 2 + 2.8f * t, _game.GetWindow.GetView.Render.Center.Y - _game.GetWindow.GetView.Render.Size.Y / 2);
+            _game.Sprites.Text.Scale = new Vector2f(1f, 1f);
+            _game.GetWindow.Render.Draw(_game.Sprites.Text);
         }
     }
 }

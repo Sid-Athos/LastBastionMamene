@@ -120,7 +120,9 @@ namespace LastBastion
 
         public void Upgrade()
         {
-            Console.WriteLine("tefzfzefzfst");
+            Rank++;
+            IncHealth();
+            IncreaseArmor();
         }
 
         public uint Rank

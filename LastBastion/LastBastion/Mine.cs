@@ -12,15 +12,5 @@ namespace LastBastion
             : base(posX, posY, 100, 100, 5, 1, 40, 0, 20, 2, context,"Mine", "test")
         {
         }
-
-        public void Upgrade()
-        {
-            if(_rank < 3)
-            {
-                _rank++;
-                IncHealth();
-                IncreaseArmor();
-            }
-        }
     }
 }

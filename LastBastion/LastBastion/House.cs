@@ -28,17 +28,6 @@ namespace LastBastion
             set { _villager = value; }
         }
 
-        new public void Upgrade()
-        {
-            if (Rank < 3)
-            {
-                Rank++;
-                IncPop();
-                IncreaseArmor();
-                IncHealth();
-            }
-        }
-
         public void IncPop()
         {
             _villager += 2;
