@@ -4,24 +4,16 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Farm : Building
+    internal class Farm : Building
     {
-        uint _rank = 1;
-
-        public Farm(float posX, float posY, Map context)
-            : base(posX, posY, 100, 100, 5, 1, 40, 0, 20, 2, context)
+        public Farm(float posX, float posY,
+            uint lifePoints, uint maxLifePoints,
+            uint armor, uint rank, uint dmg, float range, uint aaCooldown,
+            Map context, string name, string desc)
+            : base(posX, posY, 200, 200, 20, 1, 20, 0f, 0, context, "Farm", "test")
         {
-        }
-
-        public new void Upgrade ()
-        {
-            if(_rank < 3)
-            {
-                _rank++;
-                IncHealth();
-                IncreaseArmor();
-            }
 
         }
     }
 }
+

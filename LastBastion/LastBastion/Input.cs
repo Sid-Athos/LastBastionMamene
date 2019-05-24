@@ -26,14 +26,7 @@ namespace LastBastion
                 {
                     if (_game.GetMenuBuilder.SelectTarget() != "bad")
                     {
-                        if (_game.GetMenuBuilder.SelectTarget() == "HouseUp")
-                        {
-                            _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Upgrade();
-                        }
-                        else
-                        {
-                            _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
-                        }
+                        _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
                     }
                 }
             }

@@ -22,10 +22,8 @@ namespace LastBastion
             _UI = new MapUI(_game.Sprites, _game.GetWindow.Render);
             CreateMap();
             _village = new Village(this);
-            _villagePeople = new List<Villager>();
             _barbarians = new List<Unit>();
             _buildings = new List<Building>();
-            _archers = new List<Archer>();
             _projectiles = new List<Projectiles>();
             _projectiles = new List<Projectiles>();
             _waves = new Waves(this);
@@ -41,7 +39,6 @@ namespace LastBastion
             //_village = new Village(this);
             _barbarians = new List<Unit>();
             _buildings = new List<Building>();
-            _archers = new List<Archer>();
             _projectiles = new List<Projectiles>();
             _waves = new Waves(this);
 
@@ -79,17 +76,7 @@ namespace LastBastion
         {
             _buildings.Remove(T);
         }
-
-        public void AddArcher(Archer T)
-        {
-            _archers.Add(T);
-        }
-
-        public void rmvArcher(Archer T)
-        {
-            _archers.Remove(T);
-        }
-
+        
 
         public void AddBarbar(Unit u)
         {

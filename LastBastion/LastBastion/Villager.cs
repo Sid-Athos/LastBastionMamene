@@ -18,7 +18,6 @@ namespace LastBastion
             attackCooldown, speed, context)
         {
             _isHarvesting = false;
-            context.AddVillager(this);
         }
 
         

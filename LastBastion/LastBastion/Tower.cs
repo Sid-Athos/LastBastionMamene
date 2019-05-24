@@ -7,7 +7,7 @@ namespace LastBastion
     {
         
         Archer [] _slots;
-        uint _rank = 1;
+        uint _rank;
         uint _dmg;
         uint _aaCooldown;
         float _range = 2.0f;
@@ -20,17 +20,20 @@ namespace LastBastion
         uint maxLifePoints,
         uint dmg,
         uint armor,
-        uint aaCooldown,
         uint rank,
-        Map context)
+        float range,
+        uint aaCooldown,
+        Map context, string name, string desc)
             : base(posX,
          posY,
          lifePoints,
          maxLifePoints,
          armor,
          rank,
-         10, 0, 60, 2,
-         context)
+         dmg,
+         range,
+         aaCooldown,
+         context,"Tower", "test")
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;
@@ -50,14 +53,13 @@ namespace LastBastion
         uint maxLifePoints,
         uint dmg,
         uint armor,
-        uint aaCooldown,
-        uint rank)
+        uint aaCooldown)
             : base(posX,
          posY,
          lifePoints,
          maxLifePoints,
          armor,
-         rank)
+         1)
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;

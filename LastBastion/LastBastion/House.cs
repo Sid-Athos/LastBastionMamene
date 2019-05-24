@@ -4,45 +4,15 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class House : Building
+    internal class House : Building
     {
-        uint _villager = 5;
-        uint _rent = 1;
-
-        public House(float posX, float posY, uint villager, uint rent, Map context)
-            : base(posX, posY, 100, 100, 5, 1, 30, 50, 10, 0, context)
+        public House(float posX, float posY,
+            uint lifePoints, uint maxLifePoints,
+            uint armor, uint rank, uint dmg, float range, uint aaCooldown,
+            Map context, string name, string desc)
+            : base(posX, posY, 200, 200, 20, 1, 20, 0f, 0, context, "House", "test")
         {
-            _villager = villager;
-            _rent = rent;
-        }
 
-        public uint Rent
-        {
-            get { return _rent; }
-            set { _rent = value; }
         }
-
-        public uint Villager
-        {
-            get { return _villager; }
-            set { _villager = value; }
-        }
-
-        new public void Upgrade()
-        {
-            if (Rank < 3)
-            {
-                Rank++;
-                IncPop();
-                IncreaseArmor();
-                IncHealth();
-            }
-        }
-
-        public void IncPop()
-        {
-            _villager += 2;
-        }
-
     }
 }

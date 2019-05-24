@@ -8,19 +8,27 @@ namespace LastBastion
     {
         uint _rank = 1;
 
-        public Mine(float posX, float posY, Map context)
-            : base(posX, posY, 100, 100, 5, 1, 40, 0, 20, 2, context)
+        public Mine(float posX,
+        float posY,
+        uint lifePoints,
+        uint maxLifePoints,
+        uint dmg,
+        uint armor,
+        uint rank,
+        float range,
+        uint aaCooldown,
+        Map context, string name, string desc)
+            : base(posX,
+         posY,
+         lifePoints,
+         maxLifePoints,
+         armor,
+         rank,
+         dmg,
+         range,
+         aaCooldown,
+         context, "Mine", "test")
         {
-        }
-
-        public void Upgrade()
-        {
-            if(_rank < 3)
-            {
-                _rank++;
-                IncHealth();
-                IncreaseArmor();
-            }
         }
     }
 }
