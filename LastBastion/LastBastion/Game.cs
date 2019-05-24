@@ -36,6 +36,8 @@ namespace LastBastion
             _waves = new Waves(this);
         }
 
+        public int Timer => _countTimer;
+
         public void Run()
         {
             _input = new Input(this);

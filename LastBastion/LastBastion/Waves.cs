@@ -84,6 +84,10 @@ namespace LastBastion
 
         internal void Update()
         {
+            if(WavesContext.Timer == 361)
+            {
+                SpawnWave();
+            }
 
         }
     }
