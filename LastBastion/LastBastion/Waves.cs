@@ -4,21 +4,20 @@ using System.Text;
 
 namespace LastBastion
 {
-
-    internal class Waves
+    public class Waves
     {
-        Game _context;
+        Map _context;
         uint _round;
         uint _gobAmount;
         uint _timeStamp;
 
-        internal Waves(Game context)
+        internal Waves(Map context)
         {
             _context = context;
             _round = 1;
         }
 
-        public Game WavesContext => _context;
+        public Map WavesContext => _context;
 
         public uint Round
         {
@@ -45,7 +44,8 @@ namespace LastBastion
 
             for (int i = 0; i < calc; i++)
             {
-                //Barbar b = new Barbar();
+                Barbar b = new Barbar(50);
+                WavesContext.AddBarbar(b);
             }
 
             uint magesToSpawn;
@@ -55,7 +55,8 @@ namespace LastBastion
                 magesToSpawn = (uint)Math.Ceiling((double)calc);
                 for(int i = 0;  i < magesToSpawn;i++)
                 {
-                    //Mage m = new Mage();
+                    Mage m = new Mage(50);
+                    WavesContext.AddBarbar(m);
                 }
                 calc = magesToSpawn;
             }
@@ -67,7 +68,8 @@ namespace LastBastion
 
                 for (int i = 0; i < gargoylesToSpawn; i++)
                 {
-                    //Gargoyle g = new Gargoyle();
+                    Gargoyle g = new Gargoyle(50);
+                    WavesContext.AddBarbar(g);
                 }
                 calc = gargoylesToSpawn;
             }
@@ -82,12 +84,11 @@ namespace LastBastion
         }
 
 
-        internal void Update()
+        public void Update()
         {
-            if(WavesContext.Timer == 361)
-            {
+           
                 SpawnWave();
-            }
+            
 
         }
     }

@@ -11,11 +11,12 @@ namespace LastBastion
         Castle _castle;
         Village _village;
         List<Villager> _villagePeople;
-        List<Barbar> _barbarians;
+        List<Unit> _barbarians;
         List<Building> _buildings;
         List<Archer> _archers;
         List<Projectiles> _projectiles;
         Dictionary<Building, Unit> _buildingHasTarget;
+        Waves _waves;
 
         public Map(Game game)
         {
@@ -24,12 +25,16 @@ namespace LastBastion
             CreateMap();
             _village = new Village(this);
             _villagePeople = new List<Villager>();
-            _barbarians = new List<Barbar>();
+            _barbarians = new List<Unit>();
             _buildings = new List<Building>();
             _archers = new List<Archer>();
             _projectiles = new List<Projectiles>();
             _projectiles = new List<Projectiles>();
+            _waves = new Waves(this);
+
         }
+
+        public Waves Wave => _waves;
 
         public Village Vill => _village;
 
@@ -37,15 +42,17 @@ namespace LastBastion
         {
             //_village = new Village(this);
             _villagePeople = new List<Villager>();
-            _barbarians = new List<Barbar>();
+            _barbarians = new List<Unit>();
             _buildings = new List<Building>();
             _archers = new List<Archer>();
             _projectiles = new List<Projectiles>();
+            _waves = new Waves(this);
+
         }
 
         public List<Villager> VillList => _villagePeople;
 
-        public List<Barbar> BarList => _barbarians;
+        public List<Unit> BarList => _barbarians;
 
         public List<Building> BuildList => _buildings;
         
@@ -100,14 +107,14 @@ namespace LastBastion
         }
 
 
-        public void AddBarbar(Barbar v)
+        public void AddBarbar(Unit u)
         {
-            _barbarians.Add(v);
+            _barbarians.Add(u);
         }
 
-        public void RemoveBarbar(Barbar n)
+        public void RemoveBarbar(Unit u)
         {
-            _barbarians.Remove(n);
+            _barbarians.Remove(u);
 
         }
 

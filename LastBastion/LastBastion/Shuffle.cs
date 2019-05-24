@@ -24,7 +24,7 @@ namespace LastBastion
             return list;
         }
         
-        public static List<Barbar> Barbars(List<Barbar> list)
+        public static List<Unit> Barbars(List<Unit> list)
         {
 
             Random r = new Random();
@@ -33,7 +33,7 @@ namespace LastBastion
             {
 
                 int n = r.Next(i);
-                Barbar swap = list[n];
+                Unit swap = list[n];
                 list[n] = list[i];
                 list[i] = swap;
 

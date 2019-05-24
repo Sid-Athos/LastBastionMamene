@@ -201,6 +201,11 @@ namespace LastBastion
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
+        public void Update()
+        {
+
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)

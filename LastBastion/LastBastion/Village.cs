@@ -276,7 +276,6 @@ namespace LastBastion
                 _area++;
                 SetNearby();
             }
-            Console.WriteLine(_nearby.Count);
         }
 
         public List<Hut> RebuildeMegaGreatConstructor()

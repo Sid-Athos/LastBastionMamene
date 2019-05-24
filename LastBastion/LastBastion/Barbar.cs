@@ -41,7 +41,7 @@ namespace LastBastion
             Context.RemoveBarbar(this);
         }
 
-        internal void Update()
+        internal new void Update()
         {
             if (Life == 0)
             {

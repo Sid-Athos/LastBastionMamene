@@ -16,5 +16,15 @@ namespace LastBastion
         {
 
         }
+
+        internal Mage(
+            uint life
+            )
+            : base(
+            life
+            )
+        {
+            
+        }
     }
 }

@@ -24,5 +24,12 @@ namespace LastBastion
         {
 
         }
+
+        internal Gargoyle(
+            uint life)
+            : base(life)
+        {
+
+        }
     }
 }

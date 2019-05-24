@@ -200,14 +200,14 @@ namespace LastBastion
         public void AcquireTarget()
         {
             Map context = base.Context;
-            List<Barbar> barbList = context.BarList;
+            List<Unit> barbList = context.BarList;
 
             if (context.BarbCount == 0)
             {
                 throw new InvalidOperationException("Aucune unité n'est disponible!");
             }
 
-            Barbar unitToReturn;
+            Unit unitToReturn;
             barbList = Shuffle.Barbars(barbList);
 
             foreach (var n in barbList)
@@ -225,14 +225,14 @@ namespace LastBastion
         internal void SwitchTarget(List<Unit> s)
         {
             Map context = base.Context;
-            List<Barbar> barbList = context.BarList;
+            List<Unit> barbList = context.BarList;
 
             if (context.BarbCount == 0)
             {
                 throw new InvalidOperationException("Aucune unité n'est disponible!");
             }
 
-            Barbar unitToReturn;
+            Unit unitToReturn;
 
             barbList = Shuffle.Barbars(barbList);
 

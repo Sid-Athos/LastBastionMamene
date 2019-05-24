@@ -171,5 +171,16 @@ namespace Tests
 
             Assert.That(sido.Target, Is.EqualTo(v3));
         }
+
+        [Test]
+        public void t9_Waves_Create_The_Correct_Amout_of_Ennemies()
+        {
+            Game sid = new Game();
+            Map map = new Map();
+            Assert.That(map.BarbCount, Is.EqualTo(0));
+
+            map.Wave.Update();
+            Assert.That(map.BarbCount, Is.EqualTo((sid.Wave.Round * 4)));
+        }
     }
 }

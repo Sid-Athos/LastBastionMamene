@@ -9,18 +9,18 @@ namespace Tests.Tests
         static void Main(string[] args)
         {
 
-            List<Barbar> list = new List<Barbar>();
+            List<Unit> list = new List<Unit>();
 
             for(uint i = 0; i < 50; i++)
             {
-                Barbar b;
+                Unit b;
                 if(i < 20)
                 {
-                    b = new Barbar(0);
+                    b = new Unit(0);
 
                 } else
                 {
-                     b = new Barbar(i);
+                     b = new Unit(i);
 
                 }
                 list.Add(b);
@@ -36,7 +36,7 @@ namespace Tests.Tests
                 var l = list[0].GetType().ToString();
             Console.WriteLine("Type " + l);
 
-            Predicate<Barbar> dead = Preds.IsDead;
+            Predicate<Unit> dead = Preds.IsDead;
             list.RemoveAll(dead);
             Console.WriteLine("Compteur " + list.Count);
 

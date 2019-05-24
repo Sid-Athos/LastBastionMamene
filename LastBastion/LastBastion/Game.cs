@@ -33,7 +33,6 @@ namespace LastBastion
 
         public Game()
         {
-            _waves = new Waves(this);
         }
 
         public int Timer => _countTimer;
@@ -152,6 +151,7 @@ namespace LastBastion
             _menu.UpdateTopBar();
         }
 
+        public Waves Wave => _waves;
         public int RandomNumber(int min, int max) => _random.Next(min, max);
         public void Close() { _window.Render.Close(); }
         public WindowUI GetWindow => _window;
