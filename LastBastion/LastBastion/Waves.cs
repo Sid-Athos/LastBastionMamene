@@ -86,10 +86,7 @@ namespace LastBastion
 
         public void Update()
         {
-           
                 SpawnWave();
-            
-
         }
     }
 }

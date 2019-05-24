@@ -187,6 +187,10 @@ namespace LastBastion
                     MinutePass = true;
                 }
             }
+            if(_countTimer == 60)
+            {
+                Map.Wave.Update();
+            }
             if (_countTimer == 361)
             {
                 _cycle++;
