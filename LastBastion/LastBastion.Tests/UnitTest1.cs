@@ -175,7 +175,7 @@ namespace Tests
             Assert.That(map.BarbCount, Is.EqualTo(0));
 
             map.Wave.Update();
-            Assert.That(map.BarbCount, Is.EqualTo((map.Wave.Round * 4)));
+            Assert.That(map.BarbCount, Is.EqualTo((map. Wave.Round * 4)));
         }
     }
 }
