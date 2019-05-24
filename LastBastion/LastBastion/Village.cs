@@ -158,16 +158,18 @@ namespace LastBastion
 
         public void CreateBuilding(string name)
         {
-            if (_map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost <= _woodStock &&
-                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost <= _stoneStock &&
-                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost <= _foodStock &&
-                _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost <= _villagerStock)
+            _buildingName = name;
+
+            if (_map.GetGame.SamplerBuilding[_buildingName].WoodCost <= _woodStock &&
+                _map.GetGame.SamplerBuilding[_buildingName].StoneCost <= _stoneStock &&
+                _map.GetGame.SamplerBuilding[_buildingName].FoodCost <= _foodStock &&
+                _map.GetGame.SamplerBuilding[_buildingName].VillagerCost <= _villagerStock)
             {
-                _woodStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost;
-                _stoneStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost;
-                _foodStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost;
-                _villagerStock -= _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost;
-                _buildingName = name;
+                _woodStock -= _map.GetGame.SamplerBuilding[_buildingName].WoodCost;
+                _stoneStock -= _map.GetGame.SamplerBuilding[_buildingName].StoneCost;
+                _foodStock -= _map.GetGame.SamplerBuilding[_buildingName].FoodCost;
+                _villagerStock -= _map.GetGame.SamplerBuilding[_buildingName].VillagerCost;
+
                 switch (_buildingName)
                 {
                     case "House":
