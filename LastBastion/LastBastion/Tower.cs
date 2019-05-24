@@ -11,7 +11,7 @@ namespace LastBastion
         uint _rank;
         uint _dmg;
         uint _aaCooldown;
-        float _range = 4.0f;
+        float _range = 26.0f;
         Unit _target;
         List<Projectiles> _proj;
         uint _timeStamp;

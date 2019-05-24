@@ -21,7 +21,7 @@ namespace LastBastion
             _dmg = c.Dmg;
         }
 
-        internal Archer Context => _context;
+        internal Tower Context => _tow;
 
         internal uint Dmg => _dmg;
 
@@ -53,6 +53,7 @@ namespace LastBastion
 
                         //Console.WriteLine(Target.Life);
                         Target.Life = Target.Life - (Dmg - Target.Armor);
+                        Context.ProjList.Remove(this);
                                         
             }
         }

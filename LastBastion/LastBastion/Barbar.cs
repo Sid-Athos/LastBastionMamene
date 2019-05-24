@@ -97,10 +97,13 @@ namespace LastBastion
                     Position = Position.Movement(Position, BarbTarget.Position, 1, Speed, Range);
                 }
             }
-            
         }
 
-        internal Building BarbTarget => _target;
+        internal Building BarbTarget
+        {
+            get { return _target; }
+            set { _target = value; }
+        }
 
         internal uint TimeSt
         {
@@ -128,7 +131,7 @@ namespace LastBastion
                 }
             }
             SetTarget(unitToReturn);
-            _target = unitToReturn;
+            BarbTarget = unitToReturn;
         }
 
         /**public Building AquireTarget()

@@ -119,7 +119,12 @@ namespace LastBastion
         {
             _isMoving = !_isMoving;
         }
-        
+
+        internal void Burn(Building b)
+        {
+            BurnIt = !IsBurned;
+        }
+
         Vectors FindClosestEnemy(Map map)
         {
             List<Building> units = map.BuildList;
@@ -165,7 +170,11 @@ namespace LastBastion
             _isMoving = !_isMoving;
         }
 
-        public Building EnemyTarget => _enemyTar;
+        public Building EnemyTarget
+        {
+            get { return _enemyTar; }
+            set { _enemyTar = value; }
+        }
 
         internal Map Context => _context;
 
@@ -174,6 +183,10 @@ namespace LastBastion
         public float Speed => _speed;
 
         internal bool IsParalysed => _paralyzed;
+
+        internal bool IsBurned => _burned;
+
+        internal bool BurnIt { set { _burned = value; } }
 
         bool IsMoving => _isMoving;
 
@@ -209,6 +222,32 @@ namespace LastBastion
                 // TODO: définir les champs de grande taille avec la valeur Null.
 
                 disposedValue = true;
+            }
+        }
+
+        internal void SwitchTarget(List<Building> s)
+        {
+            Map context = Context;
+            List<Building> barbList = context.BuildList;
+
+            if (context.BarbCount == 0)
+            {
+                throw new InvalidOperationException("Aucune unité n'est disponible!");
+            }
+
+            Building unitToReturn;
+
+            barbList = Shuffle.Buildings(barbList);
+
+            foreach (var n in barbList)
+            {
+                if (!s.Contains(n))
+                    if (Position.IsInRange(Position, n.Position, Range))
+                    {
+                        unitToReturn = n;
+                        SetTarget(unitToReturn);
+                        return;
+                    }
             }
         }
 
