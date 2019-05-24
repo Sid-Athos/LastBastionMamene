@@ -43,7 +43,20 @@ namespace LastBastion
             Context.RemoveBarbar(this);
         }
 
-        internal new void Update()
+        internal override void Attack(Building unit)
+        {
+            Console.WriteLine("life" + unit.Life);
+
+            if (Dmg > (unit.Life + unit.Armor))
+            {
+                unit.Life = 0;
+                unit.Die();
+                return;
+            }
+            unit.Life -= (Dmg - unit.Armor);
+        }
+
+        internal override void Update()
         {
             if (Life == 0)
             {
@@ -51,17 +64,25 @@ namespace LastBastion
                 return;
             }
 
-            if (BarbTarget != null && Position.IsInRange(Position, BarbTarget.Position, Range))
+            if (BarbTarget != null )
             {
                 Attack(BarbTarget);
                 return;
             }
 
-            if(BarbTarget == null && Context.BuildCount >= 1) AcquireTarget();
-            
-            if (BarbTarget != null && !Position.IsInRange(Position,BarbTarget.Position,Range))
+            if (BarbTarget == null && Context.BuildCount >= 1)
+            {
+                AcquireTarget();
+                Console.WriteLine("life" + BarbTarget.Life);
+
+            }
+
+           // if (BarbTarget != null && !Position.IsInRange(Position,BarbTarget.Position,Range))
+            //{
                 Position = Position.Movement(Position, BarbTarget.Position, 1, Speed, Range);
-            
+                Console.WriteLine("life" + BarbTarget.Life);
+
+            //}
             Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
         }

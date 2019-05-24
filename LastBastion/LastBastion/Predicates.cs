@@ -10,10 +10,5 @@ namespace LastBastion
         {
             return n.Life == 0;
         }
-
-        public static bool IsDead(Barbar n)
-        {
-            return n.Life == 0;
-        }
     }
 }

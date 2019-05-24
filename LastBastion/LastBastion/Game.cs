@@ -35,6 +35,8 @@ namespace LastBastion
 
         public int Timer => _countTimer;
 
+        public Map GetMap => _map;
+
         public void Run()
         {
             _input = new Input(this);

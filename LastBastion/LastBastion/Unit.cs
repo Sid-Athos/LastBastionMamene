@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LastBastion
 {
-    public class Unit
+    public abstract class Unit
     {
         Map _context;
         Vectors _position;
@@ -83,27 +83,15 @@ namespace LastBastion
             set { _position = value;  }
         }
         
-        public void Attack(Unit unit)
+        internal virtual void Attack(Unit unit)
         {
-            if (_dmg > (unit._lifePoints + unit._armor))
-            {
-                unit.Life = 0;
-                unit.Die();
-                return;
-            }
-            unit.Life = Math.Max(unit.Life - (_dmg - unit._armor), 0);
+            
         }
 
-        public void Attack(Building unit)
+        internal virtual void Attack(Building unit)
         {
 
-            if (_dmg > (unit.Life + unit.Armor))
-            {
-                unit.Life = 0;
-                unit.Die();
-                return;
-            }
-            unit.Life = Math.Max(unit.Life - (_dmg - unit.Armor), 0);
+            
         }
 
         public uint Life
@@ -201,7 +189,7 @@ namespace LastBastion
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
-        public void Update()
+        internal virtual void Update()
         {
 
         }

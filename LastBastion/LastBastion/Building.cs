@@ -86,7 +86,9 @@ namespace LastBastion
         public uint Life
         {
             get { return _lifePoints; }
-            set { _lifePoints = value; }
+            set { _lifePoints = value;
+                Console.WriteLine("yes");
+            }
         }
 
         public bool IsDestroy()
