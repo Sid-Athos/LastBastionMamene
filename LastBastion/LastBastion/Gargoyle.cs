@@ -6,7 +6,21 @@ namespace LastBastion
 {
     internal class Gargoyle : Unit
     {
-        internal Gargoyle()
+        internal Gargoyle(
+            float posX, 
+            float posY, 
+            float range,
+            string job, 
+            uint lifePoints, 
+            uint dmg, 
+            uint armor, 
+            bool isMoving,
+            uint attackCooldown, 
+            float speed, 
+            Map context)
+            : base(posX, posY, range,
+            job, lifePoints, dmg, armor, isMoving,
+            attackCooldown, speed, context)
         {
 
         }

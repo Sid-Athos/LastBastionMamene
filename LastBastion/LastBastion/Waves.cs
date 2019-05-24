@@ -55,7 +55,7 @@ namespace LastBastion
                 magesToSpawn = (uint)Math.Ceiling((double)calc);
                 for(int i = 0;  i < magesToSpawn;i++)
                 {
-                    Mage m = new Mage();
+                    //Mage m = new Mage();
                 }
                 calc = magesToSpawn;
             }
@@ -67,7 +67,7 @@ namespace LastBastion
 
                 for (int i = 0; i < gargoylesToSpawn; i++)
                 {
-                    Gargoyle g = new Gargoyle();
+                    //Gargoyle g = new Gargoyle();
                 }
                 calc = gargoylesToSpawn;
             }
