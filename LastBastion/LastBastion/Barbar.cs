@@ -9,6 +9,7 @@ namespace LastBastion
     public class Barbar : Unit
     {
         static uint _count;
+        uint _timeStamp;
         Building _target = null;
 
         public Barbar(float posX, float posY,float range,
@@ -20,6 +21,7 @@ namespace LastBastion
         {
             _count++;
             context.AddBarbar(this);
+            _timeStamp = context.Vill
         }
 
         public Barbar(float posX, float posY, float range,
@@ -64,25 +66,24 @@ namespace LastBastion
                 return;
             }
 
-            if (BarbTarget != null )
+            if (BarbTarget == null && Context.BuildCount >= 1)
+            {
+                AcquireTarget();
+            }
+
+            if (BarbTarget != null && Position.IsInRange(Position, BarbTarget.Position, Range))
             {
                 Attack(BarbTarget);
                 return;
             }
 
-            if (BarbTarget == null && Context.BuildCount >= 1)
+
+           if (BarbTarget != null && !Position.IsInRange(Position,BarbTarget.Position,Range))
             {
-                AcquireTarget();
-                Console.WriteLine("life" + BarbTarget.Life);
-
-            }
-
-           // if (BarbTarget != null && !Position.IsInRange(Position,BarbTarget.Position,Range))
-            //{
                 Position = Position.Movement(Position, BarbTarget.Position, 1, Speed, Range);
                 Console.WriteLine("life" + BarbTarget.Life);
+            }
 
-            //}
             Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
         }
