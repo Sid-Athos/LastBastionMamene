@@ -11,18 +11,22 @@ namespace LastBastion
         float posY,
         uint lifePoints,
         uint maxLifePoints,
+        uint dmg,
         uint armor,
         uint rank,
-        Map context)
-            : base(
-        posX,
+        float range,
+        uint aaCooldown,
+        Map context, string name, string desc)
+            : base(posX,
          posY,
          lifePoints,
          maxLifePoints,
          armor,
          rank,
-         10, 0, 60, 2,
-         context,"Castle","Your Residence.")
+         dmg,
+         range,
+         aaCooldown,
+         context, "Tower", "test")
         {
         }
     }

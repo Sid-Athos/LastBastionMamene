@@ -16,6 +16,7 @@ namespace LastBastion
         uint _stoneStock;
         uint _woodStock;
         uint _villagerStock;
+        Dictionary<string, Dictionary<string, string>> _prices;
 
         public Village(Map map)
         {
@@ -29,8 +30,51 @@ namespace LastBastion
             _villagerStock = 5;
             SetCastle();
             SetNearby();
+            _prices = new Dictionary<string, Dictionary<string, string>>();
+            Dictionary<string, string> _towerCosts = new Dictionary<string, string>();
+            _towerCosts.Add("Wood", "10");
+            _towerCosts.Add("Stones", "60");
+            _towerCosts.Add("Food", "0");
+            _towerCosts.Add("Villager"," 2");
+            _towerCosts.Add("Description", "Tour de défense, livrée avec deux archers.");
+            _prices.Add("Tower", _towerCosts);
+            Dictionary<string, string> _houseCosts = new Dictionary<string, string>();
+            _houseCosts.Add("Wood", "10");
+            _houseCosts.Add("Stones", "60");
+            _houseCosts.Add("Food", "0");
+            _houseCosts.Add("Villager", "2");
+            _prices.Add("House", _towerCosts);
+            Dictionary<string, string> _farmCosts = new Dictionary<string, string>();
+            _farmCosts.Add("Wood", "40");
+            _farmCosts.Add("Stones", "10");
+            _farmCosts.Add("Food", "0");
+            _farmCosts.Add("Villager", "2");
+            _farmCosts.Add("Description", "Permet de produire de la nourriture.");
+            _prices.Add("Farm", _farmCosts);
+            Dictionary<string, string> _wallCosts = new Dictionary<string, string>();
+            _wallCosts.Add("Wood", "10");
+            _wallCosts.Add("Stones", "20");
+            _wallCosts.Add("Food", "0");
+            _wallCosts.Add("Villager", "0");
+            _wallCosts.Add("Description", "Murs indestructibles.");
+            _prices.Add("Wall", _wallCosts);
+            Dictionary<string, string> _mineCosts = new Dictionary<string, string>();
+            _mineCosts.Add("Wood", "40");
+            _mineCosts.Add("Stones", "20");
+            _mineCosts.Add("Food", "0");
+            _mineCosts.Add("Villager", "2");
+            _mineCosts.Add("Description", "Permet de produire des pierres pour construire.");
+            _prices.Add("Mine", _mineCosts);
+            Dictionary<string, string> _millCosts = new Dictionary<string, string>();
+            _millCosts.Add("Wood", "50");
+            _millCosts.Add("Stones", "10");
+            _millCosts.Add("Food", "0");
+            _millCosts.Add("Villager", "2");
+            _millCosts.Add("Description", "Permet de produire du bois pour construire.");
+            _prices.Add("Sawmill", _millCosts);
         }
 
+        public Dictionary<string,Dictionary<string,string>> Costs => _prices;
 
         // For development purpose only
         public void IncreaseRessources()
@@ -180,7 +224,7 @@ namespace LastBastion
             _map.GetGame.GetGrid[new Vector2i(1, 1)].IsReveal = true;
             _map.GetGame.GetGrid[new Vector2i(1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, -1)].IsReveal = true;
-            GetMap.Castle(new Castle(0f, 0f, 750, 750, 3, 1, GetMap)) ;
+            GetMap.Castle(new Castle(0f, 0f, 750, 750, 0,5,1,0f,0, GetMap,"Castle","Votre résidence")) ;
         }
 
         public void SetNearby()
@@ -206,7 +250,8 @@ namespace LastBastion
                     {
                         BuyHouse();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
-                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = 
+                            new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y,150,150,0,1,0,0f,0, GetMap,name,"Une habitation");
                     }
                     break;
                     case "Sawmill":
@@ -214,7 +259,8 @@ namespace LastBastion
                     {
                         BuySawMill();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
-                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Sawmill(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = 
+                            new Sawmill(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 150, 150, 0, 1, 0, 0f, 0, GetMap, name, "Une habitation");
                     }
                     break;
                     case "Mine":
@@ -222,7 +268,8 @@ namespace LastBastion
                     {
                         BuyMine();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
-                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Mine(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = 
+                            new Mine(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 150, 150, 0, 1, 0, 0f, 0, GetMap, name, "Carrière, permet de produire des pierres.");
                     }
                     break;
                     case "Farm":
@@ -230,7 +277,8 @@ namespace LastBastion
                     {
                         BuyFarm();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
-                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Farm(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = 
+                            new Farm(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 150, 150, 0, 1, 0, 0f, 0, GetMap, name, "Une ferme pour produire de la nourriture");
                     }
                     break; 
                     case "Tower":
@@ -238,7 +286,8 @@ namespace LastBastion
                     { 
                         BuyTower();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
-                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y,300,300,0,30,0,1, _map);
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = 
+                            new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 350, 350, 5, 3, 0, 0f, 0, GetMap, name, "Une habitation");
                     }
                     break;
                     case "Wall":

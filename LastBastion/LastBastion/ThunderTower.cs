@@ -14,9 +14,10 @@ namespace LastBastion
         uint maxLifePoints,
         uint dmg,
         uint armor,
-        uint aaCooldown,
         uint rank,
-        Map context)
+        float range,
+        uint aaCooldown,
+        Map context,string name, string desc)
             : base(
          posX,
          posY,
@@ -24,9 +25,10 @@ namespace LastBastion
          maxLifePoints,
          dmg,
          armor,
-         aaCooldown,
          rank,
-         context)
+         range,
+         aaCooldown,
+         context,name,desc)
         {
             _paralysedList = new List<Unit>();
         }

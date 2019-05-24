@@ -20,16 +20,19 @@ namespace LastBastion
         uint maxLifePoints,
         uint dmg,
         uint armor,
-        uint aaCooldown,
         uint rank,
-        Map context)
+        float range,
+        uint aaCooldown,
+        Map context, string name, string desc)
             : base(posX,
          posY,
          lifePoints,
          maxLifePoints,
          armor,
-         1,
-         10, 0, 60, 2,
+         rank,
+         dmg,
+         range,
+         aaCooldown,
          context,"Tower", "test")
         {
             _dmg = dmg;
