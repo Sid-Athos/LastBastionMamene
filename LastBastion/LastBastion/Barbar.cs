@@ -21,7 +21,6 @@ namespace LastBastion
         {
             _count++;
             context.AddBarbar(this);
-            _timeStamp = context.Vill
         }
 
         public Barbar(float posX, float posY, float range,
@@ -47,7 +46,6 @@ namespace LastBastion
 
         internal override void Attack(Building unit)
         {
-            Console.WriteLine("life" + unit.Life);
 
             if (Dmg > (unit.Life + unit.Armor))
             {
@@ -73,7 +71,19 @@ namespace LastBastion
 
             if (BarbTarget != null && Position.IsInRange(Position, BarbTarget.Position, Range))
             {
-                Attack(BarbTarget);
+                if(_timeStamp == 0)
+                {
+                    Attack(BarbTarget);
+                    TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                    return;
+                }
+                uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+                if (newTs == _timeStamp + AaCd)
+                {
+                    Attack(BarbTarget);
+                    TimeSt = newTs;
+                }
                 return;
             }
 
@@ -89,6 +99,12 @@ namespace LastBastion
         }
 
         internal Building BarbTarget => _target;
+
+        internal uint TimeSt
+        {
+            get { return _timeStamp; }
+            set { _timeStamp = value;}
+        }
 
         void AcquireTarget()
         {

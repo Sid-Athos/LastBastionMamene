@@ -185,6 +185,8 @@ namespace LastBastion
 
         internal uint Dmg => _dmg;
 
+        internal uint AaCd => _aaCooldown;
+
         internal uint Armor => _armor;
 
         private bool disposedValue = false; // Pour détecter les appels redondants

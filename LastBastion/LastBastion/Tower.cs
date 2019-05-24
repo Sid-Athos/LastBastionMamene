@@ -5,14 +5,17 @@ namespace LastBastion
 {
     public class Tower : Building
     {
-        
-        Archer [] _slots;
+
+        Archer[] _slots;
         uint _rank;
         uint _dmg;
         uint _aaCooldown;
         float _range = 2.0f;
         Unit _target;
         List<Projectiles> _proj;
+        uint _timeStamp;
+        bool _attacked = false;
+
 
         public Tower(float posX,
         float posY,
@@ -33,16 +36,16 @@ namespace LastBastion
          dmg,
          range,
          aaCooldown,
-         context,"Tower", "test")
+         context, "Tower", "test")
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;
             _slots = new Archer[2];
             context.AddBuilding(this);
-            for(int i = 0;i<2;i++)
+            for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f, context);
-                AddArcher(sut);
+                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 2, 1, false, 2, 0.2f, context);
+                _slots[i] = sut;
                 sut.SetTower(this);
             }
         }
@@ -66,11 +69,12 @@ namespace LastBastion
             _slots = new Archer[2];
             for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f,false);
-                AddArcher(sut);
+                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 80, 3, 1, false, 2, 0.002f, true);
                 sut.SetTower(this);
             }
         }
+
+        internal uint AaCd => _aaCooldown;
 
         public void SetAllTowerUnitsTarget()
         {
@@ -80,6 +84,14 @@ namespace LastBastion
                 {
                     _slots[i].SetTarget(Target);
                 }
+            }
+        }
+
+        public void SetAllProjUnitsTarget()
+        {
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                _proj[i].Target = Target;
             }
         }
 
@@ -106,33 +118,49 @@ namespace LastBastion
 
         public void Attack(Unit unit)
         {
-            for(int i = 0; i < _slots.Length;i++)
+            if(unit.Life == 0)
             {
-                _slots[i].Attack();
+                SwitchTarget(base.Context.BarList);
+                return;
             }
-
-            Projectiles p = new Projectiles(Position, unit);
-
-            foreach(var n in ProList)
+            if(Target != null)
             {
-                if(p.Position.IsInRange(p.Position,p.Target.Position,0.3f))
+                uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                if (_timeStamp == 0)
                 {
-                    p.Target.Attacked(0);
-                    if (_dmg > unit.Life)
+                    for (int i = 0; i < _slots.Length; i++)
                     {
-                        p.Target.Attacked(0);
-                        p.Target.Die();
-                        AcquireTarget();
-                        SetAllTowerUnitsTarget();
-                        return;
+                        _slots[i].Attack();
                     }
-                    p.Target.Attacked(Math.Max(p.Target.Life- (_dmg - p.Target.Armor), 0));
+                    Projectiles p = new Projectiles(Position, unit);
+                    _proj.Add(p);
+                    TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                    return;
                 }
-                else
+                else if (newTs < _timeStamp + AaCd)
                 {
-                    p.Position = p.Position.Movement(p.Position, p.Target.Position, 1, 0.002f, 0.5f);
+                    foreach (var n in ProList)
+                    {
+
+                        n.Update();
+                    }
+                }
+                else if(newTs == _timeStamp + AaCd)
+                {
+                    for (int i = 0; i < _slots.Length; i++)
+                    {
+                        _slots[i].Attack();
+                    }
+                    Projectiles p = new Projectiles(Position, unit);
+                    _proj.Add(p);
                 }
             }
+        }   
+
+        internal uint TimeSt
+        {
+            get { return _timeStamp; }
+            set { _timeStamp = value; }
         }
 
         public void IncDamage()
@@ -219,6 +247,7 @@ namespace LastBastion
                     unitToReturn = n;
                     _target = unitToReturn;
                     SetAllTowerUnitsTarget();
+                    SetAllProjUnitsTarget();
                     break;
                 }
             }

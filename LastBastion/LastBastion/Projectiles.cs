@@ -23,7 +23,6 @@
         }
 
         internal Unit Context => _context;
-        internal Unit Target => _target;
 
         internal Vectors Position
         {
@@ -31,20 +30,26 @@
             set { _position = value; }
         }
 
+        internal Unit Target
+        {
+            get { return _target; }
+            set { _target = value; }
+        }
+
         Vectors Destination => Target.Position;
         internal float Speed => _speed;
 
         internal void Update()
         {
-            if (Target.Life > 0)
+            if(!Position.IsInRange(Position, Destination, 0f))
             {
-                if(!Position.IsInRange(Position, Destination, 0.5f))
+                Position.Movement(Position, Destination, 1, Speed, 0.5f);
+            } else
+            {
+                if (Target.Life > 0)
                 {
-                    Position.Movement(Position, Destination, 1, Speed, 0.5f);
-                } else
-                {
-                    Target.Attacked(Context.Dmg);
-                }
+                Target.Attacked(Target.Life - (Context.Dmg - Target.Armor));
+                 }
             }
         }
     }
