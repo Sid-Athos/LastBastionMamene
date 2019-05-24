@@ -158,7 +158,7 @@ namespace LastBastion
 
         public void CreateBuilding(string name)
         {
-          /**  if (_map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost <= _woodStock &&
+            if (_map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.WoodCost <= _woodStock &&
                 _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.StoneCost <= _stoneStock &&
                 _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.FoodCost <= _foodStock &&
                 _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.VillagerCost <= _villagerStock)
@@ -195,7 +195,7 @@ namespace LastBastion
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Wall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
                     break;
                 }
-            }*/
+            }
             if (_nearby.Count > 0)
             {
                 int _random = _map.GetGame.RandomNumber(0, _nearby.Count - 1);
