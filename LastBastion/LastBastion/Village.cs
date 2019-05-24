@@ -10,7 +10,7 @@ namespace LastBastion
         Map _map;
         Building _castle;
         List<Hut> _nearby;
-        string _buildingName;
+        string _buildingName; 
         int _area;
         uint _foodStock;
         uint _stoneStock;
@@ -19,7 +19,7 @@ namespace LastBastion
 
         public Village(Map map)
         {
-            _map = map;
+            _map = map; 
             _nearby = new List<Hut>();
             _buildingName = "Empty";
             _area = 3;
@@ -199,8 +199,7 @@ namespace LastBastion
 
         public void CreateBuilding(string name)
         {
-                _buildingName = name;
-                switch (_buildingName)
+                switch (name)
                 {
                     case "House":
                         if(IsHouseBuyable)
@@ -455,10 +454,6 @@ namespace LastBastion
             _map.GetGame.Sprites.GetSprite("Castle").Position = _map.GetGame.GetGrid[new Vector2i(-1, -1)].GetVec2F;
             _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Castle"));
         }
-
-        public uint FoodStock => _foodStock;
-        public uint WoodStock => _woodStock;
-        public uint StoneStock => _stoneStock;
         public int Area => _area;
         public Map GetMap => _map;
     }

@@ -23,7 +23,6 @@ namespace Tests
             Map var = new Map();
 
             Assert.That(var, Is.Not.Null);
-            Assert.That(var.VillCount, Is.EqualTo(0));
 
             var job = Guid.NewGuid().ToString();
             Villager v1 = new Villager(10.9f, 11.2f, 0.1f,job, 150, 4, 3, false, 2, 1.5f, var);
@@ -48,8 +47,7 @@ namespace Tests
                 Assert.That(v1, Is.Not.Null);
 
             }
-
-            Assert.That(var.VillCount, Is.EqualTo(4));
+            
         }
 
         [Test]
@@ -67,9 +65,6 @@ namespace Tests
             Villager v3 = new Villager(10.9f, 11.2f, 0.1f, job3, 150, 10, 3, false, 2, 1.5f, var);
             var job4 = Guid.NewGuid().ToString();
             Villager v4 = new Villager(10.9f, 11.2f, 0.1f, job4, 150, 10, 3, false, 2, 1.5f, var);
-
-
-            Assert.That(var.VillCount, Is.EqualTo(4));
 
              for (int i = 0; i < 6; i++)
             {
