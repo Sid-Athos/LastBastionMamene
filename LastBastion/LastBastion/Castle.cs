@@ -22,7 +22,7 @@ namespace LastBastion
          armor,
          rank,
          10, 0, 60, 2,
-         context)
+         context,"Castle","Your Residence.")
         {
         }
     }
