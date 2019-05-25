@@ -73,8 +73,8 @@ namespace LastBastion
 
         public uint MaxLife
         {
-            get { return _lifePoints; }
-            set { _lifePoints = value; }
+            get { return _maxLifePoints; }
+            set { _maxLifePoints = value; }
         }
 
         public string Name

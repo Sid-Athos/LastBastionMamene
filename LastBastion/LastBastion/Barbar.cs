@@ -67,17 +67,17 @@ namespace LastBastion
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
             if (!IsParalysed)
             {
-                if (BarbTarget == null && Context.BuildCount >= 1)
+                if (EnemyTarget == null && Context.BuildCount >= 1)
                 {
                     AcquireTarget();
-                    bool tr = base.Position.IsInRange(Position, BarbTarget.Position, Range);
+                    bool tr = Position.IsInRange(Position, EnemyTarget.Position, Range);
                 }
 
-                if (BarbTarget != null && Position.IsInRange(Position, BarbTarget.Position, Range))
+                if (EnemyTarget != null && Position.IsInRange(Position, EnemyTarget.Position, Range))
                 {
                     if(_timeStamp == 0)
                     {
-                        Attack(BarbTarget);
+                        Attack(EnemyTarget);
                         TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                         return;
                     }
@@ -85,16 +85,16 @@ namespace LastBastion
 
                     if (newTs == _timeStamp + AaCd)
                     {
-                        Attack(BarbTarget);
+                        Attack(EnemyTarget);
                         TimeSt = newTs;
                     }
                     return;
                 }
 
 
-               if (BarbTarget != null && !Position.IsInRange(Position,BarbTarget.Position,Range))
+               if (EnemyTarget != null && !Position.IsInRange(Position, EnemyTarget.Position,Range))
                 {
-                    Position = Position.Movement(Position, BarbTarget.Position, 1, Speed, Range);
+                    Position = Position.Movement(Position, EnemyTarget.Position, 1, Speed, Range);
                 }
             }
         }
@@ -111,28 +111,7 @@ namespace LastBastion
             set { _timeStamp = value;}
         }
 
-        void AcquireTarget()
-        {
-            Map context = Context;
-            List<Building> buildList = context.BuildList;
-
-            if (context.BuildCount == 0)
-            {
-                throw new InvalidOperationException("Aucune unité n'est disponible!");
-            }
-
-            Building unitToReturn = buildList[0];
-            float min = Position.Distance(Position, buildList[0].Position);
-            foreach (var n in buildList)
-            {
-                if (Position.Distance(Position, n.Position) < min)
-                {
-                    unitToReturn = n;
-                }
-            }
-            SetTarget(unitToReturn);
-            BarbTarget = unitToReturn;
-        }
+        
 
         /**public Building AquireTarget()
         {

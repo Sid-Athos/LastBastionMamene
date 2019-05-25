@@ -169,15 +169,15 @@ namespace LastBastion
                     _game.Sprites.Text.Scale = new Vector2f(0.8f, 0.8f);
                     _game.GetWindow.Render.Draw(_game.Sprites.Text);
                     //Price
-                    _game.Sprites.Text.DisplayedString = _game.Map.Vill.Costs[SelectTarget()]["Villager"].ToString();
+                    _game.Sprites.Text.DisplayedString = _game.Map.Vill.Costs[SelectTarget()]["Villager"];
                     _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 151);
                     _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                     _game.GetWindow.Render.Draw(_game.Sprites.Text);
-                    _game.Sprites.Text.DisplayedString = _game.Map.Vill.Costs[SelectTarget()]["Food"].ToString();
+                    _game.Sprites.Text.DisplayedString = _game.Map.Vill.Costs[SelectTarget()]["Food"];
                     _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 169);
                     _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                     _game.GetWindow.Render.Draw(_game.Sprites.Text);
-                    _game.Sprites.Text.DisplayedString = _game.Map.Vill.Costs[SelectTarget()]["Wood"].ToString();
+                    _game.Sprites.Text.DisplayedString = _game.Map.Vill.Costs[SelectTarget()]["Wood"];
                     _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X + 143, _game.GetWindow.GetView.Render.Center.Y + 187);
                     _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                     _game.GetWindow.Render.Draw(_game.Sprites.Text);

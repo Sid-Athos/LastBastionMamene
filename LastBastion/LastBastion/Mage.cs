@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LastBastion
 {
@@ -56,6 +54,11 @@ namespace LastBastion
         {
             get { return _timeStamp; }
             set { _timeStamp = value; }
+        }
+
+        internal override void Update()
+        {
+            AcquireTarget();
         }
     }
 }

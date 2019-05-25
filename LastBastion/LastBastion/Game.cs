@@ -122,8 +122,7 @@ namespace LastBastion
             _map.GetVillage.DrawCastle();
             _map.GetVillage.DrawBuilding();
             _map.GetVillage.WallRenderer();
-
-            Console.WriteLine(_map.BarbCount);
+            
             if (_map.BarbCount > 0)
             {
                
@@ -133,16 +132,14 @@ namespace LastBastion
                         _map.BarList[i].Update();
 
                     }
-
-
-
             }
 
             if(_map.BuildCount > 0)
             {
-                foreach (var n in _map.BuildList)
+                for (int i = 0; i < _map.BuildCount; i++)
                 {
-                    n.Update();
+                    Console.WriteLine(_map.BuildList[i].Life);
+                    _map.BuildList[i].Update();
                 }
             }
 

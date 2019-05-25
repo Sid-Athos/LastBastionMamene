@@ -311,6 +311,10 @@ namespace LastBastion
             if(base.Life == 0)
             {
                 Context.RemoveBuilding(this);
+                Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375)/ 15), ((int)Position.Y - 375) / 15)].SetName = "Empty";
+                Console.WriteLine(Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375) / 15), ((int)Position.Y - 375) / 15)].GetName);
+                Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375) / 15), ((int)Position.Y - 375) / 15)].Building = null;
+                Console.ReadKey();
                 return;
             }
 

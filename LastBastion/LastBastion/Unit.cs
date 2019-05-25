@@ -94,6 +94,12 @@ namespace LastBastion
             
         }
 
+        public uint MaxLife
+        {
+            get { return _maxLifePoints; }
+            set { _maxLifePoints = value; }
+        }
+
         public uint Life
         {
             get { return _lifePoints; }
@@ -249,6 +255,28 @@ namespace LastBastion
                         return;
                     }
             }
+        }
+
+        internal void AcquireTarget()
+        {
+            Map context = Context;
+            List<Building> buildList = context.BuildList;
+
+            if (context.BuildCount == 0)
+            {
+                throw new InvalidOperationException("Aucune unité n'est disponible!");
+            }
+
+            Building unitToReturn = buildList[0];
+            float min = Position.Distance(Position, buildList[0].Position);
+            foreach (var n in buildList)
+            {
+                if (Position.Distance(Position, n.Position) < min)
+                {
+                    unitToReturn = n;
+                }
+            }
+            SetTarget(unitToReturn);
         }
 
         // TODO: remplacer un finaliseur seulement si la fonction Dispose(bool disposing) ci-dessus a du code pour libérer les ressources non managées.
