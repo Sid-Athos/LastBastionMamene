@@ -271,12 +271,12 @@ namespace LastBastion
             float min = Position.Distance(Position, buildList[0].Position);
             foreach (var n in buildList)
             {
-                if (Position.Distance(Position, n.Position) < min)
-                {
+                
                     unitToReturn = n;
-                }
+                    SetTarget(unitToReturn);
+                    return;
+                
             }
-            SetTarget(unitToReturn);
         }
 
         // TODO: remplacer un finaliseur seulement si la fonction Dispose(bool disposing) ci-dessus a du code pour libérer les ressources non managées.

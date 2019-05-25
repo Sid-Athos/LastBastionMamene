@@ -99,7 +99,7 @@ namespace LastBastion
                 if (_countTimer == 301)
                 {
                     _sprites.musicPlay("zebby");
-                    _map.Wave.Spawned = !_map.Wave.Spawned;
+                   // _map.Wave.Spawned = !_map.Wave.Spawned;
                 }
                 _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));
@@ -206,7 +206,6 @@ namespace LastBastion
             }
             if(_countTimer == 60)
             {
-                Map.Wave.Update();
             }
             if (_countTimer == 361)
             {
