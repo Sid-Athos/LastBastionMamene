@@ -31,6 +31,21 @@ namespace LastBastion
             _name = name;
             _desc = desc;
         }
+        public Building(float posX,
+        float posY,
+        uint lifePoints,
+        uint maxLifePoints,
+        uint armor,
+        uint aaCooldown,Map context)
+        {
+            _position = new Vectors(posX, posY);
+            _lifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
+            _armor = armor;
+            _rank = 1;
+            _context = context;
+            _count++;
+        }
 
         public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
         {
@@ -68,7 +83,7 @@ namespace LastBastion
 
         public void Die()
         {
-            return;
+            Context.BuildList.Remove(this);
         }
 
         public uint MaxLife

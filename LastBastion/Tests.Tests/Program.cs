@@ -9,43 +9,10 @@ namespace Tests.Tests
     {
         static void Main(string[] args)
         {
-
-            List<Unit> list = new List<Unit>();
-
-            for(uint i = 0; i < 50; i++)
-            {
-                Unit b;
-                if(i < 20)
-                {
-                    b = new Unit(0);
-
-                } else
-                {
-                     b = new Unit(i);
-
-                }
-                list.Add(b);
-            }
-
-            list = Shuffle.Barbars(list);
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine(list[i].Life);
-
-            }
-                var l = list[0].GetType().ToString();
-            Console.WriteLine("Type " + l);
-
-            Predicate<Unit> dead = Preds.IsDead;
-            list.RemoveAll(dead);
-            Console.WriteLine("Compteur " + list.Count);
-
-
-            Game sid = new Game();
-            sid.Run();
-            Map m = new Map(sid);
-
+            float calc = (float)(Math.Pow((0f - 19f),2) + Math.Pow((0f-15f),2));
+            float range = (float)Math.Pow(25f, 2);
+            Console.WriteLine(calc);
+            Console.WriteLine(range);
             
             
             Console.ReadKey();

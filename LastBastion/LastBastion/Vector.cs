@@ -27,16 +27,16 @@ namespace LastBastion
             set { _posY = value; }
         }
 
-       public Vectors Movement(Vectors origin, Vectors arrival, uint timestamp,float speed,float range)
+       internal Vectors Movement(Vectors origin, Vectors arrival, uint timestamp,float speed,float range)
         {
             Vectors moveVec = Substract(origin, arrival,range);
             Vectors normalizedVec =  Normalize(moveVec,speed);
              return AddVecs(origin,moveVec,speed);
         }
 
-        public bool IsInRange(Vectors origin, Vectors arrival, float range)
+        internal bool IsInRange(Vectors origin, Vectors arrival, float range)
         {
-            float result = (float)Math.Sqrt(Math.Pow(arrival.X - origin.X, 2)+ Math.Pow(arrival.Y - origin.Y, 2));
+            float result = (float)(Math.Pow(arrival.X - origin.X, 2)+ Math.Pow(arrival.Y - origin.Y, 2));
 
             return result <= (float)Math.Pow(range,2);
         }
@@ -73,16 +73,16 @@ namespace LastBastion
 
         Vectors AddVecs(Vectors origin, Vectors arrival,float speed)
         {
-            float x = (float)origin.X + ((arrival.X-1.5f)*speed);
-            float y = (float)origin.Y + ((arrival.Y-1.5f)*speed);
+            float x = (float)origin.X + ((arrival.X)*speed);
+            float y = (float)origin.Y + ((arrival.Y)*speed);
             return new Vectors(x, y);
         }
 
         Vectors Normalize(Vectors v,float speed)
         {
-            float x = v._posX / v.Magnitude() * speed;
+            float x = v._posX / v.Magnitude();
 
-            float y = v._posY / v.Magnitude() * speed;
+            float y = v._posY / v.Magnitude();
 
             return new Vectors(x, y);
         }

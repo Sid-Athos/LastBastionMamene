@@ -55,7 +55,7 @@ namespace LastBastion
         internal void Attack()
         {
             Projectiles p = new Projectiles(Position, Target,TowCont);
-            Context.AddProjectile(p);
+            TowCont.AddProjectile(p);
         }
 
         internal override void Update()

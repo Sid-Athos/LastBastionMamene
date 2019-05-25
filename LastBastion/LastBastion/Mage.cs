@@ -56,7 +56,7 @@ namespace LastBastion
             set { _timeStamp = value; }
         }
 
-        internal override void Update()
+        public override void Update()
         {
             AcquireTarget();
         }

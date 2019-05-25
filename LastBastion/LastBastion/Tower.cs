@@ -58,13 +58,15 @@ namespace LastBastion
         uint maxLifePoints,
         uint dmg,
         uint armor,
-        uint aaCooldown)
+        uint aaCooldown,
+        Map context)
             : base(posX,
          posY,
          lifePoints,
          maxLifePoints,
          armor,
-         1)
+         5,
+         context)
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;
@@ -104,7 +106,7 @@ namespace LastBastion
 
         public int AvailableSlots => _slots.Length;
 
-        public Archer[] Slots => _slots;
+        internal Archer[] Slots => _slots;
 
         public uint Dmg => _dmg;
 
@@ -179,7 +181,7 @@ namespace LastBastion
             set { _attacked = value; }
         }
 
-        internal uint TimeSt
+        public uint TimeSt
         {
             get { return _timeStamp; }
             set { _timeStamp = value; }
@@ -217,7 +219,7 @@ namespace LastBastion
             }
         }
 
-        public void AddArcher(Archer u)
+        internal void AddArcher(Archer u)
         {
             if(!u.IsInTower)
             {
@@ -274,7 +276,7 @@ namespace LastBastion
                 }
             }
         }
-
+        
         internal void SwitchTarget(List<Unit> s)
         {
             Map context = base.Context;
@@ -305,16 +307,14 @@ namespace LastBastion
 
         internal override void Update()
         {
-            Console.WriteLine(Target);
             Context.GetGame.Sprites.GetSprite("Tower").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Tower"));
             if(base.Life == 0)
             {
-                Context.RemoveBuilding(this);
+                Die();
                 Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375)/ 15), ((int)Position.Y - 375) / 15)].SetName = "Empty";
-                Console.WriteLine(Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375) / 15), ((int)Position.Y - 375) / 15)].GetName);
                 Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375) / 15), ((int)Position.Y - 375) / 15)].Building = null;
-                Console.ReadKey();
+                
                 return;
             }
 
@@ -330,6 +330,12 @@ namespace LastBastion
                 Attack(Target);
 
                 Target = (Target.Life == 0) ? null : Target;
+            }
+
+            if (!Target.Position.IsInRange(Target.Position, Position, Range))
+            {
+                Target = null;
+                AcquireTarget();
             }
         }
     }

@@ -56,6 +56,18 @@ namespace LastBastion
             unit.Life -= (Dmg - unit.Armor);
         }
 
+        internal override void Attack(Unit unit)
+        {
+
+            if (Dmg > (unit.Life + unit.Armor))
+            {
+                unit.Life = 0;
+                unit.Die();
+                return;
+            }
+            unit.Life -= (Dmg - unit.Armor);
+        }
+
         internal override void Update()
         {
             if (Life == 0)

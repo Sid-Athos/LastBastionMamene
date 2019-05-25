@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LastBastion
 {
-    public abstract class Unit
+    public  class Unit
     {
         Map _context;
         Vectors _position;
