@@ -67,14 +67,16 @@ namespace LastBastion
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
             if (!IsParalysed)
             {
-                if(EnemyTarget.Life ==0)
-                {
-                    AcquireTarget();
-                }
+                
                 if (EnemyTarget == null && Context.BuildCount >= 1)
                 {
                     AcquireTarget();
                     bool tr = Position.IsInRange(Position, EnemyTarget.Position, Range);
+                }
+
+                if (EnemyTarget.Life == 0)
+                {
+                    AcquireTarget();
                 }
 
                 if (EnemyTarget != null && Position.IsInRange(Position, EnemyTarget.Position, Range))
@@ -95,11 +97,13 @@ namespace LastBastion
                     return;
                 }
 
+                
 
-               if (EnemyTarget != null && !Position.IsInRange(Position, EnemyTarget.Position,Range))
+                if (EnemyTarget != null && !Position.IsInRange(Position, EnemyTarget.Position,Range))
                 {
                     Position = Position.Movement(Position, EnemyTarget.Position, 1, Speed, Range);
                 }
+                
             }
         }
 

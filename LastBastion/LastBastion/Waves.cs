@@ -11,6 +11,7 @@ namespace LastBastion
         uint _round;
         uint _gobAmount;
         uint _timeStamp;
+        bool _spawnStatus = false;
 
         internal Waves(Map context)
         {
@@ -24,6 +25,12 @@ namespace LastBastion
         {
             get { return _round; }
             set { _round = value; }
+        }
+
+        public bool Spawned
+        {
+            get { return _spawnStatus; }
+            set { _spawnStatus = value; }
         }
 
         internal uint TimeStamp

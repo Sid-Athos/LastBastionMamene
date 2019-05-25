@@ -90,12 +90,16 @@ namespace LastBastion
                 if (_countTimer == 300)
                 {
                     _sprites.musicStop("battle");
-                    _map.Wave.Update();
+                    if(!_map.Wave.Spawned)
+                    {
+                        _map.Wave.Update();
+                        _map.Wave.Spawned = !_map.Wave.Spawned;
+                    }     
                 }
                 if (_countTimer == 301)
                 {
                     _sprites.musicPlay("zebby");
-
+                    _map.Wave.Spawned = !_map.Wave.Spawned;
                 }
                 _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));
@@ -127,10 +131,10 @@ namespace LastBastion
             
             if (_map.BarbCount > 0)
             {
-               
-                    for(int i = 0;i <  _map.BarbCount;i++)
+                        Console.WriteLine(_map.BarList.Count);
+
+                for (int i = 0;i <  _map.BarbCount;i++)
                     {
-                        Console.WriteLine(_map.BarList[i].Life);
                         _map.BarList[i].Update();
 
                     }
@@ -140,7 +144,6 @@ namespace LastBastion
             {
                 for (int i = 0; i < _map.BuildCount; i++)
                 {
-                    Console.WriteLine(_map.BuildList[i].Life);
                     _map.BuildList[i].Update();
                 }
             }
