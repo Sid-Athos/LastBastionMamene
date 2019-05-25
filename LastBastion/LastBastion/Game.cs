@@ -131,7 +131,6 @@ namespace LastBastion
             
             if (_map.BarbCount > 0)
             {
-                        Console.WriteLine(_map.BarList.Count);
 
                 for (int i = 0;i <  _map.BarbCount;i++)
                     {
@@ -145,6 +144,10 @@ namespace LastBastion
                 for (int i = 0; i < _map.BuildCount; i++)
                 {
                     _map.BuildList[i].Update();
+                    if(_map.BuildList[i].Target !=null)
+                    {
+                     Console.WriteLine(_map.BuildList[i].Target.Life);
+                    }
                 }
             }
 

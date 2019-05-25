@@ -14,6 +14,7 @@ namespace LastBastion
         uint _rank;
         uint _count;
         bool _burned;
+        Unit _target;
 
         public Building(float posX, float posY,
             uint lifePoints, uint maxLifePoints,
@@ -73,6 +74,11 @@ namespace LastBastion
             _armor++;
         }
 
+        public virtual Unit Target
+        {
+            get { return _target; }
+            set { _target = value; }
+        }
         public string Description => _desc;
 
         public void IncHealth()

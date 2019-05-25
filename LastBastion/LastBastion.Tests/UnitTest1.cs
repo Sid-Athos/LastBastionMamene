@@ -2,7 +2,7 @@ using LastBastion;
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-
+/**
 namespace Tests
 {
     public class Tests
@@ -85,6 +85,33 @@ namespace Tests
                 Assert.That(v1.EnemyTarget, Is.EqualTo(sido));
             }
 
+            sido.Die();
+            sido = new Tower(1000000f, 10000000f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
+
+            for (int i = 0; i < 6; i++)
+            {
+                var job1 = Guid.NewGuid().ToString();
+                Barbar v1 = new Barbar(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
+                v1.AcquireTarget();
+                Assert.That(v1.EnemyTarget, Is.EqualTo(sido));
+            }
+        }
+
+        [Test]
+        public void T5_Towers_Switch_Targets_If_Enemy_Goes_Out_Of_Range()
+        {
+            Map var = new Map();
+            Assert.That(var, Is.Not.Null);
+            Tower sido = new Tower(-1000000f, -10000000f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
+
+            for (int i = 0; i < 6; i++)
+            {
+                var job1 = Guid.NewGuid().ToString();
+                Barbar v1 = new Barbar(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
+                Assert.That(v1.EnemyTarget, Is.EqualTo(sido));
+            }
+            sido.Update();
+            Assert.That(sido.Target, Is.Not.Null);
             sido.Die();
             sido = new Tower(1000000f, 10000000f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
 
@@ -197,4 +224,4 @@ namespace Tests
         }
 
     }
-}
+}*/

@@ -13,14 +13,11 @@ namespace LastBastion
 
             for (int i = list.Count - 1; i > 0; i--)
             {
-
                 int n = r.Next(i);
                 swap = list[n];
                 list[n] = list[i];
                 list[i] = swap;
-
             }
-
             return list;
         }
         
@@ -31,14 +28,11 @@ namespace LastBastion
 
             for (int i = list.Count - 1; i > 0; i--)
             {
-
                 int n = r.Next(i);
                 Unit swap = list[n];
                 list[n] = list[i];
                 list[i] = swap;
-
             }
-
             return list;
         }  
     }

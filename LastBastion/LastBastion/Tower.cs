@@ -96,7 +96,7 @@ namespace LastBastion
 
         internal List<Projectiles> ProjList => _proj;
 
-        public Unit Target
+        public override Unit Target
         {
             get { return _target; }
             set { _target = value; }
@@ -135,11 +135,11 @@ namespace LastBastion
                     TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                     Attacked = true;
                 }
-                else if (newTs < (_timeStamp + AaCd) && newTs > _timeStamp)
+                if (newTs < (_timeStamp + AaCd) && newTs > _timeStamp)
                 {
                     Attacked = false;
                 }
-                else if(newTs == _timeStamp + AaCd)
+                else if (newTs == _timeStamp + AaCd && Attacked == false)
                 {
                     for (int i = 0; i < _slots.Length; i++)
                     {
@@ -148,11 +148,11 @@ namespace LastBastion
                     Projectiles p = new Projectiles(Position, unit,this);
                     Console.WriteLine("Proj 153 " + ProjList.Count);
                     _proj.Add(p);
-                    TimeSt = newTs;
                     Attacked = true;
                 }
-                else
+                if(newTs > TimeSt+ AaCd)
                 {
+                    TimeSt = 0;
                     Attacked = !Attacked;
                 }
             }
@@ -258,7 +258,7 @@ namespace LastBastion
 
             if (context.BarbCount == 0)
             {
-                throw new InvalidOperationException("Aucune unité n'est disponible!");
+                return;
             }
 
             Unit unitToReturn;
@@ -284,7 +284,7 @@ namespace LastBastion
 
             if (context.BarbCount == 0)
             {
-                throw new InvalidOperationException("Aucune unité n'est disponible!");
+                return;
             }
 
             Unit unitToReturn;
@@ -314,27 +314,33 @@ namespace LastBastion
                 Die();
                 Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375)/ 15), ((int)Position.Y - 375) / 15)].SetName = "Empty";
                 Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375) / 15), ((int)Position.Y - 375) / 15)].Building = null;
-                
                 return;
             }
 
             if(Target == null)
             {
                 if(Context.BarbCount > 0)
+                {
                     AcquireTarget();
+
+                }
                 return;
             }
 
-            if(Target.Position.IsInRange(Target.Position,Position,Range))
+            if(!Target.Position.IsInRange(Target.Position, Position, Range))
+            {
+                Target = null;
+                AcquireTarget();
+                if(Target == null)
+                {
+                    return;
+                }
+            }
+            if(base.Position.IsInRange(Position, Target.Position,Range))
             {
                 Attack(Target);
 
                 Target = (Target.Life == 0) ? null : Target;
-            }
-
-            if (!Target.Position.IsInRange(Target.Position, Position, Range))
-            {
-                Target = null;
                 AcquireTarget();
             }
         }
