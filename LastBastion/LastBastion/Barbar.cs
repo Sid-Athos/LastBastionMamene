@@ -67,6 +67,10 @@ namespace LastBastion
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
             if (!IsParalysed)
             {
+                if(EnemyTarget.Life ==0)
+                {
+                    AcquireTarget();
+                }
                 if (EnemyTarget == null && Context.BuildCount >= 1)
                 {
                     AcquireTarget();

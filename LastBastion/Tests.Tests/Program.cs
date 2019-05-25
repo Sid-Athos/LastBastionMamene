@@ -46,22 +46,7 @@ namespace Tests.Tests
             sid.Run();
             Map m = new Map(sid);
 
-            var grid = sid.GetGrid;
-            List<Vector2f> vecs = new List<Vector2f>();
-            Random r = new Random();
-
-            foreach(KeyValuePair<Vector2i,Hut> pair in grid)
-            {
-                if(!pair.Value.IsReveal)
-                {
-                    vecs.Add(pair.Value.GetVec2F);
-                }
-                Console.WriteLine("Position : [{0},{1}]",pair.Value.GetVec2F.X, pair.Value.GetVec2F.Y);
-            }
-            Console.WriteLine(vecs.Count);
-            int c = r.Next(vecs.Count);
-            Console.WriteLine(c);
-            Console.WriteLine("Position : [{0},{1}]", vecs[c].X,vecs[c].Y);
+            
             
             Console.ReadKey();
         }

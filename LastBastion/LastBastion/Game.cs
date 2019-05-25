@@ -90,10 +90,12 @@ namespace LastBastion
                 if (_countTimer == 300)
                 {
                     _sprites.musicStop("battle");
+                    _map.Wave.Update();
                 }
                 if (_countTimer == 301)
                 {
                     _sprites.musicPlay("zebby");
+
                 }
                 _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));

@@ -342,11 +342,6 @@ namespace LastBastion
                     if(IsTowerBuyable)
                     { 
                         BuyTower();
-                        Vector2i vec = new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y);
-                        Console.WriteLine("346 " + vec.X + "    " + vec.Y);
-                        Vector2f lol = new Vector2f(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y);
-                        Console.WriteLine("346 " + lol.X + "    " + lol.Y);
-                        Console.ReadKey();
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = name;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = 
                             new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 350, 350, 5, 2, 0, 5.0f, 4, GetMap, name, "Une habitation");

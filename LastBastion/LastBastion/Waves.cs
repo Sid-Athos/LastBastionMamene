@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFML.System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -39,13 +40,14 @@ namespace LastBastion
 
         internal void SpawnWave()
         {
+            Vectors placeToSpawn = SpawnLocation();
             GobAmount = Round * 4;
             var calc = GobAmount/ Round;
 
             for (int i = 0; i < calc; i++)
             {
-                Barbar b = new Barbar(50);
-                WavesContext.AddBarbar(b);
+                Barbar v1 = new Barbar(placeToSpawn.X, placeToSpawn.Y, 2.25f, "Barbare", 150, 3, 1, false, 3, 0.001f, WavesContext);
+                
             }
 
             uint magesToSpawn;
@@ -56,7 +58,6 @@ namespace LastBastion
                 for(int i = 0;  i < magesToSpawn;i++)
                 {
                     Mage m = new Mage(50);
-                    WavesContext.AddBarbar(m);
                 }
                 calc = magesToSpawn;
             }
@@ -78,11 +79,26 @@ namespace LastBastion
             {
                 
             }
-
-
                 Round++;
         }
         
+        internal Vectors SpawnLocation()
+        {
+            var grid = _context.GetGame.GetGrid;
+            List<Vector2f> vecs = new List<Vector2f>();
+            Random r = new Random();
+
+            foreach (KeyValuePair<Vector2i, Hut> pair in grid)
+            {
+                if (!pair.Value.IsReveal)
+                {
+                    vecs.Add(pair.Value.GetVec2F);
+                }
+            }
+            int c = r.Next(vecs.Count);
+            return  new Vectors(vecs[c].X, vecs[c].Y);
+        }
+
         public void Update()
         {
                 SpawnWave();

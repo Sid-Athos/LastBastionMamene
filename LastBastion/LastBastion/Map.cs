@@ -41,7 +41,6 @@ namespace LastBastion
             _buildings = new List<Building>();
             _projectiles = new List<Projectiles>();
             _waves = new Waves(this);
-
         }
         
 

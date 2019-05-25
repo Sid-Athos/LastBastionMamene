@@ -55,7 +55,6 @@ namespace LastBastion
         internal void Attack()
         {
             Projectiles p = new Projectiles(Position, Target,TowCont);
-            Console.WriteLine("Seterling"+ p);
             Context.AddProjectile(p);
         }
 
