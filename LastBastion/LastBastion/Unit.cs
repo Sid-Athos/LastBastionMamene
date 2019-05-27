@@ -83,12 +83,12 @@ namespace LastBastion
             set { _position = value;  }
         }
         
-        internal virtual void Attack(Unit unit)
+        public virtual void Attack(Unit unit)
         {
             
         }
 
-        internal virtual void Attack(Building unit)
+        public virtual void Attack(Building unit)
         {
 
             
@@ -128,7 +128,7 @@ namespace LastBastion
 
         internal void Burn(Building b)
         {
-            BurnIt = !IsBurned;
+            b.Burn();
         }
 
         Vectors FindClosestEnemy(Map map)
@@ -210,7 +210,7 @@ namespace LastBastion
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
-        internal virtual void Update()
+        public virtual void Update()
         {
 
         }
@@ -236,28 +236,31 @@ namespace LastBastion
             Map context = Context;
             List<Building> barbList = context.BuildList;
 
-            if (context.BarbCount == 0)
+            if (barbList.Count > s.Count)
             {
-                throw new InvalidOperationException("Aucune unité n'est disponible!");
-            }
+                if (context.BarbCount == 0)
+                {
+                    throw new InvalidOperationException("Aucune unité n'est disponible!");
+                }
 
-            Building unitToReturn;
+                Building unitToReturn;
 
-            barbList = Shuffle.Buildings(barbList);
+                barbList = Shuffle.Buildings(barbList);
 
-            foreach (var n in barbList)
-            {
-                if (!s.Contains(n))
-                    if (Position.IsInRange(Position, n.Position, Range))
-                    {
-                        unitToReturn = n;
-                        SetTarget(unitToReturn);
-                        return;
-                    }
+                foreach (var n in barbList)
+                {
+                    if (!s.Contains(n))
+                        if (Position.IsInRange(Position, n.Position, Range))
+                        {
+                            unitToReturn = n;
+                            SetTarget(unitToReturn);
+                            return;
+                        }
+                }
             }
         }
 
-        internal void AcquireTarget()
+        public void AcquireTarget()
         {
             Map context = Context;
             List<Building> buildList = context.BuildList;

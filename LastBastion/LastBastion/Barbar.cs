@@ -39,12 +39,12 @@ namespace LastBastion
             _count++;
         }
 
-        internal new void Die()
+        public new void Die()
         {
             Context.RemoveBarbar(this);
         }
 
-        internal override void Attack(Building unit)
+        public override void Attack(Building unit)
         {
 
             if (Dmg > (unit.Life + unit.Armor))
@@ -56,7 +56,7 @@ namespace LastBastion
             unit.Life -= (Dmg - unit.Armor);
         }
 
-        internal override void Attack(Unit unit)
+        public override void Attack(Unit unit)
         {
 
             if (Dmg > (unit.Life + unit.Armor))
@@ -68,15 +68,15 @@ namespace LastBastion
             unit.Life -= (Dmg - unit.Armor);
         }
 
-        internal override void Update()
+        public override void Update()
         {
             if (Life == 0)
             {
                 Die();
                 return;
             }
-            Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
-            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
+            //Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
+            //Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
             if (!IsParalysed)
             {
                 
@@ -119,13 +119,13 @@ namespace LastBastion
             }
         }
 
-        internal Building BarbTarget
+        public Building BarbTarget
         {
             get { return _target; }
             set { _target = value; }
         }
 
-        internal uint TimeSt
+        public uint TimeSt
         {
             get { return _timeStamp; }
             set { _timeStamp = value;}

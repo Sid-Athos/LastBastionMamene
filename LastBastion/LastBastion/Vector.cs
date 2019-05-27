@@ -27,14 +27,14 @@ namespace LastBastion
             set { _posY = value; }
         }
 
-       internal Vectors Movement(Vectors origin, Vectors arrival, uint timestamp,float speed,float range)
+       public Vectors Movement(Vectors origin, Vectors arrival, uint timestamp,float speed,float range)
         {
             Vectors moveVec = Substract(origin, arrival,range);
             Vectors normalizedVec =  Normalize(moveVec,speed);
              return AddVecs(origin,moveVec,speed);
         }
 
-        internal bool IsInRange(Vectors origin, Vectors arrival, float range)
+        public bool IsInRange(Vectors origin, Vectors arrival, float range)
         {
             float result = (float)(Math.Pow(arrival.X - origin.X, 2)+ Math.Pow(arrival.Y - origin.Y, 2));
 

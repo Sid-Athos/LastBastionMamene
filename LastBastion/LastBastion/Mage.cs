@@ -2,14 +2,14 @@
 
 namespace LastBastion
 {
-    internal class Mage : Unit
+    public class Mage : Unit
     {
         List<Building> _burned;
         uint _timeStamp;
         float _spellRange = 28f;
         uint _spellCd = 5;
         
-        internal Mage(
+        public Mage(
             float posX, float posY, float range,
             string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
             uint attackCooldown, float speed, Map context)
@@ -17,10 +17,10 @@ namespace LastBastion
             job, lifePoints, dmg, armor, isMoving,
             attackCooldown, speed, context)
         {
-
+            _burned = new List<Building>();
         }
 
-        internal List<Building> BurList => _burned;
+        public List<Building> BurList => _burned;
 
         internal Mage(
             uint life
@@ -32,11 +32,15 @@ namespace LastBastion
             
         }
 
-        internal void Ignite()
+        public void Ignite()
         {
-            Burn(Target);
-            BurList.Add(Target);
-            base.SwitchTarget(BurList);
+            if(EnemyTarget.IsBurned)
+            {
+                base.SwitchTarget(BurList);
+                return;
+            }
+            Burn(EnemyTarget);
+            BurList.Add(EnemyTarget);
         }
 
         internal new void Die()
@@ -44,7 +48,7 @@ namespace LastBastion
             Context.RemoveBarbar(this);
         }
 
-        internal new Building Target
+        public new Building Target
         {
             get { return base.EnemyTarget; }
             set { EnemyTarget = value; }
@@ -56,7 +60,7 @@ namespace LastBastion
             set { _timeStamp = value; }
         }
 
-        internal override void Update()
+        public override void Update()
         {
             AcquireTarget();
         }

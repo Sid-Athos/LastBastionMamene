@@ -6,7 +6,6 @@ namespace LastBastion
 {
     public class Tower : Building
     {
-
         Archer[] _slots;
         uint _rank;
         uint _dmg;
@@ -16,7 +15,6 @@ namespace LastBastion
         List<Projectiles> _proj;
         uint _timeStamp;
         bool _attacked = false;
-
 
         public Tower(float posX,
         float posY,
@@ -94,7 +92,7 @@ namespace LastBastion
             }
         }
 
-        internal List<Projectiles> ProjList => _proj;
+        public List<Projectiles> ProjList => _proj;
 
         public override Unit Target
         {
@@ -219,7 +217,7 @@ namespace LastBastion
             }
         }
 
-        internal void AddArcher(Archer u)
+        public void AddArcher(Archer u)
         {
             if(!u.IsInTower)
             {
@@ -305,7 +303,7 @@ namespace LastBastion
             }
         }
 
-        internal override void Update()
+        public override void Update()
         {
             Context.GetGame.Sprites.GetSprite("Tower").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Tower"));
@@ -336,6 +334,7 @@ namespace LastBastion
                     return;
                 }
             }
+
             if(base.Position.IsInRange(Position, Target.Position,Range))
             {
                 Attack(Target);

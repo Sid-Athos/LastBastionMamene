@@ -146,7 +146,7 @@ namespace LastBastion
         
         public uint Count => _count;
 
-        internal virtual void Update()
+        public virtual void Update()
         {
 
         }

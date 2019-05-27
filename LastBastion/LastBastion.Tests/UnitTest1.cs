@@ -2,7 +2,7 @@ using LastBastion;
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-/**
+
 namespace Tests
 {
     public class Tests
@@ -102,26 +102,34 @@ namespace Tests
         {
             Map var = new Map();
             Assert.That(var, Is.Not.Null);
-            Tower sido = new Tower(-1000000f, -10000000f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
+            Tower sido = new Tower(10f, 12f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
 
-            for (int i = 0; i < 6; i++)
+            
+            var job1 = Guid.NewGuid().ToString();
+            Barbar v1 = new Barbar(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            v1.AcquireTarget();
+            Assert.That(v1.EnemyTarget, Is.EqualTo(sido));
+            Tower faaaaaar = new Tower(100f, 120f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
+
+            while (!v1.Position.IsInRange(v1.Position, faaaaaar.Position, v1.Range))
             {
-                var job1 = Guid.NewGuid().ToString();
-                Barbar v1 = new Barbar(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
-                Assert.That(v1.EnemyTarget, Is.EqualTo(sido));
+                v1.Position = v1.Position.Movement(v1.Position, faaaaaar.Position, 10, v1.Speed, v1.Range);
             }
-            sido.Update();
-            Assert.That(sido.Target, Is.Not.Null);
-            sido.Die();
-            sido = new Tower(1000000f, 10000000f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
+            sido.AcquireTarget();
+            Assert.That(sido.Target, Is.EqualTo(null));
+            Barbar v2 = new Barbar(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
+            sido.AcquireTarget();
+            Assert.That(sido.Target, Is.EqualTo(v2));
+
+            /**sido = new Tower(1000000f, 10000000f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
 
             for (int i = 0; i < 6; i++)
             {
-                var job1 = Guid.NewGuid().ToString();
-                Barbar v1 = new Barbar(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
+                job1 = Guid.NewGuid().ToString();
+                v1 = new Barbar(10.9f, 11.2f, 0.1f, job1, 150, 10, 3, false, 2, 1.5f, var);
                 v1.AcquireTarget();
                 Assert.That(v1.EnemyTarget, Is.EqualTo(sido));
-            }
+            }*/
         }
 
         [Test]
@@ -184,13 +192,14 @@ namespace Tests
         }
 
         [Test]
-        public void T9_Tower_Acquire_Targets_Within_Constraints()
+        public void T9_Tower_Acquire_Targets_Within_Range()
         {
             Map var = new Map();
             Tower sido = new Tower(0f, 0f, 250, 250, 30, 5, 1, 25.0f, 5, var,"Tower","tour");
             
             Assert.That(sido, Is.Not.Null);
-            Assert.Throws<InvalidOperationException>(() => sido.AcquireTarget());
+            sido.AcquireTarget();
+            Assert.That(sido.Target,Is.EqualTo(null));
             
             var job2 = Guid.NewGuid().ToString();
 
@@ -223,5 +232,21 @@ namespace Tests
             Assert.That(map.BarbCount, Is.EqualTo((8)));
         }
 
+        [Test]
+        public void t11_Mages_Burn_Everything_In_Range()
+        {
+            Map var = new Map();
+            Tower sido = new Tower(0f, 0f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
+
+            
+            var job2 = Guid.NewGuid().ToString();
+            Mage v2 = new Mage(12f , 10f, 30f, job2, 150, 10, 3, false, 2, 5f, var);
+            v2.AcquireTarget();
+            Assert.That(v2.EnemyTarget, Is.EqualTo(sido));
+
+            v2.Ignite();
+            Assert.That(sido.IsBurned);
+            Assert.That(v2.BurList.Count, Is.EqualTo(1));
+        }
     }
-}*/
+}

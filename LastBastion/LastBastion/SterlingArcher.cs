@@ -58,7 +58,7 @@ namespace LastBastion
             TowCont.AddProjectile(p);
         }
 
-        internal override void Update()
+        public override void Update()
         {
             if(!_inTower)
             {

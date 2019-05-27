@@ -2,7 +2,7 @@
 
 namespace LastBastion
 {
-    internal class Projectiles
+    public class Projectiles
     {
         Vectors _position;
         Tower _tow;
