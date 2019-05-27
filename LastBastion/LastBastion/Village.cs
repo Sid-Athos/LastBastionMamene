@@ -16,6 +16,7 @@ namespace LastBastion
         uint _stoneStock;
         uint _woodStock;
         uint _villagerStock;
+        uint _maxVillager;
 
         public Village(Map map)
         {
@@ -27,10 +28,11 @@ namespace LastBastion
             _foodStock = 150;
             _stoneStock = 150;
             _villagerStock = 5;
+            _maxVillager = _villagerStock;
             SetCastle();
             SetNearby();
         }
-
+        public uint MaxVillager => _maxVillager;
         public void RessourceProd()
         {
             foreach(var item in _map.GetGame.GetGrid )
@@ -175,6 +177,7 @@ namespace LastBastion
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
                         _map.GetVillage._villagerStock += 5;
+                        _maxVillager += 5;
                     break;
                     case "Sawmill":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
@@ -199,11 +202,13 @@ namespace LastBastion
                     case "House LV2":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
                         _map.GetVillage._villagerStock += 5;
-                    break;
+                        _maxVillager += 5;
+                        break;
                     case "House LV3":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
                         _map.GetVillage._villagerStock += 5;
-                    break;
+                        _maxVillager += 5;
+                        break;
                     default:
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
                     break;

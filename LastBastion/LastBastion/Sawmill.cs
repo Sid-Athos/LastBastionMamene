@@ -9,7 +9,7 @@ namespace LastBastion
         uint _rank = 1;
 
         public Sawmill(float posX, float posY, Map context)
-            : base(posX, posY, 100, 100, 5, 1, 50, 0, 10, 2, context,"Sawmill", "test")
+            : base(posX, posY, 100, 100, 5, 1, 50, 0, 10, 2, context,"Sawmill", "Increase your wood recolt \n by 5 per rank.")
         {
         }
     }

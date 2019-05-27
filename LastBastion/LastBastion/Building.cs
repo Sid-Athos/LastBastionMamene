@@ -54,7 +54,11 @@ namespace LastBastion
             _armor++;
         }
 
-        public string Description => _desc;
+        public string Description
+        {
+            get { return _desc; }
+            set { _desc = value; }
+        }
 
         public void IncHealth()
         {

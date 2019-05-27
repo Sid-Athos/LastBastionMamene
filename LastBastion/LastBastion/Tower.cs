@@ -30,7 +30,7 @@ namespace LastBastion
          armor,
          1,
          10, 0, 60, 2,
-         context,"Tower", "test")
+         context,"Tower", "Main defence to your kingdom, \n be careful to maintain them well.")
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;

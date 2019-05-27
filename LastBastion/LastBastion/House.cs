@@ -10,7 +10,7 @@ namespace LastBastion
         uint _rent = 1;
 
         public House(float posX, float posY, uint villager, uint rent, Map context)
-            : base(posX, posY, 100, 100, 5, 1, 30, 50, 10, 0, context,"House", "test")
+            : base(posX, posY, 100, 100, 5, 1, 30, 50, 10, 0, context,"House", "Userfull increase your maximum \n population by 5 per rank.")
         {
             _villager = villager;
             _rent = rent;

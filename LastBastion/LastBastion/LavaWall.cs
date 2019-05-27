@@ -16,11 +16,13 @@ namespace LastBastion
             uint armor, uint rank, uint dmg, float range, uint aaCooldown,
             uint woodCost, uint foodCost, uint stoneCost, uint villagerCost,
             Map context, string name, string desc)
-            : base(posX, posY, 200, 200,20,1, 20, 0, 40, 1, context, "LavaWall", "test")
+            : base(posX, posY, context)
         {
             _dmg = dmg;
             _aaCooldown = aaCooldown;
             _range = range;
+            Name = "Lava Wall";
+            Description = "Better wall and useful for \n showering enemies with lava.";
         }
     }
 }

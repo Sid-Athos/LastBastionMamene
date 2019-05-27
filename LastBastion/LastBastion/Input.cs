@@ -20,16 +20,6 @@ namespace LastBastion
         }
         public void IsKeyPressed(object sender, KeyEventArgs e)
         {
-            if (_game.GetMenuBuilder.IsOpen)
-            {
-                if (e.Code == Keyboard.Key.Enter)
-                {
-                    if (_game.GetMenuBuilder.SelectTarget() != "bad")
-                    {
-                        _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
-                    }
-                }
-            }
             switch (e.Code)
             {
                 case Keyboard.Key.Space:
@@ -74,18 +64,6 @@ namespace LastBastion
                             _game.GetWindow.GetView.MoveRight(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X + 1, _game.GetWindow.GetView.Y)].GetVec2F);
                         }
                         break;
-                    case Keyboard.Key.Up:
-                        if (_game.GetWindow.GetView.Render.Size.X > 100)
-                        {
-                            _game.GetWindow.GetView.Render.Size = new Vector2f(_game.GetWindow.GetView.Render.Size.X - 15, _game.GetWindow.GetView.Render.Size.Y - 15);
-                        }
-                        break;
-                    case Keyboard.Key.Down:
-                        if (_game.GetWindow.GetView.Render.Size.X < 400)
-                        {
-                            _game.GetWindow.GetView.Render.Size = new Vector2f(_game.GetWindow.GetView.Render.Size.X + 15, _game.GetWindow.GetView.Render.Size.Y + 15);
-                        }
-                        break;
                     case Keyboard.Key.Left:
                         _game.GetMenuBuilder.UWantToMoveToTheLeftInTheMenu();
                         break;
@@ -101,7 +79,14 @@ namespace LastBastion
                     case Keyboard.Key.B:
                         Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, 1.0f, "Barbare", 150, 3, 2, false, 3, 0.001f, _game.Map);
                         break;
-                    case Keyboard.Key.C:
+                    case Keyboard.Key.Enter:
+                        if (_game.GetMenuBuilder.IsOpen)
+                        {
+                            if (_game.GetMenuBuilder.SelectTarget() != "bad")
+                            {
+                                _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                            }
+                        }
                         break;
                     case Keyboard.Key.E:
                         break;
@@ -120,9 +105,13 @@ namespace LastBastion
                     case Keyboard.Key.K:
                         break;
                     case Keyboard.Key.L:
-                        _save.LeauAdd();
+                        //_save.LeauAdd();
                         break;
                     case Keyboard.Key.M:
+                        break;
+                    case Keyboard.Key.Up:
+                        break;
+                    case Keyboard.Key.Down:
                         break;
                     case Keyboard.Key.N:
                         break;

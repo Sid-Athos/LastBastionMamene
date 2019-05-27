@@ -18,6 +18,7 @@ namespace LastBastion
         Input _input;
         Map _map;
         MenuBuilder _menu;
+        StopMenu _stopMenu;
         //Mouse
         Vector2f _cursorPosition;
         // Timer And Stop
@@ -29,6 +30,8 @@ namespace LastBastion
         int _lastProd;
         //Random
         Random _random = new Random();
+        //Music
+        bool _isPlayMusic;
 
         public Game()
         {
@@ -46,18 +49,17 @@ namespace LastBastion
 
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
 
-            _countTimer = 239;
+            _countTimer = 0;
             _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
+            _isPlayMusic = false;
             
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
+            _stopMenu = new StopMenu(this);
             _sampleBuilding = InitializeBuildingSample();
-
-            _sprites.musicStart();
-            _sprites.musicPlay("Zebby");
-
+            
             _window.Render.SetMouseCursorVisible(false);
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
@@ -78,21 +80,15 @@ namespace LastBastion
                 {
                     TimerUpdate();
                 }
-                if (_countTimer == 240 )
+                if (_countTimer == 0 && _isPlayMusic == false)
                 {
-                    _sprites.musicStop("zebby");
+                    _sprites.Music(0).Play();
+                    _isPlayMusic = true;
                 }
-                if (_countTimer == 241)
+                if (_countTimer == 60 && _isPlayMusic == true)
                 {
-                    _sprites.musicPlay("battle");
-                }
-                if (_countTimer == 300)
-                {
-                    _sprites.musicStop("battle");
-                }
-                if (_countTimer == 301)
-                {
-                    _sprites.musicPlay("zebby");
+                    _sprites.Music(0).Stop();
+                    _isPlayMusic = false;
                 }
                 _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));
@@ -131,11 +127,6 @@ namespace LastBastion
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();
-           if (!_pause)
-            {
-                _map.SamouraïDeCoke();
-                // Draw menu
-            }
             //UI
             if (_menu.IsOpen)
             {
@@ -147,6 +138,12 @@ namespace LastBastion
                 _menu.MenuDesc();
             }
             _menu.UpdateTopBar();
+            if (!_pause)
+            {
+                _map.SamouraïDeCoke();
+                _stopMenu.Update();
+                // Draw menu
+            }
         }
 
         public int RandomNumber(int min, int max) => _random.Next(min, max);
@@ -184,13 +181,13 @@ namespace LastBastion
                     MinutePass = true;
                 }
             }
-            if (_countTimer == 361)
+            if (_countTimer == 61)
             {
                 _cycle++;
                 _countTimer = 1;
             }
         }
-
+        //Test Cursor
         public void MoveCursor(object sender, MouseMoveEventArgs e)
         {
             _cursorPosition = new Vector2f((float)e.X, (float)e.Y);
