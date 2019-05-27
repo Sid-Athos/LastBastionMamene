@@ -30,7 +30,41 @@ namespace LastBastion
                     _game.Close();
                     break;
             }
-
+            if (e.Code == Keyboard.Key.Z || e.Code == Keyboard.Key.Up)
+            {
+                if (_game.IsStop)
+                {
+                    if (_game.StopMenu.Target == 1)
+                    {
+                        _game.StopMenu.Target = 0;
+                    }
+                }
+            }
+            if (e.Code == Keyboard.Key.S || e.Code == Keyboard.Key.Down)
+            {
+                if (_game.IsStop)
+                {
+                    if (_game.StopMenu.Target == 0)
+                    {
+                        _game.StopMenu.Target = 1;
+                    }
+                }
+            }
+            if (e.Code == Keyboard.Key.Enter)
+            {
+                if (_game.IsStop)
+                {
+                    if (_game.StopMenu.Target == 0)
+                    {
+                        _save.CreateTXT();
+                    }
+                    if (_game.StopMenu.Target == 1)
+                    {
+                        _game.Close();
+                        Launcher launcher = new Launcher();
+                    }
+                }
+            }
             if (!_game.IsStop)
             {
                 //Console.WriteLine("[{0},{1}]", _game.GetWindow.GetView.X, _game.GetWindow.GetView.Y);
@@ -74,7 +108,6 @@ namespace LastBastion
                         _game.GetMenuBuilder.OpenClose();
                         break;
                     case Keyboard.Key.P:
-                        _save.CreateTXT();
                         break;
                     case Keyboard.Key.B:
                         Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, 1.0f, "Barbare", 150, 3, 2, false, 3, 0.001f, _game.Map);

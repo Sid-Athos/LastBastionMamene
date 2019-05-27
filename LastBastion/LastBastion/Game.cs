@@ -159,8 +159,9 @@ namespace LastBastion
 
         //Timer And Stop
         public int GetTimer => _countTimer;
-        public void Pause() { _pause = !_pause; }
+        public void Pause() { _pause = !_pause; _stopMenu.Deploy(); }
         public bool IsStop => !_pause;
+        public StopMenu StopMenu => _stopMenu;
         public void TimerUpdate()
         {
             if (DateTime.Now.Second == 1 && MinutePass == true)

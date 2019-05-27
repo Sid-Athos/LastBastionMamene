@@ -105,6 +105,7 @@ namespace LastBastion
         public void ToZero () { _currentPos = 0; }
         public void DrawMenu()
         {
+            _game.Sprites.Text.Color = new Color(255, 255, 255);
             int right;
             int left;
             if (_currentPos == _spriteBar.Count - 1)
@@ -210,6 +211,7 @@ namespace LastBastion
 
         public void MenuDesc()
         {
+            _game.Sprites.Text.Color = new Color(255, 255, 255);
             //Font
             _game.Sprites.GetSprite("BotBar").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - _game.GetWindow.GetView.Render.Size.X / 2, _game.GetWindow.GetView.Render.Center.Y + _game.GetWindow.GetView.Render.Size.Y / 2 - 120);
             _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("BotBar"));
