@@ -254,5 +254,16 @@ namespace Tests
             Assert.That(v2.EnemyTarget, Is.EqualTo(null));
 
         }
+
+        [Test]
+        public void T13_Land_Units_Cant_Attack_Flying_Units()
+        {
+            Map maps = new Map();
+
+            var job1 = Guid.NewGuid().ToString();
+            Barbar v3 = new Barbar(12.7f, (13.7f), 0.1f, job1, 150, 10, 3, false, 2, 1.5f, maps);
+
+
+        }
     }
 }
