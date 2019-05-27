@@ -32,93 +32,79 @@ namespace LastBastion
             SetCastle();
             SetNearby();
         }
-        public uint MaxVillager => _maxVillager;
+
+        public int Area => _area;
+        public Map GetMap => _map;
+        public uint MaxVillager
+        {
+            get { return _maxVillager; }
+            set { _maxVillager = value; }
+        }
+        public uint Villager
+        {
+            get { return _villagerStock; }
+            set { _villagerStock = value; }
+        }
+        public uint Wood
+        {
+            get { return _woodStock; }
+            set { _woodStock = value; }
+        }
+        public uint Food
+        {
+            get { return _foodStock; }
+            set { _foodStock = value; }
+        }
+        public uint Stone
+        {
+            get { return _stoneStock; }
+            set { _stoneStock = value; }
+        }
         public void RessourceProd()
         {
             foreach(var item in _map.GetGame.GetGrid )
             {
                 if(item.Value.GetName == "Farm")
                 {
-                    _foodStock += (5 * item.Value.Building.Rank);
-                    if (_foodStock > 9999)
+                    Food += (5 * item.Value.Building.Rank);
+                    if (Food > 9999)
                     {
-                        _foodStock = 9999;
+                        Food = 9999;
                     }
                 }
                 if (item.Value.GetName == "Sawmill")
                 {
-                    _woodStock += (5 * item.Value.Building.Rank);
-                    if (_woodStock > 9999)
+                    Wood += (5 * item.Value.Building.Rank);
+                    if (Wood > 9999)
                     {
-                        _woodStock = 9999;
+                        Wood = 9999;
                     }
                 }
                 if (item.Value.GetName == "Mine")
                 {
-                    _stoneStock += (5 * item.Value.Building.Rank);
-                    if(_stoneStock > 9999)
+                    Stone += (5 * item.Value.Building.Rank);
+                    if(Stone > 9999)
                     {
-                        _stoneStock = 9999;
+                        Stone = 9999;
                     }
                 }
                 if (item.Value.GetName == "House")
                 {
                     if(item.Value.Building.Rank <= 2)
                     {
-                        _foodStock -= 1;
+                        Food -= 1;
                     }
                     else
                     {
-                        _foodStock -= 2;
+                        Food -= 2;
                     }
-                    if (_foodStock > 9999)
+                    if (Food > 9999)
                     {
-                        _foodStock = 9999;
+                        Food = 9999;
                     }
                 }
             }
         }
-
-        /*public bool IsEnoughRessource(string building)
-        {
-            if (building == "Wall" && _woodStock >= 10 && _stoneStock >= 20)
-            {
-                _woodStock -= 10;
-                _stoneStock -= 20;
-                return true;
-            }
-            if (building == "House" && _woodStock >= 30 && _stoneStock >= 10)
-            {
-                _woodStock -= 30;
-                _stoneStock -= 10;
-                return true;
-            }
-            if (building == "Mine" && _woodStock >= 40 && _stoneStock >= 20)
-            {
-                _woodStock -= 40;
-                _stoneStock -= 20;
-                return true;
-            }
-            if (building == "Farm" && _woodStock >= 40 && _stoneStock >= 10)
-            {
-                _woodStock -= 40;
-                _stoneStock -= 10;
-                return true;
-            }
-            if (building == "Sawmill" && _woodStock >= 50 && _stoneStock >= 10)
-            {
-                _woodStock -= 50;
-                _stoneStock -= 10;
-                return true;
-            }
-            if (building == "Tower" && _woodStock >= 10 && _stoneStock >= 60)
-            {
-                _woodStock -= 10;
-                _stoneStock -= 60;
-                return true;
-            }
-            return false;
-        }*/
 
         public void SetCastle()
         {
@@ -157,27 +143,41 @@ namespace LastBastion
             }
         }
 
+        public bool BuildingCost(string name)
+        {
+            if(_map.GetGame.SamplerBuilding[name].WoodCost <= Wood && _map.GetGame.SamplerBuilding[name].StoneCost <= Stone &&
+                _map.GetGame.SamplerBuilding[name].FoodCost <= Food && _map.GetGame.SamplerBuilding[name].VillagerCost <= Villager)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void BuildingPayement()
+        {
+            Wood -= _map.GetGame.SamplerBuilding[_buildingName].WoodCost;
+            Stone -= _map.GetGame.SamplerBuilding[_buildingName].StoneCost;
+            Food -= _map.GetGame.SamplerBuilding[_buildingName].FoodCost;
+            Villager -= _map.GetGame.SamplerBuilding[_buildingName].VillagerCost;
+        }
+
         public void CreateBuilding(string name)
         {
             _buildingName = name;
 
-            if (_map.GetGame.SamplerBuilding[_buildingName].WoodCost <= _woodStock &&
-                _map.GetGame.SamplerBuilding[_buildingName].StoneCost <= _stoneStock &&
-                _map.GetGame.SamplerBuilding[_buildingName].FoodCost <= _foodStock &&
-                _map.GetGame.SamplerBuilding[_buildingName].VillagerCost <= _villagerStock)
+            if (BuildingCost(_buildingName))
             {
-                _woodStock -= _map.GetGame.SamplerBuilding[_buildingName].WoodCost;
-                _stoneStock -= _map.GetGame.SamplerBuilding[_buildingName].StoneCost;
-                _foodStock -= _map.GetGame.SamplerBuilding[_buildingName].FoodCost;
-                _villagerStock -= _map.GetGame.SamplerBuilding[_buildingName].VillagerCost;
-
+                BuildingPayement();
                 switch (_buildingName)
                 {
                     case "House":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
-                        _map.GetVillage._villagerStock += 5;
-                        _maxVillager += 5;
+                        Villager += 5;
+                        MaxVillager += 5;
                     break;
                     case "Sawmill":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
@@ -199,15 +199,15 @@ namespace LastBastion
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Wall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
                     break;
-                    case "House LV2":
+                    case "House Lv2":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
-                        _map.GetVillage._villagerStock += 5;
-                        _maxVillager += 5;
+                        Villager += 5;
+                        MaxVillager += 5;
                         break;
-                    case "House LV3":
+                    case "House Lv3":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
-                        _map.GetVillage._villagerStock += 5;
-                        _maxVillager += 5;
+                        Villager += 5;
+                        MaxVillager += 5;
                         break;
                     default:
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
@@ -418,12 +418,5 @@ namespace LastBastion
             _map.GetGame.Sprites.GetSprite("Castle").Position = _map.GetGame.GetGrid[new Vector2i(-1, -1)].GetVec2F;
             _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Castle"));
         }
-
-        public uint FoodStock => _foodStock;
-        public uint WoodStock => _woodStock;
-        public uint StoneStock => _stoneStock;
-        public uint VillagerStock => _villagerStock;
-        public int Area => _area;
-        public Map GetMap => _map;
     }
 }
