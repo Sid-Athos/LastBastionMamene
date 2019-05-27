@@ -18,6 +18,8 @@ namespace LastBastion
             attackCooldown, speed, context)
         {
             _burned = new List<Building>();
+            context.AddBarbar(this);
+
         }
 
         public List<Building> BurList => _burned;
@@ -34,13 +36,17 @@ namespace LastBastion
 
         public void Ignite()
         {
-            if(EnemyTarget.IsBurned)
+            if(EnemyTarget != null)
             {
-                base.SwitchTarget(BurList);
-                return;
+                if(EnemyTarget.IsBurned)
+                {
+                    base.SwitchTarget(BurList);
+                    return;
+                }
+                Burn(EnemyTarget);
+                BurList.Add(EnemyTarget);
             }
-            Burn(EnemyTarget);
-            BurList.Add(EnemyTarget);
+            base.SwitchTarget(BurList);
         }
 
         internal new void Die()

@@ -98,7 +98,7 @@ namespace Tests
         }
 
         [Test]
-        public void T5_Towers_Switch_Targets_If_Enemy_Goes_Out_Of_Range()
+        public void T6_Towers_Switch_Targets_If_Enemy_Goes_Out_Of_Range()
         {
             Map var = new Map();
             Assert.That(var, Is.Not.Null);
@@ -133,7 +133,7 @@ namespace Tests
         }
 
         [Test]
-        public void T6_Archers_are_created_join_towers_within_limits_Plus_Tower_Upgrade()
+        public void T7_Archers_are_created_join_towers_within_limits_Plus_Tower_Upgrade()
         {
             Map var = new Map();
 
@@ -154,7 +154,7 @@ namespace Tests
         }
 
         [Test]
-        public void T7_Projectiles_Created_Equal_To_Tower_Plus_Archar_Count_On_Attack()
+        public void T8_Projectiles_Created_Equal_To_Tower_Plus_Archar_Count_On_Attack()
         {
             Map var = new Map();
 
@@ -172,7 +172,7 @@ namespace Tests
         }
 
         [Test]
-        public void T8_Units_Move_Toward_Towers()
+        public void T9_Units_Move_Toward_Towers()
         {
             Map var = new Map();
 
@@ -192,7 +192,7 @@ namespace Tests
         }
 
         [Test]
-        public void T9_Tower_Acquire_Targets_Within_Range()
+        public void T10_Tower_Acquire_Targets_Within_Range()
         {
             Map var = new Map();
             Tower sido = new Tower(0f, 0f, 250, 250, 30, 5, 1, 25.0f, 5, var,"Tower","tour");
@@ -219,7 +219,7 @@ namespace Tests
         }
 
         [Test]
-        public void t10_Waves_Create_The_Correct_Amout_of_Ennemies()
+        public void T11_Waves_Create_The_Correct_Amout_of_Ennemies()
         {
             Game sid = new Game();
             sid.Run();
@@ -233,12 +233,13 @@ namespace Tests
         }
 
         [Test]
-        public void t11_Mages_Burn_Everything_In_Range()
+        public void T12_Mages_Burn_Everything_In_Range()
         {
             Map var = new Map();
             Tower sido = new Tower(0f, 0f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
+            Tower tido = new Tower(0f, 0f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
 
-            
+
             var job2 = Guid.NewGuid().ToString();
             Mage v2 = new Mage(12f , 10f, 30f, job2, 150, 10, 3, false, 2, 5f, var);
             v2.AcquireTarget();
@@ -247,6 +248,11 @@ namespace Tests
             v2.Ignite();
             Assert.That(sido.IsBurned);
             Assert.That(v2.BurList.Count, Is.EqualTo(1));
+            v2.Ignite();
+            Assert.That(v2.BurList.Count, Is.EqualTo(2));
+            v2.Ignite();
+            Assert.That(v2.EnemyTarget, Is.EqualTo(null));
+
         }
     }
 }

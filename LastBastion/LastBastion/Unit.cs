@@ -257,6 +257,11 @@ namespace LastBastion
                             return;
                         }
                 }
+            } else
+            {
+                Building b = null;
+                SetTarget(b);
+
             }
         }
 
