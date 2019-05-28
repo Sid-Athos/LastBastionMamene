@@ -194,13 +194,13 @@ namespace LastBastion
 
         internal bool BurnIt { set { _burned = value; } }
 
-        bool IsMoving => _isMoving;
+        internal bool IsMoving => _isMoving;
 
         internal bool IsInTower => _inTower;
 
-        string Job => _job;
+        internal string Job => _job;
 
-        public float Range => _range;
+        internal float Range => _range;
 
         internal uint Dmg => _dmg;
 
@@ -236,24 +236,33 @@ namespace LastBastion
             Map context = Context;
             List<Building> barbList = context.BuildList;
 
-            if (context.BarbCount == 0)
+            if (barbList.Count > s.Count)
             {
-                throw new InvalidOperationException("Aucune unité n'est disponible!");
+                if (context.BarbCount == 0)
+                {
+                    throw new InvalidOperationException("Aucune unité n'est disponible!");
+                }
+
+                Building unitToReturn;
+
+                barbList = Shuffle.Buildings(barbList);
+
+                foreach (var n in barbList)
+                {
+                    if (!s.Contains(n))
+                        if (Position.IsInRange(Position, n.Position, Range))
+                        {
+                            unitToReturn = n;
+                            SetTarget(unitToReturn);
+                            return;
+                        }
+                }
             }
-
-            Building unitToReturn;
-
-            barbList = Shuffle.Buildings(barbList);
-
-            foreach (var n in barbList)
+            else
             {
-                if (!s.Contains(n))
-                    if (Position.IsInRange(Position, n.Position, Range))
-                    {
-                        unitToReturn = n;
-                        SetTarget(unitToReturn);
-                        return;
-                    }
+                Building b = null;
+                SetTarget(b);
+
             }
         }
 

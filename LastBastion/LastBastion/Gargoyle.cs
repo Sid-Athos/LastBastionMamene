@@ -4,19 +4,22 @@ using System.Text;
 
 namespace LastBastion
 {
-    internal class Gargoyle : Unit
+    public class Gargoyle : Unit
     {
+        bool _flying = true;
+        uint _timeStamp;
+
         internal Gargoyle(
-            float posX, 
-            float posY, 
+            float posX,
+            float posY,
             float range,
-            string job, 
-            uint lifePoints, 
-            uint dmg, 
-            uint armor, 
+            string job,
+            uint lifePoints,
+            uint dmg,
+            uint armor,
             bool isMoving,
-            uint attackCooldown, 
-            float speed, 
+            uint attackCooldown,
+            float speed,
             Map context)
             : base(posX, posY, range,
             job, lifePoints, dmg, armor, isMoving,
@@ -30,6 +33,31 @@ namespace LastBastion
             : base(life)
         {
 
+        }
+
+        internal bool Flying => _flying;
+
+        internal new Building Target
+        {
+            get { return base.EnemyTarget; }
+            set { EnemyTarget = value; }
+        }
+
+        internal uint TimeSt
+        {
+            get { return _timeStamp; }
+            set { _timeStamp = value; }
+        }
+
+        internal new Building Target
+        {
+            get { return base.EnemyTarget; }
+            set { EnemyTarget = value; }
+        }
+
+        internal override void Update()
+        {
+            AcquireTarget();
         }
     }
 }

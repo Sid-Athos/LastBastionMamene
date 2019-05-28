@@ -303,6 +303,9 @@ namespace LastBastion
                         return;
                     }
             }
+            unitToReturn = null;
+            Target = unitToReturn;
+            SetAllTowerUnitsTarget();
         }
 
         internal override void Update()

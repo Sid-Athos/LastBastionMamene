@@ -58,13 +58,14 @@ namespace LastBastion
 
         internal override void Attack(Unit unit)
         {
+            if (unit.Job != "Gargoyle")
 
-            if (Dmg > (unit.Life + unit.Armor))
-            {
+                if (Dmg > (unit.Life + unit.Armor))
+                {
                 unit.Life = 0;
                 unit.Die();
                 return;
-            }
+                }
             unit.Life -= (Dmg - unit.Armor);
         }
 
@@ -130,19 +131,5 @@ namespace LastBastion
             get { return _timeStamp; }
             set { _timeStamp = value;}
         }
-
-        
-
-        /**public Building AquireTarget()
-        {
-            Map context = base.Context;
-            List<Building> buildings = Context.BuildList;
-
-            foreach(var n in buildings)
-            {
-
-            }
-            return;
-        }*/
     }
 }

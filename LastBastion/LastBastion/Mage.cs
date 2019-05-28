@@ -34,9 +34,14 @@ namespace LastBastion
 
         internal void Ignite()
         {
-            Burn(Target);
-            BurList.Add(Target);
-            base.SwitchTarget(BurList);
+            if (EnemyTarget != null)
+                if (EnemyTarget.IsBurned)
+                {
+                    base.SwitchTarget(BurList);
+                    return;
+                }
+                Burn(EnemyTarget);
+                BurList.Add(EnemyTarget);
         }
 
         internal new void Die()
