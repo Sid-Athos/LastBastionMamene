@@ -4,12 +4,13 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Gargoyle : Unit
+    internal class Dracula : Unit
     {
+        uint _spellCd = 3;
         bool _flying = true;
         uint _timeStamp;
 
-        internal Gargoyle(
+        internal Dracula(
             float posX,
             float posY,
             float range,
@@ -24,13 +25,6 @@ namespace LastBastion
             : base(posX, posY, range,
             job, lifePoints, dmg, armor, isMoving,
             attackCooldown, speed, context)
-        {
-
-        }
-
-        internal Gargoyle(
-            uint life)
-            : base(life)
         {
 
         }
@@ -51,17 +45,19 @@ namespace LastBastion
 
         internal override void Update()
         {
-            if (Life == 0)
+            AcquireTarget();
+        }
+        internal override void Attack(Unit unit)
+        {
+            if (Dmg > (unit.Life + unit.Armor))
             {
-                Die();
+                unit.Life = 0;
+                unit.Die();
                 return;
             }
-            Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
-            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
-            if (EnemyTarget == null)
-                AcquireTarget();
+            
+            unit.Life -= (Dmg - unit.Armor);
+            Life += Dmg;
         }
-
-
     }
 }

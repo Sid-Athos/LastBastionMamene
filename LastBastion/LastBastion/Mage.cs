@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SFML.System;
+using System.Collections.Generic;
 
 namespace LastBastion
 {
@@ -63,6 +64,14 @@ namespace LastBastion
 
         internal override void Update()
         {
+            if (Life == 0)
+            {
+                Die();
+                return;
+            }
+            Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
+            if(EnemyTarget == null)
             AcquireTarget();
         }
     }
