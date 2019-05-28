@@ -66,7 +66,18 @@ namespace LastBastion
             {
                 if(item.Value.GetName == "Farm")
                 {
-                    Food += (5 * item.Value.Building.Rank);
+                    if (_map.GetGame.Event == "AFood")
+                    {
+                        Food += (uint)((5 * item.Value.Building.Rank) * 1.15f / 1);
+                    }
+                    else if (_map.GetGame.Event == "PFood")
+                    {
+                        Food += (uint)((5 * item.Value.Building.Rank) * 0.85f / 1);
+                    }
+                    else
+                    {
+                        Food += (5 * item.Value.Building.Rank);
+                    }
                     if (Food > 9999)
                     {
                         Food = 9999;
@@ -74,7 +85,18 @@ namespace LastBastion
                 }
                 if (item.Value.GetName == "Sawmill")
                 {
-                    Wood += (5 * item.Value.Building.Rank);
+                    if (_map.GetGame.Event == "AWood")
+                    {
+                        Wood += (uint)((5 * item.Value.Building.Rank) * 1.15f / 1);
+                    }
+                    else if (_map.GetGame.Event == "PWood")
+                    {
+                        Wood += (uint)((5 * item.Value.Building.Rank) * 0.85f / 1);
+                    }
+                    else
+                    {
+                        Wood += (5 * item.Value.Building.Rank);
+                    }
                     if (Wood > 9999)
                     {
                         Wood = 9999;
@@ -82,7 +104,18 @@ namespace LastBastion
                 }
                 if (item.Value.GetName == "Mine")
                 {
-                    Stone += (5 * item.Value.Building.Rank);
+                    if (_map.GetGame.Event == "AStone")
+                    {
+                        Stone += (uint)((5 * item.Value.Building.Rank) * 1.15f / 1);
+                    }
+                    else if (_map.GetGame.Event == "PStone")
+                    {
+                        Stone += (uint)((5 * item.Value.Building.Rank) * 0.85f / 1);
+                    }
+                    else
+                    {
+                        Stone += (5 * item.Value.Building.Rank);
+                    }
                     if(Stone > 9999)
                     {
                         Stone = 9999;

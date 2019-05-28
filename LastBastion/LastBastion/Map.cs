@@ -123,7 +123,7 @@ namespace LastBastion
         {
             foreach (var item in _game.GetGrid)
             {
-                if (_game.GetTimer > 180)
+                if (_game.Turn == "WaveTurn")
                 {
                     _UI.Print("TileWinter", item.Value.GetVec2F);
                 }

@@ -16,6 +16,7 @@ namespace LastBastion
         Dictionary<string, Building> _sampleBuilding;
         SpritesManager _sprites;
         Input _input;
+        EventCycle _event;
         Map _map;
         MenuBuilder _menu;
         StopMenu _stopMenu;
@@ -28,6 +29,8 @@ namespace LastBastion
         bool _pause;
         int _cycle;
         int _lastProd;
+        //Turn
+        string _turn;
         //Random
         Random _random = new Random();
         //Music
@@ -50,6 +53,8 @@ namespace LastBastion
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
 
             _countTimer = 0;
+            _cycle = 1;
+            _turn = "PlayerTurn";
             _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
@@ -58,6 +63,7 @@ namespace LastBastion
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
             _stopMenu = new StopMenu(this);
+            _event = new EventCycle(this);
             _sampleBuilding = InitializeBuildingSample();
             
             _window.Render.SetMouseCursorVisible(false);
@@ -76,9 +82,12 @@ namespace LastBastion
 
                 //Console.WriteLine(_grid[new Vector2i(GetWindow.GetView.X, GetWindow.GetView.Y)].GetName);
 
-                if (_pause)
+                if (_turn == "PlayerTurn")
                 {
-                    TimerUpdate();
+                    if (_pause)
+                    {
+                        TimerUpdate();
+                    }
                 }
                 if (_countTimer == 0 && _isPlayMusic == false)
                 {
@@ -121,17 +130,21 @@ namespace LastBastion
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();
+            _event.Update();
             //UI
-            if (_menu.IsOpen)
+            if (_turn == "PlayerTurn")
             {
-                _menu.UpdateList();
-                _menu.DrawMenu();
+                if (_menu.IsOpen)
+                {
+                    _menu.UpdateList();
+                    _menu.DrawMenu();
+                }
+                else
+                {
+                    _menu.MenuDesc();
+                }
+                _menu.UpdateTopBar();
             }
-            else
-            {
-                _menu.MenuDesc();
-            }
-            _menu.UpdateTopBar();
             if (!_pause)
             {
                 _map.SamouraïDeCoke();
@@ -139,7 +152,9 @@ namespace LastBastion
                 // Draw menu
             }
         }
-
+        public string Turn => _turn;
+        public string Event => _event.Event;
+        public string EventDesc => _event.EventDescription;
         public int RandomNumber(int min, int max) => _random.Next(min, max);
         public void Close() { _window.Render.Close(); }
         public WindowUI GetWindow => _window;
@@ -178,8 +193,12 @@ namespace LastBastion
             }
             if (_countTimer == 61)
             {
-                _cycle++;
                 _countTimer = 1;
+                _turn = "WaveTurn";
+                /*
+                _cycle++;
+                Console.WriteLine(_cycle);
+                */
             }
         }
         //Test Cursor

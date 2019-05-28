@@ -216,10 +216,16 @@ namespace LastBastion
             _game.Sprites.GetSprite("BotBar").Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - _game.GetWindow.GetView.Render.Size.X / 2, _game.GetWindow.GetView.Render.Center.Y + _game.GetWindow.GetView.Render.Size.Y / 2 - 120);
             _game.GetWindow.Render.Draw(_game.Sprites.GetSprite("BotBar"));
             //Title
-            _game.Sprites.Text.DisplayedString = "Event";
+            _game.Sprites.Text.DisplayedString = "Event Cycle " + _game.Cycle;
             _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 135);
             _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
             _game.GetWindow.Render.Draw(_game.Sprites.Text);
+            //Event description
+            _game.Sprites.Text.DisplayedString = _game.EventDesc;
+            _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 175);
+            _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);
+            _game.GetWindow.Render.Draw(_game.Sprites.Text);
+            //Hut name
             if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Empty")
             {
                 _game.Sprites.Text.DisplayedString = "Tile";

@@ -27,7 +27,7 @@ namespace LastBastion
                     break;
                 
                 case Keyboard.Key.A:
-                    _game.Close();
+                    //_game.Close();
                     break;
             }
             if (e.Code == Keyboard.Key.Z || e.Code == Keyboard.Key.Up)
@@ -122,6 +122,11 @@ namespace LastBastion
                         }
                         break;
                     case Keyboard.Key.E:
+                        _game.Map.GetVillage.Food += 1000;
+                        _game.Map.GetVillage.Villager += 1000;
+                        _game.Map.GetVillage.MaxVillager += 1000;
+                        _game.Map.GetVillage.Stone += 1000;
+                        _game.Map.GetVillage.Wood += 1000;
                         break;
                     case Keyboard.Key.F:
                         break;
