@@ -342,7 +342,7 @@ namespace LastBastion
             if(base.Position.IsInRange(Position, Target.Position,Range))
             {
                 Attack(Target);
-
+                if(Target != null)
                 Target = (Target.Life == 0) ? null : Target;
                 AcquireTarget();
             }

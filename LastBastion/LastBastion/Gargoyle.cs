@@ -49,12 +49,6 @@ namespace LastBastion
             set { _timeStamp = value; }
         }
 
-        internal new Building Target
-        {
-            get { return base.EnemyTarget; }
-            set { EnemyTarget = value; }
-        }
-
         internal override void Update()
         {
             AcquireTarget();
