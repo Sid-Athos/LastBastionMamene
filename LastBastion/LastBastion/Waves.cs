@@ -47,12 +47,11 @@ namespace LastBastion
 
         internal void SpawnWave()
         {
-            Vectors placeToSpawn = SpawnLocation();
             GobAmount = Round * 4;
-            var calc = GobAmount/ Round;
 
-            for (int i = 0; i < calc; i++)
+            for (int i = 0; i < GobAmount; i++)
             {
+                Vectors placeToSpawn = SpawnLocation();
                 Barbar v1 = new Barbar(placeToSpawn.X, placeToSpawn.Y, 2.25f, "Barbare", 150, 3, 1, false, 3, 0.001f, WavesContext);
                 
             }
@@ -61,32 +60,33 @@ namespace LastBastion
 
             if (Round >= 4)
             {
-                magesToSpawn = (uint)Math.Ceiling((double)calc);
+                magesToSpawn = Round;
                 for(int i = 0;  i < magesToSpawn;i++)
                 {
                     Mage m = new Mage(50);
                 }
-                calc = magesToSpawn;
             }
 
             if(Round >= 8)
             {
-                calc = GobAmount / calc;
-                uint gargoylesToSpawn = (uint)Math.Ceiling((double)calc);
+                uint gargoylesToSpawn = (uint)Math.Ceiling((double)Round/2);
 
                 for (int i = 0; i < gargoylesToSpawn; i++)
                 {
                     Gargoyle g = new Gargoyle(50);
-                    WavesContext.AddBarbar(g);
                 }
-                calc = gargoylesToSpawn;
             }
 
             if(Round >= 12)
             {
-                
+                uint giantsToSpawn = (uint)Math.Ceiling((double)Round/2);
+
+                for (int i = 0; i < giantsToSpawn; i++)
+                {
+                    Gargoyle g = new Gargoyle(50);
+                }
             }
-                Round++;
+            Round++;
         }
         
         internal Vectors SpawnLocation()
