@@ -58,14 +58,17 @@ namespace LastBastion
 
         public override void Attack(Unit unit)
         {
-
-            if (Dmg > (unit.Life + unit.Armor))
+            if(unit.Job != "Gargoyle")
             {
-                unit.Life = 0;
-                unit.Die();
-                return;
+                if (Dmg > (unit.Life + unit.Armor))
+                {
+                    unit.Life = 0;
+                    unit.Die();
+                    return;
+                }
+                unit.Life -= (Dmg - unit.Armor);
+
             }
-            unit.Life -= (Dmg - unit.Armor);
         }
 
         public override void Update()

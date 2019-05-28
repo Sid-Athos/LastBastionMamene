@@ -264,6 +264,8 @@ namespace Tests
             Barbar v3 = new Barbar(12.7f, (13.7f), 0.1f, job1, 150, 10, 3, false, 2, 1.5f, maps);
             Gargoyle v4 = new Gargoyle(12.7f, (13.7f), 0.1f, "Gargoyle", 150, 10, 3, false, 2, 1.5f, maps);
             Assert.That(v4.Job, Is.EqualTo("Gargoyle"));
+            v3.Attack(v4);
+            Assert.That(v4.Life, Is.EqualTo(150));
         }
 
         [Test]
@@ -280,6 +282,12 @@ namespace Tests
             Assert.That(v2.IsParalysed);
             sido.Paralyze();
             Assert.That(sido.Target, Is.Null);
+        }
+
+        [Test]
+        public void T15_Check()
+        {
+
         }
     }
 }
