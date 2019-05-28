@@ -137,7 +137,7 @@ namespace LastBastion
             }
             return false;
         }
-
+        
         public void Upgrade()
         {
             Rank++;

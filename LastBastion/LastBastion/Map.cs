@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SFML.System;
 using Interface;
 
@@ -16,10 +17,15 @@ namespace LastBastion
         List<Archer> _archers;
         List<Projectiles> _projectiles;
         Dictionary<Building, Unit> _buildingHasTarget;
+        int _countTimer;
+        int _sec;
+        bool MinutePass = true;
 
         public Map(Game game)
         {
             _game = game;
+            _countTimer = 0;
+            _sec = DateTime.Now.Second;
             _UI = new MapUI(_game.Sprites, _game.GetWindow.Render);
             CreateMap();
             _village = new Village(this);
@@ -52,6 +58,8 @@ namespace LastBastion
         public int BarbCount => _barbarians.Count;
 
         public int BuildCount => _buildings.Count;
+
+        public int GetTimer => _countTimer;
 
         public void AddVillager(Villager v)
         {
@@ -247,6 +255,27 @@ namespace LastBastion
             foreach (var item in _game.GetGrid)
             {
                 _UI.Print("HideFont",item.Value.GetVec2F,true);
+            }
+        }
+        public void TimerUpdate()
+        {
+            if (DateTime.Now.Second == 1 && MinutePass == true)
+            {
+                _sec = 1;
+                _countTimer += 2;
+                MinutePass = false;
+            }
+            else
+            {
+                if (_sec < DateTime.Now.Second)
+                {
+                    _sec = DateTime.Now.Second;
+                    _countTimer++;
+                }
+                if (DateTime.Now.Second == 2 && MinutePass == false)
+                {
+                    MinutePass = true;
+                }
             }
         }
     }
