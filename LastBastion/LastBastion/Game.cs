@@ -29,6 +29,8 @@ namespace LastBastion
         bool _pause;
         int _cycle;
         int _lastProd;
+        //Turn
+        string _turn;
         //Random
         Random _random = new Random();
         //Music
@@ -52,6 +54,7 @@ namespace LastBastion
 
             _countTimer = 0;
             _cycle = 1;
+            _turn = "PlayerTurn";
             _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
@@ -79,9 +82,12 @@ namespace LastBastion
 
                 //Console.WriteLine(_grid[new Vector2i(GetWindow.GetView.X, GetWindow.GetView.Y)].GetName);
 
-                if (_pause)
+                if (_turn == "PlayerTurn")
                 {
-                    TimerUpdate();
+                    if (_pause)
+                    {
+                        TimerUpdate();
+                    }
                 }
                 if (_countTimer == 0 && _isPlayMusic == false)
                 {
@@ -126,16 +132,19 @@ namespace LastBastion
             _window.PrintCursor();
             _event.Update();
             //UI
-            if (_menu.IsOpen)
+            if (_turn == "PlayerTurn")
             {
-                _menu.UpdateList();
-                _menu.DrawMenu();
+                if (_menu.IsOpen)
+                {
+                    _menu.UpdateList();
+                    _menu.DrawMenu();
+                }
+                else
+                {
+                    _menu.MenuDesc();
+                }
+                _menu.UpdateTopBar();
             }
-            else
-            {
-                _menu.MenuDesc();
-            }
-            _menu.UpdateTopBar();
             if (!_pause)
             {
                 _map.SamouraïDeCoke();
@@ -143,6 +152,7 @@ namespace LastBastion
                 // Draw menu
             }
         }
+        public string Turn => _turn;
         public string Event => _event.Event;
         public string EventDesc => _event.EventDescription;
         public int RandomNumber(int min, int max) => _random.Next(min, max);
@@ -183,9 +193,12 @@ namespace LastBastion
             }
             if (_countTimer == 61)
             {
+                _countTimer = 1;
+                _turn = "WaveTurn";
+                /*
                 _cycle++;
                 Console.WriteLine(_cycle);
-                _countTimer = 1;
+                */
             }
         }
         //Test Cursor

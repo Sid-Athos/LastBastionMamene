@@ -27,7 +27,7 @@ namespace LastBastion
                     break;
                 
                 case Keyboard.Key.A:
-                    _game.Close();
+                    //_game.Close();
                     break;
             }
             if (e.Code == Keyboard.Key.Z || e.Code == Keyboard.Key.Up)
