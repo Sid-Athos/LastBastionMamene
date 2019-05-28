@@ -8,7 +8,7 @@ namespace Tests
     public class Tests
     {
         [Test]
-        public void T1_Game_Map_And_Castle_Are_created_and_not_null()
+        public void T01_Game_Map_And_Castle_Are_created_and_not_null()
         {
             Game sid = new Game();
             sid.Run();
@@ -19,7 +19,7 @@ namespace Tests
         }
 
         [Test]
-        public void T2_Create_Map_Create_Villagers()
+        public void T02_Create_Map_Create_Villagers()
         {
             Map var = new Map();
 
@@ -35,7 +35,7 @@ namespace Tests
         }
 
         [Test]
-        public void T3_Units_Are_Created_And_Can_Join_Units_List()
+        public void T03_Units_Are_Created_And_Can_Join_Units_List()
         {
             Map var = new Map();
             Assert.That(var, Is.Not.Null);
@@ -51,7 +51,7 @@ namespace Tests
         }
 
         [Test]
-        public void T4_Units_Are_In_List_And_Attack_Correctly()
+        public void T04_Units_Are_In_List_And_Attack_Correctly()
         {
             Map var = new Map();
             Assert.That(var, Is.Not.Null);
@@ -71,7 +71,7 @@ namespace Tests
         }
 
         [Test]
-        public void T5_Enemy_Units_Find_Tower_Wherever_They_Are()
+        public void T05_Enemy_Units_Find_Tower_Wherever_They_Are()
         {
             Map var = new Map();
             Assert.That(var, Is.Not.Null);
@@ -98,7 +98,7 @@ namespace Tests
         }
 
         [Test]
-        public void T6_Towers_Switch_Targets_If_Enemy_Goes_Out_Of_Range()
+        public void T06_Towers_Switch_Targets_If_Enemy_Goes_Out_Of_Range()
         {
             Map var = new Map();
             Assert.That(var, Is.Not.Null);
@@ -133,7 +133,7 @@ namespace Tests
         }
 
         [Test]
-        public void T7_Archers_are_created_join_towers_within_limits_Plus_Tower_Upgrade()
+        public void T07_Archers_are_created_join_towers_within_limits_Plus_Tower_Upgrade()
         {
             Map var = new Map();
 
@@ -154,7 +154,7 @@ namespace Tests
         }
 
         [Test]
-        public void T8_Projectiles_Created_Equal_To_Tower_Plus_Archar_Count_On_Attack()
+        public void T08_Projectiles_Created_Equal_To_Tower_Plus_Archar_Count_On_Attack()
         {
             Map var = new Map();
 
@@ -172,7 +172,7 @@ namespace Tests
         }
 
         [Test]
-        public void T9_Units_Move_Toward_Towers()
+        public void T09_Units_Move_Toward_Towers()
         {
             Map var = new Map();
 
@@ -251,19 +251,35 @@ namespace Tests
             v2.Ignite();
             Assert.That(v2.BurList.Count, Is.EqualTo(2));
             v2.Ignite();
-            Assert.That(v2.EnemyTarget, Is.EqualTo(null));
+            Assert.That(v2.BurList.Count, Is.EqualTo(2));
 
+            Assert.That(v2.EnemyTarget, Is.EqualTo(null));
         }
 
         [Test]
         public void T13_Land_Units_Cant_Attack_Flying_Units()
         {
             Map maps = new Map();
-
             var job1 = Guid.NewGuid().ToString();
             Barbar v3 = new Barbar(12.7f, (13.7f), 0.1f, job1, 150, 10, 3, false, 2, 1.5f, maps);
+            Gargoyle v4 = new Gargoyle(12.7f, (13.7f), 0.1f, "Gargoyle", 150, 10, 3, false, 2, 1.5f, maps);
+            Assert.That(v4.Job, Is.EqualTo("Gargoyle"));
+        }
 
+        [Test]
+        public void T14_Thunder_Tower_Paralyzes_Within_Constraints()
+        {
+            Map var = new Map();
+            Thunder sido = new Thunder(0f, 0f, 250, 250, 30, 5, 1, 25.0f, 5, var, "Tower", "tour");
 
+            var job2 = Guid.NewGuid().ToString();
+            Mage v2 = new Mage(12f, 10f, 30f, job2, 150, 10, 3, false, 2, 5f, var);
+            sido.AcquireTarget();
+            Assert.That(sido.Target, Is.EqualTo(v2));
+            sido.Paralyze();
+            Assert.That(v2.IsParalysed);
+            sido.Paralyze();
+            Assert.That(sido.Target, Is.Null);
         }
     }
 }

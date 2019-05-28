@@ -188,7 +188,7 @@ namespace LastBastion
 
         public float Speed => _speed;
 
-        internal bool IsParalysed => _paralyzed;
+        public bool IsParalysed => _paralyzed;
 
         internal bool IsBurned => _burned;
 
@@ -198,7 +198,7 @@ namespace LastBastion
 
         internal bool IsInTower => _inTower;
 
-        string Job => _job;
+        public string Job => _job;
 
         public float Range => _range;
 

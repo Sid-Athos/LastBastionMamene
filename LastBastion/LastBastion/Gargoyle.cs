@@ -4,9 +4,12 @@ using System.Text;
 
 namespace LastBastion
 {
-    internal class Gargoyle : Unit
+    public class Gargoyle : Unit
     {
-        internal Gargoyle(
+        bool _flying = true;
+        uint _timeStamp;
+
+        public Gargoyle(
             float posX, 
             float posY, 
             float range,
@@ -30,6 +33,25 @@ namespace LastBastion
             : base(life)
         {
 
+        }
+
+        public bool Flying => _flying;
+
+        internal new Building Target
+        {
+            get { return base.EnemyTarget; }
+            set { EnemyTarget = value; }
+        }
+
+        internal uint TimeSt
+        {
+            get { return _timeStamp; }
+            set { _timeStamp = value; }
+        }
+
+        public override void Update()
+        {
+            AcquireTarget();
         }
     }
 }

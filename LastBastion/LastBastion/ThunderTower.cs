@@ -37,17 +37,21 @@ namespace LastBastion
 
         uint ParCount => (uint)_paralysedList.Count;
         
-        internal void Paralyze()
+        public void Paralyze()
         {
-            if (!Target.IsParalysed)
+            if(Target != null)
             {
-                Target.Paralize();
-                ParList.Add(Target);
-                base.SwitchTarget(ParList);
-            }
-            else
-            {
-                throw new InvalidCastException("La cible est déjà paralysée !");
+
+                if (!Target.IsParalysed)
+                {
+                    Target.Paralize();
+                    ParList.Add(Target);
+                    base.SwitchTarget(ParList);
+                }
+                else
+                {
+                    throw new InvalidCastException("La cible est déjà paralysée !");
+                }
             }
         }
 
