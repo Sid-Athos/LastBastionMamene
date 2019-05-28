@@ -99,12 +99,6 @@ namespace LastBastion
                 {
                     _map.GetVillage.RessourceProd();
                     _lastProd = _countTimer;
-                    /*
-                    Console.WriteLine("Stock de Pierre : " + _map.GetVillage.StoneStock);
-                    Console.WriteLine("Stock de Nourriture : " + _map.GetVillage.FoodStock);
-                    Console.WriteLine("Stock de Bois : " + _map.GetVillage.WoodStock);
-                    Console.WriteLine("-----------------------------");
-                    */
                 }
                 //End Update
 
