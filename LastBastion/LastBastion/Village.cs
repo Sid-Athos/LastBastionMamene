@@ -139,27 +139,41 @@ namespace LastBastion
             }
         }
 
+        public void CreateCastle(int posX, int posY)
+        {
+            _map.GetGame.GetGrid[new Vector2i(posX, posY)].SetName = "Castle";
+            _map.GetGame.GetGrid[new Vector2i(posX, posY)].Building = new Castle(-1, 0, 750, 750, 30, 1, _map, "Castle", "Your residence");
+        }
+
         public void SetCastle()
         {
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].IsReveal = true;
+            CreateCastle(-1, 0);
             _map.GetGame.GetGrid[new Vector2i(-1, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, 1)].IsReveal = true;
+            CreateCastle(-1, 1);
             _map.GetGame.GetGrid[new Vector2i(-1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, -1)].IsReveal = true;
+            CreateCastle(-1, -1);
             _map.GetGame.GetGrid[new Vector2i(0, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, 0)].IsReveal = true;
+            CreateCastle(0, 0);
             _map.GetGame.GetGrid[new Vector2i(0, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, 1)].IsReveal = true;
+            CreateCastle(0, 1);
             _map.GetGame.GetGrid[new Vector2i(0, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, -1)].IsReveal = true;
+            CreateCastle(0, -1);
             _map.GetGame.GetGrid[new Vector2i(1, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, 0)].IsReveal = true;
+            CreateCastle(1, 0);
             _map.GetGame.GetGrid[new Vector2i(1, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, 1)].IsReveal = true;
+            CreateCastle(1, 1);
             _map.GetGame.GetGrid[new Vector2i(1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, -1)].IsReveal = true;
-            GetMap.Castle(new Castle(0f, 0f, 750, 750, 3, 1, GetMap, "Castle","Your residence",20,2.0f,1)) ;
+            CreateCastle(1, -1);
         }
 
         public void SetNearby()
