@@ -34,6 +34,9 @@ namespace Interface
             texture = new Texture("../../../../images/CursorFont.png");
             _sprites.Add("CursorFont", new Sprite(texture));
 
+            texture = new Texture("../../../../images/Comet.png");
+            _sprites.Add("Comet", new Sprite(texture));
+
             texture = new Texture("../../../../images/FrontMenu.png");
             _sprites.Add("FrontMenu", new Sprite(texture));
 

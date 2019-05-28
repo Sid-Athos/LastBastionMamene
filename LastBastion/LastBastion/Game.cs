@@ -16,6 +16,7 @@ namespace LastBastion
         Dictionary<string, Building> _sampleBuilding;
         SpritesManager _sprites;
         Input _input;
+        EventCycle _event;
         Map _map;
         MenuBuilder _menu;
         StopMenu _stopMenu;
@@ -50,6 +51,7 @@ namespace LastBastion
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
 
             _countTimer = 0;
+            _cycle = 1;
             _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
@@ -58,6 +60,7 @@ namespace LastBastion
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
             _stopMenu = new StopMenu(this);
+            _event = new EventCycle(this);
             _sampleBuilding = InitializeBuildingSample();
             
             _window.Render.SetMouseCursorVisible(false);
@@ -99,12 +102,6 @@ namespace LastBastion
                 {
                     _map.GetVillage.RessourceProd();
                     _lastProd = _countTimer;
-                    /*
-                    Console.WriteLine("Stock de Pierre : " + _map.GetVillage.StoneStock);
-                    Console.WriteLine("Stock de Nourriture : " + _map.GetVillage.FoodStock);
-                    Console.WriteLine("Stock de Bois : " + _map.GetVillage.WoodStock);
-                    Console.WriteLine("-----------------------------");
-                    */
                 }
                 //End Update
 
@@ -127,6 +124,7 @@ namespace LastBastion
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();
+            _event.Update();
             //UI
             if (_menu.IsOpen)
             {
@@ -145,7 +143,8 @@ namespace LastBastion
                 // Draw menu
             }
         }
-
+        public string Event => _event.Event;
+        public string EventDesc => _event.EventDescription;
         public int RandomNumber(int min, int max) => _random.Next(min, max);
         public void Close() { _window.Render.Close(); }
         public WindowUI GetWindow => _window;
@@ -185,6 +184,7 @@ namespace LastBastion
             if (_countTimer == 61)
             {
                 _cycle++;
+                Console.WriteLine(_cycle);
                 _countTimer = 1;
             }
         }
