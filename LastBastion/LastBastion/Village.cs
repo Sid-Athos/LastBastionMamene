@@ -126,7 +126,7 @@ namespace LastBastion
             _map.GetGame.GetGrid[new Vector2i(1, 1)].IsReveal = true;
             _map.GetGame.GetGrid[new Vector2i(1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, -1)].IsReveal = true;
-            GetMap.Castle(new Castle(0f, 0f, 750, 750, 3, 1, GetMap)) ;
+            GetMap.Castle(new Castle(0f, 0f, 750, 750, 3, 1, GetMap, "Castle","Your residence",20,2.0f,1)) ;
         }
 
         public void SetNearby()
