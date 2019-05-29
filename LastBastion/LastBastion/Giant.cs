@@ -68,6 +68,9 @@ namespace LastBastion
             if(Position.IsInRange(Position,EnemyTarget.Position,Range))
             {
                 Attack(EnemyTarget);
+            } else
+            {
+                Position = Position.Movement(Position, EnemyTarget.Position, 0, Speed, Range);
             }
         }
     }
