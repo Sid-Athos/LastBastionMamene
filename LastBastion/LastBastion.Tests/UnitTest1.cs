@@ -1,13 +1,14 @@
 using LastBastion;
 using System;
 using NUnit.Framework;
+using SFML.System;
 
 namespace Tests
 {
     class Tests
     {
         [Test]
-        public void T01_Game_Map_And_Castle_Are_created_and_not_null()
+        public void T01_Game_Map_And_Castle_Are_Created_And_Not_Null()
         {
             Game sid = new Game();
             sid.Run();
@@ -292,6 +293,7 @@ namespace Tests
             Gargoyle v5 = new Gargoyle(12f, 10f, 30f, "Mage", 150, 10, 3, false, 2, 5f, sid);
             Assert.That(sid.BarbCount, Is.EqualTo(4));
         }
+
         [Test]
         public void T16_Giants_Boulders_Hit_All_Targets_In_Range()
         {
@@ -315,6 +317,28 @@ namespace Tests
             {
                 Assert.That(m.BarList[i].Life, Is.EqualTo(143));
             }
+        }
+
+        [Test]
+        public void T17_Buildings_And_Units_Created_Correctly_AND_Removed_On_Death()
+        {
+            Game g = new Game();
+            g.Run();
+            Map m = new Map(g);
+
+            m.GetGame.GetGrid[new Vector2i(-5,5)].SetName = "House";
+            m.GetGame.GetGrid[new Vector2i(m.GetGame.GetWindow.GetView.X, m.GetGame.GetWindow.GetView.Y)].Building =
+                new Tower(15f, 50f, 350, 350, 7, 2, 0, 30f, 2, m, "House", "Une habitation");
+
+            Assert.That(m.GetGame.GetGrid[new Vector2i(-5, 5)].GetName, Is.EqualTo("House"));
+            Assert.That(m.GetGame.GetGrid[new Vector2i(-5, 5)].GetName, Is.Not.Empty);
+            Assert.That(m.BuildCount, Is.EqualTo(1));
+            m.BuildList[0].Die();
+            Assert.That(m.BuildCount, Is.EqualTo(0));
+            Barbar v3 = new Barbar(12f, 10f, 30f, "Mage", 150, 10, 3, false, 2, 5f, m);
+            Assert.That(m.BarbCount, Is.EqualTo(1));
+            v3.Die();
+            Assert.That(m.BarbCount, Is.EqualTo(0));
         }
     }
 }

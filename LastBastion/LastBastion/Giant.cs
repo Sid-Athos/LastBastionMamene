@@ -64,6 +64,10 @@ namespace LastBastion
 
         public override void Update()
         {
+            if(EnemyTarget == null)
+            {
+
+            }
             AcquireTarget();
             if(Position.IsInRange(Position,EnemyTarget.Position,Range))
             {
