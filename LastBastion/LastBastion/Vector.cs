@@ -86,5 +86,10 @@ namespace LastBastion
 
             return new Vectors(x, y);
         }
-     }  
+
+        public float TotDistance(Vectors origin, Vectors arrival)
+        {
+            return (float)(Math.Pow(arrival.X - origin.X, 2) + Math.Pow(arrival.Y - origin.Y, 2));
+        }
+    }  
 }
