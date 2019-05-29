@@ -31,7 +31,6 @@ namespace LastBastion
             life
             )
         {
-            
         }
 
         public void Ignite()

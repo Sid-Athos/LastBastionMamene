@@ -1,11 +1,10 @@
 using LastBastion;
 using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Tests
 {
-    public class Tests
+    class Tests
     {
         [Test]
         public void T01_Game_Map_And_Castle_Are_created_and_not_null()
@@ -150,7 +149,6 @@ namespace Tests
             Assert.That(sido.ShowArchers(), Is.EqualTo(4));
             Archer test = new Archer(0.5f, 10.4f, 2.0f, "Archer", 50, 5, 2, false, 3, 0.2f,var);
             Assert.Throws<InvalidOperationException>(() => sido.AddArcher(test));
-
         }
 
         [Test]
@@ -285,9 +283,38 @@ namespace Tests
         }
 
         [Test]
-        public void T15_Check()
+        public void T15_All_Units_Join_Same_List()
         {
+            Map sid = new Map();
+            Mage v2 = new Mage(12f, 10f, 30f, "Mage", 150, 10, 3, false, 2, 5f, sid);
+            Barbar v3 = new Barbar(12f, 10f, 30f, "Mage", 150, 10, 3, false, 2, 5f, sid);
+            Gargoyle v4 = new Gargoyle(12f, 10f, 30f, "Mage", 150, 10, 3, false, 2, 5f, sid);
+            Gargoyle v5 = new Gargoyle(12f, 10f, 30f, "Mage", 150, 10, 3, false, 2, 5f, sid);
+            Assert.That(sid.BarbCount, Is.EqualTo(4));
+        }
+        [Test]
+        public void T16_Giants_Boulders_Hit_All_Targets_In_Range()
+        {
+            Map m = new Map();
 
+            Assert.That(m, Is.Not.Null);
+            var job1 = Guid.NewGuid().ToString();
+            Barbar v3;
+            v3 = new Barbar(12f, 10f, 30f, job1, 150, 10, 3, false, 2, 5f, m);
+
+            for (int i = 0; i < 15;i++)
+            {
+                v3 = new Barbar(12f, 10f, 30f, job1, 150, 10, 3, false, 2, 5f, m);
+            }
+
+            Giant g1 = new Giant(12f, 10f, 30f, job1, 150, 10, 3, false, 2, 5f, m);
+            g1.SetTarget(v3);
+            g1.Attack(v3);
+
+            for(int i = 0; i < m.BarList.Count;i++)
+            {
+                Assert.That(m.BarList[i].Life, Is.EqualTo(143));
+            }
         }
     }
 }

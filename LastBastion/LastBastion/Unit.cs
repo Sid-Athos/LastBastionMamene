@@ -156,12 +156,12 @@ namespace LastBastion
             return unitToReturn;
         }
         
-        internal void SetTarget(Unit u)
+        public void SetTarget(Unit u)
         {
             _target = u;
         }
 
-        internal void SetTarget(Building b)
+        public void SetTarget(Building b)
         {
             _enemyTar = b;
         }

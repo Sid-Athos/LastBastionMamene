@@ -25,7 +25,7 @@ namespace LastBastion
             job, lifePoints, dmg, armor, isMoving,
             attackCooldown, speed, context)
         {
-
+            context.AddBarbar(this);
         }
 
         internal Gargoyle(
