@@ -10,6 +10,7 @@ namespace LastBastion
         Map _map;
         Building _castle;
         List<Hut> _nearby;
+        SpellBook _book = new SpellBook();
         string _buildingName; 
         int _area;
         uint _foodStock;
@@ -140,6 +141,8 @@ namespace LastBastion
             _stoneStock += 5000;
             _villagerStock += 5000;
         }
+
+        public SpellBook Sb => _book;
 
         public void RessourceProd()
         {

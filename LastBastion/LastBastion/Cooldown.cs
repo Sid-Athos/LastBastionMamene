@@ -26,9 +26,6 @@ namespace LastBastion
 
         public bool IsUsable => TimeStamp == 0;
 
-        public void Cast()
-        {
-            
-        }
+
     }
 }

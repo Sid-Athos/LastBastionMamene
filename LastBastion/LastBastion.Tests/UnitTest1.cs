@@ -340,5 +340,13 @@ namespace Tests
             v3.Die();
             Assert.That(m.BarbCount, Is.EqualTo(0));
         }
+
+        [Test]
+        public void T18_SpellBook_Correctly_Created()
+        {
+
+            SpellBook s = new SpellBook();
+            Assert.That(s.SpellList["Ignite"]["Nom"], Is.EqualTo("Ignite"));
+        }
     }
 }
