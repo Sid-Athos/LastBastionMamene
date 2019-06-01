@@ -16,12 +16,25 @@ namespace LastBastion
         uint _startCast;       // Timestamp when spell casting starts
         bool _casted = false;         // Spell was casted?
 
-        public Spell(string name, string desc, uint dmg, uint cdVal, uint castTime)
+        public Spell(string name, string desc, uint dmg, uint cdVal, uint castTime,Unit con)
         {
+            _name = name;
+            _description = desc;
             _cd = new Cooldown(cdVal);
+            _damages = dmg;
+            _unitContext = con;
             _castingTime = castTime;
         }
 
+        public Spell(string name, string desc, uint dmg, uint cdVal, uint castTime, Building con)
+        {
+            _name = name;
+            _description = desc;
+            _cd = new Cooldown(cdVal);
+            _damages = dmg;
+            _buildingContext = con;
+            _castingTime = castTime;
+        }
 
         public bool Casted
         {
