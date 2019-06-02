@@ -31,7 +31,7 @@ namespace LastBastion
             _paralyse.Add("Dégâts", "0");
             _paralyse.Add("CastTime", "0");
             _paralyse.Add("Soins", "0");
-            _paralyse.Add("Fréquence", "1");
+            _paralyse.Add("Fréquence", "0");
             _paralyse.Add("Durée", "15");
             _paralyse.Add("Cooldown", "10");      //Tous les cooldwns sont exprimés en secondes.
             _paralyse.Add("Type", "Magique");
@@ -45,7 +45,7 @@ namespace LastBastion
             _drainLife.Add("Dégâts", "30");
             _drainLife.Add("Soins", "15");
             _drainLife.Add("CastTime", "1");
-            _drainLife.Add("Fréquence", "1");
+            _drainLife.Add("Fréquence", "0");
             _drainLife.Add("Durée", "0");
             _drainLife.Add("Cooldown", "15");      //Tous les cooldwns sont exprimés en secondes.
             _drainLife.Add("Type", "Magique");
