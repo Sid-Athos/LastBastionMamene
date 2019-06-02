@@ -9,7 +9,10 @@ namespace Tests.Tests
     {
         static void Main(string[] args)
         {
+            Map m = new Map();
             SpellBook s = new SpellBook();
+            Tower t = new Tower(5.0f, 5f, 150, 150, 20, 0, 2, m);
+            Spell sp = new Spell("Ignite", t, s);
 
             var dico = s.SpellList;
 
@@ -18,7 +21,7 @@ namespace Tests.Tests
                 Console.WriteLine(n.Key);
                 foreach(var b in n.Value)
                 {
-                    Console.WriteLine(b.Key + " : " + b.Value);
+                    Console.WriteLine(b.Key + " : " + b.Value +".");
                 }
                 Console.WriteLine();
 

@@ -549,6 +549,7 @@ namespace LastBastion
         }
 
         public int Area => _area;
+
         public Map GetMap => _map;
     }
 }

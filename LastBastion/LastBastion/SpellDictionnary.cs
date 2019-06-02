@@ -6,13 +6,13 @@ namespace LastBastion
 {
     public class SpellBook
     {
-        Dictionary<string, Dictionary<string, string>> _spellBook;
+        readonly Dictionary<string, Dictionary<string, string>> _spellBook;
 
         public SpellBook()
         {
             _spellBook = new Dictionary<string, Dictionary<string, string>>();
             Dictionary<string, string> _ignite = new Dictionary<string, string>();
-            _ignite.Add("Nom","Ignite");
+            _ignite.Add("Nom","Embrasement");
             _ignite.Add("Description", "Un puissant sort qui brûle vos adversaires, inflige des dégâts sur la durée.");
             _ignite.Add("Dégâts", "15");
             _ignite.Add("CastTime", "0");
@@ -26,7 +26,7 @@ namespace LastBastion
             _ignite.Add("Zone d'effet", "0");
             _spellBook.Add("Ignite", _ignite);
             Dictionary<string, string> _paralyse = new Dictionary<string, string>();
-            _paralyse.Add("Nom", "ThunderWave");
+            _paralyse.Add("Nom", "Choc électrique");
             _paralyse.Add("Description", "Un sort de contrôle des foules, paralyse une cible pendant 15 secondes.");
             _paralyse.Add("Dégâts", "0");
             _paralyse.Add("CastTime", "0");
@@ -38,7 +38,7 @@ namespace LastBastion
             _paralyse.Add("École", "Foudre");
             _paralyse.Add("Range", "30");   
             _paralyse.Add("Zone d'effet", "0");
-            _spellBook.Add("Paralyse", _paralyse);
+            _spellBook.Add("ThunderWave", _paralyse);
             Dictionary<string, string> _drainLife = new Dictionary<string, string>();
             _drainLife.Add("Nom", "Drain de vie");
             _drainLife.Add("Description", "Inflige des dégâts et soigne l'utilisateur de la motié des dégâts infligés.");
