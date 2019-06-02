@@ -5,7 +5,7 @@
         Vectors _destination;
         Unit _focus;
         float _distance;
-
+        float _travDistance;
         internal Boulders(Vectors o, Unit d,Tower c)
             :base(o, d,c)
         {
@@ -23,11 +23,15 @@
 
         uint BoulderSize ()
         {
-            for(float i = 0.2f; i < Distance; i += 0.4f)
+            _travDistance = Position.TotDistance(Position, Destination);
+            float spent = _distance - _travDistance;
+            float mid = _travDistance / 2;
+
+            for (float i = 0f; i < Distance; i += 0.4f)
             {
 
             }
-            return 3;
+            return 0;
         }
 
         internal new void Update()
