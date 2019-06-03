@@ -11,12 +11,8 @@ namespace LastBastion
         uint _spellCd = 5;
         
         internal Mage(
-            float posX, float posY, float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed, Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+            float posX, float posY, string name, Map context)
+            : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
         }

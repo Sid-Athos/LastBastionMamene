@@ -12,12 +12,8 @@ namespace LastBastion
         uint _timeStamp;
         Building _target = null;
 
-        public Barbar(float posX, float posY,float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed, Map context)
-            : base(posX, posY,range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+        public Barbar(float posX, float posY,string name, Map context)
+            : base(posX, posY,  context)
         {
             _count++;
             context.AddBarbar(this);

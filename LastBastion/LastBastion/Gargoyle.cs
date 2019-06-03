@@ -13,18 +13,9 @@ namespace LastBastion
         internal Gargoyle(
             float posX,
             float posY,
-            float range,
-            string job,
-            uint lifePoints,
-            uint dmg,
-            uint armor,
-            bool isMoving,
-            uint attackCooldown,
-            float speed,
+            string name,
             Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+            : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
         }
@@ -57,8 +48,8 @@ namespace LastBastion
                 Die();
                 return;
             }
-            Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
-            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
+            Context.GetGame.Sprites.GetSprite("Gargoyle").Position = new Vector2f(Position.X, Position.Y);
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gargoyle"));
             if (EnemyTarget == null)
                 AcquireTarget();
         }
