@@ -43,13 +43,26 @@ namespace LastBastion
             _paralyse.Add("Dégâts", "11");
             _paralyse.Add("Armure", "2");
             _paralyse.Add("Cooldown", "3");
-            _paralyse.Add("Vie", "150");
+            _paralyse.Add("Vie", "250");
             _paralyse.Add("Vitesse", "0.02");
             _paralyse.Add("Capacité", "Smash");
             _paralyse.Add("Type", "Monstre");
             _paralyse.Add("Faction", "Sbire de Dracula");
             _paralyse.Add("Range", "15");
-            _bestiary.Add("Giant", _drainLife);
+            _bestiary.Add("Géant", _drainLife);
+            Dictionary<string, string> _gargoyle = new Dictionary<string, string>();
+            _gargoyle.Add("Nom", "Gargouille");
+            _gargoyle.Add("Description", "La menace vient d'en haut...");
+            _gargoyle.Add("Dégâts", "9");
+            _gargoyle.Add("Armure", "2");
+            _gargoyle.Add("Cooldown", "2");
+            _gargoyle.Add("Vie", "150");
+            _gargoyle.Add("Vitesse", "0.02");
+            _gargoyle.Add("Capacité", "Howl");
+            _gargoyle.Add("Type", "Monstre");
+            _gargoyle.Add("Faction", "Sbire de Dracula");
+            _gargoyle.Add("Range", "15");
+            _bestiary.Add("Gargouille", _gargoyle);
         }
 
         public Dictionary<string, Dictionary<string, string>> Beasts=> _bestiary;

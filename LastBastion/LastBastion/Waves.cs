@@ -71,7 +71,7 @@ namespace LastBastion
                     Mage m = new Mage(
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
-                        WavesContext.Vill.Beasts.Beasts["Gobelin"]["Nom"], WavesContext
+                        WavesContext.Vill.Beasts.Beasts["Mage"]["Nom"], WavesContext
                     );
                 }
             }
@@ -85,7 +85,7 @@ namespace LastBastion
                     Gargoyle g = new Gargoyle(
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
-                        WavesContext.Vill.Beasts.Beasts["Gobelin"]["Nom"], WavesContext
+                        WavesContext.Vill.Beasts.Beasts["Gargoyle"]["Nom"], WavesContext
                     );
                 }
             }
@@ -96,7 +96,11 @@ namespace LastBastion
 
                 for (int i = 0; i < giantsToSpawn; i++)
                 {
-                    Gargoyle g = new Gargoyle(50);
+                    Giant g = new Giant(
+                        WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
+                        WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
+                        WavesContext.Vill.Beasts.Beasts["Giant"]["Nom"], WavesContext
+                        );
                 }
             }
             Round++;
@@ -119,7 +123,7 @@ namespace LastBastion
             return  new Vectors(vecs[c].X, vecs[c].Y);
         }
 
-        public void Update()
+        internal void Update()
         {
                 SpawnWave();
         }

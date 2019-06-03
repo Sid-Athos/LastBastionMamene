@@ -11,18 +11,9 @@ namespace LastBastion
         public Giant(
             float posX,
             float posY,
-            float range,
-            string job,
-            uint lifePoints,
-            uint dmg,
-            uint armor,
-            bool isMoving,
-            uint attackCooldown,
-            float speed,
+            string name,
             Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+            : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
         }
@@ -67,6 +58,7 @@ namespace LastBastion
             if (EnemyTarget == null)
             {
                 AcquireTarget();
+                return;
             }
             if (Position.IsInRange(Position, EnemyTarget.Position, Range))
             {
