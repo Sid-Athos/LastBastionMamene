@@ -2,6 +2,7 @@ using LastBastion;
 using System;
 using NUnit.Framework;
 using SFML.System;
+using System.Timers;
 
 namespace Tests
 {
@@ -346,7 +347,22 @@ namespace Tests
         {
 
             SpellBook s = new SpellBook();
-            Assert.That(s.SpellList["Ignite"]["Nom"], Is.EqualTo("Ignite"));
+            Assert.That(s.SpellList["Ignite"]["Nom"], Is.EqualTo("Embrasement"));
+        }
+
+        [Test]
+        public void T19_Cooldown_Works_Correctly()
+        {
+
+            Cooldown s = new Cooldown(5);
+            s.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            while((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds < s.TimeStamp + s.Cd)
+            {
+                s.Update();
+            }
+            s.Update();
+
+            Assert.That(s.TimeStamp, Is.EqualTo(0));
         }
     }
 }
