@@ -17,12 +17,13 @@ namespace LastBastion
             Context.GetVillage.Villager += 5;
         }
 
-        new public void Upgrade()
+        override public void Upgrade()
         {
             Rank++;
             IncHealth();
             IncreaseArmor();
             IncPop();
+            Console.WriteLine("Inc Pop House" + Rank);
         }
 
     }

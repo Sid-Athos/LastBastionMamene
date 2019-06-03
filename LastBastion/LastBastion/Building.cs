@@ -138,11 +138,12 @@ namespace LastBastion
             return false;
         }
         
-        public void Upgrade()
+        virtual public void Upgrade()
         {
             Rank++;
             IncHealth();
             IncreaseArmor();
+            Console.WriteLine("Upgrade Building" + Rank);
         }
 
         public uint Rank
