@@ -15,6 +15,7 @@ namespace LastBastion
         Dictionary<Vector2i, Hut> _grid;
         Dictionary<string, Building> _sampleBuilding;
         SpritesManager _sprites;
+        AnimationsManager _manager;
         Input _input;
         EventCycle _event;
         Map _map;
@@ -31,6 +32,9 @@ namespace LastBastion
         int _lastProd;
         //Turn
         string _turn;
+        bool _animationSwitch;
+        float _animationsTime;
+        float _t;
         //Random
         Random _random = new Random();
         //Music
@@ -51,7 +55,7 @@ namespace LastBastion
             CreateGrid(50,50);
 
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
-
+            
             _countTimer = 0;
             _cycle = 1;
             _turn = "PlayerTurn";
@@ -59,6 +63,10 @@ namespace LastBastion
             _sec = DateTime.Now.Second;
             _pause = true;
             _isPlayMusic = false;
+
+            _animationSwitch = false;
+            _animationsTime = 0f;
+            _t = 0f;
             
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
@@ -66,6 +74,9 @@ namespace LastBastion
             _event = new EventCycle(this);
             _sampleBuilding = InitializeBuildingSample();
             
+            _manager = new AnimationsManager(_window, _sprites);
+            _manager.Initialized();
+
             _window.Render.SetMouseCursorVisible(false);
             _window.Render.KeyPressed += _input.IsKeyPressed;
             _window.Render.MouseMoved += MoveCursor;
@@ -81,6 +92,7 @@ namespace LastBastion
                 _window.Render.Clear();
 
                 //Console.WriteLine(_grid[new Vector2i(GetWindow.GetView.X, GetWindow.GetView.Y)].GetName);
+                //Console.WriteLine(DateTime.Now.Millisecond / 1000f);
 
                 if (_turn == "PlayerTurn")
                 {
@@ -116,6 +128,7 @@ namespace LastBastion
         }
         public void DrawUpdate()
         {
+
             _map.PrintMap();
             _map.GetVillage.DrawCastle();
             _map.GetVillage.DrawBuilding();
@@ -144,6 +157,13 @@ namespace LastBastion
                     _menu.MenuDesc();
                 }
                 _menu.UpdateTopBar();
+            }
+            if (_animationSwitch == true && _turn == "WaveTurn")
+            {
+                _manager.Play("I", "Dracula Turn", new Color(235, 7, 7));
+                _animationSwitch = false;
+                _sprites.Music(1).Play();
+                _isPlayMusic = true;
             }
             if (!_pause)
             {
@@ -194,7 +214,10 @@ namespace LastBastion
             if (_countTimer == 61)
             {
                 _countTimer = 1;
+                _t = 0f;
+                _animationsTime = DateTime.Now.Millisecond / 1000f;
                 _turn = "WaveTurn";
+                _animationSwitch = true;
                 /*
                 _cycle++;
                 Console.WriteLine(_cycle);

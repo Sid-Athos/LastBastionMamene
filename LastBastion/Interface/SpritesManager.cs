@@ -171,7 +171,6 @@ namespace Interface
 
             texture = new Texture("../../../../images/Attack.png");
             _sprites.Add("AttackIcon", new Sprite(texture));
-
         }
         public void Update()
         {
