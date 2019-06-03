@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 
-
 namespace LastBastion
 {
     internal class Cooldown
@@ -25,7 +24,14 @@ namespace LastBastion
 
         internal uint Cd => _cdValue;
 
-        internal bool IsUsable => TimeStamp == 0;  
+        internal bool IsUsable => TimeStamp == 0;
+
+        internal void Update()
+        {
+            if ((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds >= TimeStamp + Cd)
+            {
+                TimeStamp = 0;
+            }
+        }
     }
 }
-

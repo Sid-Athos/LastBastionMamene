@@ -15,6 +15,8 @@ namespace LastBastion
         List<Projectiles> _projectiles;
         Dictionary<Building, Unit> _buildingHasTarget;
         Waves _waves;
+        readonly SpellBook _book = new SpellBook();
+        readonly Bestiary _beasts = new Bestiary();
 
         public Map(Game game)
         {
@@ -228,5 +230,9 @@ namespace LastBastion
                 _UI.Print("HideFont",item.Value.GetVec2F,true);
             }
         }
+
+        internal SpellBook Sb => _book;
+
+        internal Bestiary Beasts => _beasts;
     }
 }
