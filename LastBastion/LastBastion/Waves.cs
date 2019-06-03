@@ -52,8 +52,13 @@ namespace LastBastion
             for (int i = 0; i < GobAmount; i++)
             {
                 Vectors placeToSpawn = SpawnLocation();
-                Barbar v1 = new Barbar(placeToSpawn.X, placeToSpawn.Y, 2.25f, "Barbare", 150, 3, 1, false, 3, 0.001f, WavesContext);
-                
+                Barbar v1 = new Barbar(
+                    WavesContext.GetGame.GetWindow.GetView.Render.Center.X, 
+                    WavesContext.GetGame.GetWindow.GetView.Render.Center.Y, 
+                    WavesContext.Vill.Beasts.Beasts["Gobelin"]["Nom"],WavesContext
+                    );
+
+
             }
 
             uint magesToSpawn;
@@ -63,7 +68,11 @@ namespace LastBastion
                 magesToSpawn = Round;
                 for(int i = 0;  i < magesToSpawn;i++)
                 {
-                    Mage m = new Mage(50);
+                    Mage m = new Mage(
+                        WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
+                        WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
+                        WavesContext.Vill.Beasts.Beasts["Gobelin"]["Nom"], WavesContext
+                    );
                 }
             }
 
@@ -73,7 +82,11 @@ namespace LastBastion
 
                 for (int i = 0; i < gargoylesToSpawn; i++)
                 {
-                    Gargoyle g = new Gargoyle(50);
+                    Gargoyle g = new Gargoyle(
+                        WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
+                        WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
+                        WavesContext.Vill.Beasts.Beasts["Gobelin"]["Nom"], WavesContext
+                    );
                 }
             }
 

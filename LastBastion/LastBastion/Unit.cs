@@ -24,27 +24,20 @@ namespace LastBastion
 
         public Unit(
             float posX, 
-            float posY
-            ,float range,
-            string job, 
-            uint lifePoints, 
-            uint dmg,
-            uint armor,
-            bool isMoving,
-            uint attackCooldown, 
-            float speed,
+            float posY,
+            string name,
             Map context)
         {
-            _job = job;
-            _lifePoints = lifePoints;
-            _maxLifePoints = _lifePoints;
-            _dmg = dmg;
-            _armor = armor;
-            _isMoving = isMoving;
-            _aaCooldown = attackCooldown;
-            _speed = speed;
+            _job = name;
+            _lifePoints = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vie"]);
+            _maxLifePoints = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vie"]); ;
+            _dmg = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Dégâts"]); ;
+            _armor = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Armure"]); ;
+            _isMoving = false;
+            _aaCooldown = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Cooldown"]) ;
+            _speed = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vitesse"]); ;
             _context = context;
-            _range = range;
+            _range = (float)Convert.ToDouble(context.Vill.Beasts.Beasts[name]["Range"]); ;
             _position = new Vectors(posX, posY);
         }
 

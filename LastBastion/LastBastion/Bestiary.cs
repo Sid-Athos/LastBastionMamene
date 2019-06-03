@@ -18,7 +18,7 @@ namespace LastBastion
             _ignite.Add("Armure", "1");
             _ignite.Add("Cooldown", "2");
             _ignite.Add("Vie", "75");
-            _ignite.Add("Vitesse", "0.02");
+            _ignite.Add("Vitesse", "0.002");
             _ignite.Add("Capacité", "0");
             _ignite.Add("Type", "Monstre");
             _ignite.Add("Faction", "Sbire de Dracula");
