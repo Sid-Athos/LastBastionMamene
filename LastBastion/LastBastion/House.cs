@@ -6,31 +6,24 @@ namespace LastBastion
 {
     public class House : Building
     {
-        uint _villager = 5;
-        uint _rent = 1;
-
         public House(float posX, float posY, uint villager, uint rent, Map context)
             : base(posX, posY, 100, 100, 5, 1, 30, 50, 10, 0, context,"House", "Userfull increase your maximum \n population by 5 per rank.")
         {
-            _villager = villager;
-            _rent = rent;
-        }
-
-        public uint Rent
-        {
-            get { return _rent; }
-            set { _rent = value; }
-        }
-
-        public uint Villager
-        {
-            get { return _villager; }
-            set { _villager = value; }
         }
 
         public void IncPop()
         {
-            _villager += 2;
+            Context.GetVillage.MaxVillager += 5;
+            Context.GetVillage.Villager += 5;
+        }
+
+        override public void Upgrade()
+        {
+            Rank++;
+            IncHealth();
+            IncreaseArmor();
+            IncPop();
+            Console.WriteLine("Inc Pop House" + Rank);
         }
 
     }

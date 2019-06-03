@@ -39,6 +39,18 @@ namespace LastBastion
             _desc = desc;
         }
 
+        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context, string name, string desc)
+        {
+            _position = new Vectors(posX, posY);
+            _lifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
+            _armor = armor;
+            _rank = rank;
+            _context = context;
+            _name = name;
+            _desc = desc;
+        }
+
         public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
         {
             _position = new Vectors(posX, posY);
@@ -115,18 +127,23 @@ namespace LastBastion
 
         public bool IsDestroy()
         {
-            if (_lifePoints <= 0)
+            if (Life <= 0)
             {
+                if(Name == "Castle")
+                {
+                    //EndGame(); A ajouter quand le EndGame sera fait
+                }
                 return true;
             }
             return false;
         }
-
-        public void Upgrade()
+        
+        virtual public void Upgrade()
         {
             Rank++;
             IncHealth();
             IncreaseArmor();
+            Console.WriteLine("Upgrade Building" + Rank);
         }
 
         public uint Rank

@@ -88,6 +88,7 @@ namespace LastBastion
         {
             while (_window.Render.IsOpen)
             {
+                _map.TimerUpdate();
                 _window.Render.DispatchEvents();
                 _window.Render.Clear();
 

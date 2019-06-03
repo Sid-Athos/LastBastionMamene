@@ -139,27 +139,41 @@ namespace LastBastion
             }
         }
 
+        public void CreateCastle(int posX, int posY)
+        {
+            _map.GetGame.GetGrid[new Vector2i(posX, posY)].SetName = "Castle";
+            _map.GetGame.GetGrid[new Vector2i(posX, posY)].Building = new Castle(-1, 0, 750, 750, 30, 1, _map, "Castle", "Your residence");
+        }
+
         public void SetCastle()
         {
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].IsReveal = true;
+            CreateCastle(-1, 0);
             _map.GetGame.GetGrid[new Vector2i(-1, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, 1)].IsReveal = true;
+            CreateCastle(-1, 1);
             _map.GetGame.GetGrid[new Vector2i(-1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, -1)].IsReveal = true;
+            CreateCastle(-1, -1);
             _map.GetGame.GetGrid[new Vector2i(0, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, 0)].IsReveal = true;
+            CreateCastle(0, 0);
             _map.GetGame.GetGrid[new Vector2i(0, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, 1)].IsReveal = true;
+            CreateCastle(0, 1);
             _map.GetGame.GetGrid[new Vector2i(0, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(0, -1)].IsReveal = true;
+            CreateCastle(0, -1);
             _map.GetGame.GetGrid[new Vector2i(1, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, 0)].IsReveal = true;
+            CreateCastle(1, 0);
             _map.GetGame.GetGrid[new Vector2i(1, 1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, 1)].IsReveal = true;
+            CreateCastle(1, 1);
             _map.GetGame.GetGrid[new Vector2i(1, -1)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(1, -1)].IsReveal = true;
-            GetMap.Castle(new Castle(0f, 0f, 750, 750, 3, 1, GetMap)) ;
+            CreateCastle(1, -1);
         }
 
         public void SetNearby()
@@ -209,8 +223,8 @@ namespace LastBastion
                     case "House":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new House(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 5, 1, _map);
-                        Villager += 5;
                         MaxVillager += 5;
+                        Villager += 5;
                     break;
                     case "Sawmill":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
@@ -234,13 +248,9 @@ namespace LastBastion
                     break;
                     case "House Lv2":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
-                        Villager += 5;
-                        MaxVillager += 5;
                         break;
                     case "House Lv3":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
-                        Villager += 5;
-                        MaxVillager += 5;
                         break;
                     default:
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
