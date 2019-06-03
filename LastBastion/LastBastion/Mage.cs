@@ -1,4 +1,5 @@
 ﻿using SFML.System;
+using System;
 using System.Collections.Generic;
 
 namespace LastBastion
@@ -9,12 +10,14 @@ namespace LastBastion
         uint _timeStamp;
         float _spellRange = 28f;
         uint _spellCd = 5;
-        
+        Spell _ignite;
+
         internal Mage(
             float posX, float posY, string name, Map context)
             : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
+            _ignite = new Spell("Ignite",this, Context.Vill.Spells);
         }
 
         internal List<Building> BurList => _burned;
@@ -60,7 +63,8 @@ namespace LastBastion
 
         internal override void Update()
         {
-            if (Life == 0)
+            AaCd.Update();
+            if (Life == 0 || Life > Convert.ToUInt16(Context.Vill.Beasts.Beasts.["Mage"]["Vie"]))
             {
                 Die();
                 return;
@@ -68,7 +72,13 @@ namespace LastBastion
             Context.GetGame.Sprites.GetSprite("Mage").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Mage"));
             if(EnemyTarget == null)
-            AcquireTarget();
+            {
+                AcquireTarget();
+            }
+            if(AaCd.IsUsable)
+            {
+                Attack(EnemyTarget);
+            }
         }
     }
 }

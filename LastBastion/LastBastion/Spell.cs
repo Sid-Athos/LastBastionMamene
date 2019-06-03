@@ -32,7 +32,20 @@ namespace LastBastion
             _description = spells.SpellList[name]["Description"];
             _damages = Convert.ToUInt16(spells.SpellList[name]["Dégâts"]);
             _castingTime = Convert.ToUInt16(spells.SpellList[name]["CastTime"]);
-            _dotFrequency = Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
+            _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"])/Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
+            _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
+            _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
+        }
+
+        internal Spell(string name, Unit con, SpellBook spells)
+        {
+            _unitContext = con;
+            _cd = new Cooldown(Convert.ToUInt16(spells.SpellList[name]["Cooldown"]));
+            _name = name;
+            _description = spells.SpellList[name]["Description"];
+            _damages = Convert.ToUInt16(spells.SpellList[name]["Dégâts"]);
+            _castingTime = Convert.ToUInt16(spells.SpellList[name]["CastTime"]);
+            _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"]) / Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
             _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
         }
@@ -216,10 +229,8 @@ namespace LastBastion
                             _castTimeTS = 0;
                         }
                     }
-                    else if (!CD.IsUsable && Casted)
+                    if (!CD.IsUsable && Casted)
                     {
-                        if (CD.TimeStamp + CD.Cd == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
-                            CD.TimeStamp = 0;
                         Casted = !Casted;
                     }
         }

@@ -17,7 +17,7 @@ namespace LastBastion
             _ignite.Add("Dégâts", "15");
             _ignite.Add("CastTime", "0");
             _ignite.Add("Soins", "0");
-            _ignite.Add("Fréquence", "3");
+            _ignite.Add("Fréquence", "10");
             _ignite.Add("Durée", "30");
             _ignite.Add("Cooldown", "10");
             _ignite.Add("Type", "Magique");

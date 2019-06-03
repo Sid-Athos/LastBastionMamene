@@ -13,7 +13,7 @@ namespace LastBastion
         readonly uint _dmg;
         readonly uint _armor;
         bool _isMoving;
-        uint _aaCooldown;
+        Cooldown _aaCooldown;
         float _speed;
         bool _inTower = false;
         bool _burned = false;
@@ -34,7 +34,7 @@ namespace LastBastion
             _dmg = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Dégâts"]); ;
             _armor = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Armure"]); ;
             _isMoving = false;
-            _aaCooldown = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Cooldown"]) ;
+            _aaCooldown = new Cooldown(Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Cooldown"]));
             _speed = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vitesse"]); ;
             _context = context;
             _range = (float)Convert.ToDouble(context.Vill.Beasts.Beasts[name]["Range"]); ;
@@ -197,7 +197,7 @@ namespace LastBastion
 
         internal uint Dmg => _dmg;
 
-        internal uint AaCd => _aaCooldown;
+        internal Cooldown AaCd => _aaCooldown;
 
         internal uint Armor => _armor;
 
