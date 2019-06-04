@@ -78,6 +78,6 @@ namespace LastBastion
             _bestiary.Add("Dracula", _dracula);
         }
 
-        public Dictionary<string, Dictionary<string, string>> Beasts=> _bestiary;
+        internal Dictionary<string, Dictionary<string, string>> Beasts=> _bestiary;
     }
 }

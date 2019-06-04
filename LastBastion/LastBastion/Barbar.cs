@@ -9,7 +9,6 @@ namespace LastBastion
     public class Barbar : Unit
     {
         static uint _count;
-        uint _timeStamp;
         Building _target = null;
 
         public Barbar(float posX, float posY,string name, Map context)
@@ -57,11 +56,12 @@ namespace LastBastion
 
         internal override void Update()
         {
-            if (Life == 0)
+            if (Life == 0 || Life > 2000)
             {
                 Die();
                 return;
             }
+            AaCd.Update();
             Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
             if (!IsParalysed)
@@ -73,25 +73,17 @@ namespace LastBastion
                     bool tr = Position.IsInRange(Position, EnemyTarget.Position, Range);
                 }
 
-                if (EnemyTarget.Life == 0)
+                if (EnemyTarget.Life == 0 || EnemyTarget.Life > 2000)
                 {
                     AcquireTarget();
                 }
 
                 if (EnemyTarget != null && Position.IsInRange(Position, EnemyTarget.Position, Range))
                 {
-                    if(_timeStamp == 0)
+                    if(AaCd.IsUsable)
                     {
                         Attack(EnemyTarget);
-                        TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                         return;
-                    }
-                    uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-
-                    if (newTs == _timeStamp + AaCd.Cd)
-                    {
-                        Attack(EnemyTarget);
-                        TimeSt = newTs;
                     }
                     return;
                 }
@@ -110,12 +102,6 @@ namespace LastBastion
         {
             get { return _target; }
             set { _target = value; }
-        }
-
-        internal uint TimeSt
-        {
-            get { return _timeStamp; }
-            set { _timeStamp = value;}
         }
     }
 }

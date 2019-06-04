@@ -10,13 +10,12 @@ namespace LastBastion
         Archer[] _slots;
         uint _rank;
         uint _dmg;
-        uint _aaCooldown;
+        Cooldown _aaCooldown;
         float _range = 26.0f;
         Unit _target;
         List<Projectiles> _proj;
         uint _timeStamp;
         bool _attacked = false;
-
 
         public Tower(float posX,
         float posY,
@@ -40,7 +39,7 @@ namespace LastBastion
          context, "Tower", "test")
         {
             _dmg = dmg;
-            _aaCooldown = aaCooldown;
+            _aaCooldown = new Cooldown(aaCooldown);
             _slots = new Archer[2];
             context.AddBuilding(this);
             for (int i = 0; i < 2; i++)
@@ -69,7 +68,6 @@ namespace LastBastion
          context)
         {
             _dmg = dmg;
-            _aaCooldown = aaCooldown;
             _slots = new Archer[2];
             for (int i = 0; i < 2; i++)
             {
@@ -80,8 +78,6 @@ namespace LastBastion
             _proj = new List<Projectiles>();
 
         }
-
-        internal uint AaCd => _aaCooldown;
 
         public void SetAllTowerUnitsTarget()
         {
@@ -115,6 +111,8 @@ namespace LastBastion
             _proj.Add(p);
         }
 
+        Cooldown AaCd => _aaCooldown;
+
         public void Attack(Unit unit)
         {
             if(unit.Life == 0)
@@ -123,55 +121,30 @@ namespace LastBastion
             }
             if(Target != null)
             {
-                uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                if (_timeStamp == 0 && Attacked == false)
+                if (AaCd.IsUsable && Attacked == false)
                 {
+                    AaCd.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                     for (int i = 0; i < _slots.Length; i++)
                     {
                         _slots[i].Attack();
                     }
                     Projectiles p = new Projectiles(Position, unit,this);
                     _proj.Add(p);
-                    TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                     Attacked = true;
                 }
-                if (newTs < (_timeStamp + AaCd) && newTs > _timeStamp)
+                if (AaCd.TimeStamp <= (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                 {
                     Attacked = false;
-                }
-                else if (newTs == _timeStamp + AaCd && Attacked == false)
-                {
-                    for (int i = 0; i < _slots.Length; i++)
-                    {
-                        _slots[i].Attack();
-                    }
-                    Projectiles p = new Projectiles(Position, unit,this);
-                    Console.WriteLine("Proj 153 " + ProjList.Count);
-                    _proj.Add(p);
-                    Attacked = true;
-                }
-                if(newTs > TimeSt+ AaCd)
-                {
-                    TimeSt = 0;
-                    Attacked = !Attacked;
                 }
             }
             if(ProjList.Count > 0)
             {
-                try
-                {
-                    foreach (var n in ProjList)
-                    {
-
-                        n.Update();
-                    }
-
-                }
-                catch(InvalidOperationException)
+                for(int i =0; i < ProjList.Count; i++)
                 {
 
-                }
+                    ProjList[i].Update();
 
+                }
             }
         }
 
@@ -343,7 +316,7 @@ namespace LastBastion
             {
                 Attack(Target);
                 if(Target != null)
-                Target = (Target.Life == 0) ? null : Target;
+                Target = (Target.Life == 0 ||Target.Life > 2000) ? null : Target;
                 AcquireTarget();
             }
         }
