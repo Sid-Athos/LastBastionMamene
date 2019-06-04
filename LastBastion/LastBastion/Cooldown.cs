@@ -26,12 +26,17 @@ namespace LastBastion
 
         internal bool IsUsable => TimeStamp == 0;
 
-        internal void Update()
+        internal void Reset()
         {
             if ((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds >= TimeStamp + Cd)
             {
                 TimeStamp = 0;
             }
+        }
+
+        internal void Update()
+        {
+            Reset();
         }
     }
 }

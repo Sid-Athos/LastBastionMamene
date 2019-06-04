@@ -7,6 +7,7 @@ namespace LastBastion
     public class Giant : Unit
     {
         uint _timeStamp;
+        Spell _smash;
 
         public Giant(
             float posX,
@@ -16,6 +17,10 @@ namespace LastBastion
             : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
+            _smash = new Spell(
+                "Smash",
+                this,
+                base.Context.Sb);
         }
 
         internal Giant(

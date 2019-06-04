@@ -53,8 +53,36 @@ namespace LastBastion
             _drainLife.Add("Range", "30");
             _drainLife.Add("Zone d'effet", "10");
             _spellBook.Add("Drain Life", _drainLife);
+            Dictionary<string, string> _smash = new Dictionary<string, string>();
+            _smash.Add("Nom", "Smash");
+            _smash.Add("Description", "Inflige des dégâts physiques à tous les ennemis dans une zone.");
+            _smash.Add("Dégâts", "45");
+            _smash.Add("Soins", "0");
+            _smash.Add("CastTime", "1");
+            _smash.Add("Fréquence", "0");
+            _smash.Add("Durée", "0");
+            _smash.Add("Cooldown", "15");      //Tous les cooldwns sont exprimés en secondes.
+            _smash.Add("Type", "Mêlée");
+            _smash.Add("École", "Physique");
+            _smash.Add("Range", "15");
+            _smash.Add("Zone d'effet", "8");
+            _spellBook.Add("Smash", _smash);
+            Dictionary<string, string> _howl = new Dictionary<string, string>();
+            _howl.Add("Nom", "Hurlement");
+            _howl.Add("Description", "Inflige des dégâts physiques à tous les ennemis autour de l'unité.");
+            _howl.Add("Dégâts", "25");
+            _howl.Add("Soins", "0");
+            _howl.Add("CastTime", "1");
+            _howl.Add("Fréquence", "0");
+            _howl.Add("Durée", "0");
+            _howl.Add("Cooldown", "10");      //Tous les cooldwns sont exprimés en secondes.
+            _howl.Add("Type", "Mêlée");
+            _howl.Add("École", "Physique");
+            _howl.Add("Range", "0");
+            _howl.Add("Zone d'effet", "8");
+            _spellBook.Add("Howl", _howl);
         }
 
-        internal Dictionary<string, Dictionary<string, string>> SpellList => _spellBook;
+        internal Dictionary <string, Dictionary <string, string>> SpellList => _spellBook;
     }
 }

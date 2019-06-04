@@ -9,6 +9,7 @@ namespace LastBastion
     {
         bool _flying = true;
         uint _timeStamp;
+        Spell _howl;
 
         internal Gargoyle(
             float posX,
@@ -18,6 +19,10 @@ namespace LastBastion
             : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
+            _howl = new Spell(
+                "Howl",
+                this,
+                base.Context.Sb);
         }
 
         internal Gargoyle(

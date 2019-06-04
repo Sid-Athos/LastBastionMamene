@@ -37,6 +37,19 @@ namespace LastBastion
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
         }
 
+        internal Spell(string name, Unit con, SpellBook spells)
+        {
+            _unitContext = con;
+            _cd = new Cooldown(Convert.ToUInt16(spells.SpellList[name]["Cooldown"]));
+            _name = name;
+            _description = spells.SpellList[name]["Description"];
+            _damages = Convert.ToUInt16(spells.SpellList[name]["Dégâts"]);
+            _castingTime = Convert.ToUInt16(spells.SpellList[name]["CastTime"]);
+            _dotFrequency = Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
+            _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
+            _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
+        }
+
         internal bool Casted
         {
             get { return _casted; }

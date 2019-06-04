@@ -7,14 +7,19 @@ namespace LastBastion
     {
         List<Building> _burned;
         uint _timeStamp;
-        float _spellRange = 28f;
-        uint _spellCd = 5;
+        Spell _ignite;
         
         internal Mage(
             float posX, float posY, string name, Map context)
             : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
+            _ignite = new Spell
+                (
+                "Ignite", 
+                this, 
+                base.Context.Vill.Spells
+                );
         }
 
         internal List<Building> BurList => _burned;
