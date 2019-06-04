@@ -26,9 +26,10 @@ namespace Tests.Tests
                 Console.WriteLine();
 
             }
+
             Console.WriteLine("Les cooldowns et fréquences sont exprimés en secondes");
-
-
+            
+            Console.ReadKey();
             Console.ReadKey();
         }
     }

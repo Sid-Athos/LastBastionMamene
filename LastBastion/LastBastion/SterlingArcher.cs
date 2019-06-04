@@ -10,39 +10,12 @@ namespace LastBastion
         Tower _context;
         bool _inTower;
 
-        public Archer(float posX, float posY, float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed, Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+        public Archer(float posX, float posY, string name, Map context)
+            : base(posX, posY, name, context)
         {
             _count++;
             //context.AddArcher(this);
             _inTower = true;
-        }
-
-        internal Archer(float posX, float posY, float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed,bool inTower, Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
-        {
-            _count++;
-            //context.AddArcher(this);
-            _inTower = inTower;
-        }
-
-        internal Archer(float posX, float posY, float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed, bool inTower)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed)
-        {
-            _count++;
-            _inTower = inTower;
         }
 
         internal Tower TowCont => _context;

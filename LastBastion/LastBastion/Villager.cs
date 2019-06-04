@@ -10,12 +10,8 @@ namespace LastBastion
         bool _isHarvesting;
         Tower _context;
             
-        public Villager(float posX, float posY,float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed, Map context)
-            : base(posX, posY,range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+        public Villager(float posX, float posY, string name, Map context)
+            : base(posX, posY, name, context)
         {
             _isHarvesting = false;
         }

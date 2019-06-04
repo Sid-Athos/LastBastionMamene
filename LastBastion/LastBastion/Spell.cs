@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Spell
+    internal class Spell
     {
         readonly string _name;
         readonly string _description;
@@ -19,12 +19,12 @@ namespace LastBastion
         readonly uint _dotFrequency;
         readonly float _range;
         uint _castTimeTS;
-        Dictionary<Unit,Dictionary<uint,uint>> _dotUnit = new Dictionary<Unit, Dictionary<uint, uint>>();
+        Dictionary<Unit, Dictionary<uint, uint>> _dotUnit = new Dictionary<Unit, Dictionary<uint, uint>>();
         Dictionary<Building, Dictionary<uint, uint>> _dotBuild = new Dictionary<Building, Dictionary<uint, uint>>();
 
 
 
-        public Spell(string name, Building con, SpellBook spells)
+        internal Spell(string name, Building con, SpellBook spells)
         {
             _buildingContext = con;
             _cd = new Cooldown(Convert.ToUInt16(spells.SpellList[name]["Cooldown"]));
@@ -32,50 +32,64 @@ namespace LastBastion
             _description = spells.SpellList[name]["Description"];
             _damages = Convert.ToUInt16(spells.SpellList[name]["Dégâts"]);
             _castingTime = Convert.ToUInt16(spells.SpellList[name]["CastTime"]);
-            _dotFrequency = Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
+            _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"]) / Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
             _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
         }
 
-        public bool Casted
+        internal Spell(string name, Unit con, SpellBook spells)
+        {
+            _unitContext = con;
+            _cd = new Cooldown(Convert.ToUInt16(spells.SpellList[name]["Cooldown"]));
+            _name = name;
+            _description = spells.SpellList[name]["Description"];
+            _damages = Convert.ToUInt16(spells.SpellList[name]["Dégâts"]);
+            _castingTime = Convert.ToUInt16(spells.SpellList[name]["CastTime"]);
+            _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"]) / Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
+            _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
+            _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
+        }
+
+        internal bool Casted
         {
             get { return _casted; }
             set { _casted = value; }
         }
 
-        public Cooldown CD => _cd;
+        internal Cooldown CD => _cd;
 
-        public uint Duration => _duration;
+        internal uint Duration => _duration;
 
-        public Dictionary<Unit, Dictionary<uint, uint>> DotUnitList => _dotUnit;
+        internal Dictionary<Unit, Dictionary<uint, uint>> DotUnitList => _dotUnit;
 
-        public Dictionary<Building, Dictionary<uint, uint>> DotBuildList => _dotBuild;
+        internal Dictionary<Building, Dictionary<uint, uint>> DotBuildList => _dotBuild;
 
 
-        public uint CastTime => _castingTime;
+        internal uint CastTime => _castingTime;
 
-        public void Cast(Unit u)
+        internal void Cast(Unit u)
         {
-            if(u != null)
-                if(u.Life >0)
-                    if(CD.IsUsable && !Casted)
+            if (u != null)
+                if (u.Life > 0)
+                    if (CD.IsUsable && !Casted)
                     {
                         Casted = !Casted;
-                        CD.TimeStamp =(uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                        if(CastTime == 0)
+                        CD.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                        if (CastTime == 0)
                         {
                             Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
                             dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
                             DotUnitList.Add(u, dotTarget);
                             Hit(u);
-                        } else
+                        }
+                        else
                         {
                             _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                         }
                     }
-                    else if(CD.IsUsable && Casted)
+                    else if (CD.IsUsable && Casted)
                     {
-                        if(_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
+                        if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                         {
                             Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
                             dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
@@ -84,26 +98,26 @@ namespace LastBastion
                             _castTimeTS = 0;
                         }
                     }
-                    else if(!CD.IsUsable && Casted)
+                    else if (!CD.IsUsable && Casted)
                     {
-                        if(CD.TimeStamp + CD.Cd == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
+                        if (CD.TimeStamp + CD.Cd == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                             CD.TimeStamp = 0;
-                            Casted = !Casted;
+                        Casted = !Casted;
                     }
         }
 
-        public void UpdateDots(Dictionary<Unit, Dictionary<uint, uint>> u)
+        internal void UpdateDots(Dictionary<Unit, Dictionary<uint, uint>> u)
         {
-            if(u.Count >0)
+            if (u.Count > 0)
             {
                 uint ts = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                foreach(var n in u)
+                foreach (var n in u)
                 {
                     foreach (var b in n.Value)
                     {
-                        if(b.Value == 0)
+                        if (b.Value == 0)
                         {
-                            if(ts == b.Key + _dotFrequency)
+                            if (ts == b.Key + _dotFrequency)
                             {
                                 Hit(n.Key);
                                 u[n.Key][b.Value] = ts;
@@ -111,11 +125,11 @@ namespace LastBastion
                         }
                         else
                         {
-                            if(n.Key.Life > 0)
+                            if (n.Key.Life > 0)
                             {
-                                if(b.Value <= b.Value + Duration)
+                                if (b.Value <= b.Value + Duration)
                                 {
-                                    if(ts == b.Key + _dotFrequency)
+                                    if (ts == b.Key + _dotFrequency)
                                     {
                                         Hit(n.Key);
                                         u[n.Key][b.Value] = ts;
@@ -133,7 +147,7 @@ namespace LastBastion
             }
         }
 
-        public void UpdateDots(Dictionary<Building, Dictionary<uint, uint>> u)
+        internal void UpdateDots(Dictionary<Building, Dictionary<uint, uint>> u)
         {
             if (u.Count > 0)
             {
@@ -174,53 +188,51 @@ namespace LastBastion
             }
         }
 
-        public void Hit(Unit u)
-        {
-            u.Life -= _damages; 
-        }
-
-        public void Hit(Building u)
+        internal void Hit(Unit u)
         {
             u.Life -= _damages;
         }
 
-        public void Cast(Building u)
+        internal void Hit(Building u)
         {
-            if(u != null)
+            u.Life -= _damages;
+        }
+
+        internal void Cast(Building u)
+        {
+            if (u != null)
                 if (u.Life > 0)
-                if (CD.IsUsable && !Casted)
-                {
-                    Casted = !Casted;
-                    CD.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                    if (CastTime == 0)
+                    if (CD.IsUsable && !Casted)
                     {
-                        Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
-                        dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
-                        DotBuildList.Add(u, dotTarget);
-                        Hit(u);
+                        Casted = !Casted;
+                        CD.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                        if (CastTime == 0)
+                        {
+                            Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
+                            dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
+                            DotBuildList.Add(u, dotTarget);
+                            Hit(u);
+                        }
+                        else
+                        {
+                            _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                        }
                     }
-                    else
+                    else if (CD.IsUsable && Casted)
                     {
-                        _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                        if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
+                        {
+                            Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
+                            dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
+                            DotBuildList.Add(u, dotTarget);
+                            Hit(u);
+                            _castTimeTS = 0;
+                        }
                     }
-                }
-                else if (CD.IsUsable && Casted)
-                {
-                    if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
-                    {
-                        Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
-                        dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
-                        DotBuildList.Add(u, dotTarget);
-                        Hit(u);
-                        _castTimeTS = 0;
-                    }
-                }
-                else if (!CD.IsUsable && Casted)
-                {
-                    if (CD.TimeStamp + CD.Cd == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
-                        CD.TimeStamp = 0;
-                    Casted = !Casted;
-                }
+            if (!CD.IsUsable && Casted)
+            {
+                Casted = !Casted;
+            }
         }
     }
 }

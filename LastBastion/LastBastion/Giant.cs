@@ -7,24 +7,20 @@ namespace LastBastion
     public class Giant : Unit
     {
         uint _timeStamp;
+        Spell _smash;
 
         public Giant(
             float posX,
             float posY,
-            float range,
-            string job,
-            uint lifePoints,
-            uint dmg,
-            uint armor,
-            bool isMoving,
-            uint attackCooldown,
-            float speed,
+            string name,
             Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+            : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
+            _smash = new Spell(
+                "Smash",
+                this,
+                base.Context.Sb);
         }
 
         internal Giant(
@@ -34,7 +30,7 @@ namespace LastBastion
 
         }
 
-        public override void Attack(Unit u)
+        internal override void Attack(Unit u)
         {
             foreach (var n in base.Context.BarList)
             {
@@ -45,7 +41,7 @@ namespace LastBastion
             }
         }
 
-        public override void Attack(Building u)
+        internal override void Attack(Building u)
         {
             foreach (var n in base.Context.BarList)
             {
@@ -64,17 +60,14 @@ namespace LastBastion
 
         public override void Update()
         {
-            if(EnemyTarget == null)
+            if (EnemyTarget == null)
             {
-
+                AcquireTarget();
+                return;
             }
-            AcquireTarget();
-            if(Position.IsInRange(Position,EnemyTarget.Position,Range))
+            if (Position.IsInRange(Position, EnemyTarget.Position, Range))
             {
                 Attack(EnemyTarget);
-            } else
-            {
-                Position = Position.Movement(Position, EnemyTarget.Position, 0, Speed, Range);
             }
         }
     }

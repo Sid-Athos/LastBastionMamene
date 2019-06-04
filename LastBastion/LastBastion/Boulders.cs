@@ -6,13 +6,11 @@
         Unit _focus;
         float _distance;
         float _travDistance;
-
-        internal Boulders(Vectors o, Unit d,Tower c)
-            :base(o, d,c)
+        internal Boulders(Vectors o, Unit d, Tower c)
+            : base(o, d, c)
         {
             _focus = d;
-            _destination = new Vectors(d.Position.X,d.Position.Y);
-            _distance = Position.TotDistance(Context.Position, Destination);
+            _destination = new Vectors(d.Position.X, d.Position.Y);
         }
 
         Vectors Destination
@@ -23,17 +21,17 @@
 
         float Distance => Distance;
 
-        uint BoulderSize ()
+        uint BoulderSize()
         {
             _travDistance = Position.TotDistance(Position, Destination);
             float spent = _distance - _travDistance;
             float mid = _travDistance / 2;
-            
-            for(float i = 0f; i < Distance; i += 0.4f)
+
+            for (float i = 0f; i < Distance; i += 0.4f)
             {
 
             }
-            return 3;
+            return 0;
         }
 
         internal new void Update()
@@ -44,9 +42,9 @@
             }
             else
             {
-                foreach(var n in base.Context.Context.BarList)
+                foreach (var n in base.Context.Context.BarList)
                 {
-                    if(Destination.IsInRange(Destination,n.Position,2.0f))
+                    if (Destination.IsInRange(Destination, n.Position, 2.0f))
                     {
                         Target.Attacked(0);
                     }

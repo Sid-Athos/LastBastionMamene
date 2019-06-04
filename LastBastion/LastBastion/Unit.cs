@@ -13,7 +13,7 @@ namespace LastBastion
         readonly uint _dmg;
         readonly uint _armor;
         bool _isMoving;
-        uint _aaCooldown;
+        Cooldown _aaCooldown;
         float _speed;
         bool _inTower = false;
         bool _burned = false;
@@ -24,53 +24,24 @@ namespace LastBastion
 
         public Unit(
             float posX, 
-            float posY
-            ,float range,
-            string job, 
-            uint lifePoints, 
-            uint dmg,
-            uint armor,
-            bool isMoving,
-            uint attackCooldown, 
-            float speed,
-            Map context)
+            float posY,
+            string name,
+            Map context
+            )
         {
-            _job = job;
-            _lifePoints = lifePoints;
-            _maxLifePoints = _lifePoints;
-            _dmg = dmg;
-            _armor = armor;
-            _isMoving = isMoving;
-            _aaCooldown = attackCooldown;
-            _speed = speed;
+            _job = name;
+            _lifePoints = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vie"]);
+            _maxLifePoints = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vie"]); ;
+            _dmg = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Dégâts"]); ;
+            _armor = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Armure"]); ;
+            _isMoving = false;
+            _aaCooldown = new Cooldown(Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Cooldown"]));
+            _speed = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vitesse"]); ;
             _context = context;
-            _range = range;
+            _range = (float)Convert.ToDouble(context.Vill.Beasts.Beasts[name]["Range"]); ;
             _position = new Vectors(posX, posY);
         }
 
-        public Unit(
-            float posX,
-            float posY
-            , float range,
-            string job,
-            uint lifePoints,
-            uint dmg,
-            uint armor,
-            bool isMoving,
-            uint attackCooldown,
-            float speed)
-        {
-            _job = job;
-            _lifePoints = lifePoints;
-            _maxLifePoints = _lifePoints;
-            _dmg = dmg;
-            _armor = armor;
-            _isMoving = isMoving;
-            _aaCooldown = attackCooldown;
-            _speed = speed;
-            _range = range;
-            _position = new Vectors(posX, posY);
-        }
 
         public Unit(uint life)
         {
@@ -194,17 +165,21 @@ namespace LastBastion
 
         internal bool BurnIt { set { _burned = value; } }
 
-        bool IsMoving => _isMoving;
+        internal bool IsMoving => _isMoving;
 
         internal bool IsInTower => _inTower;
 
+<<<<<<< HEAD
         public string Job => _job;
+=======
+        internal string Job => _job;
+>>>>>>> classes
 
-        public float Range => _range;
+        internal float Range => _range;
 
         internal uint Dmg => _dmg;
 
-        internal uint AaCd => _aaCooldown;
+        internal Cooldown AaCd => _aaCooldown;
 
         internal uint Armor => _armor;
 
@@ -257,7 +232,12 @@ namespace LastBastion
                             return;
                         }
                 }
+<<<<<<< HEAD
             } else
+=======
+            }
+            else
+>>>>>>> classes
             {
                 Building b = null;
                 SetTarget(b);

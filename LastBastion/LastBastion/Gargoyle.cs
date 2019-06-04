@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SFML.System;
 
 namespace LastBastion
 {
@@ -8,24 +9,20 @@ namespace LastBastion
     {
         bool _flying = true;
         uint _timeStamp;
+        Spell _howl;
 
-        public Gargoyle(
-            float posX, 
-            float posY, 
-            float range,
-            string job, 
-            uint lifePoints, 
-            uint dmg, 
-            uint armor, 
-            bool isMoving,
-            uint attackCooldown, 
-            float speed, 
+        internal Gargoyle(
+            float posX,
+            float posY,
+            string name,
             Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
+            : base(posX, posY, name, context)
         {
             context.AddBarbar(this);
+            _howl = new Spell(
+                "Howl",
+                this,
+                base.Context.Sb);
         }
 
         internal Gargoyle(
@@ -35,7 +32,7 @@ namespace LastBastion
 
         }
 
-        public bool Flying => _flying;
+        internal bool Flying => _flying;
 
         internal new Building Target
         {
@@ -51,7 +48,17 @@ namespace LastBastion
 
         public override void Update()
         {
-            AcquireTarget();
+            if (Life == 0)
+            {
+                Die();
+                return;
+            }
+            Context.GetGame.Sprites.GetSprite("Gargoyle").Position = new Vector2f(Position.X, Position.Y);
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gargoyle"));
+            if (EnemyTarget == null)
+                AcquireTarget();
         }
+
+
     }
 }

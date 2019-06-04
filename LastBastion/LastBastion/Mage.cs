@@ -1,28 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using SFML.System;
+using System;
+using System.Collections.Generic;
 
 namespace LastBastion
 {
-    public class Mage : Unit
+    internal class Mage : Unit
     {
         List<Building> _burned;
         uint _timeStamp;
-        float _spellRange = 28f;
-        uint _spellCd = 5;
-        
-        public Mage(
-            float posX, float posY, float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed, Map context)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed, context)
-        {
-            _burned = new List<Building>();
-            context.AddBarbar(this);
+        Spell _ignite;
 
+        internal Mage(
+            float posX, float posY, string name, Map context)
+            : base(posX, posY, name, context)
+        {
+            context.AddBarbar(this);
+            _ignite = new Spell
+                (
+                "Ignite",
+                this,
+                base.Context.Vill.Spells
+                );
         }
 
-        public List<Building> BurList => _burned;
+        internal List<Building> BurList => _burned;
 
         internal Mage(
             uint life
@@ -31,21 +32,19 @@ namespace LastBastion
             life
             )
         {
+
         }
 
-        public void Ignite()
+        internal void Ignite()
         {
-            if(EnemyTarget != null)
-            {
-                if(EnemyTarget.IsBurned)
+            if (EnemyTarget != null)
+                if (EnemyTarget.IsBurned)
                 {
                     base.SwitchTarget(BurList);
                     return;
                 }
-                Burn(EnemyTarget);
-                BurList.Add(EnemyTarget);
-            }
-            base.SwitchTarget(BurList);
+            Burn(EnemyTarget);
+            BurList.Add(EnemyTarget);
         }
 
         internal new void Die()
@@ -53,7 +52,7 @@ namespace LastBastion
             Context.RemoveBarbar(this);
         }
 
-        public new Building Target
+        internal new Building Target
         {
             get { return base.EnemyTarget; }
             set { EnemyTarget = value; }
@@ -67,7 +66,22 @@ namespace LastBastion
 
         public override void Update()
         {
-            AcquireTarget();
+            AaCd.Update();
+            if (Life == 0 || Life > Convert.ToUInt16(Context.Vill.Beasts.Beasts["Mage"]["Vie"]))
+            {
+                Die();
+                return;
+            }
+            Context.GetGame.Sprites.GetSprite("Mage").Position = new Vector2f(Position.X, Position.Y);
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Mage"));
+            if (EnemyTarget == null)
+            {
+                AcquireTarget();
+            }
+            if (AaCd.IsUsable)
+            {
+                Attack(EnemyTarget);
+            }
         }
     }
 }

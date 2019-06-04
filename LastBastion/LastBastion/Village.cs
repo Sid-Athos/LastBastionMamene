@@ -11,6 +11,11 @@ namespace LastBastion
         Building _castle;
         List<Hut> _nearby;
         SpellBook _book = new SpellBook();
+<<<<<<< HEAD
+=======
+        Bestiary _beasts = new Bestiary();
+
+>>>>>>> classes
         string _buildingName; 
         int _area;
         uint _foodStock;
@@ -18,6 +23,9 @@ namespace LastBastion
         uint _woodStock;
         uint _villagerStock;
         Dictionary<string, Dictionary<string, string>> _prices;
+
+        internal SpellBook Spells => _book;
+        internal Bestiary Beasts => _beasts;
 
         public Village(Map map)
         {

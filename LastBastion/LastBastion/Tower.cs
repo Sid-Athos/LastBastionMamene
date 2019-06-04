@@ -9,7 +9,7 @@ namespace LastBastion
         Archer[] _slots;
         uint _rank;
         uint _dmg;
-        uint _aaCooldown;
+        Cooldown _aaCooldown;
         float _range = 26.0f;
         Unit _target;
         List<Projectiles> _proj;
@@ -38,12 +38,12 @@ namespace LastBastion
          context, "Tower", "test")
         {
             _dmg = dmg;
-            _aaCooldown = aaCooldown;
+            _aaCooldown = new Cooldown(aaCooldown);
             _slots = new Archer[2];
             context.AddBuilding(this);
             for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 2, 1, false, 2, 2.3f, context);
+                Archer sut = new Archer(posX, posY, "Archer", context);
                 _slots[i] = sut;
                 sut.SetTower(this);
             }
@@ -67,19 +67,16 @@ namespace LastBastion
          context)
         {
             _dmg = dmg;
-            _aaCooldown = aaCooldown;
             _slots = new Archer[2];
             for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 80, Dmg, 1, false, 2, 0.002f, true);
+                Archer sut = new Archer(posX, posY, "Archer", Context);
                 _slots[i] = sut;
                 sut.SetTower(this);
             }
             _proj = new List<Projectiles>();
 
         }
-
-        internal uint AaCd => _aaCooldown;
 
         public void SetAllTowerUnitsTarget()
         {
@@ -113,6 +110,8 @@ namespace LastBastion
             _proj.Add(p);
         }
 
+        Cooldown AaCd => _aaCooldown;
+
         public void Attack(Unit unit)
         {
             if(unit.Life == 0)
@@ -121,55 +120,30 @@ namespace LastBastion
             }
             if(Target != null)
             {
-                uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                if (_timeStamp == 0 && Attacked == false)
+                if (AaCd.IsUsable && Attacked == false)
                 {
+                    AaCd.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                     for (int i = 0; i < _slots.Length; i++)
                     {
                         _slots[i].Attack();
                     }
                     Projectiles p = new Projectiles(Position, unit,this);
                     _proj.Add(p);
-                    TimeSt = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                     Attacked = true;
                 }
-                if (newTs < (_timeStamp + AaCd) && newTs > _timeStamp)
+                if (AaCd.TimeStamp <= (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                 {
                     Attacked = false;
-                }
-                else if (newTs == _timeStamp + AaCd && Attacked == false)
-                {
-                    for (int i = 0; i < _slots.Length; i++)
-                    {
-                        _slots[i].Attack();
-                    }
-                    Projectiles p = new Projectiles(Position, unit,this);
-                    Console.WriteLine("Proj 153 " + ProjList.Count);
-                    _proj.Add(p);
-                    Attacked = true;
-                }
-                if(newTs > TimeSt+ AaCd)
-                {
-                    TimeSt = 0;
-                    Attacked = !Attacked;
                 }
             }
             if(ProjList.Count > 0)
             {
-                try
-                {
-                    foreach (var n in ProjList)
-                    {
-
-                        n.Update();
-                    }
-
-                }
-                catch(InvalidOperationException)
+                for(int i =0; i < ProjList.Count; i++)
                 {
 
-                }
+                    ProjList[i].Update();
 
+                }
             }
         }
 
@@ -210,7 +184,7 @@ namespace LastBastion
                 _slots = newSlots;
                 for (int i = compteur; i < newSlots.Length;i++)
                 {
-                    Archer sut = new Archer(this.Position.X, this.Position.Y, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f, Context);
+                    Archer sut = new Archer(this.Position.X, this.Position.Y, "Archer", Context);
                     AddArcher(sut);
                     sut.SetTower(this);
                 }
@@ -341,8 +315,8 @@ namespace LastBastion
             if(base.Position.IsInRange(Position, Target.Position,Range))
             {
                 Attack(Target);
-
-                Target = (Target.Life == 0) ? null : Target;
+                if(Target != null)
+                Target = (Target.Life == 0 ||Target.Life > 2000) ? null : Target;
                 AcquireTarget();
             }
         }
