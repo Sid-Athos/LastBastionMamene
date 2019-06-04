@@ -26,7 +26,7 @@ namespace LastBastion
 
         internal bool IsUsable => TimeStamp == 0;
 
-        internal void Update()
+        internal void Reset()
         {
             if(IsUsable)
             {
@@ -36,6 +36,11 @@ namespace LastBastion
             {
                 TimeStamp = 0;
             }
+        }
+
+        internal void Update()
+        {
+            Reset();
         }
     }
 }

@@ -41,29 +41,6 @@ namespace LastBastion
             _position = new Vectors(posX, posY);
         }
 
-        public Unit(
-            float posX,
-            float posY
-            , float range,
-            string job,
-            uint lifePoints,
-            uint dmg,
-            uint armor,
-            bool isMoving,
-            uint attackCooldown,
-            float speed)
-        {
-            _job = job;
-            _lifePoints = lifePoints;
-            _maxLifePoints = _lifePoints;
-            _dmg = dmg;
-            _armor = armor;
-            _isMoving = isMoving;
-            _aaCooldown = attackCooldown;
-            _speed = speed;
-            _range = range;
-            _position = new Vectors(posX, posY);
-        }
 
         public Unit(uint life)
         {

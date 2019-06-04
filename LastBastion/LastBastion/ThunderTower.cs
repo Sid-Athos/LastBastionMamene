@@ -6,6 +6,7 @@ namespace LastBastion
     public class Thunder:Tower
     {
         List<Unit> _paralysedList;
+        Spell _par;
 
         public Thunder(
         float posX,
@@ -31,6 +32,7 @@ namespace LastBastion
          context,name,desc)
         {
             _paralysedList = new List<Unit>();
+            _par = new Spell("ThunderWave", this, base.Context.Vill.Spells);
         }
 
         List<Unit> ParList => _paralysedList;
