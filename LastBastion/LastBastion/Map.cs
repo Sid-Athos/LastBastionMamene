@@ -34,11 +34,11 @@ namespace LastBastion
 
         public Waves Wave => _waves;
 
-        public Village Vill => _village;
+        public Village GetVillage => _village;
 
         public Map()
         {
-            //_village = new Village(this);
+            _village = new Village(this);
             _barbarians = new List<Unit>();
             _buildings = new List<Building>();
             _projectiles = new List<Projectiles>();
@@ -54,11 +54,11 @@ namespace LastBastion
 
         public int BuildCount => _buildings.Count;
 
-        internal void AddProjectile(Projectiles v)
+        public void AddProjectile(Projectiles v)
         {
             _projectiles.Add(v);
         }
-        internal void RemoveProjectile(Projectiles n)
+        public void RemoveProjectile(Projectiles n)
         {
             _projectiles.Remove(n);
         }
@@ -89,8 +89,6 @@ namespace LastBastion
             _barbarians.Remove(u);
 
         }
-
-        public Village GetVillage => _village;
 
         public Game GetGame => _game;
 
@@ -231,8 +229,8 @@ namespace LastBastion
             }
         }
 
-        internal SpellBook Sb => _book;
+        public SpellBook Sb => _book;
 
-        internal Bestiary Beasts => _beasts;
+        public Bestiary Beasts => _beasts;
     }
 }

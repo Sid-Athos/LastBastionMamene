@@ -4,13 +4,13 @@ using System.Text;
 
 namespace LastBastion
 {
-    internal class Dracula : Unit
+    public class Dracula : Unit
     {
         uint _spellCd = 3;
         bool _flying = true;
         uint _timeStamp;
 
-        internal Dracula(
+        public Dracula(
             float posX,
             float posY,
            string name,
@@ -20,25 +20,25 @@ namespace LastBastion
 
         }
 
-        internal bool Flying => _flying;
+        public bool Flying => _flying;
 
-        internal new Building Target
+        public new Building Target
         {
             get { return base.EnemyTarget; }
             set { EnemyTarget = value; }
         }
 
-        internal uint TimeSt
+        public uint TimeSt
         {
             get { return _timeStamp; }
             set { _timeStamp = value; }
         }
 
-        internal override void Update()
+        public override void Update()
         {
             AcquireTarget();
         }
-        internal override void Attack(Unit unit)
+        public override void Attack(Unit unit)
         {
             if (Dmg > (unit.Life + unit.Armor))
             {

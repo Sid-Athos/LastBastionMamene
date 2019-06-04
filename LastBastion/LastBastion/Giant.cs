@@ -30,7 +30,7 @@ namespace LastBastion
 
         }
 
-        internal override void Attack(Unit u)
+        public override void Attack(Unit u)
         {
             foreach (var n in base.Context.BarList)
             {
@@ -41,7 +41,7 @@ namespace LastBastion
             }
         }
 
-        internal override void Attack(Building u)
+        public override void Attack(Building u)
         {
             foreach (var n in base.Context.BarList)
             {

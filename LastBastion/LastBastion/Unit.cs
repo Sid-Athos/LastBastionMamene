@@ -10,8 +10,8 @@ namespace LastBastion
         readonly string _job;
         uint _lifePoints;
         uint _maxLifePoints;
-        readonly uint _dmg;
-        readonly uint _armor;
+        uint _dmg;
+        uint _armor;
         bool _isMoving;
         Cooldown _aaCooldown;
         float _speed;
@@ -30,15 +30,15 @@ namespace LastBastion
             )
         {
             _job = name;
-            _lifePoints = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vie"]);
-            _maxLifePoints = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vie"]); ;
-            _dmg = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Dégâts"]); ;
-            _armor = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Armure"]); ;
+            _lifePoints = Convert.ToUInt32(context.GetVillage.Beasts.Beasts[name]["Vie"]);
+            _maxLifePoints = Convert.ToUInt32(context.GetVillage.Beasts.Beasts[name]["Vie"]); ;
+            _dmg = Convert.ToUInt32(context.GetVillage.Beasts.Beasts[name]["Dégâts"]); ;
+            _armor = Convert.ToUInt32(context.GetVillage.Beasts.Beasts[name]["Armure"]); ;
             _isMoving = false;
-            _aaCooldown = new Cooldown(Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Cooldown"]));
-            _speed = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vitesse"]); ;
+            _aaCooldown = new Cooldown(Convert.ToUInt32(context.GetVillage.Beasts.Beasts[name]["Cooldown"]));
+            _speed = (float)Convert.ToDouble(context.GetVillage.Beasts.Beasts[name]["Vitesse"]); ;
             _context = context;
-            _range = (float)Convert.ToDouble(context.Vill.Beasts.Beasts[name]["Range"]); ;
+            _range = (float)Convert.ToDouble(context.GetVillage.Beasts.Beasts[name]["Range"]); ;
             _position = new Vectors(posX, posY);
         }
 
@@ -77,17 +77,17 @@ namespace LastBastion
             set { _lifePoints = value; }
         }
 
-        internal void Attacked(uint newLife)
+        public void Attacked(uint newLife)
         {
             Life = newLife;
         }
 
-         internal void Die()
+         public void Die()
         {
            
         }
 
-        internal void JoinTower()
+        public void JoinTower()
         {
             _inTower = !_inTower;
         }
@@ -97,7 +97,7 @@ namespace LastBastion
             _isMoving = !_isMoving;
         }
 
-        internal void Burn(Building b)
+        public void Burn(Building b)
         {
             b.Burn();
         }
@@ -153,35 +153,32 @@ namespace LastBastion
             set { _enemyTar = value; }
         }
 
-        internal Map Context => _context;
+        public Map Context => _context;
 
-        internal Unit Target => _target;
+        public Unit Target => _target;
 
         public float Speed => _speed;
 
         public bool IsParalysed => _paralyzed;
 
-        internal bool IsBurned => _burned;
+        public bool IsBurned => _burned;
 
-        internal bool BurnIt { set { _burned = value; } }
+        public bool BurnIt { set { _burned = value; } }
 
-        internal bool IsMoving => _isMoving;
+        public bool IsMoving => _isMoving;
 
-        internal bool IsInTower => _inTower;
+        public bool IsInTower => _inTower;
 
-<<<<<<< HEAD
         public string Job => _job;
-=======
-        internal string Job => _job;
->>>>>>> classes
 
-        internal float Range => _range;
 
-        internal uint Dmg => _dmg;
+        public float Range => _range;
 
-        internal Cooldown AaCd => _aaCooldown;
+        public uint Dmg => _dmg;
 
-        internal uint Armor => _armor;
+        public Cooldown AaCd => _aaCooldown;
+
+        public uint Armor => _armor;
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
@@ -206,7 +203,7 @@ namespace LastBastion
             }
         }
 
-        internal void SwitchTarget(List<Building> s)
+        public void SwitchTarget(Dictionary<Building,Dictionary<uint,uint>> s)
         {
             Map context = Context;
             List<Building> barbList = context.BuildList;
@@ -224,24 +221,18 @@ namespace LastBastion
 
                 foreach (var n in barbList)
                 {
-                    if (!s.Contains(n))
-                        if (Position.IsInRange(Position, n.Position, Range))
-                        {
-                            unitToReturn = n;
-                            SetTarget(unitToReturn);
-                            return;
-                        }
+                    if(!n.IsBurned)
+                    {
+                        unitToReturn = n;
+                        SetTarget(n);
+                        return;
+                    }
                 }
-<<<<<<< HEAD
-            } else
-=======
             }
             else
->>>>>>> classes
             {
                 Building b = null;
                 SetTarget(b);
-
             }
         }
 

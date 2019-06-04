@@ -58,22 +58,22 @@ namespace LastBastion
             switch (_buildingName)
             {
                 case "House":
-                    building = new House(GetVec2F.X, GetVec2F.Y,150,150,0,1,0,0f,0, _game.Map,a,_game.GetMap.Vill.Costs[a]["Description"]);
+                    building = new House(GetVec2F.X, GetVec2F.Y,150,150,0,1,0,0f,0, _game.Map,a,_game.GetMap.GetVillage.Costs[a]["Description"]);
                     break;
                 case "Sawmill":
-                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 1, 0, 0f, 0, _game.Map, a, _game.GetMap.Vill.Costs[a]["Description"]);
+                    building = new Sawmill(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 1, 0, 0f, 0, _game.Map, a, _game.GetMap.GetVillage.Costs[a]["Description"]);
                     break;
                 case "Mine":
-                    building = new Mine(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 1, 0, 0f, 0, _game.Map, a, _game.GetMap.Vill.Costs[a]["Description"]);
+                    building = new Mine(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 1, 0, 0f, 0, _game.Map, a, _game.GetMap.GetVillage.Costs[a]["Description"]);
                     break;
                 case "Farm":
-                    building = new Farm(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 1, 0, 0f, 0, _game.Map, a, _game.GetMap.Vill.Costs[a]["Description"]);
+                    building = new Farm(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 1, 0, 0f, 0, _game.Map, a, _game.GetMap.GetVillage.Costs[a]["Description"]);
                     break;
                 case "Tower":
-                    building = new Tower(GetVec2F.X, GetVec2F.Y, 350, 350, 5, 2, 1 ,2.0f, 0, _game.Map, a, _game.GetMap.Vill.Costs[a]["Description"]);
+                    building = new Tower(GetVec2F.X, GetVec2F.Y, 350, 350, 5, 2, 1 ,2.0f, 0, _game.Map, a, _game.GetMap.GetVillage.Costs[a]["Description"]);
                     break;
                 case "Wall":
-                    building = new Wall(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 10, 0, 0f, 0, _game.Map, a, _game.GetMap.Vill.Costs[a]["Description"]);
+                    building = new Wall(GetVec2F.X, GetVec2F.Y, 150, 150, 0, 10, 0, 0f, 0, _game.Map, a, _game.GetMap.GetVillage.Costs[a]["Description"]);
                     break;
                 default:
                     //Console.WriteLine("Default case");

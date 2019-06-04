@@ -99,7 +99,7 @@ namespace LastBastion
                         _save.CreateTXT();
                         break;
                     case Keyboard.Key.B:
-                        Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, _game.GetMap.Vill.Beasts.Beasts["Gobelin"]["Nom"], _game.Map);
+                        Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, _game.GetMap.GetVillage.Beasts.Beasts["Gobelin"]["Nom"], _game.Map);
                         break;
                     case Keyboard.Key.C:
                         break;
@@ -114,7 +114,7 @@ namespace LastBastion
                         Console.WriteLine(_game.GetWindow.GetView.Render.Size.Y);
                         break;
                     case Keyboard.Key.I:
-                        _game.Map.Vill.IncreaseRessources();
+                        _game.Map.GetVillage.IncreaseRessources();
                         break;
                     case Keyboard.Key.J:
                         break;

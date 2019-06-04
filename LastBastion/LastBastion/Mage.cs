@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace LastBastion
 {
-    internal class Mage : Unit
+    public class Mage : Unit
     {
         List<Building> _burned;
         uint _timeStamp;
         Spell _ignite;
 
-        internal Mage(
+        public Mage(
             float posX, float posY, string name, Map context)
             : base(posX, posY, name, context)
         {
@@ -19,13 +19,13 @@ namespace LastBastion
                 (
                 "Ignite",
                 this,
-                base.Context.Vill.Spells
+                base.Context.GetVillage.Spells
                 );
         }
 
-        internal List<Building> BurList => _burned;
+        public List<Building> BurList => _burned;
 
-        internal Mage(
+        public Mage(
             uint life
             )
             : base(
@@ -35,30 +35,20 @@ namespace LastBastion
 
         }
 
-        internal void Ignite()
-        {
-            if (EnemyTarget != null)
-                if (EnemyTarget.IsBurned)
-                {
-                    base.SwitchTarget(BurList);
-                    return;
-                }
-            Burn(EnemyTarget);
-            BurList.Add(EnemyTarget);
-        }
+        public Spell Ignite => _ignite;
 
-        internal new void Die()
+        public new void Die()
         {
             Context.RemoveBarbar(this);
         }
 
-        internal new Building Target
+        public new Building Target
         {
             get { return base.EnemyTarget; }
             set { EnemyTarget = value; }
         }
 
-        internal uint TimeSt
+        public uint TimeSt
         {
             get { return _timeStamp; }
             set { _timeStamp = value; }
@@ -67,21 +57,41 @@ namespace LastBastion
         public override void Update()
         {
             AaCd.Update();
-            if (Life == 0 || Life > Convert.ToUInt16(Context.Vill.Beasts.Beasts["Mage"]["Vie"]))
+            if (Life == 0 || Life > Convert.ToUInt16(Context.GetVillage.Beasts.Beasts["Mage"]["Vie"]))
             {
                 Die();
                 return;
             }
-            Context.GetGame.Sprites.GetSprite("Mage").Position = new Vector2f(Position.X, Position.Y);
-            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Mage"));
+            //Context.GetGame.Sprites.GetSprite("Mage").Position = new Vector2f(Position.X, Position.Y);
+            //Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Mage"));
+
             if (EnemyTarget == null)
             {
                 AcquireTarget();
+                return;
             }
-            if (AaCd.IsUsable)
+            if (AaCd.IsUsable && EnemyTarget.Position.IsInRange(this.Position,EnemyTarget.Position,base.Range))
             {
                 Attack(EnemyTarget);
             }
+            if(EnemyTarget.IsBurned)
+            {
+                SwitchTarget(Ignite.DotBuildList);
+            }
+            Ignite.Update(this);
+        }
+
+        public List<Building> BurnList => _burned;
+
+        public override void Attack(Unit unit)
+        {
+
+        }
+
+        public override void Attack(Building unit)
+        {
+
+
         }
     }
 }

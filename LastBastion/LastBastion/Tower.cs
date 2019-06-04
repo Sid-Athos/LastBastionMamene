@@ -110,7 +110,7 @@ namespace LastBastion
             _proj.Add(p);
         }
 
-        Cooldown AaCd => _aaCooldown;
+        public Cooldown AaCd => _aaCooldown;
 
         public void Attack(Unit unit)
         {

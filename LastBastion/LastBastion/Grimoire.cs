@@ -24,7 +24,7 @@ namespace LastBastion
             _ignite.Add("École", "Feu");
             _ignite.Add("Range", "30");
             _ignite.Add("Zone d'effet", "0");
-            _spellBook.Add("Ignite", _ignite);
+            _spell.Add("Ignite", _ignite);
             Dictionary<string, string> _paralyse = new Dictionary<string, string>();
             _paralyse.Add("Nom", "Choc électrique");
             _paralyse.Add("Description", "Un sort de contrôle des foules, paralyse une cible pendant 15 secondes.");
@@ -38,7 +38,7 @@ namespace LastBastion
             _paralyse.Add("École", "Foudre");
             _paralyse.Add("Range", "30");
             _paralyse.Add("Zone d'effet", "0");
-            _spellBook.Add("ThunderWave", _paralyse);
+            _spell.Add("ThunderWave", _paralyse);
             Dictionary<string, string> _drainLife = new Dictionary<string, string>();
             _drainLife.Add("Nom", "Drain de vie");
             _drainLife.Add("Description", "Inflige des dégâts et soigne l'utilisateur de la motié des dégâts infligés.");
@@ -52,7 +52,7 @@ namespace LastBastion
             _drainLife.Add("École", "Ombre");
             _drainLife.Add("Range", "30");
             _drainLife.Add("Zone d'effet", "10");
-            _spellBook.Add("Drain Life", _drainLife);
+            _spell.Add("Drain Life", _drainLife);
             Dictionary<string, string> _smash = new Dictionary<string, string>();
             _smash.Add("Nom", "Smash");
             _smash.Add("Description", "Inflige des dégâts physiques à tous les ennemis dans une zone.");
@@ -66,7 +66,7 @@ namespace LastBastion
             _smash.Add("École", "Physique");
             _smash.Add("Range", "15");
             _smash.Add("Zone d'effet", "8");
-            _spellBook.Add("Smash", _smash);
+            _spell.Add("Smash", _smash);
             Dictionary<string, string> _howl = new Dictionary<string, string>();
             _howl.Add("Nom", "Hurlement");
             _howl.Add("Description", "Inflige des dégâts physiques à tous les ennemis autour de l'unité.");
@@ -80,9 +80,9 @@ namespace LastBastion
             _howl.Add("École", "Physique");
             _howl.Add("Range", "0");
             _howl.Add("Zone d'effet", "8");
-            _spellBook.Add("Howl", _howl);
+            _spell.Add("Howl", _howl);
         }
 
-        internal Dictionary <string, Dictionary <string, string>> SpellList => _spell;
+        public Dictionary <string, Dictionary <string, string>> SpellList => _spell;
     }
 }

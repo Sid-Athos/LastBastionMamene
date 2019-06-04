@@ -4,29 +4,29 @@ using System.Text;
 
 namespace LastBastion
 {
-    internal class Cooldown
+    public class Cooldown
     {
         Spell _con;             // Context
         uint _tS;                 // Timestamp
         bool _cdStat;         // Cooldown Status
         uint _cdValue;        // Cooldown value in seconds
 
-        internal Cooldown(uint cdValue)
+        public Cooldown(uint cdValue)
         {
             _cdValue = cdValue;
         }
 
-        internal uint TimeStamp
+        public uint TimeStamp
         {
             get { return _tS; }
             set { _tS = value; }
         }
 
-        internal uint Cd => _cdValue;
+        public uint Cd => _cdValue;
 
-        internal bool IsUsable => TimeStamp == 0;
+        public bool IsUsable => TimeStamp == 0;
 
-        internal void Reset()
+        public void Reset()
         {
             if (IsUsable)
             {
@@ -38,7 +38,7 @@ namespace LastBastion
             }
         }
 
-        internal void Update()
+        public void Update()
         {
             Reset();
         }

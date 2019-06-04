@@ -32,7 +32,7 @@ namespace LastBastion
          context,name,desc)
         {
             _paralysedList = new List<Unit>();
-            _par = new Spell("ThunderWave", this, base.Context.Vill.Spells);
+            _par = new Spell("ThunderWave", this, base.Context.GetVillage.Spells);
         }
 
         List<Unit> ParList => _paralysedList;

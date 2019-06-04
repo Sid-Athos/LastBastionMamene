@@ -13,13 +13,13 @@ namespace LastBastion
         uint _timeStamp;
         bool _spawnStatus = false;
 
-        internal Waves(Map context)
+        public Waves(Map context)
         {
             _context = context;
             _round = 1;
         }
 
-        internal Map WavesContext => _context;
+        public Map WavesContext => _context;
 
         public uint Round
         {
@@ -33,19 +33,19 @@ namespace LastBastion
             set { _spawnStatus = value; }
         }
 
-        internal uint TimeStamp
+        public uint TimeStamp
         {
             get { return _timeStamp; }
             set { _timeStamp = value; }
         }
 
-        internal uint GobAmount
+        public uint GobAmount
         {
             get { return _gobAmount; }
             set { _gobAmount = value; }
         }
 
-        internal void SpawnWave()
+        public void SpawnWave()
         {
             GobAmount = Round * 4;
 
@@ -55,7 +55,7 @@ namespace LastBastion
                 Barbar v1 = new Barbar(
                     WavesContext.GetGame.GetWindow.GetView.Render.Center.X, 
                     WavesContext.GetGame.GetWindow.GetView.Render.Center.Y, 
-                    WavesContext.Vill.Beasts.Beasts["Gobelin"]["Nom"],WavesContext
+                    WavesContext.GetVillage.Beasts.Beasts["Gobelin"]["Nom"],WavesContext
                     );
 
 
@@ -71,7 +71,7 @@ namespace LastBastion
                     Mage m = new Mage(
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
-                        WavesContext.Vill.Beasts.Beasts["Mage"]["Nom"], WavesContext
+                        WavesContext.GetVillage.Beasts.Beasts["Mage"]["Nom"], WavesContext
                     );
                 }
             }
@@ -85,7 +85,7 @@ namespace LastBastion
                     Gargoyle g = new Gargoyle(
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
-                        WavesContext.Vill.Beasts.Beasts["Gargoyle"]["Nom"], WavesContext
+                        WavesContext.GetVillage.Beasts.Beasts["Gargoyle"]["Nom"], WavesContext
                     );
                 }
             }
@@ -99,14 +99,14 @@ namespace LastBastion
                     Giant g = new Giant(
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
                         WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
-                        WavesContext.Vill.Beasts.Beasts["Giant"]["Nom"], WavesContext
+                        WavesContext.GetVillage.Beasts.Beasts["Giant"]["Nom"], WavesContext
                         );
                 }
             }
             Round++;
         }
         
-        internal Vectors SpawnLocation()
+        public Vectors SpawnLocation()
         {
             var grid = _context.GetGame.GetGrid;
             List<Vector2f> vecs = new List<Vector2f>();
@@ -123,7 +123,7 @@ namespace LastBastion
             return  new Vectors(vecs[c].X, vecs[c].Y);
         }
 
-        internal void Update()
+        public void Update()
         {
                 SpawnWave();
         }

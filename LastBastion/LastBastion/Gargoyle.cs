@@ -11,7 +11,7 @@ namespace LastBastion
         uint _timeStamp;
         Spell _howl;
 
-        internal Gargoyle(
+        public Gargoyle(
             float posX,
             float posY,
             string name,
@@ -25,22 +25,22 @@ namespace LastBastion
                 base.Context.Sb);
         }
 
-        internal Gargoyle(
+        public Gargoyle(
             uint life)
             : base(life)
         {
 
         }
 
-        internal bool Flying => _flying;
+        public bool Flying => _flying;
 
-        internal new Building Target
+        public new Building Target
         {
             get { return base.EnemyTarget; }
             set { EnemyTarget = value; }
         }
 
-        internal uint TimeSt
+        public uint TimeSt
         {
             get { return _timeStamp; }
             set { _timeStamp = value; }

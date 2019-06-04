@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    internal class Spell
+    public class Spell
     {
         readonly string _name;
         readonly string _description;
@@ -24,7 +24,7 @@ namespace LastBastion
 
 
 
-        internal Spell(string name, Building con, SpellBook spells)
+        public Spell(string name, Building con, SpellBook spells)
         {
             _buildingContext = con;
             _cd = new Cooldown(Convert.ToUInt16(spells.SpellList[name]["Cooldown"]));
@@ -37,7 +37,7 @@ namespace LastBastion
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
         }
 
-        internal Spell(string name, Unit con, SpellBook spells)
+        public Spell(string name, Unit con, SpellBook spells)
         {
             _unitContext = con;
             _cd = new Cooldown(Convert.ToUInt16(spells.SpellList[name]["Cooldown"]));
@@ -50,24 +50,24 @@ namespace LastBastion
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
         }
 
-        internal bool Casted
+        public bool Casted
         {
             get { return _casted; }
             set { _casted = value; }
         }
 
-        internal Cooldown CD => _cd;
+        public Cooldown CD => _cd;
 
-        internal uint Duration => _duration;
+        public uint Duration => _duration;
 
-        internal Dictionary<Unit, Dictionary<uint, uint>> DotUnitList => _dotUnit;
+        public Dictionary<Unit, Dictionary<uint, uint>> DotUnitList => _dotUnit;
 
-        internal Dictionary<Building, Dictionary<uint, uint>> DotBuildList => _dotBuild;
+        public Dictionary<Building, Dictionary<uint, uint>> DotBuildList => _dotBuild;
 
 
-        internal uint CastTime => _castingTime;
+        public uint CastTime => _castingTime;
 
-        internal void Cast(Unit u)
+        public void Cast(Unit u)
         {
             if (u != null)
                 if (u.Life > 0)
@@ -106,7 +106,7 @@ namespace LastBastion
                     }
         }
 
-        internal void UpdateDots(Dictionary<Unit, Dictionary<uint, uint>> u)
+        public void UpdateDots(Dictionary<Unit, Dictionary<uint, uint>> u)
         {
             if (u.Count > 0)
             {
@@ -147,7 +147,7 @@ namespace LastBastion
             }
         }
 
-        internal void UpdateDots(Dictionary<Building, Dictionary<uint, uint>> u)
+        public void UpdateDots(Dictionary<Building, Dictionary<uint, uint>> u)
         {
             if (u.Count > 0)
             {
@@ -174,8 +174,11 @@ namespace LastBastion
                                     {
                                         Hit(n.Key);
                                         u[n.Key][b.Value] = ts;
-                                        DotBuildList.Remove(n.Key);
                                     }
+                                }
+                                else
+                                {
+                                    DotBuildList.Remove(n.Key);
                                 }
                             }
                             else
@@ -188,51 +191,78 @@ namespace LastBastion
             }
         }
 
-        internal void Hit(Unit u)
+        public void Hit(Unit u)
         {
             u.Life -= _damages;
         }
 
-        internal void Hit(Building u)
+        public void Hit(Building u)
         {
             u.Life -= _damages;
         }
 
-        internal void Cast(Building u)
+        public void Cast(Building u)
         {
-            if (u != null)
                 if (u.Life > 0)
                     if (CD.IsUsable && !Casted)
                     {
                         Casted = !Casted;
-                        CD.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                        if (CastTime == 0)
+
+                    if (CastTime == 0)
                         {
-                            Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
-                            dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
-                            DotBuildList.Add(u, dotTarget);
+                            if(SpellName == "Ignite")
+                            {
+                                _unitContext.Life = 30;
+                                Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
+                                dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
+                                DotBuildList.Add(u, dotTarget);
+                                CD.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                                u.IsBurned = true ;
+                                Hit(u);
+                                _unitContext.SwitchTarget(DotBuildList);
+                            return;
+                            }
                             Hit(u);
+                            Casted = !Casted;
                         }
                         else
                         {
                             _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                         }
                     }
-                    else if (CD.IsUsable && Casted)
+                    if (_castTimeTS != 0)
                     {
                         if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                         {
-                            Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
-                            dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
-                            DotBuildList.Add(u, dotTarget);
                             Hit(u);
                             _castTimeTS = 0;
+                            Casted = !Casted;
                         }
                     }
-            if (!CD.IsUsable && Casted)
+        }
+
+        public string SpellName => _name;
+
+        public void Update(Unit b)
+        {
+            CD.Update();
+            if(b != null)
             {
-                Casted = !Casted;
+            Cast(b.EnemyTarget);
+
             }
+            if(SpellName =="Ignite")
+            {
+                if (DotUnitList.Count >0)
+                {
+                    UpdateDots(DotBuildList);
+                }
+            }
+        }
+
+        public void Update(Building b)
+        {
+
         }
     }
 }
