@@ -28,7 +28,7 @@ namespace LastBastion
             _paralyse.Add("Nom", "Mage");
             _paralyse.Add("Description", "Un habile magicien, capable de blesser rapidement vos troupes et à la défense améliorée par la magie. Garde à vous.");
             _paralyse.Add("Dégâts", "4");
-            _paralyse.Add("Armure", "2");
+            _paralyse.Add("Armure", "3");
             _paralyse.Add("Cooldown", "2");
             _paralyse.Add("Vie", "100");
             _paralyse.Add("Vitesse", "0.02");
@@ -63,6 +63,19 @@ namespace LastBastion
             _gargoyle.Add("Faction", "Sbire de Dracula");
             _gargoyle.Add("Range", "15");
             _bestiary.Add("Gargouille", _gargoyle);
+            Dictionary<string, string> _dracula = new Dictionary<string, string>();
+            _dracula.Add("Nom", "Prince des vampires");
+            _dracula.Add("Description", "Une entité démoniaque légendaire");
+            _dracula.Add("Dégâts", "150");
+            _dracula.Add("Armure", "4");
+            _dracula.Add("Cooldown", "1");
+            _dracula.Add("Vie", "1050");
+            _dracula.Add("Vitesse", "0.01");
+            _dracula.Add("Capacité", "Dran de vie");
+            _dracula.Add("Type", "Monstre");
+            _dracula.Add("Faction", "Sbire de Dracula");
+            _dracula.Add("Range", "25");
+            _bestiary.Add("Dracula", _dracula);
         }
 
         public Dictionary<string, Dictionary<string, string>> Beasts=> _bestiary;
