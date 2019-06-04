@@ -9,6 +9,7 @@ namespace Tests.Tests
     {
         static void Main(string[] args)
         {
+            /**
             Map m = new Map();
             SpellBook s = new SpellBook();
 
@@ -28,7 +29,7 @@ namespace Tests.Tests
 
 
             Console.ReadKey();
-            Console.ReadKey();
+            Console.ReadKey();*/
         }
     }
 }

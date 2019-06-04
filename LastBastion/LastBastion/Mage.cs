@@ -67,7 +67,7 @@ namespace LastBastion
         internal override void Update()
         {
             AaCd.Update();
-            if (Life == 0 || Life > Convert.ToUInt16(Context.Vill.Beasts.Beasts.["Mage"]["Vie"]))
+            if (Life == 0 || Life > Convert.ToUInt16(Context.Vill.Beasts.Beasts["Mage"]["Vie"]))
             {
                 Die();
                 return;

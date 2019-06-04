@@ -26,7 +26,8 @@ namespace LastBastion
             float posX, 
             float posY,
             string name,
-            Map context)
+            Map context
+            )
         {
             _job = name;
             _lifePoints = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vie"]);
