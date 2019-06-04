@@ -24,6 +24,11 @@ namespace LastBastion
             {
                 case Keyboard.Key.Space:
                     _game.Pause();
+                    if (_game.MenuSaveIsOpen)
+                    {
+                        _game.MenuSaveSwitch();
+                        _game.StopMenu.ResetInput();
+                    }
                     break;
                 
                 case Keyboard.Key.A:
@@ -32,7 +37,7 @@ namespace LastBastion
             }
             if (e.Code == Keyboard.Key.Z || e.Code == Keyboard.Key.Up)
             {
-                if (_game.IsStop)
+                if (_game.IsStop && !_game.MenuSaveIsOpen)
                 {
                     if (_game.StopMenu.Target == 1)
                     {
@@ -42,7 +47,7 @@ namespace LastBastion
             }
             if (e.Code == Keyboard.Key.S || e.Code == Keyboard.Key.Down)
             {
-                if (_game.IsStop)
+                if (_game.IsStop && !_game.MenuSaveIsOpen)
                 {
                     if (_game.StopMenu.Target == 0)
                     {
@@ -52,11 +57,12 @@ namespace LastBastion
             }
             if (e.Code == Keyboard.Key.Enter)
             {
-                if (_game.IsStop)
+                if (_game.IsStop && !_game.MenuSaveIsOpen)
                 {
                     if (_game.StopMenu.Target == 0)
                     {
-                        _save.CreateTXT();
+                        _game.MenuSaveSwitch();
+                        //_save.CreateTXT();
                     }
                     if (_game.StopMenu.Target == 1)
                     {
@@ -304,6 +310,95 @@ namespace LastBastion
                     case Keyboard.Key.Pause:
                         break;
                     case Keyboard.Key.KeyCount:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (_game.MenuSaveIsOpen)
+            {
+                switch (e.Code)
+                {
+                    case Keyboard.Key.A:
+                        _game.StopMenu.Add("A");
+                        break;
+                    case Keyboard.Key.B:
+                        _game.StopMenu.Add("B");
+                        break;
+                    case Keyboard.Key.C:
+                        _game.StopMenu.Add("C");
+                        break;
+                    case Keyboard.Key.D:
+                        _game.StopMenu.Add("D");
+                        break;
+                    case Keyboard.Key.E:
+                        _game.StopMenu.Add("E");
+                        break;
+                    case Keyboard.Key.F:
+                        _game.StopMenu.Add("F");
+                        break;
+                    case Keyboard.Key.G:
+                        _game.StopMenu.Add("G");
+                        break;
+                    case Keyboard.Key.H:
+                        _game.StopMenu.Add("H");
+                        break;
+                    case Keyboard.Key.I:
+                        _game.StopMenu.Add("I");
+                        break;
+                    case Keyboard.Key.J:
+                        _game.StopMenu.Add("J");
+                        break;
+                    case Keyboard.Key.K:
+                        _game.StopMenu.Add("K");
+                        break;
+                    case Keyboard.Key.L:
+                        _game.StopMenu.Add("L");
+                        break;
+                    case Keyboard.Key.M:
+                        _game.StopMenu.Add("M");
+                        break;
+                    case Keyboard.Key.N:
+                        _game.StopMenu.Add("N");
+                        break;
+                    case Keyboard.Key.O:
+                        _game.StopMenu.Add("O");
+                        break;
+                    case Keyboard.Key.P:
+                        _game.StopMenu.Add("P");
+                        break;
+                    case Keyboard.Key.Q:
+                        _game.StopMenu.Add("Q");
+                        break;
+                    case Keyboard.Key.R:
+                        _game.StopMenu.Add("R");
+                        break;
+                    case Keyboard.Key.S:
+                        _game.StopMenu.Add("S");
+                        break;
+                    case Keyboard.Key.T:
+                        _game.StopMenu.Add("T");
+                        break;
+                    case Keyboard.Key.U:
+                        _game.StopMenu.Add("U");
+                        break;
+                    case Keyboard.Key.V:
+                        _game.StopMenu.Add("V");
+                        break;
+                    case Keyboard.Key.W:
+                        _game.StopMenu.Add("W");
+                        break;
+                    case Keyboard.Key.X:
+                        _game.StopMenu.Add("X");
+                        break;
+                    case Keyboard.Key.Y:
+                        _game.StopMenu.Add("Y");
+                        break;
+                    case Keyboard.Key.Z:
+                        _game.StopMenu.Add("Z");
+                        break;
+                    case Keyboard.Key.Return:
+                        _game.StopMenu.Suppr();
                         break;
                     default:
                         break;

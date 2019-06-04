@@ -28,6 +28,7 @@ namespace LastBastion
         int _sec;
         bool MinutePass = true;
         bool _pause;
+        bool _menuSaveOpen;
         int _cycle;
         int _lastProd;
         //Turn
@@ -62,6 +63,7 @@ namespace LastBastion
             _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
+            _menuSaveOpen = false;
             _isPlayMusic = false;
 
             _animationSwitch = false;
@@ -169,10 +171,22 @@ namespace LastBastion
             if (!_pause)
             {
                 _map.SamouraïDeCoke();
-                _stopMenu.Update();
+                if (_menuSaveOpen)
+                {
+                    _stopMenu.Update(_menuSaveOpen);
+                }
+                else
+                {
+                    _stopMenu.Update(_menuSaveOpen);
+                }
                 // Draw menu
             }
         }
+        public void MenuSaveSwitch()
+        {
+            _menuSaveOpen = !_menuSaveOpen;
+        }
+        public bool MenuSaveIsOpen => _menuSaveOpen;
         public string Turn => _turn;
         public string Event => _event.Event;
         public string EventDesc => _event.EventDescription;
