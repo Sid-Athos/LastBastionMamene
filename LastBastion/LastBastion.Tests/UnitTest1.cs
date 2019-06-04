@@ -6,7 +6,7 @@ using System.Timers;
 
 namespace Tests
 {
-    class Tests
+    internal class Tests
     {
         [Test]
         public void T01_Game_Map_And_Castle_Are_Created_And_Not_Null()
