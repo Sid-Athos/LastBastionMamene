@@ -22,7 +22,7 @@ namespace LastBastion
         Dictionary<string, Dictionary<string, string>> _prices;
 
         internal SpellBook Spells => _book;
-        internal Bestiary Beasts =_beasts;
+        internal Bestiary Beasts => _beasts;
 
         public Village(Map map)
         {

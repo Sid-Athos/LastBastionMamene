@@ -9,12 +9,25 @@ namespace Tests.Tests
     {
         static void Main(string[] args)
         {
-            float calc = (float)(Math.Pow((0f - 19f),2) + Math.Pow((0f-15f),2));
-            float range = (float)Math.Pow(25f, 2);
-            Console.WriteLine(calc);
-            Console.WriteLine(range);
-            
-            
+            Map m = new Map();
+            SpellBook s = new SpellBook();
+
+            var dico = s.SpellList;
+
+            foreach (var n in dico)
+            {
+                Console.WriteLine(n.Key);
+                foreach (var b in n.Value)
+                {
+                    Console.WriteLine(b.Key + " : " + b.Value);
+                }
+                Console.WriteLine();
+
+            }
+            Console.WriteLine("Les cooldowns et fréquences sont exprimés en secondes");
+
+
+            Console.ReadKey();
             Console.ReadKey();
         }
     }

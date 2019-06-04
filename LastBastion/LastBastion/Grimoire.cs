@@ -4,11 +4,11 @@ using System.Text;
 
 namespace LastBastion
 {
-    internal class SpellBook
+    public class SpellBook
     {
         readonly Dictionary<string, Dictionary<string, string>> _spellBook;
 
-        internal SpellBook()
+        public SpellBook()
         {
             _spellBook = new Dictionary<string, Dictionary<string, string>>();
             Dictionary<string, string> _ignite = new Dictionary<string, string>();
@@ -83,6 +83,6 @@ namespace LastBastion
             _spellBook.Add("Howl", _howl);
         }
 
-        internal Dictionary <string, Dictionary <string, string>> SpellList => _spellBook;
+        public Dictionary <string, Dictionary <string, string>> SpellList => _spellBook;
     }
 }

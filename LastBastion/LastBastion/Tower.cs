@@ -45,7 +45,7 @@ namespace LastBastion
             context.AddBuilding(this);
             for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 50, 2, 1, false, 2, 2.3f, context);
+                Archer sut = new Archer(posX, posY, "Archer", context);
                 _slots[i] = sut;
                 sut.SetTower(this);
             }
@@ -73,7 +73,7 @@ namespace LastBastion
             _slots = new Archer[2];
             for (int i = 0; i < 2; i++)
             {
-                Archer sut = new Archer(posX, posY, 2.0f, "Archer", 80, Dmg, 1, false, 2, 0.002f, true);
+                Archer sut = new Archer(posX, posY, "Archer", Context);
                 _slots[i] = sut;
                 sut.SetTower(this);
             }
@@ -212,7 +212,7 @@ namespace LastBastion
                 _slots = newSlots;
                 for (int i = compteur; i < newSlots.Length;i++)
                 {
-                    Archer sut = new Archer(this.Position.X, this.Position.Y, 2.0f, "Archer", 50, 5, 1, false, 2, 0.2f, Context);
+                    Archer sut = new Archer(this.Position.X, this.Position.Y, "Archer", Context);
                     AddArcher(sut);
                     sut.SetTower(this);
                 }

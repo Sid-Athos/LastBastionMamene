@@ -13,20 +13,10 @@ namespace LastBastion
         Building _target = null;
 
         public Barbar(float posX, float posY,string name, Map context)
-            : base(posX, posY,  context)
+            : base(posX, posY,name,  context)
         {
             _count++;
             context.AddBarbar(this);
-        }
-
-        public Barbar(float posX, float posY, float range,
-            string job, uint lifePoints, uint dmg, uint armor, bool isMoving,
-            uint attackCooldown, float speed)
-            : base(posX, posY, range,
-            job, lifePoints, dmg, armor, isMoving,
-            attackCooldown, speed)
-        {
-            _count++;
         }
 
         public Barbar(uint life)
@@ -98,7 +88,7 @@ namespace LastBastion
                     }
                     uint newTs = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
-                    if (newTs == _timeStamp + AaCd)
+                    if (newTs == _timeStamp + AaCd.Cd)
                     {
                         Attack(EnemyTarget);
                         TimeSt = newTs;
