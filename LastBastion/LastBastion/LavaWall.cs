@@ -10,17 +10,12 @@ namespace LastBastion
         uint _dmg = 10;
         uint _aaCooldown = 2;
         float _range = 1.0f;
-        Map _map;
         int _lastAttack;
 
-        public LavaWall(float posX, float posY,
-            uint lifePoints, uint maxLifePoints,
-            uint armor, uint rank, uint dmg, float range, uint aaCooldown,
-            uint woodCost, uint foodCost, uint stoneCost, uint villagerCost,
-            Map context, string name, string desc)
-            : base(posX, posY, context)
+        public LavaWall(float posX, float posY, uint dmg, float range, uint aaCooldown, Map context)
+            : base(posX, posY ,context)
         {
-            _lastAttack = _map.GetGame.GetTimer;
+            _lastAttack = Context.GetGame.GetTimer;
             _dmg = dmg;
             _aaCooldown = aaCooldown;
             _range = range;
@@ -49,9 +44,9 @@ namespace LastBastion
 
         public void Update()
         {
-            if (_map.GetTimer != _lastAttack && _map.GetTimer % Cooldown == 0)
+            if (Context.GetTimer != _lastAttack && Context.GetTimer % Cooldown == 0)
             {
-                foreach(var unit in _map.BarList)
+                foreach(var unit in Context.BarList)
                 {
                     Attack(unit);
                     if(unit.Life < (Dmg - unit.Armor))

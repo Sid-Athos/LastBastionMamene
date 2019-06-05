@@ -246,6 +246,10 @@ namespace LastBastion
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new Wall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, _map);
                     break;
+                    case "LavaWall":
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
+                        _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building = new LavaWall(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 10,1.0f,1, _map);
+                        break;
                     case "House Lv2":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building.Upgrade();
                         break;
@@ -304,6 +308,11 @@ namespace LastBastion
                     {
                         _map.GetGame.Sprites.GetSprite("Wall").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Wall"));
+                    }
+                    if (item.Value.GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWall").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWall"));
                     }
                     if (item.Value.GetName == "Mine")
                     {
@@ -380,12 +389,22 @@ namespace LastBastion
                         _map.GetGame.Sprites.GetSprite("WallLeft").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallLeft"));
                     }
+                    if(_map.GetGame.GetGrid[new Vector2i(item.Key.X -1, item.Key.Y)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallLeft").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallLeft"));
+                    }
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X + 1, item.Key.Y)].GetName == "Wall")
                     {
                         _map.GetGame.Sprites.GetSprite("WallRight").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallRight"));
                     }
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X + 1, item.Key.Y)].GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallRight").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallRight"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X + 1, item.Key.Y)].GetName == "LavaWall")
                     {
                         _map.GetGame.Sprites.GetSprite("WallRight").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallRight"));
@@ -400,6 +419,11 @@ namespace LastBastion
                         _map.GetGame.Sprites.GetSprite("WallDown").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallDown"));
                     }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y + 1)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallDown").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallDown"));
+                    }
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y-1)].GetName == "Wall")
                     {
                         _map.GetGame.Sprites.GetSprite("WallUp").Position = item.Value.GetVec2F;
@@ -410,7 +434,77 @@ namespace LastBastion
                         _map.GetGame.Sprites.GetSprite("WallUp").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallUp"));
                     }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y - 1)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("WallUp").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("WallUp"));
+                    }
                 }
+
+                if (item.Value.GetName == "LavaWall")
+                {
+                    if(_map.GetGame.GetGrid[new Vector2i(item.Key.X - 1, item.Key.Y)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallLeft").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallLeft"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X - 1, item.Key.Y)].GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallLeft").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallLeft"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X - 1, item.Key.Y)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallLeft").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallLeft"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X + 1, item.Key.Y)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallRight").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallRight"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X + 1, item.Key.Y)].GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallRight").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallRight"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X + 1, item.Key.Y)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallRight").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallRight"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y + 1)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallDown").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallDown"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y + 1)].GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallDown").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallDown"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y + 1)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallDown").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallDown"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y - 1)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallUp").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallUp"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y - 1)].GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallUp").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallUp"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y - 1)].GetName == "Wall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("LavaWallUp").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("LavaWallUp"));
+                    }
+                }
+
                 if (item.Value.GetName == "Tower")
                 {
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X - 1, item.Key.Y)].GetName == "Wall")
@@ -419,6 +513,11 @@ namespace LastBastion
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerLeft"));
                     }
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X - 1, item.Key.Y)].GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("TowerLeft").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerLeft"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X - 1, item.Key.Y)].GetName == "LavaWall")
                     {
                         _map.GetGame.Sprites.GetSprite("TowerLeft").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerLeft"));
@@ -433,6 +532,11 @@ namespace LastBastion
                         _map.GetGame.Sprites.GetSprite("TowerRight").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerRight"));
                     }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X + 1, item.Key.Y )].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("TowerRight").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerRight"));
+                    }
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y + 1)].GetName == "Wall")
                     {
                         _map.GetGame.Sprites.GetSprite("TowerBot").Position = item.Value.GetVec2F;
@@ -443,12 +547,22 @@ namespace LastBastion
                         _map.GetGame.Sprites.GetSprite("TowerBot").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerBot"));
                     }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y + 1)].GetName == "LavaWall")
+                    {
+                        _map.GetGame.Sprites.GetSprite("TowerBot").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerBot"));
+                    }
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y - 1)].GetName == "Wall")
                     {
                         _map.GetGame.Sprites.GetSprite("TowerUp").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerUp"));
                     }
                     if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y - 1)].GetName == "Tower")
+                    {
+                        _map.GetGame.Sprites.GetSprite("TowerUp").Position = item.Value.GetVec2F;
+                        _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerUp"));
+                    }
+                    if (_map.GetGame.GetGrid[new Vector2i(item.Key.X, item.Key.Y - 1)].GetName == "LavaWall")
                     {
                         _map.GetGame.Sprites.GetSprite("TowerUp").Position = item.Value.GetVec2F;
                         _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("TowerUp"));

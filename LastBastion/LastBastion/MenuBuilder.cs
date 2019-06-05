@@ -69,6 +69,10 @@ namespace LastBastion
                         _spriteBar.Add(_sprites.GetSprite("Wall"));
                         _spriteBar.Add(_sprites.GetSprite("Sawmill"));
                     }
+                    else if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "Wall")
+                    {
+                        _spriteBar.Add(_sprites.GetSprite("LavaWall"));
+                    }
                     else if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].GetName == "House")
                     {
                         if(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].Building.Rank < 3)
@@ -454,6 +458,10 @@ namespace LastBastion
                 if (_spriteBar[_currentPos] == _sprites.GetSprite("Wall"))
                 {
                     return "Wall";
+                }
+                if (_spriteBar[_currentPos] == _sprites.GetSprite("LavaWall"))
+                {
+                    return "LavaWall";
                 }
                 if (_spriteBar[_currentPos] == _sprites.GetSprite("HouseUp") && _game.GetGrid[new Vector2i(_game.GetWindow.GetView.X,_game.GetWindow.GetView.Y)].Building.Rank == 1)
                 {

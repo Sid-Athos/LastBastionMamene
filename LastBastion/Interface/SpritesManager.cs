@@ -130,6 +130,21 @@ namespace Interface
             texture = new Texture("../../../../images/Wall05.png");
             _sprites.Add("WallDown", new Sprite(texture));
 
+            texture = new Texture("../../../../images/LavaWall01.png");
+            _sprites.Add("LavaWall", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall02.png");
+            _sprites.Add("LavaWallRight", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall03.png");
+            _sprites.Add("LavaWallLeft", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall04.png");
+            _sprites.Add("LavaWallUp", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall05.png");
+            _sprites.Add("LavaWallDown", new Sprite(texture));
+
             texture = new Texture("../../../../images/sawmill.png");
             _sprites.Add("Sawmill", new Sprite(texture));
 
@@ -147,6 +162,9 @@ namespace Interface
 
             texture = new Texture("../../../../images/Wall01Up.png");
             _sprites.Add("WallLUP", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall01Up.png");
+            _sprites.Add("LavaWallLUP", new Sprite(texture));
 
             texture = new Texture("../../../../images/HouseUp.png");
             _sprites.Add("HouseUp", new Sprite(texture));

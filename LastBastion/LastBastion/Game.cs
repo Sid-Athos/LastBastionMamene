@@ -333,6 +333,9 @@ namespace LastBastion
             //Wall Lv1
             Wall wall = new Wall(0f,0f,_map);
             returnValue.Add("Wall",wall);
+            //LavaWall Lv1
+            LavaWall lavawall = new LavaWall(0f, 0f,10,1.0f,2, _map);
+            returnValue.Add("LavaWall", lavawall);
             //Tower Lv1
             Tower tower = new Tower(0f,0f,200,200,10,20,1,1,_map);
             returnValue.Add("Tower",tower);
