@@ -9,27 +9,47 @@ namespace Tests.Tests
     {
         static void Main(string[] args)
         {
-            Map m = new Map();
-            SpellBook s = new SpellBook();
-            Tower t = new Tower(5.0f, 5f, 150, 150, 20, 0, 2, m);
-            Spell sp = new Spell("Ignite", t, s);
+            Game sid = new Game();
+            sid.Run();
+            sid.Close();
+            Map map = new Map(sid);
+            Tower sido = new Tower(0f, 0f, 250, 250, 30, 0, 1, 25.0f, 5, map, "Tower", "tour");
 
-            var dico = s.SpellList;
+            Mage m = new Mage(0f, 0f, "Mage", map);
+            m.Update();
+            Console.WriteLine("Cd AA remaining: " + m.AaCd.RemainingCd());
 
-            foreach(var n in dico)
-            {
-                Console.WriteLine(n.Key);
-                foreach(var b in n.Value)
-                {
-                    Console.WriteLine(b.Key + " : " + b.Value +".");
-                }
-                Console.WriteLine();
+            m.Update();
+            Console.WriteLine("Cd AA remaining: " + m.AaCd.RemainingCd());
 
-            }
+            m.Update();
 
-            Console.WriteLine("Les cooldowns et fréquences sont exprimés en secondes");
-            
+            m.Update();
+
+            Console.WriteLine("Cd AA remaining: " + m.AaCd.RemainingCd());
+            Console.WriteLine("Target : " + m.EnemyTarget);
+            Console.WriteLine("Spell Damages : " + m.Ignite.Damages);
+            Console.WriteLine("Durée : " + m.Ignite.Duration);
+            Console.WriteLine("TS : " + (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
+            Console.WriteLine("TS + durée : " + ((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds+ m.Ignite.Duration));
+
+
+
+            Console.WriteLine("Fréquences : " + m.Ignite.Frequency);
+
+            Console.WriteLine("Unit Damages : " + m.Dmg);
+            Console.WriteLine("Target Life : " + sido.Life);
+
+
+
+
             Console.ReadKey();
+            Console.WriteLine("Cd AA remaining: " + m.AaCd.RemainingCd());
+
+            while(true)
+            {
+                m.Update();
+            }
             Console.ReadKey();
         }
     }

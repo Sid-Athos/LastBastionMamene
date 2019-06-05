@@ -57,6 +57,7 @@ namespace LastBastion
         public override void Update()
         {
             AaCd.Update();
+
             if (Life == 0 || Life > Convert.ToUInt16(Context.GetVillage.Beasts.Beasts["Mage"]["Vie"]))
             {
                 Die();
@@ -64,11 +65,9 @@ namespace LastBastion
             }
             //Context.GetGame.Sprites.GetSprite("Mage").Position = new Vector2f(Position.X, Position.Y);
             //Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Mage"));
-
             if (EnemyTarget == null)
             {
                 AcquireTarget();
-                return;
             }
             if (AaCd.IsUsable && EnemyTarget.Position.IsInRange(this.Position,EnemyTarget.Position,base.Range))
             {
@@ -91,7 +90,14 @@ namespace LastBastion
         public override void Attack(Building unit)
         {
 
-
+            if (Dmg > (unit.Life + unit.Armor))
+                {
+                    unit.Life = 0;
+                    unit.Die();
+                    return;
+                }
+            unit.Life -= (Dmg - unit.Armor);
+            AaCd.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LastBastion
@@ -60,6 +61,12 @@ namespace LastBastion
 
         public uint Duration => _duration;
 
+        public uint Frequency => _dotFrequency;
+
+
+        public uint Damages => _damages;
+
+
         public Dictionary<Unit, Dictionary<uint, uint>> DotUnitList => _dotUnit;
 
         public Dictionary<Building, Dictionary<uint, uint>> DotBuildList => _dotBuild;
@@ -110,6 +117,7 @@ namespace LastBastion
         {
             if (u.Count > 0)
             {
+                Console.WriteLine("dots");
                 uint ts = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                 foreach (var n in u)
                 {
@@ -151,39 +159,48 @@ namespace LastBastion
         {
             if (u.Count > 0)
             {
+
                 uint ts = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                foreach (var n in u)
+                foreach (var n in u.ToList())
                 {
-                    foreach (var b in n.Value)
+                    foreach (var b in n.Value.ToList())
                     {
+                        
+
                         if (b.Value == 0)
                         {
                             if (ts == b.Key + _dotFrequency)
                             {
                                 Hit(n.Key);
-                                u[n.Key][b.Value] = ts;
+                                u[n.Key][b.Key] = ts;
                             }
                         }
                         else
                         {
                             if (n.Key.Life > 0)
                             {
-                                if (b.Value <= b.Value + Duration)
+                                if (b.Value <= b.Key + Duration)
                                 {
-                                    if (ts == b.Key + _dotFrequency)
+                                    
+                                    if (ts == b.Value + _dotFrequency)
                                     {
                                         Hit(n.Key);
-                                        u[n.Key][b.Value] = ts;
+                                        u[n.Key][b.Key] = ts;
+                                        Console.WriteLine("Hit");
+                                        Console.WriteLine("val" + b.Value);
+                                        Console.WriteLine(n.Key.Life);
                                     }
                                 }
                                 else
                                 {
                                     DotBuildList.Remove(n.Key);
+                                    n.Key.IsBurned = !n.Key.IsBurned;
                                 }
                             }
                             else
                             {
                                 DotBuildList.Remove(n.Key);
+                                n.Key.IsBurned = !n.Key.IsBurned;
                             }
                         }
                     }
@@ -203,6 +220,7 @@ namespace LastBastion
 
         public void Cast(Building u)
         {
+            if(u != null)
                 if (u.Life > 0)
                     if (CD.IsUsable && !Casted)
                     {
@@ -220,7 +238,7 @@ namespace LastBastion
                                 u.IsBurned = true ;
                                 Hit(u);
                                 _unitContext.SwitchTarget(DotBuildList);
-                            return;
+                                return;
                             }
                             Hit(u);
                             Casted = !Casted;
@@ -230,7 +248,7 @@ namespace LastBastion
                             _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                         }
                     }
-                    if (_castTimeTS != 0)
+                    if (_castTimeTS == _castTimeTS + _castingTime)
                     {
                         if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                         {
@@ -246,14 +264,13 @@ namespace LastBastion
         public void Update(Unit b)
         {
             CD.Update();
-            if(b != null)
+            if(b != null && !b.IsBurned)
             {
-            Cast(b.EnemyTarget);
-
+                Cast(b.EnemyTarget);
             }
             if(SpellName =="Ignite")
             {
-                if (DotUnitList.Count >0)
+                if (DotBuildList.Count >0)
                 {
                     UpdateDots(DotBuildList);
                 }
