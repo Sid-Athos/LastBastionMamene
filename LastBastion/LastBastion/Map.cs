@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SFML.System;
 using Interface;
 
@@ -17,10 +18,15 @@ namespace LastBastion
         Waves _waves;
         readonly SpellBook _book = new SpellBook();
         readonly Bestiary _beasts = new Bestiary();
+        int _countTimer;
+        int _sec;
+        bool MinutePass = true;
 
         public Map(Game game)
         {
             _game = game;
+            _countTimer = 0;
+            _sec = DateTime.Now.Second;
             _UI = new MapUI(_game.Sprites, _game.GetWindow.Render);
             CreateMap();
             _village = new Village(this);
@@ -53,6 +59,18 @@ namespace LastBastion
         public int BarbCount => _barbarians.Count;
 
         public int BuildCount => _buildings.Count;
+
+        public int GetTimer => _countTimer;
+
+        /*public void AddVillager(Villager v)
+        {
+            VillList.Add(v);
+        }
+        public void RemoveVillager(Villager n)
+        {
+            _villagePeople.Remove(n);
+
+        }*/
 
         internal void AddProjectile(Projectiles v)
         {
@@ -104,7 +122,7 @@ namespace LastBastion
         {
             foreach (var item in _game.GetGrid)
             {
-                if (_game.GetTimer > 180)
+                if (_game.Turn == "WaveTurn")
                 {
                     _UI.Print("TileWinter", item.Value.GetVec2F);
                 }
@@ -234,5 +252,26 @@ namespace LastBastion
         internal SpellBook Sb => _book;
 
         internal Bestiary Beasts => _beasts;
+        public void TimerUpdate()
+        {
+            if (DateTime.Now.Second == 1 && MinutePass == true)
+            {
+                _sec = 1;
+                _countTimer += 2;
+                MinutePass = false;
+            }
+            else
+            {
+                if (_sec < DateTime.Now.Second)
+                {
+                    _sec = DateTime.Now.Second;
+                    _countTimer++;
+                }
+                if (DateTime.Now.Second == 2 && MinutePass == false)
+                {
+                    MinutePass = true;
+                }
+            }
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace LastBastion
          dmg,
          range,
          aaCooldown,
-         context, "Tower", "test")
+         context, "Tower", "Main defence to your kingdom, \n be careful to maintain them well.")
         {
             _dmg = dmg;
             _aaCooldown = new Cooldown(aaCooldown);

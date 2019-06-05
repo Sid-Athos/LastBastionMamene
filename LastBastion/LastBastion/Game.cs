@@ -13,10 +13,14 @@ namespace LastBastion
         //Attribut
         WindowUI _window;
         Dictionary<Vector2i, Hut> _grid;
+        Dictionary<string, Building> _sampleBuilding;
         SpritesManager _sprites;
+        AnimationsManager _manager;
         Input _input;
+        EventCycle _event;
         Map _map;
         MenuBuilder _menu;
+        StopMenu _stopMenu;
         //Mouse
         Vector2f _cursorPosition;
         // Timer And Stop
@@ -24,10 +28,18 @@ namespace LastBastion
         int _sec;
         bool MinutePass = true;
         bool _pause;
+        bool _menuSaveOpen;
         int _cycle;
         int _lastProd;
+        //Turn
+        string _turn;
+        bool _animationSwitch;
+        float _animationsTime;
+        float _t;
         //Random
         Random _random = new Random();
+        //Music
+        bool _isPlayMusic;
 
         public Game()
         {
@@ -47,17 +59,28 @@ namespace LastBastion
             CreateGrid(50,50);
 
             _window = new WindowUI(_sprites,_grid[new Vector2i(0,0)].GetVec2F);
-
-            _countTimer = 239;
+            
+            _countTimer = 0;
+            _cycle = 1;
+            _turn = "PlayerTurn";
             _lastProd = _countTimer;
             _sec = DateTime.Now.Second;
             _pause = true;
+            _menuSaveOpen = false;
+            _isPlayMusic = false;
+
+            _animationSwitch = false;
+            _animationsTime = 0f;
+            _t = 0f;
             
             _map = new Map(this);
             _menu = new MenuBuilder(this, _sprites);
-
-            _sprites.musicStart();
-            _sprites.musicPlay("Zebby");
+            _stopMenu = new StopMenu(this);
+            _event = new EventCycle(this);
+            _sampleBuilding = InitializeBuildingSample();
+            
+            _manager = new AnimationsManager(_window, _sprites);
+            _manager.Initialized();
 
             _window.Render.SetMouseCursorVisible(false);
             _window.Render.KeyPressed += _input.IsKeyPressed;
@@ -70,36 +93,35 @@ namespace LastBastion
         {
             while (_window.Render.IsOpen)
             {
+                _map.TimerUpdate();
                 _window.Render.DispatchEvents();
                 _window.Render.Clear();
 
                 //Console.WriteLine(_grid[new Vector2i(GetWindow.GetView.X, GetWindow.GetView.Y)].GetName);
+                //Console.WriteLine(DateTime.Now.Millisecond / 1000f);
 
-                if (_pause)
+                if (_turn == "PlayerTurn")
                 {
-                    TimerUpdate();
+                    if (_pause)
+                    {
+                        TimerUpdate();
+                    }
                 }
-                if (_countTimer == 240 )
+                if (_countTimer == 0 && _isPlayMusic == false)
                 {
-                    _sprites.musicStop("zebby");
-                }
-                if (_countTimer == 241)
-                {
-                    _sprites.musicPlay("battle");
-                }
-                if (_countTimer == 300)
-                {
-                    _sprites.musicStop("battle");
                     if(!_map.Wave.Spawned)
                     {
                         _map.Wave.Update();
                         _map.Wave.Spawned = !_map.Wave.Spawned;
                     }     
+                    _sprites.Music(0).Play();
+                    _isPlayMusic = true;
                 }
-                if (_countTimer == 301)
+                if (_countTimer == 60 && _isPlayMusic == true)
                 {
-                    _sprites.musicPlay("zebby");
                    // _map.Wave.Spawned = !_map.Wave.Spawned;
+                    _sprites.Music(0).Stop();
+                    _isPlayMusic = false;
                 }
                 _sprites.Update();
                 //Mouse.SetPosition(new Vector2i((int)_cursorPosition.X,(int)_cursorPosition.Y));
@@ -110,12 +132,6 @@ namespace LastBastion
                 {
                     _map.GetVillage.RessourceProd();
                     _lastProd = _countTimer;
-                    /*
-                    Console.WriteLine("Stock de Pierre : " + _map.GetVillage.StoneStock);
-                    Console.WriteLine("Stock de Nourriture : " + _map.GetVillage.FoodStock);
-                    Console.WriteLine("Stock de Bois : " + _map.GetVillage.WoodStock);
-                    Console.WriteLine("-----------------------------");
-                    */
                 }
                 //End Update
 
@@ -124,6 +140,7 @@ namespace LastBastion
         }
         public void DrawUpdate()
         {
+
             _map.PrintMap();
             _map.GetVillage.DrawCastle();
             _map.GetVillage.DrawBuilding();
@@ -154,24 +171,50 @@ namespace LastBastion
             _map.ZoneReveal();
             _map.PrintMist();
             _window.PrintCursor();
-           if (!_pause)
+            _event.Update();
+            //UI
+            if (_turn == "PlayerTurn")
+            {
+                if (_menu.IsOpen)
+                {
+                    _menu.UpdateList();
+                    _menu.DrawMenu();
+                }
+                else
+                {
+                    _menu.MenuDesc();
+                }
+                _menu.UpdateTopBar();
+            }
+            if (_animationSwitch == true && _turn == "WaveTurn")
+            {
+                _manager.Play("I", "Dracula Turn", new Color(235, 7, 7));
+                _animationSwitch = false;
+                _sprites.Music(1).Play();
+                _isPlayMusic = true;
+            }
+            if (!_pause)
             {
                 _map.SamouraïDeCoke();
+                if (_menuSaveOpen)
+                {
+                    _stopMenu.Update(_menuSaveOpen);
+                }
+                else
+                {
+                    _stopMenu.Update(_menuSaveOpen);
+                }
                 // Draw menu
             }
-            //UI
-            if (_menu.IsOpen)
-            {
-                _menu.UpdateList();
-                _menu.DrawMenu();
-            }
-            else
-            {
-                _menu.MenuDesc();
-            }
-            _menu.UpdateTopBar();
         }
-        
+        public void MenuSaveSwitch()
+        {
+            _menuSaveOpen = !_menuSaveOpen;
+        }
+        public bool MenuSaveIsOpen => _menuSaveOpen;
+        public string Turn => _turn;
+        public string Event => _event.Event;
+        public string EventDesc => _event.EventDescription;
         public int RandomNumber(int min, int max) => _random.Next(min, max);
         public void Close() { _window.Render.Close(); }
         public WindowUI GetWindow => _window;
@@ -185,8 +228,9 @@ namespace LastBastion
 
         //Timer And Stop
         public int GetTimer => _countTimer;
-        public void Pause() { _pause = !_pause; }
+        public void Pause() { _pause = !_pause; _stopMenu.Deploy(); }
         public bool IsStop => !_pause;
+        public StopMenu StopMenu => _stopMenu;
         public void TimerUpdate()
         {
             if (DateTime.Now.Second == 1 && MinutePass == true)
@@ -211,12 +255,20 @@ namespace LastBastion
             {
             }
             if (_countTimer == 361)
+            if (_countTimer == 61)
             {
-                _cycle++;
                 _countTimer = 1;
+                _t = 0f;
+                _animationsTime = DateTime.Now.Millisecond / 1000f;
+                _turn = "WaveTurn";
+                _animationSwitch = true;
+                /*
+                _cycle++;
+                Console.WriteLine(_cycle);
+                */
             }
         }
-
+        //Test Cursor
         public void MoveCursor(object sender, MouseMoveEventArgs e)
         {
             _cursorPosition = new Vector2f((float)e.X, (float)e.Y);
@@ -256,6 +308,68 @@ namespace LastBastion
             }
             return returnList;
         }
-        
+        public Dictionary<string, Building> InitializeBuildingSample()
+        {
+            Dictionary<string, Building> returnValue = new Dictionary<string, Building>();
+            //House Lv1
+            House house = new House(0f, 0f, 5, 1, _map);
+            returnValue.Add("House", house);
+            //House Lv2
+            House house1 = new House(0f, 0f, 5, 1, _map);
+            house1.Upgrade();
+            returnValue.Add("House Lv2", house1);
+            //House Lv3
+            House house2 = new House(0f, 0f, 5, 1, _map);
+            house2.Upgrade();
+            house2.Upgrade();
+            returnValue.Add("House Lv3", house2);
+            //Sawmill Lv1
+            Sawmill sawmill = new Sawmill(0f,0f,_map);
+            returnValue.Add("Sawmill", sawmill);
+            //Sawmill Lv2
+            Sawmill sawmill1 = new Sawmill(0f, 0f, _map);
+            sawmill1.Upgrade();
+            returnValue.Add("Sawmill Lv2", sawmill1);
+            //Sawmill Lv3
+            Sawmill sawmill2 = new Sawmill(0f, 0f, _map);
+            sawmill2.Upgrade();
+            sawmill2.Upgrade();
+            returnValue.Add("Sawmill Lv3", sawmill2);
+            //Farm Lv1
+            Farm farm = new Farm(0f, 0f, _map);
+            returnValue.Add("Farm", farm);
+            //Farm Lv2
+            Farm farm1 = new Farm(0f, 0f, _map);
+            farm1.Upgrade();
+            returnValue.Add("Farm Lv2", farm1);
+            //Farm Lv3
+            Farm farm2 = new Farm(0f, 0f, _map);
+            farm2.Upgrade();
+            farm2.Upgrade();
+            returnValue.Add("Farm Lv3", farm2);
+            //Mine Lv1
+            Mine mine = new Mine(0f, 0f, _map);
+            returnValue.Add("Mine", mine);
+            //Mine Lv2
+            Mine mine1 = new Mine(0f, 0f, _map);
+            mine1.Upgrade();
+            returnValue.Add("Mine Lv2", mine1);
+            //Mine Lv3
+            Mine mine2 = new Mine(0f, 0f, _map);
+            mine2.Upgrade();
+            mine2.Upgrade();
+            returnValue.Add("Mine Lv3", mine2);
+            //Wall Lv1
+            Wall wall = new Wall(0f,0f,_map);
+            returnValue.Add("Wall",wall);
+            //LavaWall Lv1
+            LavaWall lavawall = new LavaWall(0f, 0f,10,1.0f,2, _map);
+            returnValue.Add("LavaWall", lavawall);
+            //Tower Lv1
+            Tower tower = new Tower(0f,0f,200,200,10,20,1,_map);
+            returnValue.Add("Tower",tower);
+            return returnValue;
+        }
+        public Dictionary<string, Building> SamplerBuilding => _sampleBuilding;
     }
 }

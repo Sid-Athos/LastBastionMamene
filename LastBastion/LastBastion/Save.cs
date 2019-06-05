@@ -38,7 +38,7 @@ namespace LastBastion
                 }
             }
             writer.WriteLine("<Setup>");
-            writer.WriteLine("$$" + _game.GetTimer + "$$" + _game.Cycle + "$$" + _game.Map.GetVillage.Food + "$$" + _game.Map.GetVillage.Stones + "$$" + _game.Map.GetVillage.Wood + "%%");
+            writer.WriteLine("$$" + _game.GetTimer + "$$" + _game.Cycle + "$$" + _game.Map.GetVillage.Food + "$$" + _game.Map.GetVillage.Stone + "$$" + _game.Map.GetVillage.Wood + "%%");
             writer.Close();
             Console.Write("Done");
         }

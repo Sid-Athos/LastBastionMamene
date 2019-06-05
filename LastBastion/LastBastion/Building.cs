@@ -14,7 +14,32 @@ namespace LastBastion
         uint _rank;
         uint _count;
         bool _burned;
+        uint _woodCost;
+        uint _stoneCost;
+        uint _foodCost;
+        uint _villagerCost;
         Unit _target;
+
+        public Building(float posX, float posY,
+    uint lifePoints, uint maxLifePoints,
+    uint armor, uint rank,
+    uint woodCost, uint foodCost, uint stoneCost, uint villagerCost,
+    Map context, string name, string desc)
+        {
+            _position = new Vectors(posX, posY);
+            _lifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
+            _armor = armor;
+            _rank = 1;
+            _woodCost = woodCost;
+            _stoneCost = stoneCost;
+            _foodCost = foodCost;
+            _villagerCost = villagerCost;
+            _context = context;
+            _count++;
+            _name = name;
+            _desc = desc;
+        }
 
         public Building(float posX, float posY,
             uint lifePoints, uint maxLifePoints,
@@ -48,6 +73,18 @@ namespace LastBastion
             _count++;
         }
 
+        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context, string name, string desc)
+        {
+            _position = new Vectors(posX, posY);
+            _lifePoints = lifePoints;
+            _maxLifePoints = _lifePoints;
+            _armor = armor;
+            _rank = rank;
+            _context = context;
+            _name = name;
+            _desc = desc;
+        }
+
         public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
         {
             _position = new Vectors(posX, posY);
@@ -56,6 +93,30 @@ namespace LastBastion
             _armor = armor;
             _rank = rank;
             _count++;
+        }
+
+        public uint WoodCost
+        {
+            get { return _woodCost; }
+            set { _woodCost = value; }
+        }
+
+        public uint StoneCost
+        {
+            get { return _stoneCost; }
+            set { _stoneCost = value; }
+        }
+
+        public uint FoodCost
+        {
+            get { return _foodCost; }
+            set { _foodCost = value; }
+        }
+
+        public uint VillagerCost
+        {
+            get { return _villagerCost; }
+            set { _villagerCost = value; }
         }
 
         public bool IsBurned
@@ -79,7 +140,12 @@ namespace LastBastion
             get { return _target; }
             set { _target = value; }
         }
-        public string Description => _desc;
+
+        public string Description
+        {
+            get { return _desc; }
+            set { _desc = value; }
+        }
 
         public void IncHealth()
         {
@@ -112,20 +178,23 @@ namespace LastBastion
 
         public bool IsDestroy()
         {
-            // un uint en dessous de 0 c'est plusieurs milliards
-            // return Life == 0;
-            if (_lifePoints <= 0)
+            if (Life <= 0)
             {
+                if(Name == "Castle")
+                {
+                    //EndGame(); A ajouter quand le EndGame sera fait
+                }
                 return true;
             }
             return false;
         }
-
-        public void Upgrade()
+        
+        virtual public void Upgrade()
         {
             Rank++;
             IncHealth();
             IncreaseArmor();
+            Console.WriteLine("Upgrade Building" + Rank);
         }
 
         public uint Rank

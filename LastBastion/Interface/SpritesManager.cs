@@ -34,6 +34,12 @@ namespace Interface
             texture = new Texture("../../../../images/CursorFont.png");
             _sprites.Add("CursorFont", new Sprite(texture));
 
+            texture = new Texture("../../../../images/Comet.png");
+            _sprites.Add("Comet", new Sprite(texture));
+
+            texture = new Texture("../../../../images/FrontMenu.png");
+            _sprites.Add("FrontMenu", new Sprite(texture));
+
             texture = new Texture("../../../../images/TowerUp.png");
             _sprites.Add("TowerUp", new Sprite(texture));
 
@@ -100,6 +106,9 @@ namespace Interface
             texture = new Texture("../../../../images/House.png");
             _sprites.Add("House", new Sprite(texture));
 
+            texture = new Texture("../../../../images/Timer.png");
+            _sprites.Add("Timer", new Sprite(texture));
+
             texture = new Texture("../../../../images/Tower.png");
             _sprites.Add("Tower", new Sprite(texture));
 
@@ -121,6 +130,21 @@ namespace Interface
             texture = new Texture("../../../../images/Wall05.png");
             _sprites.Add("WallDown", new Sprite(texture));
 
+            texture = new Texture("../../../../images/LavaWall01.png");
+            _sprites.Add("LavaWall", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall02.png");
+            _sprites.Add("LavaWallRight", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall03.png");
+            _sprites.Add("LavaWallLeft", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall04.png");
+            _sprites.Add("LavaWallUp", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall05.png");
+            _sprites.Add("LavaWallDown", new Sprite(texture));
+
             texture = new Texture("../../../../images/sawmill.png");
             _sprites.Add("Sawmill", new Sprite(texture));
 
@@ -138,6 +162,9 @@ namespace Interface
 
             texture = new Texture("../../../../images/Wall01Up.png");
             _sprites.Add("WallLUP", new Sprite(texture));
+
+            texture = new Texture("../../../../images/LavaWall01Up.png");
+            _sprites.Add("LavaWallLUP", new Sprite(texture));
 
             texture = new Texture("../../../../images/HouseUp.png");
             _sprites.Add("HouseUp", new Sprite(texture));
@@ -162,7 +189,6 @@ namespace Interface
 
             texture = new Texture("../../../../images/Attack.png");
             _sprites.Add("AttackIcon", new Sprite(texture));
-
         }
         public void Update()
         {
@@ -171,41 +197,16 @@ namespace Interface
                 item.Value.Scale = new SFML.System.Vector2f(1f, 1f);
             }
         }
+        public Music Music (int n)
+        {
+            return _music[n];
+        }
         public Sprite GetSprite(string name) => _sprites[name];
         public Text Text
         {
             get { return _text; }
             set { _text = value; }
         }
-
-        public void musicPlay(string name)
-        {
-            if (name == "zebby")
-            {
-                _music[0].Volume = 100f;
-            }
-            if (name == "battle")
-            {
-                _music[1].Volume = 100f;
-            }
-        }
-        public void musicStop(string name)
-        {
-            if (name == "zebby")
-            {
-                _music[0].Volume = 0f;
-            }
-            if (name == "battle")
-            {
-                _music[1].Volume = 0f;
-            }
-        }
-        public void musicStart()
-        {
-            foreach (var item in _music)
-            {
-                item.Play();
-            }
-        }
+        
     }
 }

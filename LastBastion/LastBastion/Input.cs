@@ -20,27 +20,57 @@ namespace LastBastion
         }
         public void IsKeyPressed(object sender, KeyEventArgs e)
         {
-            if (_game.GetMenuBuilder.IsOpen)
-            {
-                if (e.Code == Keyboard.Key.Enter)
-                {
-                    if (_game.GetMenuBuilder.SelectTarget() != "bad")
-                    {
-                        _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
-                    }
-                }
-            }
             switch (e.Code)
             {
                 case Keyboard.Key.Space:
                     _game.Pause();
+                    if (_game.MenuSaveIsOpen)
+                    {
+                        _game.MenuSaveSwitch();
+                        _game.StopMenu.ResetInput();
+                    }
                     break;
                 
                 case Keyboard.Key.A:
-                    _game.Close();
+                    //_game.Close();
                     break;
             }
-
+            if (e.Code == Keyboard.Key.Z || e.Code == Keyboard.Key.Up)
+            {
+                if (_game.IsStop && !_game.MenuSaveIsOpen)
+                {
+                    if (_game.StopMenu.Target == 1)
+                    {
+                        _game.StopMenu.Target = 0;
+                    }
+                }
+            }
+            if (e.Code == Keyboard.Key.S || e.Code == Keyboard.Key.Down)
+            {
+                if (_game.IsStop && !_game.MenuSaveIsOpen)
+                {
+                    if (_game.StopMenu.Target == 0)
+                    {
+                        _game.StopMenu.Target = 1;
+                    }
+                }
+            }
+            if (e.Code == Keyboard.Key.Enter)
+            {
+                if (_game.IsStop && !_game.MenuSaveIsOpen)
+                {
+                    if (_game.StopMenu.Target == 0)
+                    {
+                        _game.MenuSaveSwitch();
+                        //_save.CreateTXT();
+                    }
+                    if (_game.StopMenu.Target == 1)
+                    {
+                        _game.Close();
+                        Launcher launcher = new Launcher();
+                    }
+                }
+            }
             if (!_game.IsStop)
             {
                 //Console.WriteLine("[{0},{1}]", _game.GetWindow.GetView.X, _game.GetWindow.GetView.Y);
@@ -74,18 +104,6 @@ namespace LastBastion
                             _game.GetWindow.GetView.MoveRight(_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X + 1, _game.GetWindow.GetView.Y)].GetVec2F);
                         }
                         break;
-                    case Keyboard.Key.Up:
-                        if (_game.GetWindow.GetView.Render.Size.X > 100)
-                        {
-                            _game.GetWindow.GetView.Render.Size = new Vector2f(_game.GetWindow.GetView.Render.Size.X - 15, _game.GetWindow.GetView.Render.Size.Y - 15);
-                        }
-                        break;
-                    case Keyboard.Key.Down:
-                        if (_game.GetWindow.GetView.Render.Size.X < 400)
-                        {
-                            _game.GetWindow.GetView.Render.Size = new Vector2f(_game.GetWindow.GetView.Render.Size.X + 15, _game.GetWindow.GetView.Render.Size.Y + 15);
-                        }
-                        break;
                     case Keyboard.Key.Left:
                         _game.GetMenuBuilder.UWantToMoveToTheLeftInTheMenu();
                         break;
@@ -96,14 +114,25 @@ namespace LastBastion
                         _game.GetMenuBuilder.OpenClose();
                         break;
                     case Keyboard.Key.P:
-                        _save.CreateTXT();
                         break;
                     case Keyboard.Key.B:
                         Barbar v1 = new Barbar(_game.GetWindow.GetView.Render.Center.X, _game.GetWindow.GetView.Render.Center.Y, _game.GetMap.Vill.Beasts.Beasts["Gobelin"]["Nom"], _game.Map);
                         break;
-                    case Keyboard.Key.C:
+                    case Keyboard.Key.Enter:
+                        if (_game.GetMenuBuilder.IsOpen)
+                        {
+                            if (_game.GetMenuBuilder.SelectTarget() != "bad")
+                            {
+                                _game.Map.GetVillage.CreateBuilding(_game.GetMenuBuilder.SelectTarget());
+                            }
+                        }
                         break;
                     case Keyboard.Key.E:
+                        _game.Map.GetVillage.Food += 1000;
+                        _game.Map.GetVillage.Villager += 1000;
+                        _game.Map.GetVillage.MaxVillager += 1000;
+                        _game.Map.GetVillage.Stone += 1000;
+                        _game.Map.GetVillage.Wood += 1000;
                         break;
                     case Keyboard.Key.F:
                         break;
@@ -121,9 +150,13 @@ namespace LastBastion
                     case Keyboard.Key.K:
                         break;
                     case Keyboard.Key.L:
-                        _save.LeauAdd();
+                        //_save.LeauAdd();
                         break;
                     case Keyboard.Key.M:
+                        break;
+                    case Keyboard.Key.Up:
+                        break;
+                    case Keyboard.Key.Down:
                         break;
                     case Keyboard.Key.N:
                         break;
@@ -278,6 +311,95 @@ namespace LastBastion
                     case Keyboard.Key.Pause:
                         break;
                     case Keyboard.Key.KeyCount:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (_game.MenuSaveIsOpen)
+            {
+                switch (e.Code)
+                {
+                    case Keyboard.Key.A:
+                        _game.StopMenu.Add("A");
+                        break;
+                    case Keyboard.Key.B:
+                        _game.StopMenu.Add("B");
+                        break;
+                    case Keyboard.Key.C:
+                        _game.StopMenu.Add("C");
+                        break;
+                    case Keyboard.Key.D:
+                        _game.StopMenu.Add("D");
+                        break;
+                    case Keyboard.Key.E:
+                        _game.StopMenu.Add("E");
+                        break;
+                    case Keyboard.Key.F:
+                        _game.StopMenu.Add("F");
+                        break;
+                    case Keyboard.Key.G:
+                        _game.StopMenu.Add("G");
+                        break;
+                    case Keyboard.Key.H:
+                        _game.StopMenu.Add("H");
+                        break;
+                    case Keyboard.Key.I:
+                        _game.StopMenu.Add("I");
+                        break;
+                    case Keyboard.Key.J:
+                        _game.StopMenu.Add("J");
+                        break;
+                    case Keyboard.Key.K:
+                        _game.StopMenu.Add("K");
+                        break;
+                    case Keyboard.Key.L:
+                        _game.StopMenu.Add("L");
+                        break;
+                    case Keyboard.Key.M:
+                        _game.StopMenu.Add("M");
+                        break;
+                    case Keyboard.Key.N:
+                        _game.StopMenu.Add("N");
+                        break;
+                    case Keyboard.Key.O:
+                        _game.StopMenu.Add("O");
+                        break;
+                    case Keyboard.Key.P:
+                        _game.StopMenu.Add("P");
+                        break;
+                    case Keyboard.Key.Q:
+                        _game.StopMenu.Add("Q");
+                        break;
+                    case Keyboard.Key.R:
+                        _game.StopMenu.Add("R");
+                        break;
+                    case Keyboard.Key.S:
+                        _game.StopMenu.Add("S");
+                        break;
+                    case Keyboard.Key.T:
+                        _game.StopMenu.Add("T");
+                        break;
+                    case Keyboard.Key.U:
+                        _game.StopMenu.Add("U");
+                        break;
+                    case Keyboard.Key.V:
+                        _game.StopMenu.Add("V");
+                        break;
+                    case Keyboard.Key.W:
+                        _game.StopMenu.Add("W");
+                        break;
+                    case Keyboard.Key.X:
+                        _game.StopMenu.Add("X");
+                        break;
+                    case Keyboard.Key.Y:
+                        _game.StopMenu.Add("Y");
+                        break;
+                    case Keyboard.Key.Z:
+                        _game.StopMenu.Add("Z");
+                        break;
+                    case Keyboard.Key.Return:
+                        _game.StopMenu.Suppr();
                         break;
                     default:
                         break;
