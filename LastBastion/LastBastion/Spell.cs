@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LastBastion
@@ -32,7 +33,7 @@ namespace LastBastion
             _description = spells.SpellList[name]["Description"];
             _damages = Convert.ToUInt16(spells.SpellList[name]["Dégâts"]);
             _castingTime = Convert.ToUInt16(spells.SpellList[name]["CastTime"]);
-            _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"])/Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
+            _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"]) / Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
             _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
         }
@@ -59,6 +60,12 @@ namespace LastBastion
         internal Cooldown CD => _cd;
 
         internal uint Duration => _duration;
+
+        internal uint Frequency => _dotFrequency;
+
+
+        internal uint Damages => _damages;
+
 
         internal Dictionary<Unit, Dictionary<uint, uint>> DotUnitList => _dotUnit;
 
@@ -110,6 +117,7 @@ namespace LastBastion
         {
             if (u.Count > 0)
             {
+                Console.WriteLine("dots");
                 uint ts = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                 foreach (var n in u)
                 {
@@ -151,36 +159,48 @@ namespace LastBastion
         {
             if (u.Count > 0)
             {
+
                 uint ts = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                foreach (var n in u)
+                foreach (var n in u.ToList())
                 {
-                    foreach (var b in n.Value)
+                    foreach (var b in n.Value.ToList())
                     {
+
+
                         if (b.Value == 0)
                         {
                             if (ts == b.Key + _dotFrequency)
                             {
                                 Hit(n.Key);
-                                u[n.Key][b.Value] = ts;
+                                u[n.Key][b.Key] = ts;
                             }
                         }
                         else
                         {
                             if (n.Key.Life > 0)
                             {
-                                if (b.Value <= b.Value + Duration)
+                                if (b.Value <= b.Key + Duration)
                                 {
-                                    if (ts == b.Key + _dotFrequency)
+
+                                    if (ts == b.Value + _dotFrequency)
                                     {
                                         Hit(n.Key);
-                                        u[n.Key][b.Value] = ts;
-                                        DotBuildList.Remove(n.Key);
+                                        u[n.Key][b.Key] = ts;
+                                        Console.WriteLine("Hit");
+                                        Console.WriteLine("val" + b.Value);
+                                        Console.WriteLine(n.Key.Life);
                                     }
+                                }
+                                else
+                                {
+                                    DotBuildList.Remove(n.Key);
+                                    n.Key.IsBurned = !n.Key.IsBurned;
                                 }
                             }
                             else
                             {
                                 DotBuildList.Remove(n.Key);
+                                n.Key.IsBurned = !n.Key.IsBurned;
                             }
                         }
                     }
@@ -205,34 +225,61 @@ namespace LastBastion
                     if (CD.IsUsable && !Casted)
                     {
                         Casted = !Casted;
-                        CD.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
                         if (CastTime == 0)
                         {
-                            Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
-                            dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
-                            DotBuildList.Add(u, dotTarget);
+                            if (SpellName == "Ignite")
+                            {
+                                _unitContext.Life = 30;
+                                Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
+                                dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
+                                DotBuildList.Add(u, dotTarget);
+                                CD.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                                u.IsBurned = true;
+                                Hit(u);
+                                _unitContext.SwitchTarget(DotBuildList);
+                                return;
+                            }
                             Hit(u);
+                            Casted = !Casted;
                         }
                         else
                         {
                             _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                         }
                     }
-                    else if (CD.IsUsable && Casted)
-                    {
-                        if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
-                        {
-                            Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
-                            dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
-                            DotBuildList.Add(u, dotTarget);
-                            Hit(u);
-                            _castTimeTS = 0;
-                        }
-                    }
-                    if (!CD.IsUsable && Casted)
-                    {
-                        Casted = !Casted;
-                    }
+            if (_castTimeTS == _castTimeTS + _castingTime)
+            {
+                if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
+                {
+                    Hit(u);
+                    _castTimeTS = 0;
+                    Casted = !Casted;
+                }
+            }
+        }
+
+        internal string SpellName => _name;
+
+        internal void Update(Unit b)
+        {
+            CD.Update();
+            if (b != null && !b.IsBurned)
+            {
+                Cast(b.EnemyTarget);
+            }
+            if (SpellName == "Ignite")
+            {
+                if (DotBuildList.Count > 0)
+                {
+                    UpdateDots(DotBuildList);
+                }
+            }
+        }
+
+        internal void Update(Building b)
+        {
+
         }
     }
 }

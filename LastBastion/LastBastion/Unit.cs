@@ -202,7 +202,7 @@ namespace LastBastion
             }
         }
 
-        internal void SwitchTarget(List<Building> s)
+        internal void SwitchTarget(Dictionary<Building,Dictionary<uint,uint>> s)
         {
             Map context = Context;
             List<Building> barbList = context.BuildList;
@@ -220,7 +220,7 @@ namespace LastBastion
 
                 foreach (var n in barbList)
                 {
-                    if (!s.Contains(n))
+                    if (!n.IsBurned)
                         if (Position.IsInRange(Position, n.Position, Range))
                         {
                             unitToReturn = n;

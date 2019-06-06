@@ -308,7 +308,8 @@ namespace LastBastion
 
         public bool BuildingCost(string name)
         {
-            if(_map.GetGame.SamplerBuilding[name].WoodCost <= Wood && _map.GetGame.SamplerBuilding[name].StoneCost <= Stone &&
+     
+            if(name != "Empty" && _map.GetGame.SamplerBuilding[name].WoodCost <= Wood && _map.GetGame.SamplerBuilding[name].StoneCost <= Stone &&
                 _map.GetGame.SamplerBuilding[name].FoodCost <= Food && _map.GetGame.SamplerBuilding[name].VillagerCost <= Villager)
             {
                 return true;
@@ -317,23 +318,25 @@ namespace LastBastion
             {
                 return false;
             }
+
+            
         }
 
-        public void BuildingPayement()
+        public void BuildingPayement(string name)
         {
-            Wood -= _map.GetGame.SamplerBuilding[_buildingName].WoodCost;
-            Stone -= _map.GetGame.SamplerBuilding[_buildingName].StoneCost;
-            Food -= _map.GetGame.SamplerBuilding[_buildingName].FoodCost;
-            Villager -= _map.GetGame.SamplerBuilding[_buildingName].VillagerCost;
+            Wood -= _map.GetGame.SamplerBuilding[name].WoodCost;
+            Stone -= _map.GetGame.SamplerBuilding[name].StoneCost;
+            Food -= _map.GetGame.SamplerBuilding[name].FoodCost;
+            Villager -= _map.GetGame.SamplerBuilding[name].VillagerCost;
         }
 
         public void CreateBuilding(string name)
         {
 
-            if (BuildingCost(_buildingName))
+            if (BuildingCost(name))
             {
-                BuildingPayement();
-                switch (_buildingName)
+                BuildingPayement(name);
+                switch (name)
                 {
                     case "House":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = _buildingName;
