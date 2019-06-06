@@ -87,6 +87,7 @@ namespace LastBastion
                     if(AaCd.IsUsable)
                     {
                         Attack(EnemyTarget);
+                        //AaCd.TimeStamp = 
                         return;
                     }
                     return;

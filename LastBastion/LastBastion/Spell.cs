@@ -117,7 +117,6 @@ namespace LastBastion
         {
             if (u.Count > 0)
             {
-                Console.WriteLine("dots");
                 uint ts = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                 foreach (var n in u)
                 {
@@ -186,9 +185,6 @@ namespace LastBastion
                                     {
                                         Hit(n.Key);
                                         u[n.Key][b.Key] = ts;
-                                        Console.WriteLine("Hit");
-                                        Console.WriteLine("val" + b.Value);
-                                        Console.WriteLine(n.Key.Life);
                                     }
                                 }
                                 else
