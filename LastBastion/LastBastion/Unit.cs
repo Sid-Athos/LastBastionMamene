@@ -36,7 +36,7 @@ namespace LastBastion
             _armor = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Armure"]); ;
             _isMoving = false;
             _aaCooldown = new Cooldown(Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Cooldown"]));
-            _speed = Convert.ToUInt16(context.Vill.Beasts.Beasts[name]["Vitesse"]); ;
+            _speed = (float)Convert.ToDouble(context.Vill.Beasts.Beasts[name]["Vitesse"]); ;
             _context = context;
             _range = (float)Convert.ToDouble(context.Vill.Beasts.Beasts[name]["Range"]); ;
             _position = new Vectors(posX, posY);

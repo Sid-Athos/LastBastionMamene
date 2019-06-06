@@ -8,7 +8,7 @@ namespace LastBastion
     {
         readonly Dictionary<string, Dictionary<string, string>> _bestiary;
 
-        internal Bestiary()
+        public Bestiary()
         {
             _bestiary = new Dictionary<string, Dictionary<string, string>>();
             Dictionary<string, string> _ignite = new Dictionary<string, string>();
@@ -18,11 +18,11 @@ namespace LastBastion
             _ignite.Add("Armure", "1");
             _ignite.Add("Cooldown", "2");
             _ignite.Add("Vie", "75");
-            _ignite.Add("Vitesse", "0.002");
+            _ignite.Add("Vitesse", "0,002");
             _ignite.Add("Capacité", "0");
             _ignite.Add("Type", "Monstre");
             _ignite.Add("Faction", "Sbire de Dracula");
-            _ignite.Add("Range", "10.0");
+            _ignite.Add("Range", "10,0");
             _bestiary.Add("Gobelin", _ignite);
             Dictionary<string, string> _paralyse = new Dictionary<string, string>();
             _paralyse.Add("Nom", "Mage");
@@ -31,7 +31,7 @@ namespace LastBastion
             _paralyse.Add("Armure", "3");
             _paralyse.Add("Cooldown", "2");
             _paralyse.Add("Vie", "100");
-            _paralyse.Add("Vitesse", "0.02");
+            _paralyse.Add("Vitesse", "0,02");
             _paralyse.Add("Capacité", "Ignite");
             _paralyse.Add("Type", "Monstre");
             _paralyse.Add("Faction", "Sbire de Dracula");
@@ -76,8 +76,21 @@ namespace LastBastion
             _dracula.Add("Faction", "Sbire de Dracula");
             _dracula.Add("Range", "25");
             _bestiary.Add("Dracula", _dracula);
+            Dictionary<string, string> _archer = new Dictionary<string, string>();
+            _archer.Add("Nom", "Archer");
+            _archer.Add("Description", "votre soldat le plus loyal.");
+            _archer.Add("Dégâts", "7");
+            _archer.Add("Armure", "1");
+            _archer.Add("Cooldown", "2");
+            _archer.Add("Vie", "150");
+            _archer.Add("Vitesse", "0,01");
+            _archer.Add("Capacité", "Dran de vie");
+            _archer.Add("Type", "Soldat");
+            _archer.Add("Faction", "Royaume Perdu");
+            _archer.Add("Range", "30");
+            _bestiary.Add("Archer", _archer);
         }
 
-        internal Dictionary<string, Dictionary<string, string>> Beasts=> _bestiary;
+        internal Dictionary<string, Dictionary<string, string>> Beasts => _bestiary;
     }
 }
