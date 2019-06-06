@@ -161,10 +161,6 @@ namespace LastBastion
                 for (int i = 0; i < _map.BuildCount; i++)
                 {
                     _map.BuildList[i].Update();
-                    if(_map.BuildList[i].Target !=null)
-                    {
-                     Console.WriteLine(_map.BuildList[i].Target.Life);
-                    }
                 }
             }
 

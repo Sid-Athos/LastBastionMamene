@@ -361,7 +361,7 @@ namespace LastBastion
                     case "Tower":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = name;
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].Building =
-                            new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 350, 350, 7, 2, 0, 30f, 2, _map, name, "Une habitation");
+                            new Tower(_map.GetGame.GetWindow.GetView.Render.Center.X, _map.GetGame.GetWindow.GetView.Render.Center.Y, 350, 350, 7, 2, 0, 60f, 2, _map, name, "Une habitation");
                         break;
                     case "Wall":
                         _map.GetGame.GetGrid[new Vector2i(_map.GetGame.GetWindow.GetView.X, _map.GetGame.GetWindow.GetView.Y)].SetName = name;

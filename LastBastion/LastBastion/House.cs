@@ -30,7 +30,6 @@ namespace LastBastion
             IncHealth();
             IncreaseArmor();
             IncPop();
-            Console.WriteLine("Inc Pop House" + Rank);
         }
     }
 }

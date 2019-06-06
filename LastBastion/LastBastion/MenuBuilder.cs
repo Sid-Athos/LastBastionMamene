@@ -196,7 +196,6 @@ namespace LastBastion
                     _game.Sprites.Text.Scale = new Vector2f(0.7f, 0.7f);
                     _game.GetWindow.Render.Draw(_game.Sprites.Text);
                     //Description
-                    Console.WriteLine(SelectTarget());
                     _game.Sprites.Text.DisplayedString = _game.SamplerBuilding[SelectTarget()].Description.ToString();
                     _game.Sprites.Text.Position = new Vector2f(_game.GetWindow.GetView.Render.Center.X - 248, _game.GetWindow.GetView.Render.Center.Y + 165);
                     _game.Sprites.Text.Scale = new Vector2f(0.3f, 0.3f);

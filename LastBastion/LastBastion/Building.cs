@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LastBastion
 {
@@ -19,6 +20,7 @@ namespace LastBastion
         uint _foodCost;
         uint _villagerCost;
         Unit _target;
+        Archer[] _archers;
 
         internal Building(float posX, float posY,
     uint lifePoints, uint maxLifePoints,
@@ -194,7 +196,11 @@ namespace LastBastion
             Rank++;
             IncHealth();
             IncreaseArmor();
-            Console.WriteLine("Upgrade Building" + Rank);
+        }
+
+        internal virtual Archer[] Slots()
+        {
+            return _archers;
         }
 
         internal uint Rank

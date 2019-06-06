@@ -19,6 +19,8 @@ namespace LastBastion
         bool _casted = false;         // Spell was casted?
         readonly uint _dotFrequency;
         readonly float _range;
+        readonly float _areaOfEffect;
+
         uint _castTimeTS;
         Dictionary<Unit, Dictionary<uint, uint>> _dotUnit = new Dictionary<Unit, Dictionary<uint, uint>>();
         Dictionary<Building, Dictionary<uint, uint>> _dotBuild = new Dictionary<Building, Dictionary<uint, uint>>();
@@ -36,6 +38,8 @@ namespace LastBastion
             _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"]) / Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
             _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
+            _areaOfEffect = (float)Convert.ToDouble(spells.SpellList[name]["Zone d'effet"]);
+
         }
 
         internal Spell(string name, Unit con, SpellBook spells)
@@ -49,6 +53,7 @@ namespace LastBastion
             _dotFrequency = (uint)Convert.ToUInt16(spells.SpellList[name]["Durée"]) / Convert.ToUInt16(spells.SpellList[name]["Fréquence"]);
             _range = (float)Convert.ToDouble(spells.SpellList[name]["Range"]);
             _duration = Convert.ToUInt16(spells.SpellList[name]["Durée"]);
+            _areaOfEffect = (float)Convert.ToDouble(spells.SpellList[name]["Zone d'effet"]);
         }
 
         internal bool Casted
@@ -63,6 +68,9 @@ namespace LastBastion
 
         internal uint Frequency => _dotFrequency;
 
+        internal float Range => _range;
+
+        internal float AoERange => _areaOfEffect;
 
         internal uint Damages => _damages;
 
@@ -249,6 +257,24 @@ namespace LastBastion
                 if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                 {
                     Hit(u);
+                    if(SpellName == "Smash")
+                    {
+                        if(_unitContext.Context.BuildCount > 1)
+                        {
+                            for(int i =0; i < _unitContext.Context.BuildCount;i++)
+                            {
+                                if(_unitContext.Context.BuildList[i] != u && u.Position.IsInRange(u.Position, _unitContext.Context.BuildList[i].Position,Range))
+                                {
+                                    Hit(_unitContext.Context.BuildList[i]);
+                                    Archer[] arch = _unitContext.Context.BuildList[i].Slots();
+                                    for (int j = 0; i < arch.Length;j++)
+                                    {
+                                        Hit(arch[j]);
+                                    }
+                                }
+                            }
+                        }
+                    }
                     _castTimeTS = 0;
                     Casted = !Casted;
                 }
@@ -260,15 +286,22 @@ namespace LastBastion
         internal void Update(Unit b)
         {
             CD.Update();
-            if (b != null && !b.IsBurned)
-            {
-                Cast(b.EnemyTarget);
-            }
             if (SpellName == "Ignite")
             {
+                if (b != null && !b.IsBurned)
+                {
+                    Cast(b.EnemyTarget);
+                }
                 if (DotBuildList.Count > 0)
                 {
                     UpdateDots(DotBuildList);
+                }
+            }
+            if (SpellName == "Smash")
+            {
+                if (b != null)
+                {
+                    Cast(b.EnemyTarget);
                 }
             }
         }

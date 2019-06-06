@@ -53,12 +53,10 @@ namespace LastBastion
             {
                 Vectors placeToSpawn = SpawnLocation();
                 Barbar v1 = new Barbar(
-                    WavesContext.GetGame.GetWindow.GetView.Render.Center.X, 
-                    WavesContext.GetGame.GetWindow.GetView.Render.Center.Y, 
+                    placeToSpawn.X,
+                    placeToSpawn.Y, 
                     WavesContext.Vill.Beasts.Beasts["Gobelin"]["Nom"],WavesContext
                     );
-
-
             }
 
             uint magesToSpawn;
@@ -68,9 +66,10 @@ namespace LastBastion
                 magesToSpawn = Round;
                 for(int i = 0;  i < magesToSpawn;i++)
                 {
+                    Vectors placeToSpawn = SpawnLocation();
                     Mage m = new Mage(
-                        WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
-                        WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
+                        placeToSpawn.X,
+                        placeToSpawn.Y,
                         WavesContext.Vill.Beasts.Beasts["Mage"]["Nom"], WavesContext
                     );
                 }
@@ -82,9 +81,10 @@ namespace LastBastion
 
                 for (int i = 0; i < gargoylesToSpawn; i++)
                 {
+                    Vectors placeToSpawn = SpawnLocation();
                     Gargoyle g = new Gargoyle(
-                        WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
-                        WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
+                        placeToSpawn.X,
+                        placeToSpawn.Y,
                         WavesContext.Vill.Beasts.Beasts["Gargoyle"]["Nom"], WavesContext
                     );
                 }
@@ -96,9 +96,10 @@ namespace LastBastion
 
                 for (int i = 0; i < giantsToSpawn; i++)
                 {
+                    Vectors placeToSpawn = SpawnLocation();
                     Giant g = new Giant(
-                        WavesContext.GetGame.GetWindow.GetView.Render.Center.X,
-                        WavesContext.GetGame.GetWindow.GetView.Render.Center.Y,
+                        placeToSpawn.X,
+                        placeToSpawn.Y,
                         WavesContext.Vill.Beasts.Beasts["Giant"]["Nom"], WavesContext
                         );
                 }

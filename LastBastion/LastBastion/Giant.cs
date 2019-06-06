@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SFML.System;
 
 namespace LastBastion
 {
@@ -60,14 +61,50 @@ namespace LastBastion
 
         internal override void Update()
         {
-            if (EnemyTarget == null)
+            if (Life == 0 || Life > 2000)
             {
-                AcquireTarget();
+                Die();
                 return;
             }
-            if (Position.IsInRange(Position, EnemyTarget.Position, Range))
+            AaCd.Update();
+            Context.GetGame.Sprites.GetSprite("Gobelin").Position = new Vector2f(Position.X, Position.Y);
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gobelin"));
+            if (!IsParalysed)
             {
-                Attack(EnemyTarget);
+
+                if (EnemyTarget == null && Context.BuildCount >= 1)
+                {
+                    AcquireTarget();
+                    bool tr = Position.IsInRange(Position, EnemyTarget.Position, Range);
+                }
+
+                if (EnemyTarget == null)
+                {
+                    return;
+                }
+                if (EnemyTarget.Life == 0 || EnemyTarget.Life > 2000)
+                {
+                    AcquireTarget();
+                }
+
+                if (EnemyTarget != null && Position.IsInRange(Position, EnemyTarget.Position, Range))
+                {
+                    if (AaCd.IsUsable)
+                    {
+                        Attack(EnemyTarget);
+                        AaCd.SetTs();
+                    }
+                }
+
+                if(_smash.CD.IsUsable && Position.IsInRange(Position,EnemyTarget.Position,_smash.Range))
+                {
+                    _smash.Update(this);
+                }
+
+                if (EnemyTarget != null && !Position.IsInRange(Position, EnemyTarget.Position, Range))
+                {
+                    Position = Position.Movement(Position, EnemyTarget.Position, 1, Speed, Range);
+                }
             }
         }
     }

@@ -102,7 +102,10 @@ namespace LastBastion
 
         internal int AvailableSlots => _slots.Length;
 
-        internal Archer[] Slots => _slots;
+        internal override Archer[] Slots()
+        {
+            return _slots;
+        }
 
         internal uint Dmg => _dmg;
 
@@ -284,9 +287,10 @@ namespace LastBastion
 
         internal override void Update()
         {
+            AaCd.Update();
             Context.GetGame.Sprites.GetSprite("Tower").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Tower"));
-            if (base.Life == 0)
+            if (base.Life == 0 || base.Life > base.MaxLife)
             {
                 Die();
                 Context.GetGame.GetGrid[new Vector2i((((int)Position.X - 375) / 15), ((int)Position.Y - 375) / 15)].SetName = "Empty";
@@ -316,6 +320,7 @@ namespace LastBastion
 
             if (base.Position.IsInRange(Position, Target.Position, Range))
             {
+                Console.WriteLine(Target.Life);
                 Attack(Target);
                 if (Target != null)
                     Target = (Target.Life == 0 || Target.Life > 2000) ? null : Target;
