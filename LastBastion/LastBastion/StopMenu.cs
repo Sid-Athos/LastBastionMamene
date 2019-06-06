@@ -6,25 +6,25 @@ using SFML.Graphics;
 
 namespace LastBastion
 {
-    public class StopMenu
+    internal class StopMenu
     {
         Game _game;
         Vector2f _positionMenu;
         int _target;
         string _name;
 
-        public StopMenu(Game game)
+        internal StopMenu(Game game)
         {
             _game = game;
             _target = 0;
             _name = "";
             _positionMenu = new Vector2f(_game.GetWindow.GetView.Render.Center.X - _game.Sprites.GetSprite("FrontMenu").Texture.Size.X / 2, _game.GetWindow.GetView.Render.Center.Y - _game.Sprites.GetSprite("FrontMenu").Texture.Size.Y / 2);
         }
-        public void Deploy()
+        internal void Deploy()
         {
             _target = 0;
         }
-        public void Update(bool t)
+        internal void Update(bool t)
         {
             if (!t)
             {
@@ -86,18 +86,18 @@ namespace LastBastion
                 _game.GetWindow.Render.Draw(_game.Sprites.Text);
             }
         }
-        public void Add(string t)
+        internal void Add(string t)
         {
             if (_name.Length < 24)
             {
                 _name += t;
             }
         }
-        public void ResetInput()
+        internal void ResetInput()
         {
             _name = "";
         }
-        public void Suppr()
+        internal void Suppr()
         {
             if (_name.Length > 0)
             {
@@ -109,7 +109,7 @@ namespace LastBastion
                 _name = r;
             }
         }
-        public int Target
+        internal int Target
         {
             get { return _target; }
             set { _target = value; }

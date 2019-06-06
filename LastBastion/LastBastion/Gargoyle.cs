@@ -5,7 +5,7 @@ using SFML.System;
 
 namespace LastBastion
 {
-    public class Gargoyle : Unit
+    internal class Gargoyle : Unit
     {
         bool _flying = true;
         uint _timeStamp;

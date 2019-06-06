@@ -4,13 +4,13 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Villager : Unit
+    internal class Villager : Unit
     {
         uint _harvestCooldown = 3;
         bool _isHarvesting;
         Tower _context;
             
-        public Villager(float posX, float posY, string name, Map context)
+        internal Villager(float posX, float posY, string name, Map context)
             : base(posX, posY, name, context)
         {
             _isHarvesting = false;
@@ -18,21 +18,21 @@ namespace LastBastion
 
         
 
-        public void SetTower(Tower t)
+        internal void SetTower(Tower t)
         {
             _context = t;
         }
 
-        public Tower ShowTower => _context;
+        internal Tower ShowTower => _context;
 
-        public uint HarvestCd => _harvestCooldown;
+        internal uint HarvestCd => _harvestCooldown;
         
-        public void Harvest()
+        internal void Harvest()
         {
             _isHarvesting = ! _isHarvesting;
         }
 
-        public Vectors FindClosestWorkPlace()
+        internal Vectors FindClosestWorkPlace()
         {
             List<Building> buildList = base.Context.BuildList;
             

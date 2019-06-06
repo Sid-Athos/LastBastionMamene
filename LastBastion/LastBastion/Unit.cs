@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LastBastion
 {
-    public class Unit
+    internal class Unit
     {
         Map _context;
         Vectors _position;
@@ -22,7 +22,7 @@ namespace LastBastion
         Unit _target;
         Building _enemyTar;
 
-        public Unit(
+        internal Unit(
             float posX,
             float posY,
             string name,
@@ -43,51 +43,51 @@ namespace LastBastion
         }
 
 
-        public Unit(uint life)
+        internal Unit(uint life)
         {
             _lifePoints = life;
         }
 
-        public Vectors Position
+        internal Vectors Position
         {
             get { return _position; }
             set { _position = value; }
         }
 
-        public virtual void Attack(Unit unit)
+        internal virtual void Attack(Unit unit)
         {
 
         }
 
-        public virtual void Attack(Building unit)
+        internal virtual void Attack(Building unit)
         {
 
 
         }
 
-        public uint MaxLife
+        internal uint MaxLife
         {
             get { return _maxLifePoints; }
             set { _maxLifePoints = value; }
         }
 
-        public uint Life
+        internal uint Life
         {
             get { return _lifePoints; }
             set { _lifePoints = value; }
         }
 
-        public void Attacked(uint newLife)
+        internal void Attacked(uint newLife)
         {
             Life = newLife;
         }
 
-        public void Die()
+        internal void Die()
         {
 
         }
 
-        public void JoinTower()
+        internal void JoinTower()
         {
             _inTower = !_inTower;
         }
@@ -97,7 +97,7 @@ namespace LastBastion
             _isMoving = !_isMoving;
         }
 
-        public void Burn(Building b)
+        internal void Burn(Building b)
         {
             b.Burn();
         }
@@ -127,62 +127,62 @@ namespace LastBastion
             return unitToReturn;
         }
 
-        public void SetTarget(Unit u)
+        internal void SetTarget(Unit u)
         {
             _target = u;
         }
 
-        public void SetTarget(Building b)
+        internal void SetTarget(Building b)
         {
             _enemyTar = b;
         }
 
-        public void Paralize()
+        internal void Paralize()
         {
             _paralyzed = !_paralyzed;
         }
 
-        public void Moving()
+        internal void Moving()
         {
             _isMoving = !_isMoving;
         }
 
-        public Building EnemyTarget
+        internal Building EnemyTarget
         {
             get { return _enemyTar; }
             set { _enemyTar = value; }
         }
 
-        public Map Context => _context;
+        internal Map Context => _context;
 
-        public Unit Target => _target;
+        internal Unit Target => _target;
 
-        public float Speed => _speed;
+        internal float Speed => _speed;
 
-        public bool IsParalysed => _paralyzed;
+        internal bool IsParalysed => _paralyzed;
 
-        public bool IsBurned => _burned;
+        internal bool IsBurned => _burned;
 
-        public bool BurnIt { set { _burned = value; } }
+        internal bool BurnIt { set { _burned = value; } }
 
-        public bool IsMoving => _isMoving;
+        internal bool IsMoving => _isMoving;
 
-        public bool IsInTower => _inTower;
+        internal bool IsInTower => _inTower;
 
-        public string Job => _job;
+        internal string Job => _job;
 
 
-        public float Range => _range;
+        internal float Range => _range;
 
-        public uint Dmg => _dmg;
+        internal uint Dmg => _dmg;
 
-        public Cooldown AaCd => _aaCooldown;
+        internal Cooldown AaCd => _aaCooldown;
 
-        public uint Armor => _armor;
+        internal uint Armor => _armor;
 
         private bool disposedValue = false; // Pour détecter les appels redondants
 
-        public virtual void Update()
+        internal virtual void Update()
         {
 
         }
@@ -203,7 +203,7 @@ namespace LastBastion
             }
         }
 
-        public void SwitchTarget(Dictionary<Building, Dictionary<uint, uint>> s)
+        internal void SwitchTarget(Dictionary<Building, Dictionary<uint, uint>> s)
         {
             Map context = Context;
             List<Building> barbList = context.BuildList;
@@ -236,7 +236,7 @@ namespace LastBastion
             }
         }
 
-        public void AcquireTarget()
+        internal void AcquireTarget()
         {
             Map context = Context;
             List<Building> buildList = context.BuildList;
@@ -267,7 +267,7 @@ namespace LastBastion
         // }
 
         // Ce code est ajouté pour implémenter correctement le modèle supprimable.
-        public void Dispose()
+        internal void Dispose()
         {
             // Ne modifiez pas ce code. Placez le code de nettoyage dans Dispose(bool disposing) ci-dessus.
             Dispose(true);

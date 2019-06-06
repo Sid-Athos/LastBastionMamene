@@ -24,7 +24,7 @@ namespace LastBastion
             Context.GetVillage.Villager += 5;
         }
 
-        override public void Upgrade()
+        override internal void Upgrade()
         {
             Rank++;
             IncHealth();

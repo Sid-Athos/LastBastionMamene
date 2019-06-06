@@ -72,6 +72,7 @@ namespace LastBastion
             if (AaCd.IsUsable && EnemyTarget.Position.IsInRange(this.Position, EnemyTarget.Position, base.Range))
             {
                 Attack(EnemyTarget);
+                AaCd.SetTs();
             }
             if (EnemyTarget.IsBurned)
             {
@@ -97,7 +98,7 @@ namespace LastBastion
                 return;
             }
             unit.Life -= (Dmg - unit.Armor);
-            AaCd.TimeStamp = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            
         }
     }
 }

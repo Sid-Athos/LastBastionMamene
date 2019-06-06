@@ -2,7 +2,7 @@
 
 namespace LastBastion
 {
-    public class Building
+    internal class Building
     {
         Map _context;
         string _name;
@@ -20,7 +20,7 @@ namespace LastBastion
         uint _villagerCost;
         Unit _target;
 
-        public Building(float posX, float posY,
+        internal Building(float posX, float posY,
     uint lifePoints, uint maxLifePoints,
     uint armor, uint rank,
     uint woodCost, uint foodCost, uint stoneCost, uint villagerCost,
@@ -41,7 +41,7 @@ namespace LastBastion
             _desc = desc;
         }
 
-        public Building(float posX, float posY,
+        internal Building(float posX, float posY,
             uint lifePoints, uint maxLifePoints,
             uint armor, uint rank, uint dmg, float range, uint aaCooldown,
             Map context, string name, string desc)
@@ -57,7 +57,7 @@ namespace LastBastion
             _name = name;
             _desc = desc;
         }
-        public Building(float posX,
+        internal Building(float posX,
         float posY,
         uint lifePoints,
         uint maxLifePoints,
@@ -73,7 +73,7 @@ namespace LastBastion
             _count++;
         }
 
-        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context, string name, string desc)
+        internal Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank, Map context, string name, string desc)
         {
             _position = new Vectors(posX, posY);
             _lifePoints = lifePoints;
@@ -85,7 +85,7 @@ namespace LastBastion
             _desc = desc;
         }
 
-        public Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
+        internal Building(float posX, float posY, uint lifePoints, uint maxLifePoints, uint armor, uint rank)
         {
             _position = new Vectors(posX, posY);
             _lifePoints = lifePoints;
@@ -95,88 +95,88 @@ namespace LastBastion
             _count++;
         }
 
-        public uint WoodCost
+        internal uint WoodCost
         {
             get { return _woodCost; }
             set { _woodCost = value; }
         }
 
-        public uint StoneCost
+        internal uint StoneCost
         {
             get { return _stoneCost; }
             set { _stoneCost = value; }
         }
 
-        public uint FoodCost
+        internal uint FoodCost
         {
             get { return _foodCost; }
             set { _foodCost = value; }
         }
 
-        public uint VillagerCost
+        internal uint VillagerCost
         {
             get { return _villagerCost; }
             set { _villagerCost = value; }
         }
 
-        public bool IsBurned
+        internal bool IsBurned
         {
             get { return _burned; }
             set { _burned = value; }
         }
 
-        public void Burn()
+        internal void Burn()
         {
             IsBurned = !IsBurned; ;
         }
 
-        public void IncreaseArmor()
+        internal void IncreaseArmor()
         {
             _armor++;
         }
 
-        public virtual Unit Target
+        internal virtual Unit Target
         {
             get { return _target; }
             set { _target = value; }
         }
 
-        public string Description
+        internal string Description
         {
             get { return _desc; }
             set { _desc = value; }
         }
 
-        public void IncHealth()
+        internal void IncHealth()
         {
             _maxLifePoints  *= 2;
             _lifePoints *= 2;
         }
 
-        public void Die()
+        internal void Die()
         {
             Context.BuildList.Remove(this);
         }
 
-        public uint MaxLife
+        internal uint MaxLife
         {
             get { return _maxLifePoints; }
             set { _maxLifePoints = value; }
         }
 
-        public string Name
+        internal string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
-        public uint Life
+        internal uint Life
         {
             get { return _lifePoints; }
             set { _lifePoints = value; }
         }
 
-        public bool IsDestroy()
+        internal bool IsDestroy()
         {
             if (Life <= 0)
             {
@@ -189,7 +189,7 @@ namespace LastBastion
             return false;
         }
         
-        virtual public void Upgrade()
+        virtual internal void Upgrade()
         {
             Rank++;
             IncHealth();
@@ -197,23 +197,23 @@ namespace LastBastion
             Console.WriteLine("Upgrade Building" + Rank);
         }
 
-        public uint Rank
+        internal uint Rank
         {
             get { return _rank; }
             set { _rank = value; }
         }
 
-        public Vectors Position
+        internal Vectors Position
         {
             get { return _position; }
             set { _position = value; }
         }
 
-        public Map Context => _context;
+        internal Map Context => _context;
         
-        public uint Armor => _armor;
+        internal uint Armor => _armor;
         
-        public uint Count => _count;
+        internal uint Count => _count;
 
         internal virtual void Update()
         {

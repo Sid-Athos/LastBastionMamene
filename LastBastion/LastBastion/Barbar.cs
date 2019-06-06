@@ -6,19 +6,19 @@ using SFML.System;
 
 namespace LastBastion
 {
-    public class Barbar : Unit
+    internal class Barbar : Unit
     {
         static uint _count;
         Building _target = null;
 
-        public Barbar(float posX, float posY,string name, Map context)
+        internal Barbar(float posX, float posY,string name, Map context)
             : base(posX, posY,name,  context)
         {
             _count++;
             context.AddBarbar(this);
         }
 
-        public Barbar(uint life)
+        internal Barbar(uint life)
             : base(life)
         {
             _count++;
@@ -87,14 +87,12 @@ namespace LastBastion
                     if(AaCd.IsUsable)
                     {
                         Attack(EnemyTarget);
-                        //AaCd.TimeStamp = 
+                        AaCd.SetTs(); 
                         return;
                     }
                     return;
                 }
-
                 
-
                 if (EnemyTarget != null && !Position.IsInRange(Position, EnemyTarget.Position,Range))
                 {
                     Position = Position.Movement(Position, EnemyTarget.Position, 1, Speed, Range);

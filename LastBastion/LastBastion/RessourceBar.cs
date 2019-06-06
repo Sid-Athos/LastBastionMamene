@@ -15,7 +15,7 @@ namespace LastBastion
         float xSize;
         float ySize;
 
-        public RessourceBar(Game game, SpritesManager sprites)
+        internal RessourceBar(Game game, SpritesManager sprites)
         {
             _game = game;
             _sprites = sprites;

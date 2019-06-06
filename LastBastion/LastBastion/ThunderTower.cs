@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace LastBastion
 {
-    public class Thunder:Tower
+    internal class Thunder:Tower
     {
         List<Unit> _paralysedList;
         Spell _par;
 
-        public Thunder(
+        internal Thunder(
         float posX,
         float posY,
         uint lifePoints,

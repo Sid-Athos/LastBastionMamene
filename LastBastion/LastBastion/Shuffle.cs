@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace LastBastion
 {
-    public static class Shuffle
+    internal static class Shuffle
     {
-        public static List<Building> Buildings(List<Building> list)
+        internal static List<Building> Buildings(List<Building> list)
         {
 
             Random r = new Random();
@@ -21,7 +21,7 @@ namespace LastBastion
             return list;
         }
         
-        public static List<Unit> Barbars(List<Unit> list)
+        internal static List<Unit> Barbars(List<Unit> list)
         {
 
             Random r = new Random();

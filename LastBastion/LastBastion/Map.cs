@@ -5,7 +5,7 @@ using Interface;
 
 namespace LastBastion
 {
-    public class Map
+    internal class Map
     {
         Game _game;
         MapUI _UI;
@@ -22,7 +22,7 @@ namespace LastBastion
         int _sec;
         bool MinutePass = true;
 
-        public Map(Game game)
+        internal Map(Game game)
         {
             _game = game;
             _countTimer = 0;
@@ -38,11 +38,11 @@ namespace LastBastion
 
         }
 
-        public Waves Wave => _waves;
+        internal Waves Wave => _waves;
 
-        public Village Vill => _village;
+        internal Village Vill => _village;
 
-        public Map()
+        internal Map()
         {
             //_village = new Village(this);
             _barbarians = new List<Unit>();
@@ -52,21 +52,21 @@ namespace LastBastion
         }
         
 
-        public List<Unit> BarList => _barbarians;
+        internal List<Unit> BarList => _barbarians;
 
-        public List<Building> BuildList => _buildings;
+        internal List<Building> BuildList => _buildings;
 
-        public int BarbCount => _barbarians.Count;
+        internal int BarbCount => _barbarians.Count;
 
-        public int BuildCount => _buildings.Count;
+        internal int BuildCount => _buildings.Count;
 
-        public int GetTimer => _countTimer;
+        internal int GetTimer => _countTimer;
 
-        /*public void AddVillager(Villager v)
+        /*internal void AddVillager(Villager v)
         {
             VillList.Add(v);
         }
-        public void RemoveVillager(Villager n)
+        internal void RemoveVillager(Villager n)
         {
             _villagePeople.Remove(n);
 
@@ -81,44 +81,44 @@ namespace LastBastion
             _projectiles.Remove(n);
         }
 
-        public void AddBuilding(Building T)
+        internal void AddBuilding(Building T)
         {
             BuildList.Add(T);
         }
 
-        public void Castle(Castle c)
+        internal void Castle(Castle c)
         {
             _castle = c;
         }
 
-        public void RemoveBuilding(Building T)
+        internal void RemoveBuilding(Building T)
         {
             _buildings.Remove(T);
         }
         
 
-        public void AddBarbar(Unit u)
+        internal void AddBarbar(Unit u)
         {
             _barbarians.Add(u);
         }
 
-        public void RemoveBarbar(Unit u)
+        internal void RemoveBarbar(Unit u)
         {
             _barbarians.Remove(u);
 
         }
 
-        public Village GetVillage => _village;
+        internal Village GetVillage => _village;
 
-        public Game GetGame => _game;
+        internal Game GetGame => _game;
 
-        public Castle GetCastle => _castle;
-
-
-        public MapUI GetMapUI => _UI;
+        internal Castle GetCastle => _castle;
 
 
-        public void PrintMap()
+        internal MapUI GetMapUI => _UI;
+
+
+        internal void PrintMap()
         {
             foreach (var item in _game.GetGrid)
             {
@@ -132,7 +132,7 @@ namespace LastBastion
                 }
             }
         }
-        public void PrintMist()
+        internal void PrintMist()
         {
             foreach (var item in _game.GetGrid)
             {
@@ -144,7 +144,7 @@ namespace LastBastion
             }
         }
 
-        public void CreateMap()
+        internal void CreateMap()
         {
             foreach (var item in _game.GetGrid)
             {
@@ -186,7 +186,7 @@ namespace LastBastion
                 }
             }
         }
-        public string NearbyHutOk(Hut hut)
+        internal string NearbyHutOk(Hut hut)
         {
             string result = "Empty";
             if (_game.GetGrid.ContainsKey(new Vector2i(hut.GetVec2I.X - 1, hut.GetVec2I.Y)) && _game.GetGrid[new Vector2i(hut.GetVec2I.X - 1, hut.GetVec2I.Y)].GetName != "Empty")
@@ -228,7 +228,7 @@ namespace LastBastion
             }
             return result;
         }
-        public void ZoneReveal()
+        internal void ZoneReveal()
         {
             foreach (var item in _game.GetGrid)
             {
@@ -241,7 +241,7 @@ namespace LastBastion
                 }
             }
         }
-        public void SamouraïDeCoke()
+        internal void SamouraïDeCoke()
         {
             foreach (var item in _game.GetGrid)
             {
@@ -252,7 +252,7 @@ namespace LastBastion
         internal SpellBook Sb => _book;
 
         internal Bestiary Beasts => _beasts;
-        public void TimerUpdate()
+        internal void TimerUpdate()
         {
             if (DateTime.Now.Second == 1 && MinutePass == true)
             {

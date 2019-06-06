@@ -4,11 +4,11 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Mine : Building
+    internal class Mine : Building
     {
         uint _rank = 1;
 
-        public Mine(float posX,
+        internal Mine(float posX,
         float posY,
         uint lifePoints,
         uint maxLifePoints,
@@ -30,7 +30,7 @@ namespace LastBastion
          context, "Mine", "test")
         { }
 
-        public Mine(float posX, float posY, Map context)
+        internal Mine(float posX, float posY, Map context)
             : base(posX, posY, 100, 100, 5, 1, 40, 0, 20, 2, context,"Mine", "Increase your stone recolt \n by 5 per rank.")
         {
         }

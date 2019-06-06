@@ -4,12 +4,12 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Giant : Unit
+    internal class Giant : Unit
     {
         uint _timeStamp;
         Spell _smash;
 
-        public Giant(
+        internal Giant(
             float posX,
             float posY,
             string name,

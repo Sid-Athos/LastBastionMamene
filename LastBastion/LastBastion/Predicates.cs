@@ -4,9 +4,9 @@ using System.Text;
 
 namespace LastBastion
 {
-    public static class Preds
+    internal static class Preds
     {
-        public static bool IsDead(Unit n)
+        internal static bool IsDead(Unit n)
         {
             return n.Life == 0;
         }

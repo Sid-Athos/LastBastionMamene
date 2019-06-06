@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class LavaWall : Wall
+    internal class LavaWall : Wall
     {
         uint _rank = 1;
         uint _dmg = 10;
@@ -12,13 +12,13 @@ namespace LastBastion
         float _range = 1.0f;
         int _lastAttack;
 
-        public LavaWall(float posX, float posY,
+        internal LavaWall(float posX, float posY,
             uint lifePoints, uint maxLifePoints,
             uint armor, uint rank, uint dmg, float range, uint aaCooldown,
             Map context, string name, string desc)
             : base(posX, posY, 200, 200, 0, 1, 20, 0f, 40, context, "LavaWall", "test") { }
 
-        public LavaWall(float posX, float posY, uint dmg, float range, uint aaCooldown, Map context)
+        internal LavaWall(float posX, float posY, uint dmg, float range, uint aaCooldown, Map context)
             : base(posX, posY ,context)
         {
             _lastAttack = Context.GetGame.GetTimer;
@@ -29,11 +29,11 @@ namespace LastBastion
             Description = "Better wall and useful for \n showering enemies with lava.";
         }
 
-        public float Range => _range;
-        public uint Dmg => _dmg;
-        public uint Cooldown => _aaCooldown;
+        internal float Range => _range;
+        internal uint Dmg => _dmg;
+        internal uint Cooldown => _aaCooldown;
         
-        public void Attack(Unit unit)
+        internal void Attack(Unit unit)
         {
             if (unit.Position.IsInRange(unit.Position,unit.Target.Position,Range))
             {

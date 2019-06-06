@@ -5,17 +5,17 @@ using SFML.System;
 
 namespace LastBastion
 {
-    public class Hut
+    internal class Hut
     {
         Vector2f _pos;
         Vector2i _posG;
-        public string _name;
+        internal string _name;
         string _buildingName;
         bool _isReveal;
         Building building;
         Game _game;
 
-        public Hut(Game game, Vector2f pos, string name, Vector2i posG)
+        internal Hut(Game game, Vector2f pos, string name, Vector2i posG)
         {
             _game = game;
             _posG = posG;
@@ -25,13 +25,13 @@ namespace LastBastion
             _isReveal = false;
             building = null;
         }
-        public Vector2i GetVec2I { get { return _posG; } }
-        public Vector2f GetVec2F { get { return _pos; } }
-        public String GetName { get { return _buildingName; } }
-        public String SetName { set { _buildingName = value; } }
-        public String StringVec => _name;
+        internal Vector2i GetVec2I { get { return _posG; } }
+        internal Vector2f GetVec2F { get { return _pos; } }
+        internal String GetName { get { return _buildingName; } }
+        internal String SetName { set { _buildingName = value; } }
+        internal String StringVec => _name;
 
-        public bool IsBusy()
+        internal bool IsBusy()
         {
             if (_buildingName != "Empty")
             {
@@ -39,13 +39,13 @@ namespace LastBastion
             }
             return false;
         }
-        public bool IsReveal
+        internal bool IsReveal
         {
             get { return _isReveal; }
             set { _isReveal = value; }
         }
 
-        public Building Building
+        internal Building Building
         {
             get { return building; }
             set { building = value; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Archer : Unit
+    internal class Archer : Unit
     {
         static uint _count;
         Tower _context;

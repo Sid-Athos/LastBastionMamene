@@ -5,7 +5,7 @@ using SFML.System;
 
 namespace LastBastion
 {
-    public class Village
+    internal class Village
     {
         Map _map;
         Building _castle;
@@ -24,7 +24,7 @@ namespace LastBastion
         internal Bestiary Beasts => _beasts;
         uint _maxVillager;
 
-        public Village(Map map)
+        internal Village(Map map)
         {
             _map = map; 
             _nearby = new List<Hut>();
@@ -137,46 +137,46 @@ namespace LastBastion
             _prices.Add("House Lv3", _hLv3);
         }
 
-        public Dictionary<string,Dictionary<string,string>> Costs => _prices;
+        internal Dictionary<string,Dictionary<string,string>> Costs => _prices;
 
         // For development purpose only
 
-        public int Area => _area;
-        public Map GetMap => _map;
+        internal int Area => _area;
+        internal Map GetMap => _map;
 
-        public void IncreaseRessources()
+        internal void IncreaseRessources()
         {
             _woodStock += 5000;
             _foodStock += 5000;
             _stoneStock += 5000;
             _villagerStock += 5000;
         }
-        public uint MaxVillager
+        internal uint MaxVillager
         {
             get { return _maxVillager; }
             set { _maxVillager = value; }
         }
-        public uint Villager
+        internal uint Villager
         {
             get { return _villagerStock; }
             set { _villagerStock = value; }
         }
-        public uint Wood
+        internal uint Wood
         {
             get { return _woodStock; }
             set { _woodStock = value; }
         }
-        public uint Food
+        internal uint Food
         {
             get { return _foodStock; }
             set { _foodStock = value; }
         }
-        public uint Stone
+        internal uint Stone
         {
             get { return _stoneStock; }
             set { _stoneStock = value; }
         }
-        public void RessourceProd()
+        internal void RessourceProd()
         {
             foreach(var item in _map.GetGame.GetGrid )
             {
@@ -255,13 +255,13 @@ namespace LastBastion
             }
         }
 
-        public void CreateCastle(int posX, int posY)
+        internal void CreateCastle(int posX, int posY)
         {
             _map.GetGame.GetGrid[new Vector2i(posX, posY)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(posX, posY)].Building = new Castle(-1, 0, 750, 750, 30, 1, _map, "Castle", "Your residence");
         }
 
-        public void SetCastle()
+        internal void SetCastle()
         {
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].SetName = "Castle";
             _map.GetGame.GetGrid[new Vector2i(-1, 0)].IsReveal = true;
@@ -292,7 +292,7 @@ namespace LastBastion
             CreateCastle(1, -1);
         }
 
-        public void SetNearby()
+        internal void SetNearby()
         {
             for (int i = -1 * _area + 1; i < _area; i++)
             {
@@ -306,7 +306,7 @@ namespace LastBastion
             }
         }
 
-        public bool BuildingCost(string name)
+        internal bool BuildingCost(string name)
         {
             if(_map.GetGame.SamplerBuilding[name].WoodCost <= Wood && _map.GetGame.SamplerBuilding[name].StoneCost <= Stone &&
                 _map.GetGame.SamplerBuilding[name].FoodCost <= Food && _map.GetGame.SamplerBuilding[name].VillagerCost <= Villager)
@@ -321,7 +321,7 @@ namespace LastBastion
             
         }
 
-        public void BuildingPayement(string name)
+        internal void BuildingPayement(string name)
         {
             Wood -= _map.GetGame.SamplerBuilding[name].WoodCost;
             Stone -= _map.GetGame.SamplerBuilding[name].StoneCost;
@@ -329,7 +329,7 @@ namespace LastBastion
             Villager -= _map.GetGame.SamplerBuilding[name].VillagerCost;
         }
 
-        public void CreateBuilding(string name)
+        internal void CreateBuilding(string name)
         {
             _buildingName = name;
             if (BuildingCost(_buildingName))
@@ -387,7 +387,7 @@ namespace LastBastion
         }
 
 
-        public List<Hut> RebuildeMegaGreatConstructor()
+        internal List<Hut> RebuildeMegaGreatConstructor()
         {
             List<Hut> newList = new List<Hut>();
             foreach (var item in _nearby)
@@ -397,7 +397,7 @@ namespace LastBastion
             return newList;
         }
 
-        public void DrawBuilding()
+        internal void DrawBuilding()
         {
             foreach (var item in _map.GetGame.GetGrid)
             {
@@ -467,7 +467,7 @@ namespace LastBastion
                 }
             }
         }
-        public void WallRenderer()
+        internal void WallRenderer()
         {
             foreach (var item in _map.GetGame.GetGrid)
             {
@@ -664,7 +664,7 @@ namespace LastBastion
                 }
             }
         }
-        public void DrawCastle()
+        internal void DrawCastle()
         {
             _map.GetGame.Sprites.GetSprite("Castle").Position = _map.GetGame.GetGrid[new Vector2i(-1, -1)].GetVec2F;
             _map.GetGame.GetWindow.Render.Draw(_map.GetGame.Sprites.GetSprite("Castle"));

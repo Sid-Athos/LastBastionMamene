@@ -8,7 +8,7 @@ using Interface;
 
 namespace LastBastion
 {
-    public class Game
+    internal class Game
     {
         //Attribut
         WindowUI _window;

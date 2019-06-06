@@ -8,7 +8,7 @@ using Interface;
 
 namespace LastBastion
 {
-    public class MenuBuilder
+    internal class MenuBuilder
     {
         Game _game;
         SpritesManager _sprites;
@@ -18,7 +18,7 @@ namespace LastBastion
         int _currentPos;
         bool _up;
 
-        public MenuBuilder(Game game,SpritesManager sprites)
+        internal MenuBuilder(Game game,SpritesManager sprites)
         {
             _game = game;
             _sprites = sprites;
@@ -27,7 +27,7 @@ namespace LastBastion
             _spriteBar = new List<Sprite>();
         }
         
-        public void UpdateList()
+        internal void UpdateList()
         {
             _spriteBar.Clear();
             if (_game.GetGrid[new Vector2i(_game.GetWindow.GetView.X, _game.GetWindow.GetView.Y)].IsReveal == false)
@@ -104,10 +104,10 @@ namespace LastBastion
                 }
             }
         }
-        public bool IsOpen => _up;
-        public void OpenClose() { _up = !_up; _currentPos = 0; }
-        public void ToZero () { _currentPos = 0; }
-        public void DrawMenu()
+        internal bool IsOpen => _up;
+        internal void OpenClose() { _up = !_up; _currentPos = 0; }
+        internal void ToZero () { _currentPos = 0; }
+        internal void DrawMenu()
         {
             _game.Sprites.Text.Color = new Color(255, 255, 255);
             int right;
@@ -214,7 +214,7 @@ namespace LastBastion
             }
         }
 
-        public void MenuDesc()
+        internal void MenuDesc()
         {
             _game.Sprites.Text.Color = new Color(255, 255, 255);
             //Font
@@ -410,7 +410,7 @@ namespace LastBastion
                 }
             }
         }
-        public void UWantToMoveToTheRightInTheMenu()
+        internal void UWantToMoveToTheRightInTheMenu()
         {
             if (_currentPos == _spriteBar.Count - 1)
             {
@@ -421,7 +421,7 @@ namespace LastBastion
                 _currentPos++;
             }
         }
-        public void UWantToMoveToTheLeftInTheMenu()
+        internal void UWantToMoveToTheLeftInTheMenu()
         {
             if (_currentPos == 0)
             {
@@ -432,7 +432,7 @@ namespace LastBastion
                 _currentPos--;
             }
         }
-        public String SelectTarget()
+        internal String SelectTarget()
         {
             if (_spriteBar.Count > 0)
             {
@@ -507,7 +507,7 @@ namespace LastBastion
             }
             return "bad";
         }
-        public void UpdateTopBar()
+        internal void UpdateTopBar()
         {
             float t = _game.GetWindow.GetView.Render.Size.X / 10f;
             _game.Sprites.GetSprite("TopBar").Scale = new Vector2f(_game.GetWindow.GetView.Render.Size.X / _game.Sprites.GetSprite("TopBar").Scale.X, ((0.1f * _game.GetWindow.GetView.Render.Size.Y) / _game.Sprites.GetSprite("TopBar").Scale.Y)/39f);

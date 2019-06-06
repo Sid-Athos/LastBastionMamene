@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LastBastion
 {
-    public class Sawmill : Building
+    internal class Sawmill : Building
     {
         public Sawmill(float posX,
         float posY,
