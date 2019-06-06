@@ -73,6 +73,10 @@ namespace LastBastion
                     bool tr = Position.IsInRange(Position, EnemyTarget.Position, Range);
                 }
 
+                if(EnemyTarget == null)
+                {
+                    return;
+                }
                 if (EnemyTarget.Life == 0 || EnemyTarget.Life > 2000)
                 {
                     AcquireTarget();
