@@ -308,7 +308,7 @@ namespace LastBastion
 
         public bool BuildingCost(string name)
         {
-            if(name != "Empty" && _map.GetGame.SamplerBuilding[name].WoodCost <= Wood && _map.GetGame.SamplerBuilding[name].StoneCost <= Stone &&
+            if(_map.GetGame.SamplerBuilding[name].WoodCost <= Wood && _map.GetGame.SamplerBuilding[name].StoneCost <= Stone &&
                 _map.GetGame.SamplerBuilding[name].FoodCost <= Food && _map.GetGame.SamplerBuilding[name].VillagerCost <= Villager)
             {
                 return true;
@@ -331,8 +331,8 @@ namespace LastBastion
 
         public void CreateBuilding(string name)
         {
-
-            if (BuildingCost(name))
+            _buildingName = name;
+            if (BuildingCost(_buildingName))
             {
                 BuildingPayement(name);
                 switch (name)

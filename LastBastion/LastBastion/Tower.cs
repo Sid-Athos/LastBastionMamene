@@ -49,6 +49,7 @@ namespace LastBastion
                 sut.SetTower(this);
             }
             _proj = new List<Projectiles>();
+            Description = "Main defence to your kingdom, \n be careful to maintain them well.";
         }
 
         public Tower(float posX,
@@ -76,7 +77,7 @@ namespace LastBastion
                 sut.SetTower(this);
             }
             _proj = new List<Projectiles>();
-
+            Description = "Main defence to your kingdom, \n be careful to maintain them well.";
         }
 
         public void SetAllTowerUnitsTarget()
