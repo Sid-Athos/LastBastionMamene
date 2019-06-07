@@ -65,8 +65,8 @@ namespace LastBastion
                 return;
             }
             AaCd.Update();
-            Context.GetGame.Sprites.GetSprite("Gargoyle").Position = new Vector2f(Position.X, Position.Y);
-            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gargoyle"));
+            Context.GetGame.Sprites.GetSprite("Gargole").Position = new Vector2f(Position.X, Position.Y);
+            Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gargole"));
             if (!IsParalysed)
             {
 
