@@ -356,7 +356,7 @@ namespace LastBastion
             mine2.Upgrade();
             returnValue.Add("Mine Lv3", mine2);
             //Wall Lv1
-            Wall wall = new Wall(0f,0f,_map);
+            Wall wall = new Wall(0f,0f,200,200,20,1,10,0,20,0,_map);
             returnValue.Add("Wall",wall);
             //LavaWall Lv1
             LavaWall lavawall = new LavaWall(0f, 0f,10,1.0f,2, _map);

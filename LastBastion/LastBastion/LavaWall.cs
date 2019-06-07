@@ -19,7 +19,7 @@ namespace LastBastion
             : base(posX, posY, 200, 200, 0, 1, 20, 0f, 40, context, "LavaWall", "test") { }
 
         internal LavaWall(float posX, float posY, uint dmg, float range, uint aaCooldown, Map context)
-            : base(posX, posY ,context)
+            : base(posX, posY, 200, 200, 20, 1, 10, 0, 30, 0, context)
         {
             _lastAttack = Context.GetGame.GetTimer;
             _dmg = dmg;
