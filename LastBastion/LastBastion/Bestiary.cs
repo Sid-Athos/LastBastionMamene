@@ -44,7 +44,7 @@ namespace LastBastion
             _drainLife.Add("Armure", "2");
             _drainLife.Add("Cooldown", "3");
             _drainLife.Add("Vie", "250");
-            _drainLife.Add("Vitesse", "0.02");
+            _drainLife.Add("Vitesse", "0,02");
             _drainLife.Add("Capacité", "Smash");
             _drainLife.Add("Type", "Monstre");
             _drainLife.Add("Faction", "Sbire de Dracula");
@@ -57,7 +57,7 @@ namespace LastBastion
             _gargoyle.Add("Armure", "2");
             _gargoyle.Add("Cooldown", "2");
             _gargoyle.Add("Vie", "150");
-            _gargoyle.Add("Vitesse", "0.02");
+            _gargoyle.Add("Vitesse", "0,02");
             _gargoyle.Add("Capacité", "Howl");
             _gargoyle.Add("Type", "Monstre");
             _gargoyle.Add("Faction", "Sbire de Dracula");

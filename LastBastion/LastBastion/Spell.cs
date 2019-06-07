@@ -244,7 +244,7 @@ namespace LastBastion
                 if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                 {
                     Hit(u);
-                    if(SpellName == "Smash")
+                    if(SpellName == "Smash" || SpellName == "Howl")
                     {
                         if(_unitContext.Context.BuildCount > 1)
                         {
@@ -281,7 +281,7 @@ namespace LastBastion
                     UpdateDots(DotBuildList);
                 }
             }
-            if (SpellName == "Smash")
+            if (SpellName == "Smash" || SpellName == "Howl")
             {
                 Cast(b.EnemyTarget);
             }

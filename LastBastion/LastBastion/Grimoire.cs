@@ -70,7 +70,7 @@ namespace LastBastion
             Dictionary<string, string> _howl = new Dictionary<string, string>();
             _howl.Add("Nom", "Hurlement");
             _howl.Add("Description", "Inflige des dégâts physiques à tous les ennemis autour de l'unité.");
-            _howl.Add("Dégâts", "25");
+            _howl.Add("Dégâts", "35");
             _howl.Add("Soins", "0");
             _howl.Add("CastTime", "1");
             _howl.Add("Fréquence", "0");

@@ -46,19 +46,65 @@ namespace LastBastion
             set { _timeStamp = value; }
         }
 
+        internal override void Attack(Building u)
+        {
+            foreach (var n in base.Context.BarList)
+            {
+                if (Position.IsInRange(Position, n.Position, 7.5f))
+                {
+                    n.Life -= (Dmg - n.Armor);
+                }
+            }
+        }
+
         internal override void Update()
         {
-            if (Life == 0)
+            if (Life == 0 || Life > 2000)
             {
                 Die();
                 return;
             }
+            AaCd.Update();
             Context.GetGame.Sprites.GetSprite("Gargoyle").Position = new Vector2f(Position.X, Position.Y);
             Context.GetGame.GetWindow.Render.Draw(Context.GetGame.Sprites.GetSprite("Gargoyle"));
-            if (EnemyTarget == null)
-                AcquireTarget();
-        }
+            if (!IsParalysed)
+            {
 
+                if (EnemyTarget == null && Context.BuildCount >= 1)
+                {
+                    AcquireTarget();
+                    bool tr = Position.IsInRange(Position, EnemyTarget.Position, Range);
+                }
+
+                if (EnemyTarget == null)
+                {
+                    return;
+                }
+                if (EnemyTarget.Life == 0 || EnemyTarget.Life > 2000)
+                {
+                    AcquireTarget();
+                }
+
+                if (EnemyTarget != null && Position.IsInRange(Position, EnemyTarget.Position, Range))
+                {
+                    if (AaCd.IsUsable)
+                    {
+                        Attack(EnemyTarget);
+                        AaCd.SetTs();
+                    }
+                }
+
+                if (_howl.CD.IsUsable && Position.IsInRange(Position, EnemyTarget.Position, _howl.Range))
+                {
+                    _howl.Update(this);
+                }
+
+                if (EnemyTarget != null && !Position.IsInRange(Position, EnemyTarget.Position, Range))
+                {
+                    Position = Position.Movement(Position, EnemyTarget.Position, 1, Speed, Range);
+                }
+            }
+        }
 
     }
 }
