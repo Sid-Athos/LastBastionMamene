@@ -20,7 +20,6 @@ namespace LastBastion
         readonly uint _dotFrequency;
         readonly float _range;
         readonly float _areaOfEffect;
-
         uint _castTimeTS;
         Dictionary<Unit, Dictionary<uint, uint>> _dotUnit = new Dictionary<Unit, Dictionary<uint, uint>>();
         Dictionary<Building, Dictionary<uint, uint>> _dotBuild = new Dictionary<Building, Dictionary<uint, uint>>();
@@ -100,17 +99,6 @@ namespace LastBastion
                         else
                         {
                             _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                        }
-                    }
-                    else if (CD.IsUsable && Casted)
-                    {
-                        if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
-                        {
-                            Dictionary<uint, uint> dotTarget = new Dictionary<uint, uint>();
-                            dotTarget.Add((uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds, 0);
-                            DotUnitList.Add(u, dotTarget);
-                            Hit(u);
-                            _castTimeTS = 0;
                         }
                     }
                     else if (!CD.IsUsable && Casted)
@@ -252,8 +240,7 @@ namespace LastBastion
                             _castTimeTS = (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                         }
                     }
-            if (_castTimeTS == _castTimeTS + _castingTime)
-            {
+           
                 if (_castTimeTS + CastTime == (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
                 {
                     Hit(u);
@@ -278,7 +265,6 @@ namespace LastBastion
                     _castTimeTS = 0;
                     Casted = !Casted;
                 }
-            }
         }
 
         internal string SpellName => _name;
@@ -288,10 +274,8 @@ namespace LastBastion
             CD.Update();
             if (SpellName == "Ignite")
             {
-                if (b != null && !b.IsBurned)
-                {
-                    Cast(b.EnemyTarget);
-                }
+                Cast(b.EnemyTarget);
+                
                 if (DotBuildList.Count > 0)
                 {
                     UpdateDots(DotBuildList);
@@ -299,10 +283,7 @@ namespace LastBastion
             }
             if (SpellName == "Smash")
             {
-                if (b != null)
-                {
-                    Cast(b.EnemyTarget);
-                }
+                Cast(b.EnemyTarget);
             }
         }
 
